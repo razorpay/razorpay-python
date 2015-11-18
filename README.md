@@ -1,4 +1,4 @@
-# Razorpay Python Wrapper
+# Razorpay Python Client
 
 [![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://decached.mit-license.org)
 
