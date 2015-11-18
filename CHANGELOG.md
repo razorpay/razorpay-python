@@ -1,8 +1,7 @@
 # Change Log
-All notable changes to this project will be documented in this file. 
-This project adheres to [Semantic Versioning](http://semver.org/).
+All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.1.0-alpha] - 2015-11-18
 ### Added
-- Payments: Fetch and Capture.
-- Refunds: Fetch and Initiate.
+- Payments: List, fetch and capture payments.
+- Refunds: List, fetch and initiate refunds.
