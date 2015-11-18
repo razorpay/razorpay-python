@@ -49,9 +49,9 @@ class Client:
         request_options = self._parse_request_options(options)
         response = getattr(self.session, method)(url, auth=self.auth, **request_options)
         if response.status_code in STATUS_MAP:
-            raise STATUS_MAP[response.status_code](response)
+            raise STATUS_MAP[response.status_code](response.json())
         elif response.status_code >= 500 and response.status_code < 600:
-            raise errors.ServerError(response)
+            raise errors.ServerError(response.json())
         else:
             return response.json()
 
@@ -66,7 +66,7 @@ class Client:
         """Parses POST request options and dispatches a request."""
         parameter_options = self._parse_parameter_options(options)
         data = _merge(parameter_options, data)  # values in the data body takes precendence
-        return self.request('post', path, data=data, headers={'content-type': 'application/json'}, **options)
+        return self.request('post', path, data=data, **options)
 
     def _merge_options(self, *objects):
         """Merges one or more options objects with client's options and returns a new options object"""
