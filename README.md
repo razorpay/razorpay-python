@@ -63,3 +63,10 @@ razor = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
     ```py
     razor.refund.all("<PAYMENT_ID>")
     ```
+
+## Bugs? Feature requests? Pull requests?
+
+All of those are welcome. You can [file issues][issues] or [submit pull requests][pulls] in this repository.
+
+[issues]: https://github.com/decached/razorpay/issues
+[pulls]: https://github.com/decached/razorpay/pulls

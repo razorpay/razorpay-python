@@ -4,9 +4,11 @@ All notable changes to this project will be documented in this file. This projec
 ## [0.1.0] - 2015-11-19
 ### Added
 - Tests: For payments and refunds.
+
 ### Changed
-- `data` argument to create refund is now optional.
-- Add mandatory `amount` argument for payment capture.
+- **data** argument to create refund is now optional.
+- Add mandatory **amount** argument for payment capture.
+
 ### Fixes
 - Local imports for py 3.x.
 
