@@ -1,0 +1,8 @@
+{
+  "id": "fake_refund_id",
+  "entity": "refund",
+  "amount": 2000,
+  "currency": "INR",
+  "payment_id": "fake_payment_id",
+  "created_at": 1500826750
+}

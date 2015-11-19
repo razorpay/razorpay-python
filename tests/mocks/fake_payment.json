@@ -1,0 +1,13 @@
+{
+  "id": "fake_payment_id",
+  "entity": "payment",
+  "amount": 500,
+  "currency": "INR",
+  "status": "created",
+  "amount_refunded": 0,
+  "refund_status": null,
+  "error_code": null,
+  "error_description": null,
+  "udf": {},
+  "created_at": 1400826750
+}

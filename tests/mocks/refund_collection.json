@@ -1,0 +1,22 @@
+{
+  "count": 2,
+  "entity": "collection",
+  "items": [
+    {
+      "id": "rfnd_AABBdHIieexn5c",
+      "entity": "refund",
+      "amount": 100,
+      "currency": "INR",
+      "payment_id": "fake_payment_id",
+      "created_at": 1500826750
+    },
+    {
+      "id": "rfnd_19btGlBig6xZ2f",
+      "entity": "refund",
+      "amount": 100,
+      "currency": "INR",
+      "payment_id": "fake_payment_id",
+      "created_at": 1500826750
+    }
+  ]
+}

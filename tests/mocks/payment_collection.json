@@ -1,0 +1,32 @@
+{
+  "count": 2,
+  "entity": "collection",
+  "items": [
+    {
+      "id": "pay_29QQoUBi66xm2f",
+      "entity": "payment",
+      "amount": 500,
+      "currency": "INR",
+      "status": "created",
+      "amount_refunded": 0,
+      "refund_status": null,
+      "error_code": null,
+      "error_description": null,
+      "udf": {},
+      "created_at": 1400826750
+    },
+    {
+      "id": "pay_19btGlBig6xZ2f",
+      "entity": "payment",
+      "amount": 500,
+      "currency": "INR",
+      "status": "created",
+      "amount_refunded": 0,
+      "refund_status": null,
+      "error_code": null,
+      "error_description": null,
+      "udf": {},
+      "created_at": 1400826750
+    }
+  ]
+}
