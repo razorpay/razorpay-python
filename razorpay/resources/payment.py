@@ -9,5 +9,5 @@ class Payment:
     def fetch(self, payment_id, **options):
         return self.client.get('/payments/' + payment_id, **options)
 
-    def capture(self, payment_id, **options):
-        return self.client.post('/payments/' + payment_id + '/capture', **options)
+    def capture(self, payment_id, amount, **options):
+        return self.client.post('/payments/' + payment_id + '/capture', {'amount': amount}, **options)
