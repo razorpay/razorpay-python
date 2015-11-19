@@ -1,7 +1,6 @@
 # Razorpay Python Client
 
-[![PyPI version](https://img.shields.io/pypi/v/razorpay.svg?style=flat-square)](https://pypi.python.org/pypi/razorpay)
-[![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://decached.mit-license.org)
+[![PyPI Version](https://img.shields.io/pypi/v/razorpay.svg?style=flat-square)](https://pypi.python.org/pypi/razorpay) [![Build Status](https://img.shields.io/travis/decached/razorpay.svg?style=flat-square)](https://travis-ci.org/decached/razorpay) [![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://decached.mit-license.org)
 
 Python bindings for interacting with the Razorpay API. 
 
@@ -29,7 +28,7 @@ razor = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - Capture a payment
 
     ```py
-    razor.payment.capture("<PAYMENT_ID>")
+    razor.payment.capture("<PAYMENT_ID>", "<AMOUNT>")
     ```
 
 - Fetch a particular payment
@@ -49,7 +48,8 @@ razor = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - Initiate a refund
 
     ```py
-    razor.refund.create("<PAYMENT_ID>", {"amount": "<AMOUNT_TO_BE_REFUNDED>"})
+    razor.refund.create("<PAYMENT_ID>")  # for whole amount
+    razor.refund.create("<PAYMENT_ID>", data={"amount": "<AMOUNT_TO_BE_REFUNDED>"})  # for particular amount
     ```
 
 - Fetch a particular refund
