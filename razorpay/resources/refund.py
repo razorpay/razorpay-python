@@ -9,5 +9,5 @@ class Refund:
     def fetch(self, payment_id, refund_id, **options):
         return self.client.get('/payments/' + payment_id + '/refunds/' + refund_id, **options)
 
-    def create(self, payment_id, data, **options):
+    def create(self, payment_id, data={}, **options):
         return self.client.post('/payments/' + payment_id + '/refund', data, **options)
