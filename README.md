@@ -1,6 +1,6 @@
 # Razorpay Python Client
 
-[![PyPI Version](https://img.shields.io/pypi/v/razorpay.svg?style=flat-square)](https://pypi.python.org/pypi/razorpay) [![Build Status](https://img.shields.io/travis/decached/razorpay.svg?style=flat-square)](https://travis-ci.org/decached/razorpay) [![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://decached.mit-license.org)
+[![PyPI Version](https://img.shields.io/pypi/v/razorpay.svg?style=flat-square)](https://pypi.python.org/pypi/razorpay) [![Build Status](https://travis-ci.org/razorpay/razorpay-python.svg?branch=master)](https://travis-ci.org/razorpay/razorpay-python) [![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 Python bindings for interacting with the Razorpay API. 
 
