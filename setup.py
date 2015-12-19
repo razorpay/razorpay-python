@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="razorpay",
-    version="0.1.0",
+    version="0.1.1",
     description="Razorpay Python Client",
     url="https://github.com/decached/razorpay",
     author="Akash Kothawale",

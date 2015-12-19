@@ -1,8 +1,10 @@
 include LICENSE, CHANGELOG.md, README.md
 recursive-include tests *
+recursive-include razorpay *
 recursive-include examples *
 recursive-include docs *
 recursive-exclude docs *.pyc
+recursive-exclude razorpay *.pyc
 recursive-exclude docs *.pyo
 recursive-exclude tests *.pyc
 recursive-exclude tests *.pyo
