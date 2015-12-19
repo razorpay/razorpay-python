@@ -2,14 +2,15 @@ from setuptools import setup
 
 setup(
     name="razorpay",
-    version="0.1.1",
+    version="0.1.2",
     description="Razorpay Python Client",
-    url="https://github.com/decached/razorpay",
-    author="Akash Kothawale",
-    author_email="akash@decached.com",
+    url="https://github.com/razorpay/razorpay-python",
+    author="Team Razorpay",
+    author_email="support@razorpay.com",
     license="MIT",
     install_requires=["requests"],
-    packages=["razorpay"],
+    package_dir={'razorpay': 'razorpay', 'razorpay.resources': 'razorpay/resources'},
+    packages=['razorpay', 'razorpay.resources'],
     keywords='razorpay payment gateway india',
     classifiers=[
         "Development Status :: 4 - Beta",

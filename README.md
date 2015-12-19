@@ -68,5 +68,5 @@ razor = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 
 All of those are welcome. You can [file issues][issues] or [submit pull requests][pulls] in this repository.
 
-[issues]: https://github.com/decached/razorpay/issues
-[pulls]: https://github.com/decached/razorpay/pulls
+[issues]: https://github.com/razorpay/razorpay-python/issues
+[pulls]: https://github.com/razorpay/razorpay-python/pulls
