@@ -92,8 +92,6 @@ class Client:
             # remove empty 'options':
             if 'options' in request_options['data'] and len(request_options['data']['options']) == 0:
                 del request_options['data']['options']
-            # serialize 'data' to JSON, requests doesn't do this automatically:
-            request_options['data'] = json.dumps(request_options['data'])
         return request_options
 
     def _select_options(self, options, keys, invert=False):
