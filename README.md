@@ -19,49 +19,98 @@ You can find your API keys at <https://dashboard.razorpay.com/#/app/keys>.
 
 ```py
 import razorpay
-razor = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
+razor_pay = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 ```
 
 
 ### Payments
 
-- Capture a payment
+- Fetch all payments
 
     ```py
-    razor.payment.capture("<PAYMENT_ID>", "<AMOUNT>")
+    razor_pay.payment.all()
     ```
 
 - Fetch a particular payment
 
     ```py
-    razor.payment.fetch("<PAYMENT_ID>")
+    razor_pay.payment.fetch("<PAYMENT_ID>")
     ```
 
-- Fetch all payments
+- Capture a payment
 
     ```py
-    razor.payment.all()
+    razor_pay.payment.capture("<PAYMENT_ID>", "<AMOUNT>")
+    Note: <AMOUNT> should be same as the original amount while creating the payment
     ```
 
-### Refunds
-
-- Initiate a refund
+- Refund a payment
 
     ```py
-    razor.refund.create("<PAYMENT_ID>")  # for whole amount
-    razor.refund.create("<PAYMENT_ID>", data={"amount": "<AMOUNT_TO_BE_REFUNDED>"})  # for particular amount
+    razor_pay.payment.refund("<PAYMENT_ID>", "<AMOUNT>") 
+    # for full refund
+
+    razor_pay.payment.refund("<PAYMENT_ID>", "<AMOUNT_TO_BE_REFUNDED>") 
+    # for particular amount
+
+    Note: <AMOUNT_TO_BE_REFUNDED> should be equal/less than the original amount
     ```
 
 - Fetch a particular refund
 
     ```py
-    razor.refund.fetch("<PAYMENT_ID>", "<REFUND_ID>")
+    razor_pay.payment.refund("<PAYMENT_ID>", "<REFUND_ID>")
     ```
 
 - Fetch all refunds for a particular payment
 
     ```py
-    razor.refund.all("<PAYMENT_ID>")
+    razor_pay.payment.refunds("<PAYMENT_ID>")
+    ```
+
+### Refunds
+
+- fetch a particular refund
+
+    ```py
+    razor_pay.refund.fetch("<payment_id>", "<refund_id>")
+    ```
+
+- fetch all refunds for a particular payment(same as payment refund fetch all)
+   
+    ```py
+    razor_pay.refund.all("<payment_id>")
+    ```
+
+### Orders
+
+- Create a new order
+
+    ```py
+    razor_pay.order.create(data=DATA)
+    DATA should contain these keys
+        amount    : amount of order
+        currency  : currency of order
+        receipt   : recipt id of order
+        notes(optional)  : optional notes for order
+    ```
+
+- fetch a particular order
+
+    ```py
+    razor_pay.order.fetch("<ORDER_ID>")
+    ```
+
+- fetch all orders 
+   
+    ```py
+    razor_pay.orders.all()
+    ```
+
+- fetch Payments of order 
+   
+    ```py
+    razor_pay.orders.payments("<ORDER_ID>")
     ```
 
 ## Bugs? Feature requests? Pull requests?
