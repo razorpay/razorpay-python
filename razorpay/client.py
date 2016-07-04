@@ -1,6 +1,9 @@
+import os
 import json
 import requests
+
 from types import ModuleType
+
 from . import resources
 from .errors import (BadRequestError, NoAuthorizationError,
                      NotFoundError, ServerError)
@@ -27,14 +30,17 @@ class Client:
     ALL_OPTIONS = CLIENT_OPTIONS | QUERY_OPTIONS | REQUEST_OPTIONS
 
     def __init__(self, session=None, auth=None, **options):
-        """ Initialize a Client object with session,
-            optional auth handler, and options
+        """
+        Initialize a Client object with session,
+        optional auth handler, and options
         """
         self.session = session or requests.Session()
         self.auth = auth
+        file_dir = os.path.dirname(__file__)
+        self.cert_path = file_dir + '/ca-bundle.crt'
         # merge the provided options (if any) with the global DEFAULTS
         self.options = _merge(self.DEFAULTS, options)
-        # intializes each resource,
+        # intializes each resource
         # injecting this client object into the constructor
         for name, Klass in RESOURCE_CLASSES.items():
             setattr(self, name, Klass(self))
@@ -45,6 +51,7 @@ class Client:
         url = "{}{}".format(options['base_url'],  path)
         request_options = self._parse_request_options(options)
         response = getattr(self.session, method)(url, auth=self.auth,
+                                                 verify=self.cert_path,
                                                  **request_options)
         if response.status_code == 200:
             return response.json()
@@ -98,8 +105,8 @@ class Client:
 
     def _parse_request_options(self, options):
         """
-        Select and formats options to be passed
-        to the 'requests' library's request methods
+        Select and formats options to be passed to
+        the 'requests' library's request methods
         """
         request_options = self._select_options(options, self.REQUEST_OPTIONS)
         if 'params' in request_options:
