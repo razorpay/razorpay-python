@@ -19,7 +19,7 @@ You can find your API keys at <https://dashboard.razorpay.com/#/app/keys>.
 
 ```py
 import razorpay
-razor_pay = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
+client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 ```
 
 
@@ -28,29 +28,29 @@ razor_pay = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - Fetch all payments
 
     ```py
-    razor_pay.payment.all()
+    client.payment.all()
     ```
 
 - Fetch a particular payment
 
     ```py
-    razor_pay.payment.fetch("<PAYMENT_ID>")
+    client.payment.fetch("<PAYMENT_ID>")
     ```
 
 - Capture a payment
 
     ```py
-    razor_pay.payment.capture("<PAYMENT_ID>", "<AMOUNT>")
+    client.payment.capture("<PAYMENT_ID>", "<AMOUNT>")
     Note: <AMOUNT> should be same as the original amount while creating the payment
     ```
 
 - Refund a payment
 
     ```py
-    razor_pay.payment.refund("<PAYMENT_ID>", "<AMOUNT>") 
+    client.payment.refund("<PAYMENT_ID>", "<AMOUNT>") 
     # for full refund
 
-    razor_pay.payment.refund("<PAYMENT_ID>", "<AMOUNT_TO_BE_REFUNDED>") 
+    client.payment.refund("<PAYMENT_ID>", "<AMOUNT_TO_BE_REFUNDED>") 
     # for particular amount
 
     Note: <AMOUNT_TO_BE_REFUNDED> should be equal/less than the original amount
@@ -59,13 +59,13 @@ razor_pay = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - Fetch a particular refund
 
     ```py
-    razor_pay.payment.refund("<PAYMENT_ID>", "<REFUND_ID>")
+    client.payment.refund("<PAYMENT_ID>", "<REFUND_ID>")
     ```
 
 - Fetch all refunds for a particular payment
 
     ```py
-    razor_pay.payment.refunds("<PAYMENT_ID>")
+    client.payment.refunds("<PAYMENT_ID>")
     ```
 
 ### Refunds
@@ -73,13 +73,13 @@ razor_pay = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - fetch a particular refund
 
     ```py
-    razor_pay.refund.fetch("<payment_id>", "<refund_id>")
+    client.refund.fetch("<payment_id>", "<refund_id>")
     ```
 
 - fetch all refunds for a particular payment(same as payment refund fetch all)
    
     ```py
-    razor_pay.refund.all("<payment_id>")
+    client.refund.all("<payment_id>")
     ```
 
 ### Orders
@@ -87,7 +87,7 @@ razor_pay = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - Create a new order
 
     ```py
-    razor_pay.order.create(data=DATA)
+    client.order.create(data=DATA)
     DATA should contain these keys
         amount    : amount of order
         currency  : currency of order
@@ -98,19 +98,19 @@ razor_pay = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - fetch a particular order
 
     ```py
-    razor_pay.order.fetch("<ORDER_ID>")
+    client.order.fetch("<ORDER_ID>")
     ```
 
 - fetch all orders 
    
     ```py
-    razor_pay.orders.all()
+    client.orders.all()
     ```
 
 - fetch Payments of order 
    
     ```py
-    razor_pay.orders.payments("<ORDER_ID>")
+    client.orders.payments("<ORDER_ID>")
     ```
 
 ## Bugs? Feature requests? Pull requests?

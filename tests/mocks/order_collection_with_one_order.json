@@ -1,0 +1,17 @@
+{
+  "count": 1,
+  "entity": "collection",
+  "items": [
+    {
+      "id": "fake_order_id",
+      "entity": "order",
+      "amount": 500,
+      "attempts": 1,
+      "currency": "INR",
+      "status": "attempted",
+      "notes": [],
+      "created_at": 1400826750,
+      "receipt": "12121"
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import requests
 from types import ModuleType
 
 from . import resources
+
 from .errors import (BadRequestError, NoAuthorizationError,
                      NotFoundError, ServerError)
 
@@ -38,6 +39,7 @@ class Client:
         self.auth = auth
         file_dir = os.path.dirname(__file__)
         self.cert_path = file_dir + '/ca-bundle.crt'
+
         # merge the provided options (if any) with the global DEFAULTS
         self.options = _merge(self.DEFAULTS, options)
         # intializes each resource
@@ -46,7 +48,9 @@ class Client:
             setattr(self, name, Klass(self))
 
     def request(self, method, path, **options):
-        """Dispatches a request to the Razorpay HTTP API"""
+        """
+        Dispatches a request to the Razorpay HTTP API
+        """
         options = self._merge_options(options)
         url = "{}{}".format(options['base_url'],  path)
         request_options = self._parse_request_options(options)
@@ -71,7 +75,9 @@ class Client:
                 raise ServerError(msg)
 
     def get(self, path, **options):
-        """Parses GET request options and dispatches a request."""
+        """
+        Parses GET request options and dispatches a request
+        """
         query_options = self._parse_query_options(options)
         parameter_options = self._parse_parameter_options(options)
         # options in the query takes precendence
@@ -79,7 +85,9 @@ class Client:
         return self.request('get', path, params=query, **options)
 
     def post(self, path, data, **options):
-        """Parses POST request options and dispatches a request."""
+        """
+        Parses POST request options and dispatches a request
+        """
         parameter_options = self._parse_parameter_options(options)
         # values in the data body takes precendence
         data = _merge(parameter_options, data)
@@ -93,7 +101,9 @@ class Client:
         return _merge(self.options, *objects)
 
     def _parse_query_options(self, options):
-        """Selects query string options out of the provided options object"""
+        """
+        Selects query string options out of the provided options object
+        """
         return self._select_options(options, self.QUERY_OPTIONS)
 
     def _parse_parameter_options(self, options):
@@ -114,6 +124,7 @@ class Client:
             for key in params:
                 if isinstance(params[key], bool):
                     params[key] = json.dumps(params[key])
+
         if 'data' in request_options:
             # remove empty 'options':
             if 'options' in request_options['data']:
@@ -134,8 +145,10 @@ class Client:
         return result
 
 
-def _merge(*objects):
-    """Merge one or more objects into a new object"""
+def _merge(*args):
+    """
+    Merge one or more objects into a new object
+    """
     result = {}
-    [result.update(obj) for obj in objects]
+    [result.update(obj) for obj in args]
     return result
