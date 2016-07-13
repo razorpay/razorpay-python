@@ -6,7 +6,7 @@ class Refund(Resource):
         self.client = client
         self.base_url = "/payments"
 
-    def all(self, payment_id, **kwargs):
+    def fetch_all(self, payment_id, **kwargs):
         """"
         All Refund for given payment Id
 
@@ -32,4 +32,3 @@ class Refund(Resource):
         """
         url = "{}/{}/refunds/{}".format(self.base_url, payment_id, refund_id)
         return self.get_url(url, **kwargs)
-

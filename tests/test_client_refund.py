@@ -16,7 +16,7 @@ class TestClientRefund(ClientTestCase):
         url = '{}/{}/refunds'.format(self.base_url, self.payment_id)
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.refund.all(self.payment_id), result)
+        self.assertEqual(self.client.refund.fetch_all(self.payment_id), result)
 
     @responses.activate
     def test_refund_fetch(self):

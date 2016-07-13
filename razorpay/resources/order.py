@@ -6,7 +6,7 @@ class Order(Resource):
         self.client = client
         self.base_url = "/orders"
 
-    def all(self, **kwargs):
+    def fetch_all(self, **kwargs):
         """"
         Fetch all Order entities
 
@@ -29,7 +29,7 @@ class Order(Resource):
         url = "{}/{}".format(self.base_url, order_id)
         return self.get_url(url, **kwargs)
 
-    def payments(self, order_id, **kwargs):
+    def fetch_all_payments(self, order_id, **kwargs):
         """"
         Fetch Payment for Order Id
 

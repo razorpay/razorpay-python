@@ -16,7 +16,7 @@ class TestClientPayment(ClientTestCase):
         url = self.base_url
         responses.add(responses.GET, url, status=200,
                       body=json.dumps(result), match_querystring=True)
-        self.assertEqual(self.client.payment.all(), result)
+        self.assertEqual(self.client.payment.fetch_all(), result)
 
     @responses.activate
     def test_payment_all_with_options(self):
@@ -25,7 +25,7 @@ class TestClientPayment(ClientTestCase):
         url = '{}?count={}'.format(self.base_url, count)
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.payment.all(count=count), result)
+        self.assertEqual(self.client.payment.fetch_all(count=count), result)
 
     @responses.activate
     def test_payment_fetch(self):

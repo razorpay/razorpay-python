@@ -16,7 +16,7 @@ class TestClientOrder(ClientTestCase):
         url = self.base_url
         responses.add(responses.GET, url, status=200,
                       body=json.dumps(result), match_querystring=True)
-        self.assertEqual(self.client.order.all(), result)
+        self.assertEqual(self.client.order.fetch_all(), result)
 
     @responses.activate
     def test_order_all_with_options(self):
@@ -25,7 +25,7 @@ class TestClientOrder(ClientTestCase):
         url = '{}?count={}'.format(self.base_url, count)
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.order.all(count=count), result)
+        self.assertEqual(self.client.order.fetch_all(count=count), result)
 
     @responses.activate
     def test_order_fetch(self):
@@ -41,4 +41,5 @@ class TestClientOrder(ClientTestCase):
         url = '{}/{}/payments'.format(self.base_url, 'fake_order_id')
         responses.add(responses.GET, url, status=200,
                       body=json.dumps(result), match_querystring=True)
-        self.assertEqual(self.client.order.payments('fake_order_id'), result)
+        self.assertEqual(self.client.order.fetch_all_payments('fake_order_id'),
+                         result)

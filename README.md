@@ -28,7 +28,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - Fetch all payments
 
     ```py
-    client.payment.all()
+    client.payment.fetch_all()
     ```
 
 - Fetch a particular payment
@@ -56,18 +56,6 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
     Note: <AMOUNT_TO_BE_REFUNDED> should be equal/less than the original amount
     ```
 
-- Fetch a particular refund
-
-    ```py
-    client.payment.refund("<PAYMENT_ID>", "<REFUND_ID>")
-    ```
-
-- Fetch all refunds for a particular payment
-
-    ```py
-    client.payment.refunds("<PAYMENT_ID>")
-    ```
-
 ### Refunds
 
 - fetch a particular refund
@@ -79,7 +67,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - fetch all refunds for a particular payment(same as payment refund fetch all)
    
     ```py
-    client.refund.all("<payment_id>")
+    client.refund.fetch_all("<payment_id>")
     ```
 
 ### Orders
@@ -104,13 +92,13 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - fetch all orders 
    
     ```py
-    client.orders.all()
+    client.orders.fetch_all()
     ```
 
 - fetch Payments of order 
    
     ```py
-    client.orders.payments("<ORDER_ID>")
+    client.orders.fetch_all_payments("<ORDER_ID>")
     ```
 
 ## Bugs? Feature requests? Pull requests?
