@@ -19,49 +19,86 @@ You can find your API keys at <https://dashboard.razorpay.com/#/app/keys>.
 
 ```py
 import razorpay
-razor = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
+client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 ```
 
 
 ### Payments
 
-- Capture a payment
+- Fetch all payments
 
     ```py
-    razor.payment.capture("<PAYMENT_ID>", "<AMOUNT>")
+    client.payment.fetch_all()
     ```
 
 - Fetch a particular payment
 
     ```py
-    razor.payment.fetch("<PAYMENT_ID>")
+    client.payment.fetch("<PAYMENT_ID>")
     ```
 
-- Fetch all payments
+- Capture a payment
 
     ```py
-    razor.payment.all()
+    client.payment.capture("<PAYMENT_ID>", "<AMOUNT>")
+    Note: <AMOUNT> should be same as the original amount while creating the payment
+    ```
+
+- Refund a payment
+
+    ```py
+    client.payment.refund("<PAYMENT_ID>", "<AMOUNT>") 
+    # for full refund
+
+    client.payment.refund("<PAYMENT_ID>", "<AMOUNT_TO_BE_REFUNDED>") 
+    # for particular amount
+
+    Note: <AMOUNT_TO_BE_REFUNDED> should be equal/less than the original amount
     ```
 
 ### Refunds
 
-- Initiate a refund
+- fetch a particular refund
 
     ```py
-    razor.refund.create("<PAYMENT_ID>")  # for whole amount
-    razor.refund.create("<PAYMENT_ID>", data={"amount": "<AMOUNT_TO_BE_REFUNDED>"})  # for particular amount
+    client.refund.fetch("<payment_id>", "<refund_id>")
     ```
 
-- Fetch a particular refund
-
+- fetch all refunds for a particular payment(same as payment refund fetch all)
+   
     ```py
-    razor.refund.fetch("<PAYMENT_ID>", "<REFUND_ID>")
+    client.refund.fetch_all("<payment_id>")
     ```
 
-- Fetch all refunds for a particular payment
+### Orders
+
+- Create a new order
 
     ```py
-    razor.refund.all("<PAYMENT_ID>")
+    client.order.create(data=DATA)
+    DATA should contain these keys
+        amount    : amount of order
+        currency  : currency of order
+        receipt   : recipt id of order
+        notes(optional)  : optional notes for order
+    ```
+
+- fetch a particular order
+
+    ```py
+    client.order.fetch("<ORDER_ID>")
+    ```
+
+- fetch all orders 
+   
+    ```py
+    client.orders.fetch_all()
+    ```
+
+- fetch Payments of order 
+   
+    ```py
+    client.orders.fetch_all_payments("<ORDER_ID>")
     ```
 
 ## Bugs? Feature requests? Pull requests?

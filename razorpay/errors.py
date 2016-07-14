@@ -1,40 +1,18 @@
-class RazorpayError(Exception):
-    """Base Razorpay error class"""
-    def __init__(self, status=None, error=None):
-        self.status = status
-        self.error = error
+class BadRequestError(Exception):
+    def __init__(self, message=None, *args, **kwargs):
+        super(BadRequestError, self).__init__(message)
 
 
-class BadRequestError(RazorpayError):
-    def __init__(self, error=None):
-        super(BadRequestError, self).__init__(
-            status=400,
-            error=error
-        )
+class NoAuthorizationError(Exception):
+    def __init__(self, message=None, *args, **kwargs):
+        super(NoAuthorizationError, self).__init__(message)
 
 
-class NoAuthorizationError(RazorpayError):
-    def __init__(self, error=None):
-        super(NoAuthorizationError, self).__init__(
-            status=401,
-            error=error
-        )
+class NotFoundError(Exception):
+    def __init__(self, message=None, *args, **kwargs):
+        super(NotFoundError, self).__init__(message)
 
 
-class NotFoundError(RazorpayError):
-    def __init__(self, error=None):
-        super(NotFoundError, self).__init__(
-            status=404,
-            error=error
-        )
-
-
-class ServerError(RazorpayError):
-    def __init__(self, error=None):
-        status = 500
-        if error:
-            status = error.status
-        super(ServerError, self).__init__(
-            status=status,
-            error=error
-        )
+class ServerError(Exception):
+    def __init__(self, message=None, *args, **kwargs):
+        super(ServerError, self).__init__(message)
