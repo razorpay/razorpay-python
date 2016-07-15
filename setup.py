@@ -9,6 +9,7 @@ setup(
     author_email="support@razorpay.com",
     license="MIT",
     install_requires=["requests"],
+    include_package_data=True,
     package_dir={'razorpay': 'razorpay', 'razorpay.resources': 'razorpay/resources'},
     packages=['razorpay', 'razorpay.resources'],
     keywords='razorpay payment gateway india',
