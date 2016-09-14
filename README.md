@@ -79,7 +79,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
     DATA should contain these keys
         amount           : amount of order
         currency         : currency of order
-        receipt          : recipt id of order
+        receipt          : receipt id of order
         payment_capture  : 1 if capture should be done automatically or else 0
         notes(optional)  : optional notes for order
     ```
