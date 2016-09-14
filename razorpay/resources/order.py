@@ -52,6 +52,7 @@ class Order(Resource):
                 'currency' : Currency used in Order
                 'receipt' : Receipt Id for the order
                 'notes' : key value pair as notes
+                'payment_capture'  : 0/1 if payment should be auto captured or not
 
         Returns:
             Order Dict which was created
