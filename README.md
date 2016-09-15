@@ -93,13 +93,13 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - fetch all orders 
    
     ```py
-    client.orders.fetch_all()
+    client.order.fetch_all()
     ```
 
 - fetch Payments of order 
    
     ```py
-    client.orders.fetch_all_payments("<ORDER_ID>")
+    client.order.fetch_all_payments("<ORDER_ID>")
     ```
 
 ## Bugs? Feature requests? Pull requests?
