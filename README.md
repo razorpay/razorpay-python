@@ -22,7 +22,6 @@ import razorpay
 client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 ```
 
-
 ### Payments
 
 - Fetch all payments
