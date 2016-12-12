@@ -1,10 +1,11 @@
 from .base import Resource
+from .Url import URL
 
 
 class Invoice(Resource):
     def __init__(self, client=None):
         self.client = client
-        self.base_url = "/invoices"
+        self.base_url = URL.INVOICE_URL
 
     def fetch_all(self, **kwargs):
         """"

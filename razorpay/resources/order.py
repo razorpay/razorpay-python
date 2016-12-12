@@ -1,10 +1,11 @@
 from .base import Resource
+from .Url import URL
 
 
 class Order(Resource):
     def __init__(self, client=None):
         self.client = client
-        self.base_url = "/orders"
+        self.base_url = URL.ORDER_URL
 
     def fetch_all(self, **kwargs):
         """"
