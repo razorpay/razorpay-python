@@ -101,6 +101,29 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
     client.order.fetch_all_payments("<ORDER_ID>")
     ```
 
+### Invoices
+
+- Create a new invoice
+
+    ```py
+    client.invoice.create(data=DATA)
+    ```
+    For List of params refer to this :-
+    https://docs.razorpay.com/v1/page/invoices#v1invoices
+
+
+- fetch a particular invoice
+
+    ```py
+    client.invoice.fetch("<INVOICE_ID>")
+    ```
+
+- fetch all invoices
+   
+    ```py
+    client.invoice.fetch_all()
+    ```
+
 ## Bugs? Feature requests? Pull requests?
 
 All of those are welcome. You can [file issues][issues] or [submit pull requests][pulls] in this repository.
