@@ -91,7 +91,20 @@ class Client:
         parameter_options = self._parse_parameter_options(options)
         # values in the data body takes precendence
         data = _merge(parameter_options, data)
+        data, options = self._update_request(data, options)
         return self.request('post', path, data=data, **options)
+
+    def _update_request(self, data, options):
+        """
+        Updates The resource data and header options
+        """
+        data = json.dumps(data)
+        if 'headers' in options:
+            options['headers']['Content-type'] = 'application/json'
+        else:
+            options['headers'] = {'Content-type' : 'application/json'}
+
+        return data, options
 
     def _merge_options(self, *objects):
         """
