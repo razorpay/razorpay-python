@@ -98,17 +98,11 @@ class Client:
         """
         Updates The resource data and header options
         """
-        is_json_content = False
-        for key in data:
-            if isinstance(data[key], dict):
-                is_json_content = True
-
-        if is_json_content:
-            data = json.dumps(data)
-            if 'headers' in options:
-                options['headers']['Content-type'] = 'application/json'
-            else:
-                options['headers'] = {'Content-type' : 'application/json'}
+        data = json.dumps(data)
+        if 'headers' in options:
+            options['headers']['Content-type'] = 'application/json'
+        else:
+            options['headers'] = {'Content-type' : 'application/json'}
 
         return data, options
 
