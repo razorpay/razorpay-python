@@ -14,7 +14,7 @@ class Payment(Resource):
         Returns:
             Dictionary of Payment data
         """
-        return super(Payment, self).all(data)
+        return super(Payment, self).all(data, **kwargs)
 
     def fetch(self, payment_id, data={}, **kwargs):
         """"

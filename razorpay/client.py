@@ -43,7 +43,13 @@ class Client:
         """
         Dispatches a request to the Razorpay HTTP API
         """
-        url = "{}{}".format(options['base_url'],  path)
+        base_url = self.DEFAULTS['base_url']
+
+        if 'base_url' in options:
+            base_url = options['base_url']
+            del(options['base_url'])
+
+        url = "{}{}".format(base_url,  path)
         response = getattr(self.session, method)(url, auth=self.auth,
                                                  verify=self.cert_path,
                                                  **options)

@@ -5,7 +5,7 @@ from .Url import URL
 class Refund(Resource):
     def __init__(self, client=None):
         self.client = client
-        self.base_url = URL.REFUND_URL
+        self.base_url = URL.REFUNDS_URL
 
     def create(self, data={}, **kwargs):
         """
