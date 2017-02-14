@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+import pkg_resources
 
 from types import ModuleType
 
@@ -39,6 +40,19 @@ class Client:
         for name, Klass in RESOURCE_CLASSES.items():
             setattr(self, name, Klass(self))
 
+    def _update_user_agent_header(self, options):
+        user_agent = "{}{}".format('Razorpay-Python/',  self._get_version())
+
+        if 'headers' in options:
+            options['headers']['User-Agent'] = user_agent
+        else:
+            options['headers'] = {'User-Agent': user_agent}
+
+        return options
+
+    def _get_version(self):
+        return pkg_resources.require("razorpay")[0].version
+
     def request(self, method, path, **options):
         """
         Dispatches a request to the Razorpay HTTP API
@@ -48,6 +62,8 @@ class Client:
         if 'base_url' in options:
             base_url = options['base_url']
             del(options['base_url'])
+
+        options = self._update_user_agent_header(options)
 
         url = "{}{}".format(base_url,  path)
         response = getattr(self.session, method)(url, auth=self.auth,
