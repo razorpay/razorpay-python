@@ -5,7 +5,7 @@ import pkg_resources
 
 from types import ModuleType
 
-from . import resources
+from . import resources, utility
 
 from .errors import (BadRequestError, GatewayError,
                      ProcessingError, ServerError)
@@ -16,6 +16,11 @@ RESOURCE_CLASSES = {}
 for name, module in resources.__dict__.items():
     if isinstance(module, ModuleType) and name.capitalize() in module.__dict__:
         RESOURCE_CLASSES[name] = module.__dict__[name.capitalize()]
+
+UTILITY_CLASSES = {}
+for name, module in utility.__dict__.items():
+    if isinstance(module, ModuleType) and name.capitalize() in module.__dict__:
+        UTILITY_CLASSES[name] = module.__dict__[name.capitalize()]
 
 
 class Client:
@@ -37,7 +42,7 @@ class Client:
 
         # intializes each resource
         # injecting this client object into the constructor
-        for name, Klass in RESOURCE_CLASSES.items():
+        for name, Klass in RESOURCE_CLASSES.items() + UTILITY_CLASSES.items():
             setattr(self, name, Klass(self))
 
     def _update_user_agent_header(self, options):

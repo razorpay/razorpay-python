@@ -3,6 +3,7 @@ from .resources import Order
 from .resources import Payment
 from .resources import Refund
 from .resources import Invoice
+from .utility import Utility
 
 __all__ = [
         'Payment',
@@ -10,4 +11,5 @@ __all__ = [
         'Order',
         'Client',
         'Invoice',
+        'Utility',
 ]
