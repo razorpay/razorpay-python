@@ -7,16 +7,16 @@ class Invoice(Resource):
         self.client = client
         self.base_url = URL.INVOICE_URL
 
-    def all(self, **kwargs):
+    def all(self, data={}, **kwargs):
         """"
         Fetch all Invoice entities
 
         Returns:
             Dictionary of Invoice data
         """
-        return super(Invoice, self).all(**kwargs)
+        return super(Invoice, self).all(data, **kwargs)
 
-    def fetch(self, invoice_id, **kwargs):
+    def fetch(self, invoice_id, data={}, **kwargs):
         """"
         Fetch Invoice for given Id
 
@@ -26,7 +26,7 @@ class Invoice(Resource):
         Returns:
             Invoice dict for given invoice Id
         """
-        return super(Invoice, self).fetch(invoice_id, **kwargs)
+        return super(Invoice, self).fetch(invoice_id, data, **kwargs)
 
     def create(self, data={}, **kwargs):
         """"

@@ -14,7 +14,7 @@ class Refund(Resource):
         url = self.base_url
         return self.post_url(url, data, **kwargs)
 
-    def all(self, **kwargs):
+    def all(self, data={}, **kwargs):
         """"
         All Refund for given payment Id
 
@@ -24,9 +24,9 @@ class Refund(Resource):
         Returns:
             Refund dict for given payment Id
         """
-        return super(Refund, self).all(**kwargs)
+        return super(Refund, self).all(data, **kwargs)
 
-    def fetch(self, refund_id, **kwargs):
+    def fetch(self, refund_id, data={}, **kwargs):
         """"
         Refund object for given payment Id and given paymnet Id
 
@@ -37,4 +37,4 @@ class Refund(Resource):
         Returns:
             Refund dict for given payment and refund Id
         """
-        return super(Refund, self).fetch(refund_id, **kwargs)
+        return super(Refund, self).fetch(refund_id, data, **kwargs)

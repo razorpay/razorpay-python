@@ -7,16 +7,16 @@ class Order(Resource):
         self.client = client
         self.base_url = URL.ORDER_URL
 
-    def all(self, **kwargs):
+    def all(self, data={}, **kwargs):
         """"
         Fetch all Order entities
 
         Returns:
             Dictionary of Order data
         """
-        return super(Order, self).all(**kwargs)
+        return super(Order, self).all(data, **kwargs)
 
-    def fetch(self, order_id, **kwargs):
+    def fetch(self, order_id, data={}, **kwargs):
         """"
         Fetch Order for given Id
 
@@ -26,9 +26,9 @@ class Order(Resource):
         Returns:
             Order dict for given order Id
         """
-        return super(Order, self).fetch(order_id, **kwargs)
+        return super(Order, self).fetch(order_id, data, **kwargs)
 
-    def payments(self, order_id, **kwargs):
+    def payments(self, order_id, data={}, **kwargs):
         """"
         Fetch Payment for Order Id
 
@@ -39,7 +39,7 @@ class Order(Resource):
             Payment dict for given Order Id
         """
         url = "{}/{}/payments".format(self.base_url, order_id)
-        return self.get_url(url, **kwargs)
+        return self.get_url(url, data, **kwargs)
 
     def create(self, data={}, **kwargs):
         """"
