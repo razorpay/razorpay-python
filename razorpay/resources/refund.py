@@ -7,6 +7,13 @@ class Refund(Resource):
         self.client = client
         self.base_url = URL.REFUND_URL
 
+    def create(self, data={}, **kwargs):
+        """
+        TODO : fill me
+        """
+        url = self.base_url
+        return self.post_url(url, data, **kwargs)
+
     def all(self, **kwargs):
         """"
         All Refund for given payment Id
