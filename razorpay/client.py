@@ -7,8 +7,8 @@ from types import ModuleType
 
 from . import resources
 
-from .errors import (BadRequestError, NoAuthorizationError,
-                     NotFoundError, ServerError)
+from .errors import (BadRequestError, GatewayError,
+                     ProcessingError, ServerError)
 
 
 # Create a dict of resource classes
@@ -73,17 +73,23 @@ class Client:
             return response.json()
         else:
             msg = ""
+            code = ""
             json_response = response.json()
             if 'error' in json_response:
                 if 'description' in json_response['error']:
                     msg = json_response['error']['description']
-            if response.status_code == 400:
+                if 'code' in json_response['error']:
+                    code = json_response['error']['code']
+
+            if code == 'BAD_REQUEST_ERROR':
                 raise BadRequestError(msg)
-            if response.status_code == 401:
-                raise NoAuthorizationError(msg)
-            if response.status_code == 404:
-                raise NotFoundError(msg)
-            elif response.status_code >= 500 and response.status_code < 600:
+            elif code == 'GATEWAY_ERROR':
+                raise GatewayError(msg)
+            elif code == 'SERVER_ERROR':
+                raise ServerError(msg)
+            elif code == 'PROCESSING_ERROR':
+                raise ProcessingError(msg)
+            else:
                 raise ServerError(msg)
 
     def get(self, path, params, **options):
