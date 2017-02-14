@@ -14,8 +14,7 @@ class Payment(Resource):
         Returns:
             Dictionary of Payment data
         """
-        url = self.base_url
-        return self.get_url(url, **kwargs)
+        return super(Payment, self).all(**kwargs)
 
     def fetch(self, payment_id, **kwargs):
         """"
@@ -27,8 +26,7 @@ class Payment(Resource):
         Returns:
             Payment dict for given payment Id
         """
-        url = "{}/{}".format(self.base_url, payment_id)
-        return self.get_url(url, **kwargs)
+        return super(Payment, self).fetch(payment_id, **kwargs)
 
     def capture(self, payment_id, amount, **kwargs):
         """"
@@ -59,17 +57,3 @@ class Payment(Resource):
         url = "{}/{}/refund".format(self.base_url, payment_id)
         data = {'amount': amount}
         return self.post_url(url, data, **kwargs)
-
-    def refunds(self, payment_id, **kwargs):
-        """"
-        Refund Payment for given Id
-
-        Args:
-            payment_id : Id for which payment object has to be refunded
-            Amount : Amount for which the payment has to be refunded
-
-        Returns:
-            Payment dict after getting refunded
-        """
-        url = "{}/{}/refund".format(self.base_url, payment_id)
-        return self.get_url(url, **kwargs)

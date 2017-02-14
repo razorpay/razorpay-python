@@ -14,8 +14,7 @@ class Order(Resource):
         Returns:
             Dictionary of Order data
         """
-        url = self.base_url
-        return self.get_url(url, **kwargs)
+        return super(Order, self).all(**kwargs)
 
     def fetch(self, order_id, **kwargs):
         """"
@@ -27,8 +26,7 @@ class Order(Resource):
         Returns:
             Order dict for given order Id
         """
-        url = "{}/{}".format(self.base_url, order_id)
-        return self.get_url(url, **kwargs)
+        return super(Order, self).fetch(order_id, **kwargs)
 
     def payments(self, order_id, **kwargs):
         """"
@@ -53,7 +51,7 @@ class Order(Resource):
                 'currency' : Currency used in Order
                 'receipt' : Receipt Id for the order
                 'notes' : key value pair as notes
-                'payment_capture'  : 0/1 if payment should be auto captured or not
+                'payment_capture': 0/1 if payment should be auto captured or not
 
         Returns:
             Order Dict which was created

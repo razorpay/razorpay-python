@@ -17,8 +17,7 @@ class Refund(Resource):
         Returns:
             Refund dict for given payment Id
         """
-        url = self.base_url
-        return self.get_url(url, **kwargs)
+        return super(Refund, self).all(**kwargs)
 
     def fetch(self, refund_id, **kwargs):
         """"
@@ -31,5 +30,4 @@ class Refund(Resource):
         Returns:
             Refund dict for given payment and refund Id
         """
-        url = "{}/{}".format(self.base_url, refund_id)
-        return self.get_url(url, **kwargs)
+        return super(Refund, self).fetch(refund_id, **kwargs)

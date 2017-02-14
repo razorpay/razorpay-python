@@ -14,8 +14,7 @@ class Invoice(Resource):
         Returns:
             Dictionary of Invoice data
         """
-        url = self.base_url
-        return self.get_url(url, **kwargs)
+        return super(Invoice, self).all(**kwargs)
 
     def fetch(self, invoice_id, **kwargs):
         """"
@@ -27,8 +26,7 @@ class Invoice(Resource):
         Returns:
             Invoice dict for given invoice Id
         """
-        url = "{}/{}".format(self.base_url, invoice_id)
-        return self.get_url(url, **kwargs)
+        return super(Invoice, self).fetch(invoice_id, **kwargs)
 
     def create(self, data={}, **kwargs):
         """"
