@@ -69,7 +69,7 @@ class Client:
         response = getattr(self.session, method)(url, auth=self.auth,
                                                  verify=self.cert_path,
                                                  **options)
-        if response.status_code == 200:
+        if ((response.status_code >= 200) and (response.status_code < 300)):
             return response.json()
         else:
             msg = ""
@@ -98,6 +98,20 @@ class Client:
         """
         data, options = self._update_request(data, options)
         return self.request('post', path, data=data, **options)
+
+    def delete(self, path, data, **options):
+        """
+        Parses DELETE request options and dispatches a request
+        """
+        data, options = self._update_request(data, options)
+        return self.request('delete', path, data=data, **options)
+
+    def put(self, path, data, **options):
+        """
+        Parses PUT request options and dispatches a request
+        """
+        data, options = self._update_request(data, options)
+        return self.request('put', path, data=data, **options)
 
     def _update_request(self, data, options):
         """

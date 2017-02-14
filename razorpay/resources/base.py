@@ -15,3 +15,9 @@ class Resource(object):
 
     def post_url(self, url, data, **kwargs):
         return self.client.post(url, data, **kwargs)
+
+    def put_url(self, url, data, **kwargs):
+        return self.client.put(url, data, **kwargs)
+
+    def delete_url(self, url, data, **kwargs):
+        return self.client.delete(url, data, **kwargs)
