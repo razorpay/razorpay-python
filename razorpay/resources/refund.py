@@ -5,9 +5,9 @@ from .Url import URL
 class Refund(Resource):
     def __init__(self, client=None):
         self.client = client
-        self.base_url = URL.PAYMENTS_URL
+        self.base_url = URL.REFUND_URL
 
-    def fetch_all(self, payment_id, **kwargs):
+    def all(self, **kwargs):
         """"
         All Refund for given payment Id
 
@@ -17,10 +17,10 @@ class Refund(Resource):
         Returns:
             Refund dict for given payment Id
         """
-        url = "{}/{}/refunds".format(self.base_url, payment_id)
+        url = self.base_url
         return self.get_url(url, **kwargs)
 
-    def fetch(self, payment_id, refund_id, **kwargs):
+    def fetch(self, refund_id, **kwargs):
         """"
         Refund object for given payment Id and given paymnet Id
 
@@ -31,5 +31,5 @@ class Refund(Resource):
         Returns:
             Refund dict for given payment and refund Id
         """
-        url = "{}/{}/refunds/{}".format(self.base_url, payment_id, refund_id)
+        url = "{}/{}".format(self.base_url, refund_id)
         return self.get_url(url, **kwargs)

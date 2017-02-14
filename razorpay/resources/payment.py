@@ -7,7 +7,7 @@ class Payment(Resource):
         self.client = client
         self.base_url = URL.PAYMENTS_URL
 
-    def fetch_all(self, **kwargs):
+    def all(self, **kwargs):
         """"
         Fetch all Payment entities
 
@@ -59,3 +59,17 @@ class Payment(Resource):
         url = "{}/{}/refund".format(self.base_url, payment_id)
         data = {'amount': amount}
         return self.post_url(url, data, **kwargs)
+
+    def refunds(self, payment_id, **kwargs):
+        """"
+        Refund Payment for given Id
+
+        Args:
+            payment_id : Id for which payment object has to be refunded
+            Amount : Amount for which the payment has to be refunded
+
+        Returns:
+            Payment dict after getting refunded
+        """
+        url = "{}/{}/refund".format(self.base_url, payment_id)
+        return self.get_url(url, **kwargs)

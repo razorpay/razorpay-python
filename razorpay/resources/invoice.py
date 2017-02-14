@@ -7,7 +7,7 @@ class Invoice(Resource):
         self.client = client
         self.base_url = URL.INVOICE_URL
 
-    def fetch_all(self, **kwargs):
+    def all(self, **kwargs):
         """"
         Fetch all Invoice entities
 
