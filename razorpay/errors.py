@@ -8,11 +8,6 @@ class GatewayError(Exception):
         super(GatewayError, self).__init__(message)
 
 
-class ProcessingError(Exception):
-    def __init__(self, message=None, *args, **kwargs):
-        super(ProcessingError, self).__init__(message)
-
-
 class ServerError(Exception):
     def __init__(self, message=None, *args, **kwargs):
         super(ServerError, self).__init__(message)

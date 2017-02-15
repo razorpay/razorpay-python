@@ -10,7 +10,7 @@ from types import ModuleType
 from . import resources, utility
 
 from .errors import (BadRequestError, GatewayError,
-                     ProcessingError, ServerError)
+                     ServerError)
 
 
 # Create a dict of resource classes
@@ -96,14 +96,12 @@ class Client:
                 if 'code' in json_response['error']:
                     code = json_response['error']['code']
 
-            if code == 'BAD_REQUEST_ERROR':
+            if str.upper(code) == 'BAD_REQUEST_ERROR':
                 raise BadRequestError(msg)
-            elif code == 'GATEWAY_ERROR':
+            elif str.upper(code) == 'GATEWAY_ERROR':
                 raise GatewayError(msg)
-            elif code == 'SERVER_ERROR':
+            elif str.upper(code) == 'SERVER_ERROR':
                 raise ServerError(msg)
-            elif code == 'PROCESSING_ERROR':
-                raise ProcessingError(msg)
             else:
                 raise ServerError(msg)
 
