@@ -17,7 +17,7 @@ class Utility(object):
 
         generated_signature = dig.hexdigest()
 
-        if (generated_signature == razorpay_signature):
-            return True
+        if hmac.compare_digest(generated_signature, razorpay_signature) == False:
+            return False
 
-        return False
+        return True
