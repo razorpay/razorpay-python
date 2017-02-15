@@ -94,7 +94,7 @@ class Client:
                 if 'description' in json_response['error']:
                     msg = json_response['error']['description']
                 if 'code' in json_response['error']:
-                    code = json_response['error']['code']
+                    code = str(json_response['error']['code'])
 
             if str.upper(code) == 'BAD_REQUEST_ERROR':
                 raise BadRequestError(msg)
