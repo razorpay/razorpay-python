@@ -6,6 +6,7 @@ import pkg_resources
 from pkg_resources import DistributionNotFound
 
 from types import ModuleType
+from .constants import HTTP_STATUS_CODE
 
 from . import resources, utility
 
@@ -84,7 +85,8 @@ class Client:
         response = getattr(self.session, method)(url, auth=self.auth,
                                                  verify=self.cert_path,
                                                  **options)
-        if ((response.status_code >= 200) and (response.status_code < 300)):
+        if ((response.status_code >= HTTP_STATUS_CODE.OK) and
+                (response.status_code < HTTP_STATUS_CODE.REDIRECT)):
             return response.json()
         else:
             msg = ""
