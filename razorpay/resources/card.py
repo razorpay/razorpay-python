@@ -7,16 +7,6 @@ class Card(Resource):
         self.client = client
         self.base_url = URL.CARD_URL
 
-    def fetch_all(self, **kwargs):
-        """"
-        Fetch all Card entities
-
-        Returns:
-            Dictionary of Card data
-        """
-        url = self.base_url
-        return self.get_url(url, **kwargs)
-
     def fetch(self, card_id, **kwargs):
         """"
         Fetch Card for given Id

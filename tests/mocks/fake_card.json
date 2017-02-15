@@ -1,0 +1,9 @@
+{
+  "id": "fake_card_id",
+  "entity": "card",
+  "name": "ria",
+  "last4": "1234",
+  "network": "visa",
+  "type": "visa",
+  "internation": false,
+}
