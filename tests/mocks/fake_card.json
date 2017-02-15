@@ -1,0 +1,9 @@
+{
+  "id": "fake_card_id",
+  "entity": "card",
+  "international": false,
+  "last4": 1111,
+  "name": "sample name",
+  "network": "Visa",
+  "type": "debit",
+}

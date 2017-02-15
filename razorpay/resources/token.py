@@ -28,7 +28,7 @@ class Token(Resource):
             Customer Dict which was created
         """
         url = "{}/{}/tokens".format(self.base_url, customer_id)
-        return self.post_url(url, data, **kwargs)
+        return self.get_url(url, data, **kwargs)
 
     def delete(self, customer_id, token_id, data={}, **kwargs):
         """"

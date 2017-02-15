@@ -1,0 +1,19 @@
+import responses
+import json
+
+from .helpers import mock_file, ClientTestCase
+
+
+class TestClientCustomer(ClientTestCase):
+
+    def setUp(self):
+        super(TestClientCustomer, self).setUp()
+        self.base_url = '{}/customers'.format(self.base_url)
+
+    @responses.activate
+    def test_customer_fetch(self):
+        result = mock_file('fake_customer')
+        url = '{}/{}'.format(self.base_url, self.customer_id)
+        responses.add(responses.GET, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.customer.fetch(self.customer_id), result)
