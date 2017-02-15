@@ -3,6 +3,8 @@ import json
 import requests
 import pkg_resources
 
+from pkg_resources import DistributionNotFound
+
 from types import ModuleType
 
 from . import resources, utility
@@ -56,7 +58,12 @@ class Client:
         return options
 
     def _get_version(self):
-        return pkg_resources.require("razorpay")[0].version
+        version = ""
+        try:
+            version = pkg_resources.require("razorpay")[0].version
+        except DistributionNotFound:
+            pass
+        return version
 
     def request(self, method, path, **options):
         """
