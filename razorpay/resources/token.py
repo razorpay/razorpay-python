@@ -17,8 +17,7 @@ class Token(Resource):
         Returns:
             Order dict for given customer Id
         """
-        url = "{}/{}/{}/{}".format(self.base_url,
-                                   customer_id, 'tokens', token_id)
+        url = "{}/{}/tokens/{}".format(self.base_url, customer_id, token_id)
         return self.get_url(url, data, **kwargs)
 
     def all(self, customer_id, data={}, **kwargs):
@@ -28,7 +27,7 @@ class Token(Resource):
         Returns:
             Customer Dict which was created
         """
-        url = "{}/{}/{}".format(self.base_url, customer_id, 'tokens')
+        url = "{}/{}/tokens".format(self.base_url, customer_id)
         return self.post_url(url, data, **kwargs)
 
     def delete(self, customer_id, token_id, data={}, **kwargs):
@@ -38,6 +37,5 @@ class Token(Resource):
         Returns:
             Dict for deleted token
         """
-        url = "{}/{}/{}/{}".format(self.base_url,
-                                   customer_id, 'tokens', token_id)
+        url = "{}/{}/tokens/{}".format(self.base_url, customer_id, token_id)
         return self.delete_url(url, data, **kwargs)

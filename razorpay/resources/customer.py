@@ -29,12 +29,13 @@ class Customer(Resource):
         url = self.base_url
         return self.post_url(url, data, **kwargs)
 
-    def edit(self, data={}, **kwargs):
+    def edit(self, customer_id, data={}, **kwargs):
         """"
         Create Customer from given dict
 
         Returns:
             Customer Dict which was created
         """
-        url = self.base_url
+        url = '{}/{}'.format(self.base_url, customer_id)
+
         return self.put_url(url, data, **kwargs)
