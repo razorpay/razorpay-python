@@ -44,7 +44,10 @@ class Client:
 
         # intializes each resource
         # injecting this client object into the constructor
-        for name, Klass in RESOURCE_CLASSES.items() + UTILITY_CLASSES.items():
+        for name, Klass in RESOURCE_CLASSES.items():
+            setattr(self, name, Klass(self))
+
+        for name, Klass in UTILITY_CLASSES.items():
             setattr(self, name, Klass(self))
 
     def _update_user_agent_header(self, options):
