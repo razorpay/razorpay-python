@@ -7,7 +7,7 @@ class Card(Resource):
         self.client = client
         self.base_url = URL.CARD_URL
 
-    def fetch(self, card_id, data={}, **kwargs):
+    def fetch(self, card_id, data = {}, **kwargs):
         """"
         Fetch Card for given Id
 

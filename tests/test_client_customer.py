@@ -14,6 +14,24 @@ class TestClientCustomer(ClientTestCase):
     def test_customer_fetch(self):
         result = mock_file('fake_customer')
         url = '{}/{}'.format(self.base_url, self.customer_id)
-        responses.add(responses.GET, url, status=200, body=json.dumps(result),
+
+        responses.add(responses.GET,
+                      url,
+                      status=200,
+                      body=json.dumps(result),
                       match_querystring=True)
+
         self.assertEqual(self.client.customer.fetch(self.customer_id), result)
+
+    @responses.activate
+    def test_customer_create(self):
+        init = mock_file('init_customer')
+        result = mock_file('fake_customer')
+        url = self.base_url
+        responses.add(responses.POST,
+                      url,
+                      status=200,
+                      body=json.dumps(result),
+                      match_querystring=True)
+
+        self.assertEqual(self.client.customer.create(init), result)
