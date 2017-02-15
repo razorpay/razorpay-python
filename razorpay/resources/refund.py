@@ -15,7 +15,7 @@ class Refund(Resource):
 
     def create(self, data={}, **kwargs):
         """
-        TODO : fill me
+        Create refund for given payment id
         """
         url = self.base_url
         return self.post_url(url, data, **kwargs)

@@ -39,7 +39,6 @@ class Order(Resource):
                       DeprecationWarning)
         self.payments(order_id, data, **kwargs)
 
-
     def payments(self, order_id, data={}, **kwargs):
         """"
         Fetch Payment for Order Id
