@@ -1,11 +1,17 @@
 from .base import Resource
 from .Url import URL
+import warnings
 
 
 class Order(Resource):
     def __init__(self, client=None):
         self.client = client
         self.base_url = URL.ORDER_URL
+
+    def fetch_all(self, data={}, **kwargs):
+        warnings.warn("Will be Deprecated in next release, use all",
+                      DeprecationWarning)
+        self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
         """"
@@ -27,6 +33,12 @@ class Order(Resource):
             Order dict for given order Id
         """
         return super(Order, self).fetch(order_id, data, **kwargs)
+
+    def fetch_all_payments(self, order_id, data={}, **kwargs):
+        warnings.warn("Will be Deprecated in next release, use payments",
+                      DeprecationWarning)
+        self.payments(order_id, data, **kwargs)
+
 
     def payments(self, order_id, data={}, **kwargs):
         """"

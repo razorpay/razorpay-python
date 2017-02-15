@@ -1,11 +1,17 @@
 from .base import Resource
 from .Url import URL
+import warnings
 
 
 class Refund(Resource):
     def __init__(self, client=None):
         self.client = client
         self.base_url = URL.REFUNDS_URL
+
+    def fetch_all(self, data={}, **kwargs):
+        warnings.warn("Will be Deprecated in next release, use all",
+                      DeprecationWarning)
+        self.all(data, **kwargs)
 
     def create(self, data={}, **kwargs):
         """

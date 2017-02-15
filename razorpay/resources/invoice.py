@@ -1,11 +1,16 @@
 from .base import Resource
 from .Url import URL
+import warnings
 
 
 class Invoice(Resource):
     def __init__(self, client=None):
         self.client = client
         self.base_url = URL.INVOICE_URL
+
+    def fetch_all(self, data={}, **kwargs):
+        warnings.warn("Will be Deprecated in next release", DeprecationWarning)
+        self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
         """"
