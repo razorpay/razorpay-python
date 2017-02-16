@@ -8,7 +8,7 @@ class Order(Resource):
         self.client = client
         self.base_url = URL.ORDER_URL
 
-    def fetch_all(self, data={}, **kwargs):
+    def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",
                       DeprecationWarning)
         self.all(data, **kwargs)
@@ -34,7 +34,7 @@ class Order(Resource):
         """
         return super(Order, self).fetch(order_id, data, **kwargs)
 
-    def fetch_all_payments(self, order_id, data={}, **kwargs):
+    def fetch_all_payments(self, order_id, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use payments",
                       DeprecationWarning)
         self.payments(order_id, data, **kwargs)

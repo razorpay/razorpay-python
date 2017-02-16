@@ -8,7 +8,7 @@ class Refund(Resource):
         self.client = client
         self.base_url = URL.REFUNDS_URL
 
-    def fetch_all(self, data={}, **kwargs):
+    def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",
                       DeprecationWarning)
         self.all(data, **kwargs)
