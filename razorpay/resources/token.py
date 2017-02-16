@@ -1,5 +1,5 @@
 from .base import Resource
-from .Url import URL
+from ..constants.url import URL
 
 
 class Token(Resource):

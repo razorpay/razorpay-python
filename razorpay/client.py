@@ -6,7 +6,7 @@ import pkg_resources
 from pkg_resources import DistributionNotFound
 
 from types import ModuleType
-from .constants import HTTP_STATUS_CODE, ERROR_CODE
+from .constants import HTTP_STATUS_CODE, ERROR_CODE, URL
 
 from . import resources, utility
 
@@ -30,7 +30,7 @@ class Client:
     """Razorpay client class"""
 
     DEFAULTS = {
-        'base_url': 'https://api.razorpay.com/v1'
+        'base_url': URL.BASE_URL
     }
 
     def __init__(self, session=None, auth=None, **options):
