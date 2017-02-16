@@ -8,9 +8,9 @@ class Utility(object):
         self.client = client
 
     def verify_payment_signature(self, parameters):
-        order_id = parameters['order_id']
-        payment_id = parameters['payment_id']
-        razorpay_signature = parameters['razorpay_signature']
+        order_id = str(parameters['razorpay_order_id'])
+        payment_id = str(parameters['razorpay_payment_id'])
+        razorpay_signature = str(parameters['razorpay_signature'])
         msg = "{}|{}".format(order_id, payment_id)
         key = self.client.auth[1]
 
