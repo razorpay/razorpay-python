@@ -1,5 +1,6 @@
 import hmac
 import hashlib
+import sys
 
 
 class Utility(object):
@@ -11,7 +12,13 @@ class Utility(object):
         payment_id = parameters['payment_id']
         razorpay_signature = parameters['razorpay_signature']
         msg = "{}|{}".format(order_id, payment_id)
-        dig = hmac.new(key=self.client.auth[1],
+        key = self.client.auth[1]
+
+        if sys.version_info[0] == 3:
+            key = bytes(key, 'utf-8')
+            msg = bytes(msg, 'utf-8')
+
+        dig = hmac.new(key=key,
                        msg=msg,
                        digestmod=hashlib.sha256)
 
