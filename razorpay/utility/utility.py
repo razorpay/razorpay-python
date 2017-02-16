@@ -6,7 +6,7 @@ class Utility(object):
     def __init__(self, client=None):
         self.client = client
 
-    def validate_signature(self, parameters):
+    def verify_payment_signature(self, parameters):
         order_id = parameters['order_id']
         payment_id = parameters['payment_id']
         razorpay_signature = parameters['razorpay_signature']
@@ -18,6 +18,6 @@ class Utility(object):
         generated_signature = dig.hexdigest()
 
         if not hmac.compare_digest(generated_signature, razorpay_signature):
-            return False
+            raise ValueError('Payment Signature Verification Failed')
 
         return True
