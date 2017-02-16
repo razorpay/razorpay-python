@@ -7,6 +7,8 @@ from .resources import Customer
 from .resources import Card
 from .resources import Token
 from .utility import Utility
+from .constants import ERROR_CODE
+from .constants import HTTP_STATUS_CODE
 
 __all__ = [
         'Payment',
@@ -18,4 +20,6 @@ __all__ = [
         'Customer',
         'Card',
         'Token',
+        'HTTP_STATUS_CODE',
+        'ERROR_CODE',
 ]
