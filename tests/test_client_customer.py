@@ -35,3 +35,16 @@ class TestClientCustomer(ClientTestCase):
                       match_querystring=True)
 
         self.assertEqual(self.client.customer.create(init), result)
+
+    @responses.activate
+    def test_customer_edit(self):
+        email = 'test@test.com'
+        result = mock_file('fake_customer')
+        url = '{}/{}'.format(self.base_url, self.customer_id)
+        responses.add(responses.PUT,
+                      url,
+                      status=200,
+                      body=json.dumps(result),
+                      match_querystring=True)
+
+        self.assertEqual(self.client.customer.edit(self.customer_id, email), result)
