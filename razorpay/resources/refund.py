@@ -5,7 +5,7 @@ import warnings
 
 class Refund(Resource):
     def __init__(self, client=None):
-        self.client = client
+        super(Refund, self).__init__(client)
         self.base_url = URL.REFUNDS_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover

@@ -5,7 +5,7 @@ import warnings
 
 class Order(Resource):
     def __init__(self, client=None):
-        self.client = client
+        super(Order, self).__init__(client)
         self.base_url = URL.ORDER_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover

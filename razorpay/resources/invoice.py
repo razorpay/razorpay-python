@@ -5,7 +5,7 @@ import warnings
 
 class Invoice(Resource):
     def __init__(self, client=None):
-        self.client = client
+        super(Invoice, self).__init__(client)
         self.base_url = URL.INVOICE_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover

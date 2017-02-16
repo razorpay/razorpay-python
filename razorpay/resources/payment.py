@@ -5,7 +5,7 @@ import warnings
 
 class Payment(Resource):
     def __init__(self, client=None):
-        self.client = client
+        super(Payment, self).__init__(client)
         self.base_url = URL.PAYMENTS_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover

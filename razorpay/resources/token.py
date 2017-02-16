@@ -4,7 +4,7 @@ from .Url import URL
 
 class Token(Resource):
     def __init__(self, client=None):
-        self.client = client
+        super(Token, self).__init__(client)
         self.base_url = URL.CUSTOMER_URL
 
     def fetch(self, customer_id, token_id, data={}, **kwargs):
