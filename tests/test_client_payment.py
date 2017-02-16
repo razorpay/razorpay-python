@@ -2,6 +2,7 @@ import responses
 import json
 
 from .helpers import mock_file, ClientTestCase
+from razorpay.errors import BadRequestError
 
 
 class TestClientPayment(ClientTestCase):

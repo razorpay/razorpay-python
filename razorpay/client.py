@@ -65,7 +65,7 @@ class Client:
         version = ""
         try:
             version = pkg_resources.require("razorpay")[0].version
-        except DistributionNotFound:
+        except DistributionNotFound:  # pragma: no cover
             pass
         return version
 
