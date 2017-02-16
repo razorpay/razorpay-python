@@ -7,3 +7,9 @@ class HTTP_STATUS_CODE(object):
     REFUNDS_URL = "/refunds"
     CARD_URL = "/cards"
     CUSTOMER_URL = "/customers"
+
+
+class ERROR_CODE(object):
+    BAD_REQUEST_ERROR = "BAD_REQUEST_ERROR"
+    GATEWAY_ERROR = "GATEWAY_ERROR"
+    SERVER_ERROR = "SERVER_ERROR"

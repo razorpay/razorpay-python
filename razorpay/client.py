@@ -6,7 +6,7 @@ import pkg_resources
 from pkg_resources import DistributionNotFound
 
 from types import ModuleType
-from .constants import HTTP_STATUS_CODE
+from .constants import HTTP_STATUS_CODE, ERROR_CODE
 
 from . import resources, utility
 
@@ -98,11 +98,11 @@ class Client:
                 if 'code' in json_response['error']:
                     code = str(json_response['error']['code'])
 
-            if str.upper(code) == 'BAD_REQUEST_ERROR':
+            if str.upper(code) == ERROR_CODE.BAD_REQUEST_ERROR:
                 raise BadRequestError(msg)
-            elif str.upper(code) == 'GATEWAY_ERROR':
+            elif str.upper(code) == ERROR_CODE.GATEWAY_ERROR:
                 raise GatewayError(msg)
-            elif str.upper(code) == 'SERVER_ERROR':
+            elif str.upper(code) == ERROR_CODE.SERVER_ERROR:
                 raise ServerError(msg)
             else:
                 raise ServerError(msg)
