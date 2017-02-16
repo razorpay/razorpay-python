@@ -43,3 +43,12 @@ class TestClientPayment(ClientTestCase):
                       body=json.dumps(result), match_querystring=True)
         self.assertEqual(self.client.payment.capture(self.payment_id,
                                                      amount=5100), result)
+
+    @responses.activate
+    def test_refund_create(self):
+        result = mock_file('fake_refund')
+        url = '{}/{}/refund'.format(self.base_url, self.payment_id)
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.payment.refund(self.payment_id, 2000),
+                         result)

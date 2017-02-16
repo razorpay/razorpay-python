@@ -58,3 +58,12 @@ class TestClientOrder(ClientTestCase):
                       match_querystring=True)
 
         self.assertEqual(self.client.order.payments('fake_order_id'), result)
+
+    @responses.activate
+    def test_order_create(self):
+        init = mock_file('init_order')
+        result = mock_file('fake_order')
+        url = self.base_url
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.order.create(init), result)

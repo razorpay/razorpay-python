@@ -49,7 +49,7 @@ class Payment(Resource):
         data['amount'] = amount
         return self.post_url(url, data, **kwargs)
 
-    def refund(self, payment_id, amount, data={}, **kwargs):
+    def refund(self, payment_id, amount, data={}, **kwargs):  # pragma: no cover
         """"
         Refund Payment for given Id
 
