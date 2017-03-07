@@ -11,7 +11,7 @@ class Refund(Resource):
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",
                       DeprecationWarning)
-        self.all(data, **kwargs)
+        return self.all(data, **kwargs)
 
     def create(self, data={}, **kwargs):
         """

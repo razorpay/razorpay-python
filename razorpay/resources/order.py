@@ -11,7 +11,7 @@ class Order(Resource):
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",
                       DeprecationWarning)
-        self.all(data, **kwargs)
+        return self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
         """"
@@ -37,7 +37,7 @@ class Order(Resource):
     def fetch_all_payments(self, order_id, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use payments",
                       DeprecationWarning)
-        self.payments(order_id, data, **kwargs)
+        return self.payments(order_id, data, **kwargs)
 
     def payments(self, order_id, data={}, **kwargs):
         """"
