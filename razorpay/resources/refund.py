@@ -22,25 +22,21 @@ class Refund(Resource):
 
     def all(self, data={}, **kwargs):
         """"
-        All Refund for given payment Id
-
-        Args:
-            payment_id : Payment Id for which refund has to be retrieved
+        Fetch All Refund
 
         Returns:
-            Refund dict for given payment Id
+            Refund dict
         """
         return super(Refund, self).all(data, **kwargs)
 
     def fetch(self, refund_id, data={}, **kwargs):
         """"
-        Refund object for given payment Id and given paymnet Id
+        Refund object for given paymnet Id
 
         Args:
-            payment_id : Payment Id for which refund has to be retrieved
-            payment_id : Refund Id for which refund has to be retrieved
+            refund_id : Refund Id for which refund has to be retrieved
 
         Returns:
-            Refund dict for given payment and refund Id
+            Refund dict for given refund Id
         """
         return super(Refund, self).fetch(refund_id, data, **kwargs)

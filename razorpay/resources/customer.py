@@ -31,10 +31,10 @@ class Customer(Resource):
 
     def edit(self, customer_id, data={}, **kwargs):
         """"
-        Create Customer from given dict
+        Edit Customer information from given dict
 
         Returns:
-            Customer Dict which was created
+            Customer Dict which was edited
         """
         url = '{}/{}'.format(self.base_url, customer_id)
 

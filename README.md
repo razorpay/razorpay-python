@@ -60,13 +60,13 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - fetch a particular refund
 
     ```py
-    client.refund.fetch("<payment_id>", "<refund_id>")
+    client.refund.fetch("<refund_id>")
     ```
 
-- fetch all refunds for a particular payment(same as payment refund fetch all)
+- fetch all refunds
    
     ```py
-    client.refund.fetch_all("<payment_id>")
+    client.refund.fetch_all()
     ```
 
 ### Orders
@@ -98,7 +98,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - fetch Payments of order 
    
     ```py
-    client.order.fetch_all_payments("<ORDER_ID>")
+    client.order.payments("<ORDER_ID>")
     ```
 
 ### Invoices
@@ -123,6 +123,77 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
     ```py
     client.invoice.fetch_all()
     ```
+
+### Card
+
+- fetch a particular card data
+
+    ```py
+    client.card.fetch(card_id=card_id)
+    ```
+
+### Customer
+
+- fetch a particular customer Info
+
+    ```py
+    client.customer.fetch(customer_id=customer_id)
+    ```
+
+- Create a customer 
+
+    ```py
+    client.customer.create(data=data)
+    ```
+
+- Edit a customer info
+
+    ```py
+    client.customer.edit(customer_id=customer_id, data=data)
+    ```
+
+### Token
+
+- fetch a token associated with a customer 
+
+    ```py
+    client.token.fetch(customer_id=customer_id, token_id=token_id)
+    ```
+
+- fetch all tokens associated with customer
+
+    ```py
+    client.token.all(customer_id=customer_id)
+    ```
+
+- Delete a given token assicated with a customer
+
+    ```py
+    client.token.delete(customer_id=customer_id, token_id=token_id)
+    ```
+
+### Utility
+
+- Verify Payment Signature
+
+    ```py
+    params_dict should have razorpay_order_id, razorpay_payment_id, razorpay_signature
+    which are received with the cord callback
+    client.utility.verify_payment_signature(params_dict)
+    ```
+
+- fetch all tokens associated with customer
+
+    ```py
+    client.token.all(customer_id=customer_id)
+    ```
+
+- Delete a given token assicated with a customer
+
+    ```py
+    client.token.delete(customer_id=customer_id, token_id=token_id)
+    ```
+
 
 ## Bugs? Feature requests? Pull requests?
 
