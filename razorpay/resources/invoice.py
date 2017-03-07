@@ -1,23 +1,27 @@
 from .base import Resource
-from .Url import URL
+from ..constants.url import URL
+import warnings
 
 
 class Invoice(Resource):
     def __init__(self, client=None):
-        self.client = client
+        super(Invoice, self).__init__(client)
         self.base_url = URL.INVOICE_URL
 
-    def fetch_all(self, **kwargs):
+    def fetch_all(self, data={}, **kwargs):  # pragma: no cover
+        warnings.warn("Will be Deprecated in next release", DeprecationWarning)
+        self.all(data, **kwargs)
+
+    def all(self, data={}, **kwargs):
         """"
         Fetch all Invoice entities
 
         Returns:
             Dictionary of Invoice data
         """
-        url = self.base_url
-        return self.get_url(url, **kwargs)
+        return super(Invoice, self).all(data, **kwargs)
 
-    def fetch(self, invoice_id, **kwargs):
+    def fetch(self, invoice_id, data={}, **kwargs):
         """"
         Fetch Invoice for given Id
 
@@ -27,8 +31,7 @@ class Invoice(Resource):
         Returns:
             Invoice dict for given invoice Id
         """
-        url = "{}/{}".format(self.base_url, invoice_id)
-        return self.get_url(url, **kwargs)
+        return super(Invoice, self).fetch(invoice_id, data, **kwargs)
 
     def create(self, data={}, **kwargs):
         """"

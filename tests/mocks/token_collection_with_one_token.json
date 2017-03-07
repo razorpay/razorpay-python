@@ -1,0 +1,27 @@
+{
+  "count": 1,
+  "entity": "collection",
+  "items": [
+    {
+    "id": "fake_token_id",
+    "entity": "token",
+    "method": "card",
+    "recurring": true,
+    "token": "token_id",
+    "used_at": 1482751390,
+    "wallet": null,
+    "card":[
+      "emi":true,
+      "entity":"card",
+      expiry_month:"2",
+      expiry_year:"2022",
+      "international":false,
+      "issuer":"HDFC",
+      "last4":1111,
+      "name":"test name",
+      "network":"Visa",
+      "type":"credit"
+    ]
+    }
+  ]
+}

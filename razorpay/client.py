@@ -1,13 +1,17 @@
 import os
 import json
 import requests
+import pkg_resources
+
+from pkg_resources import DistributionNotFound
 
 from types import ModuleType
+from .constants import HTTP_STATUS_CODE, ERROR_CODE, URL
 
-from . import resources
+from . import resources, utility
 
-from .errors import (BadRequestError, NoAuthorizationError,
-                     NotFoundError, ServerError)
+from .errors import (BadRequestError, GatewayError,
+                     ServerError)
 
 
 # Create a dict of resource classes
@@ -16,19 +20,18 @@ for name, module in resources.__dict__.items():
     if isinstance(module, ModuleType) and name.capitalize() in module.__dict__:
         RESOURCE_CLASSES[name] = module.__dict__[name.capitalize()]
 
+UTILITY_CLASSES = {}
+for name, module in utility.__dict__.items():
+    if isinstance(module, ModuleType) and name.capitalize() in module.__dict__:
+        UTILITY_CLASSES[name] = module.__dict__[name.capitalize()]
+
 
 class Client:
     """Razorpay client class"""
 
     DEFAULTS = {
-        'base_url': 'https://api.razorpay.com/v1'
+        'base_url': URL.BASE_URL
     }
-
-    CLIENT_OPTIONS = set(DEFAULTS.keys())
-    QUERY_OPTIONS = set(['from', 'to', 'count', 'skip'])
-    REQUEST_OPTIONS = set(['headers', 'params', 'data'])
-
-    ALL_OPTIONS = CLIENT_OPTIONS | QUERY_OPTIONS | REQUEST_OPTIONS
 
     def __init__(self, session=None, auth=None, **options):
         """
@@ -40,59 +43,96 @@ class Client:
         file_dir = os.path.dirname(__file__)
         self.cert_path = file_dir + '/ca-bundle.crt'
 
-        # merge the provided options (if any) with the global DEFAULTS
-        self.options = _merge(self.DEFAULTS, options)
         # intializes each resource
         # injecting this client object into the constructor
         for name, Klass in RESOURCE_CLASSES.items():
             setattr(self, name, Klass(self))
 
+        for name, Klass in UTILITY_CLASSES.items():
+            setattr(self, name, Klass(self))
+
+    def _update_user_agent_header(self, options):
+        user_agent = "{}{}".format('Razorpay-Python/',  self._get_version())
+
+        if 'headers' in options:
+            options['headers']['User-Agent'] = user_agent
+        else:
+            options['headers'] = {'User-Agent': user_agent}
+
+        return options
+
+    def _get_version(self):
+        version = ""
+        try:
+            version = pkg_resources.require("razorpay")[0].version
+        except DistributionNotFound:  # pragma: no cover
+            pass
+        return version
+
     def request(self, method, path, **options):
         """
         Dispatches a request to the Razorpay HTTP API
         """
-        options = self._merge_options(options)
-        url = "{}{}".format(options['base_url'],  path)
-        request_options = self._parse_request_options(options)
+        base_url = self.DEFAULTS['base_url']
+
+        if 'base_url' in options:
+            base_url = options['base_url']
+            del(options['base_url'])
+
+        options = self._update_user_agent_header(options)
+
+        url = "{}{}".format(base_url,  path)
         response = getattr(self.session, method)(url, auth=self.auth,
                                                  verify=self.cert_path,
-                                                 **request_options)
-        if response.status_code == 200:
+                                                 **options)
+        if ((response.status_code >= HTTP_STATUS_CODE.OK) and
+                (response.status_code < HTTP_STATUS_CODE.REDIRECT)):
             return response.json()
         else:
             msg = ""
+            code = ""
             json_response = response.json()
             if 'error' in json_response:
                 if 'description' in json_response['error']:
                     msg = json_response['error']['description']
-            if response.status_code == 400:
+                if 'code' in json_response['error']:
+                    code = str(json_response['error']['code'])
+
+            if str.upper(code) == ERROR_CODE.BAD_REQUEST_ERROR:
                 raise BadRequestError(msg)
-            if response.status_code == 401:
-                raise NoAuthorizationError(msg)
-            if response.status_code == 404:
-                raise NotFoundError(msg)
-            elif response.status_code >= 500 and response.status_code < 600:
+            elif str.upper(code) == ERROR_CODE.GATEWAY_ERROR:
+                raise GatewayError(msg)
+            elif str.upper(code) == ERROR_CODE.SERVER_ERROR:
+                raise ServerError(msg)
+            else:
                 raise ServerError(msg)
 
-    def get(self, path, **options):
+    def get(self, path, params, **options):
         """
         Parses GET request options and dispatches a request
         """
-        query_options = self._parse_query_options(options)
-        parameter_options = self._parse_parameter_options(options)
-        # options in the query takes precendence
-        query = _merge(query_options, parameter_options)
-        return self.request('get', path, params=query, **options)
+        return self.request('get', path, params=params, **options)
 
     def post(self, path, data, **options):
         """
         Parses POST request options and dispatches a request
         """
-        parameter_options = self._parse_parameter_options(options)
-        # values in the data body takes precendence
-        data = _merge(parameter_options, data)
         data, options = self._update_request(data, options)
         return self.request('post', path, data=data, **options)
+
+    def delete(self, path, data, **options):
+        """
+        Parses DELETE request options and dispatches a request
+        """
+        data, options = self._update_request(data, options)
+        return self.request('delete', path, data=data, **options)
+
+    def put(self, path, data, **options):
+        """
+        Parses PUT request options and dispatches a request
+        """
+        data, options = self._update_request(data, options)
+        return self.request('put', path, data=data, **options)
 
     def _update_request(self, data, options):
         """
@@ -102,66 +142,6 @@ class Client:
         if 'headers' in options:
             options['headers']['Content-type'] = 'application/json'
         else:
-            options['headers'] = {'Content-type' : 'application/json'}
+            options['headers'] = {'Content-type': 'application/json'}
 
         return data, options
-
-    def _merge_options(self, *objects):
-        """
-        Merges one or more options objects with client's options
-        returns a new options object
-        """
-        return _merge(self.options, *objects)
-
-    def _parse_query_options(self, options):
-        """
-        Selects query string options out of the provided options object
-        """
-        return self._select_options(options, self.QUERY_OPTIONS)
-
-    def _parse_parameter_options(self, options):
-        """
-        Selects all unknown options
-        (not query string, API, or request options)
-        """
-        return self._select_options(options, self.ALL_OPTIONS, invert=True)
-
-    def _parse_request_options(self, options):
-        """
-        Select and formats options to be passed to
-        the 'requests' library's request methods
-        """
-        request_options = self._select_options(options, self.REQUEST_OPTIONS)
-        if 'params' in request_options:
-            params = request_options['params']
-            for key in params:
-                if isinstance(params[key], bool):
-                    params[key] = json.dumps(params[key])
-
-        if 'data' in request_options:
-            # remove empty 'options':
-            if 'options' in request_options['data']:
-                if len(request_options['data']['options']) == 0:
-                    del request_options['data']['options']
-        return request_options
-
-    def _select_options(self, options, keys, invert=False):
-        """
-        Selects the provided keys (or everything except the provided keys)
-        out of an options object
-        """
-        options = self._merge_options(options)
-        result = {}
-        for key in options:
-            if (invert and key not in keys) or (not invert and key in keys):
-                result[key] = options[key]
-        return result
-
-
-def _merge(*args):
-    """
-    Merge one or more objects into a new object
-    """
-    result = {}
-    [result.update(obj) for obj in args]
-    return result

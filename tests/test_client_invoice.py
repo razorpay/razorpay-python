@@ -16,7 +16,7 @@ class TestClientInvoice(ClientTestCase):
         url = self.base_url
         responses.add(responses.GET, url, status=200,
                       body=json.dumps(result), match_querystring=True)
-        self.assertEqual(self.client.invoice.fetch_all(), result)
+        self.assertEqual(self.client.invoice.all(), result)
 
     @responses.activate
     def test_invoice_fetch_all_with_options(self):
@@ -25,7 +25,7 @@ class TestClientInvoice(ClientTestCase):
         url = '{}?count={}'.format(self.base_url, count)
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.invoice.fetch_all(count=count), result)
+        self.assertEqual(self.client.invoice.all({'count': count}), result)
 
     @responses.activate
     def test_invoice_fetch(self):
@@ -35,3 +35,11 @@ class TestClientInvoice(ClientTestCase):
                       match_querystring=True)
         self.assertEqual(self.client.invoice.fetch('fake_invoice_id'), result)
 
+    @responses.activate
+    def test_invoice_create(self):
+        init = mock_file('init_invoice')
+        result = mock_file('fake_invoice')
+        url = self.base_url
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.invoice.create(init), result)

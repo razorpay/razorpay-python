@@ -1,0 +1,8 @@
+{
+  "id": "fake_customer_id",
+  "entity": "customer",
+  "email": "test@test.com",
+  "contact": 9876543210,
+  "name": "sample name",
+  "notes": [],
+}
