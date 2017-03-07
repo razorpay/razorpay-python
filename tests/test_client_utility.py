@@ -1,6 +1,7 @@
 import responses
 
 from .helpers import ClientTestCase
+from razorpay.errors import SignatureVerificationError
 
 
 class TestClientValidator(ClientTestCase):
@@ -27,6 +28,6 @@ class TestClientValidator(ClientTestCase):
         parameters['razorpay_payment_id'] = 'fake_payment_id'
         parameters['razorpay_signature'] = 'test_signature'
         self.assertRaises(
-            ValueError,
+            SignatureVerificationError,
             self.client.utility.verify_payment_signature,
             parameters)

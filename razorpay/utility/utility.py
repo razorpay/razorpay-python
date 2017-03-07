@@ -3,6 +3,9 @@ import hashlib
 import sys
 
 
+from ..errors import SignatureVerificationError
+
+
 class Utility(object):
     def __init__(self, client=None):
         self.client = client
@@ -25,6 +28,6 @@ class Utility(object):
         generated_signature = dig.hexdigest()
 
         if not hmac.compare_digest(generated_signature, razorpay_signature):
-            raise ValueError('Payment Signature Verification Failed')
+            raise SignatureVerificationError('Payment Signature Verification Failed')
 
         return True
