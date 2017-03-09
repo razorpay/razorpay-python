@@ -1,0 +1,40 @@
+{
+  "event": "payment.authorized",
+  "entity": "event",
+  "contains": [
+    "payment"
+  ],
+  "payload": {
+    "payment": {
+      "entity": {
+        "id": "pay_6koWN7bvxujzxM",
+        "entity": "payment",
+        "amount": 1000000,
+        "currency": "INR",
+        "status": "captured",
+        "order_id": "order_100000000order",
+        "international": false,
+        "method": "card",
+        "amount_refunded": 0,
+        "refund_status": null,
+        "captured": true,
+        "description": "random description",
+        "card_id": "card_6koWNAT6LASUqy",
+        "bank": null,
+        "wallet": null,
+        "vpa": null,
+        "email": "a@b.com",
+        "contact": "+919999999999",
+        "notes": {
+          "merchant_order_id": "random order id"
+        },
+        "fee": 23000,
+        "service_tax": 3000,
+        "error_code": null,
+        "error_description": null,
+        "created_at": 1479978483
+      }
+    }
+  },
+  "created_at": 1400826760
+}
