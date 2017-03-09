@@ -1,6 +1,6 @@
 import responses
 
-from .helpers import ClientTestCase
+from .helpers import mock_file, ClientTestCase
 from razorpay.errors import SignatureVerificationError
 
 
@@ -32,3 +32,23 @@ class TestClientValidator(ClientTestCase):
             SignatureVerificationError,
             self.client.utility.verify_payment_signature,
             parameters)
+
+    @responses.activate
+    def test_verify_webhook_signature(self):
+        sig = 'd60e67fd884556c045e9be7dad57903e33efc7172c17c6e3ef77db42d2b366e9'
+        body = mock_file('fake_payment_authorized_webhook')
+
+        self.assertEqual(
+             self.client.utility.verify_webhook_signature(sig, body),
+             None)
+
+    @responses.activate
+    def test_verify_webhook_signature_with_exception(self):
+        sig = 'test_signature'
+        body = ''
+
+        self.assertRaises(
+            SignatureVerificationError,
+            self.client.utility.verify_webhook_signature,
+            sig,
+            body)
