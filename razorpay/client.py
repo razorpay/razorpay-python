@@ -145,9 +145,13 @@ class Client:
         Updates The resource data and header options
         """
         data = json.dumps(data)
-        if 'headers' in options:
+
+        if 'headers' not in options:
+            options['headers'] = {}
+
+        if 'Content-type' not in options['headers']:
             options['headers']['Content-type'] = 'application/json'
-        else:
-            options['headers'] = {'Content-type': 'application/json'}
+
+        options['headers']['Content-type'] = 'application/json'
 
         return data, options
