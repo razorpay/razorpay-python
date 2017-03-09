@@ -17,8 +17,9 @@ class TestClientValidator(ClientTestCase):
         parameters['razorpay_payment_id'] = 'fake_payment_id'
         parameters['razorpay_signature'] = sig
 
-        self.client.utility.verify_payment_signature(parameters)
-        self.assert_(True)
+        self.assertEqual(
+             self.client.utility.verify_payment_signature(parameters),
+             None)
 
     @responses.activate
     def test_verify_payment_signature_with_exception(self):
