@@ -68,3 +68,22 @@ class TestClientError(ClientTestCase):
             ServerError,
             self.client.payment.all,
             {'count': count})
+
+    @responses.activate
+    def test_unknown_error(self):
+        count = 10
+        result = {
+            'error':
+            {
+                'code': 'UNKNOWN_ERROR',
+                'description': 'No Description'
+            }
+        }
+
+        url = '{}?count={}'.format(self.base_url, count)
+        responses.add(responses.GET, url, status=500, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertRaises(
+            ServerError,
+            self.client.payment.all,
+            {'count': count})
