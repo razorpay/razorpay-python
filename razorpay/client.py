@@ -149,9 +149,6 @@ class Client:
         if 'headers' not in options:
             options['headers'] = {}
 
-        if 'Content-type' not in options['headers']:
-            options['headers']['Content-type'] = 'application/json'
-
-        options['headers']['Content-type'] = 'application/json'
+        options['headers'].update({'Content-type': 'application/json'})
 
         return data, options
