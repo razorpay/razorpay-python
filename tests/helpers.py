@@ -14,9 +14,12 @@ def mock_file(filename):
 class ClientTestCase(unittest.TestCase):
     def setUp(self):
         self.base_url = 'https://api.razorpay.com/v1'
+        self.secondary_url = 'https://test-api.razorpay.com/v1'
         self.payment_id = 'fake_payment_id'
         self.refund_id = 'fake_refund_id'
         self.card_id = 'fake_card_id'
         self.customer_id = 'fake_customer_id'
         self.token_id = 'fake_token_id'
         self.client = razorpay.Client(auth=('key_id', 'key_secret'))
+        self.secondary_client = razorpay.Client(auth=('key_id', 'key_secret'),
+                                                base_url=self.secondary_url)
