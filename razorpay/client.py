@@ -43,6 +43,8 @@ class Client:
         file_dir = os.path.dirname(__file__)
         self.cert_path = file_dir + '/ca-bundle.crt'
 
+        self.base_url = self._set_base_url(**options)
+
         # intializes each resource
         # injecting this client object into the constructor
         for name, Klass in RESOURCE_CLASSES.items():
@@ -50,6 +52,15 @@ class Client:
 
         for name, Klass in UTILITY_CLASSES.items():
             setattr(self, name, Klass(self))
+
+    def _set_base_url(self, **options):
+        base_url = self.DEFAULTS['base_url']
+
+        if 'base_url' in options:
+            base_url = options['base_url']
+            del(options['base_url'])
+
+        return base_url
 
     def _update_user_agent_header(self, options):
         user_agent = "{}{}".format('Razorpay-Python/',  self._get_version())
@@ -73,15 +84,10 @@ class Client:
         """
         Dispatches a request to the Razorpay HTTP API
         """
-        base_url = self.DEFAULTS['base_url']
-
-        if 'base_url' in options:
-            base_url = options['base_url']
-            del(options['base_url'])
-
         options = self._update_user_agent_header(options)
 
-        url = "{}{}".format(base_url,  path)
+        url = "{}{}".format(self.base_url, path)
+
         response = getattr(self.session, method)(url, auth=self.auth,
                                                  verify=self.cert_path,
                                                  **options)
