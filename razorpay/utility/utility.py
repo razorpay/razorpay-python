@@ -29,5 +29,3 @@ class Utility(object):
 
         if not hmac.compare_digest(generated_signature, razorpay_signature):
             raise SignatureVerificationError('Payment Signature Verification Failed')
-
-        return True
