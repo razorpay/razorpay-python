@@ -1,6 +1,22 @@
 # Change Log
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [1.0.0] - 2017-03-10
+### Added
+- Added Support For Signature Validation
+- Added Client for Card, Customer, Token
+- Now Sdk throws BadRequestError, GatewayError, ServerError, SignatureVerificationError depending on error occurred 
+- Set Base URL of API on client level instead of request level
+- Updated README
+- Supports Notes for Order and Refund, and line itmes in Invoices 
+
+### Changed
+- Refund Can be fetched by just refund id, previously it needed payment id also 
+- Test Coverage Increased to 100%
+- Deprecated fetch_all in favour of all
+- Take params in a dictonary instead of key/value pair
+
 ## [0.2.0] - 2016-07-04
 ### Added
 - API for Orders.
