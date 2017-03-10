@@ -27,7 +27,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - Fetch all payments
 
     ```py
-    client.payment.fetch_all()
+    client.payment.all()
     ```
 
 - Fetch a particular payment
@@ -66,7 +66,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - fetch all refunds
    
     ```py
-    client.refund.fetch_all()
+    client.refund.all()
     ```
 
 ### Orders
@@ -92,7 +92,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - fetch all orders 
    
     ```py
-    client.order.fetch_all()
+    client.order.all()
     ```
 
 - fetch Payments of order 
@@ -121,7 +121,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - fetch all invoices
    
     ```py
-    client.invoice.fetch_all()
+    client.invoice.all()
     ```
 
 ### Card
