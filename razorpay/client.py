@@ -45,6 +45,8 @@ class Client:
 
         self.base_url = self._set_base_url(**options)
 
+        self.app_details = []
+
         # intializes each resource
         # injecting this client object into the constructor
         for name, Klass in RESOURCE_CLASSES.items():
@@ -79,6 +81,12 @@ class Client:
         except DistributionNotFound:  # pragma: no cover
             pass
         return version
+
+    def _set_app_details(self, app_details):
+        self.app_details.append(app_details)
+
+    def _get_app_details(self):
+        return self.app_details
 
     def request(self, method, path, **options):
         """
