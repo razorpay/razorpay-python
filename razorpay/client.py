@@ -65,8 +65,8 @@ class Client:
         return base_url
 
     def _update_user_agent_header(self, options):
-        user_agent = "{}{}{}{}".format('Razorpay-Python/',  self._get_version(),
-                                       ' ', self._get_app_details_ua())
+        user_agent = "{}{} {}".format('Razorpay-Python/', self._get_version(),
+                                       self._get_app_details_ua())
 
         if 'headers' in options:
             options['headers']['User-Agent'] = user_agent
