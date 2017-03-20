@@ -84,23 +84,23 @@ class Client:
         return version
 
     def _get_app_details_ua(self):
-        appDetailsUa = ""
+        app_details_ua = ""
 
-        app_details = self._get_app_details()
+        app_details = self.get_app_details()
 
         for app in app_details:
             if 'title' in app and isinstance(app['title'], str):
-                appUa = app['title']
-                if 'version' in app and not isinstance(app['version'], list):
-                    appUa += "{}{}".format('/', app['version'])
-                appDetailsUa += "{}{}".format(appUa, ' ')
+                app_ua = app['title']
+                if 'version' in app and isinstance(app['version'], str):
+                    app_ua += "/{}".format(app['version'])
+                app_details_ua += "{} ".format(app_ua)
 
-        return appDetailsUa
+        return app_details_ua
 
-    def _set_app_details(self, app_details):
+    def set_app_details(self, app_details):
         self.app_details.append(app_details)
 
-    def _get_app_details(self):
+    def get_app_details(self):
         return self.app_details
 
     def request(self, method, path, **options):
