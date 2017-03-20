@@ -65,7 +65,8 @@ class Client:
         return base_url
 
     def _update_user_agent_header(self, options):
-        user_agent = "{}{}".format('Razorpay-Python/',  self._get_version())
+        user_agent = "{}{}{}{}".format('Razorpay-Python/',  self._get_version(),
+                                       ' ', self._get_app_details_ua())
 
         if 'headers' in options:
             options['headers']['User-Agent'] = user_agent
@@ -81,6 +82,20 @@ class Client:
         except DistributionNotFound:  # pragma: no cover
             pass
         return version
+
+    def _get_app_details_ua(self):
+        appDetailsUa = ""
+
+        app_details = self._get_app_details()
+
+        for app in app_details:
+            if 'title' in app and isinstance(app['title'], str):
+                appUa = app['title']
+                if 'version' in app and not isinstance(app['version'], list):
+                    appUa += "{}{}".format('/', app['version'])
+                appDetailsUa += "{}{}".format(appUa, ' ')
+
+        return appDetailsUa
 
     def _set_app_details(self, app_details):
         self.app_details.append(app_details)
