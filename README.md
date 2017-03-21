@@ -28,7 +28,7 @@ After setting up client, you can set your app details before making any request
 to Razorpay using the following:
 
 ```py
-client.set_app_details({"title" : <Your App Title>, "version" : <Your app's version>})
+client.set_app_details({"title" : "<YOUR_APP_TITLE>", "version" : "<YOUR_APP_VERSION>"})
 ```
 
 For example, you can set the title to `Django` and version to `1.8.17`. Please ensure
