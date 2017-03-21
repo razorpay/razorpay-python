@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import requests
 import pkg_resources
@@ -88,10 +89,15 @@ class Client:
 
         app_details = self.get_app_details()
 
+        if sys.version_info[0] is 3:
+            types = [bytes, str]
+        else:
+            types = [str, unicode]
+
         for app in app_details:
-            if 'title' in app and type(app['title']) in [str, unicode]:
+            if 'title' in app and type(app['title']) in types:
                 app_ua = app['title']
-                if 'version' in app and type(app['version']) in [str, unicode]:
+                if 'version' in app and type(app['version']) in types:
                     app_ua += "/{}".format(app['version'])
                 app_details_ua += "{} ".format(app_ua)
 
