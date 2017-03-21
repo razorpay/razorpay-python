@@ -25,7 +25,7 @@ class Utility(object):
     def verify_signature(self, signature, body):
         key = self.client.auth[1]
 
-        if sys.version_info[0] == 3:
+        if sys.version_info[0] == 3:  # pragma: no cover
             key = bytes(key, 'utf-8')
             body = bytes(body, 'utf-8')
 
