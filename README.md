@@ -2,7 +2,7 @@
 
 [![PyPI Version](https://img.shields.io/pypi/v/razorpay.svg?style=flat-square)](https://pypi.python.org/pypi/razorpay) [![Build Status](https://travis-ci.org/razorpay/razorpay-python.svg?branch=master)](https://travis-ci.org/razorpay/razorpay-python) [![Coverage Status](https://coveralls.io/repos/github/razorpay/razorpay-python/badge.svg?branch=master)](https://coveralls.io/github/razorpay/razorpay-python?branch=master) [![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-Python bindings for interacting with the Razorpay API. 
+Python bindings for interacting with the Razorpay API.
 
 This is primarily meant for merchants who wish to perform interactions with the Razorpay API programatically.
 
@@ -21,6 +21,18 @@ You can find your API keys at <https://dashboard.razorpay.com/#/app/keys>.
 import razorpay
 client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 ```
+
+## App Details
+
+After setting up client, you can set your app details before making any request
+to Razorpay using the following:
+
+```py
+client.set_app_details({"title" : <Your App Title>, "version" : <Your app's version>})
+```
+
+For example, you can set the title to `Django` and version to `1.8.17`. Please ensure
+that both app title and version are strings.
 
 ### Payments
 
@@ -46,10 +58,10 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 - Refund a payment
 
     ```py
-    client.payment.refund("<PAYMENT_ID>", "<AMOUNT>") 
+    client.payment.refund("<PAYMENT_ID>", "<AMOUNT>")
     # for full refund
 
-    client.payment.refund("<PAYMENT_ID>", "<AMOUNT_TO_BE_REFUNDED>") 
+    client.payment.refund("<PAYMENT_ID>", "<AMOUNT_TO_BE_REFUNDED>")
     # for particular amount
 
     Note: <AMOUNT_TO_BE_REFUNDED> should be equal/less than the original amount
@@ -64,7 +76,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
     ```
 
 - fetch all refunds
-   
+
     ```py
     client.refund.all()
     ```
@@ -89,14 +101,14 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
     client.order.fetch("<ORDER_ID>")
     ```
 
-- fetch all orders 
-   
+- fetch all orders
+
     ```py
     client.order.all()
     ```
 
-- fetch Payments of order 
-   
+- fetch Payments of order
+
     ```py
     client.order.payments("<ORDER_ID>")
     ```
@@ -119,7 +131,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
     ```
 
 - fetch all invoices
-   
+
     ```py
     client.invoice.all()
     ```
@@ -140,7 +152,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
     client.customer.fetch(customer_id=customer_id)
     ```
 
-- Create a customer 
+- Create a customer
 
     ```py
     client.customer.create(data=data)
@@ -154,7 +166,7 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 
 ### Token
 
-- fetch a token associated with a customer 
+- fetch a token associated with a customer
 
     ```py
     client.token.fetch(customer_id=customer_id, token_id=token_id)

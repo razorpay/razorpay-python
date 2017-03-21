@@ -45,6 +45,8 @@ class Client:
 
         self.base_url = self._set_base_url(**options)
 
+        self.app_details = []
+
         # intializes each resource
         # injecting this client object into the constructor
         for name, Klass in RESOURCE_CLASSES.items():
@@ -63,7 +65,8 @@ class Client:
         return base_url
 
     def _update_user_agent_header(self, options):
-        user_agent = "{}{}".format('Razorpay-Python/',  self._get_version())
+        user_agent = "{}{} {}".format('Razorpay-Python/', self._get_version(),
+                                       self._get_app_details_ua())
 
         if 'headers' in options:
             options['headers']['User-Agent'] = user_agent
@@ -79,6 +82,26 @@ class Client:
         except DistributionNotFound:  # pragma: no cover
             pass
         return version
+
+    def _get_app_details_ua(self):
+        app_details_ua = ""
+
+        app_details = self.get_app_details()
+
+        for app in app_details:
+            if 'title' in app:
+                app_ua = app['title']
+                if 'version' in app:
+                    app_ua += "/{}".format(app['version'])
+                app_details_ua += "{} ".format(app_ua)
+
+        return app_details_ua
+
+    def set_app_details(self, app_details):
+        self.app_details.append(app_details)
+
+    def get_app_details(self):
+        return self.app_details
 
     def request(self, method, path, **options):
         """
