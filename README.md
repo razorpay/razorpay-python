@@ -31,7 +31,8 @@ to Razorpay using the following:
 client.set_app_details({"title" : <Your App Title>, "version" : <Your app's version>})
 ```
 
-For example, you can set the title to `Django` and version to `1.8.17`
+For example, you can set the title to `Django` and version to `1.8.17`. Please ensure
+that both app title and version are strings.
 
 ### Payments
 

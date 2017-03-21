@@ -89,15 +89,10 @@ class Client:
 
         app_details = self.get_app_details()
 
-        if sys.version_info[0] is 3:
-            types = [bytes, str]
-        else:
-            types = [str, unicode]
-
         for app in app_details:
-            if 'title' in app and type(app['title']) in types:
+            if 'title' in app:
                 app_ua = app['title']
-                if 'version' in app and type(app['version']) in types:
+                if 'version' in app:
                     app_ua += "/{}".format(app['version'])
                 app_details_ua += "{} ".format(app_ua)
 
