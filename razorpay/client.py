@@ -89,9 +89,9 @@ class Client:
         app_details = self.get_app_details()
 
         for app in app_details:
-            if 'title' in app and isinstance(app['title'], str):
+            if 'title' in app and type(app['title']) in [str, unicode]:
                 app_ua = app['title']
-                if 'version' in app and isinstance(app['version'], str):
+                if 'version' in app and type(app['version']) in [str, unicode]:
                     app_ua += "/{}".format(app['version'])
                 app_details_ua += "{} ".format(app_ua)
 

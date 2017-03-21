@@ -1,6 +1,5 @@
 import responses
 import json
-import yaml
 
 from .helpers import mock_file, ClientTestCase
 
@@ -8,7 +7,7 @@ class TestClientUserAgent(ClientTestCase):
 
     def setUp(self):
         super(TestClientUserAgent, self).setUp()
-        app_details = yaml.safe_load(mock_file('fake_app_details'))
+        app_details = json.loads(mock_file('fake_app_details'))
         self.client.set_app_details(app_details)
         self.base_url = "{}/payments".format(self.base_url)
 
