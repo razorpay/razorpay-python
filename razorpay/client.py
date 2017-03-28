@@ -17,13 +17,15 @@ from .errors import (BadRequestError, GatewayError,
 # Create a dict of resource classes
 RESOURCE_CLASSES = {}
 for name, module in resources.__dict__.items():
-    if isinstance(module, ModuleType) and name.capitalize() in module.__dict__:
-        RESOURCE_CLASSES[name] = module.__dict__[name.capitalize()]
+    attr_name = name.title().replace("_","")
+    if isinstance(module, ModuleType) and attr_name in module.__dict__:
+        RESOURCE_CLASSES[name] = module.__dict__[attr_name]
 
 UTILITY_CLASSES = {}
 for name, module in utility.__dict__.items():
-    if isinstance(module, ModuleType) and name.capitalize() in module.__dict__:
-        UTILITY_CLASSES[name] = module.__dict__[name.capitalize()]
+    attr_name = name.title().replace("_","")
+    if isinstance(module, ModuleType) and attr_name in module.__dict__:
+        UTILITY_CLASSES[name] = module.__dict__[attr_name]
 
 
 class Client:
@@ -103,7 +105,7 @@ class Client:
     def get_app_details(self):
         return self.app_details
 
-    def request(self, method, path, **options):
+    def request(self, method, path, public=False, **options):
         """
         Dispatches a request to the Razorpay HTTP API
         """
@@ -111,7 +113,9 @@ class Client:
 
         url = "{}{}".format(self.base_url, path)
 
-        response = getattr(self.session, method)(url, auth=self.auth,
+        auth = (self.auth[0],"") if public else self.auth
+
+        response = getattr(self.session, method)(url, auth=auth,
                                                  verify=self.cert_path,
                                                  **options)
         if ((response.status_code >= HTTP_STATUS_CODE.OK) and
@@ -141,6 +145,12 @@ class Client:
         Parses GET request options and dispatches a request
         """
         return self.request('get', path, params=params, **options)
+
+    def get_public(self, path, params, **options):
+        """
+        Parses GET request options and dispatches a request without secret key
+        """
+        return self.request('get', path, public=True, params=params, **options)
 
     def post(self, path, data, **options):
         """
