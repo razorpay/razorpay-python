@@ -206,6 +206,19 @@ that both app title and version are strings.
     client.token.delete(customer_id=customer_id, token_id=token_id)
     ```
 
+- Stringify a payment method for an invoice/receipt
+
+    ```py
+    client.utility.strf_payment_method(payment_info)
+    # Where payment_info is the dict returned by client.payment.capture and client.payment.fetch
+    # or one of the items in the client.payment.all response
+    ```
+    
+- All available payment methods
+    ```py
+    client.utility.payment_methods
+    ```
+
 
 ## Bugs? Feature requests? Pull requests?
 

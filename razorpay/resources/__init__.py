@@ -5,7 +5,7 @@ from .invoice import Invoice
 from .customer import Customer
 from .card import Card
 from .token import Token
-
+from .payment_method import PaymentMethod
 
 __all__ = [
         'Payment',
@@ -15,4 +15,5 @@ __all__ = [
         'Customer',
         'Card',
         'Token',
+        'PaymentMethod',
 ]
