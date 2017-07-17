@@ -188,24 +188,19 @@ that both app title and version are strings.
 
 - Verify Payment Signature
 
+    `params_dict` should have `razorpay_order_id`, `razorpay_payment_id`, `razorpay_signature` which are received in the callback
+
     ```py
-    params_dict should have razorpay_order_id, razorpay_payment_id, razorpay_signature
-    which are received with the cord callback
     client.utility.verify_payment_signature(params_dict)
     ```
 
-- fetch all tokens associated with customer
+- Verify Webhook Signature
+
+    `webhook_signature` is the signature you receive under `X-Razorpay-Header` in the webhook, while `webhook_secret` is the secret you used when creating the webhook on dashboard.
 
     ```py
-    client.token.all(customer_id=customer_id)
+    client.utility.verify_webhook_signature(webhook_signature, webhook_body, webhook_secret)
     ```
-
-- Delete a given token assicated with a customer
-
-    ```py
-    client.token.delete(customer_id=customer_id, token_id=token_id)
-    ```
-
 
 ## Bugs? Feature requests? Pull requests?
 
