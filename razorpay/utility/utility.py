@@ -17,14 +17,14 @@ class Utility(object):
 
         msg = "{}|{}".format(order_id, payment_id)
 
-        self.verify_signature(razorpay_signature, msg)
+        secret = str(self.client.auth[1])
 
-    def verify_webhook_signature(self, signature, body):
-        self.verify_signature(signature, body)
+        self.verify_signature(razorpay_signature, msg, secret)
 
-    def verify_signature(self, signature, body):
-        key = str(self.client.auth[1])
+    def verify_webhook_signature(self, signature, body, secret):
+        self.verify_signature(signature, body, secret)
 
+    def verify_signature(self, signature, body, key):
         if sys.version_info[0] == 3:  # pragma: no cover
             key = bytes(key, 'utf-8')
             body = bytes(body, 'utf-8')
