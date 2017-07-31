@@ -199,7 +199,7 @@ that both app title and version are strings.
     `webhook_signature` is the signature you receive under `X-Razorpay-Header` in the webhook, while `webhook_secret` is the secret you used when creating the webhook on dashboard.
 
     ```py
-    client.utility.verify_webhook_signature(webhook_signature, webhook_body, webhook_secret)
+    client.utility.verify_webhook_signature(webhook_body, webhook_signature, webhook_secret)
     ```
 
 ## Bugs? Feature requests? Pull requests?

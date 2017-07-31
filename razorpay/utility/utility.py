@@ -19,12 +19,12 @@ class Utility(object):
 
         secret = str(self.client.auth[1])
 
-        self.verify_signature(razorpay_signature, msg, secret)
+        self.verify_signature(msg, razorpay_signature, secret)
 
-    def verify_webhook_signature(self, signature, body, secret):
-        self.verify_signature(signature, body, secret)
+    def verify_webhook_signature(self, body, signature, secret):
+        self.verify_signature(body, signature, secret)
 
-    def verify_signature(self, signature, body, key):
+    def verify_signature(self, body, signature, key):
         if sys.version_info[0] == 3:  # pragma: no cover
             key = bytes(key, 'utf-8')
             body = bytes(body, 'utf-8')
