@@ -35,5 +35,9 @@ class Utility(object):
 
         generated_signature = dig.hexdigest()
 
-        if not hmac.compare_digest(generated_signature, signature):
-            raise SignatureVerificationError('Payment Signature Verification Failed')
+        if sys.hexversion >= 0x020707F0:
+            if not hmac.compare_digest(generated_signature, signature):
+                raise SignatureVerificationError('Payment Signature Verification Failed')
+        else:
+            if str(generated_signature) != str(signature):
+                raise SignatureVerificationError('Payment Signature Verification Failed')
