@@ -40,7 +40,7 @@ class TestClientValidator(ClientTestCase):
         body = mock_file('fake_payment_authorized_webhook')
 
         self.assertEqual(
-             self.client.utility.verify_webhook_signature(sig, body, secret),
+             self.client.utility.verify_webhook_signature(body, sig, secret),
              None)
 
     @responses.activate
@@ -52,6 +52,6 @@ class TestClientValidator(ClientTestCase):
         self.assertRaises(
             SignatureVerificationError,
             self.client.utility.verify_webhook_signature,
-            sig,
             body,
+            sig,
             secret)
