@@ -63,3 +63,30 @@ class Payment(Resource):
         url = "{}/{}/refund".format(self.base_url, payment_id)
         data['amount'] = amount
         return self.post_url(url, data, **kwargs)
+
+    def transfer(self, payment_id, data={}, **kwargs):
+        """"
+        Transfer Payment for given Id
+
+        Args:
+            payment_id : Id for which payment object has to be transfered
+
+        Returns:
+            Payment dict after getting transfered
+        """
+        url = "{}/{}/transfers".format(self.base_url, payment_id)
+        return self.post_url(url, data, **kwargs)
+
+    def transfers(self, payment_id, data={}, **kwargs):
+        """"
+        Refund Payment for given Id
+
+        Args:
+            payment_id : Id for which payment object has to be refunded
+            Amount : Amount for which the payment has to be refunded
+
+        Returns:
+            Payment dict after getting refunded
+        """
+        url = "transfers/{}".format(payment_id)
+        return self.get_url(url, data, **kwargs)
