@@ -5,6 +5,7 @@ from .invoice import Invoice
 from .customer import Customer
 from .card import Card
 from .token import Token
+from .transfer import Transfer
 
 
 __all__ = [
@@ -15,4 +16,5 @@ __all__ = [
         'Customer',
         'Card',
         'Token',
+        'Transfer',
 ]
