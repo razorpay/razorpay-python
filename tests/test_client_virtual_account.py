@@ -52,6 +52,20 @@ class TestClientVirtualAccount(ClientTestCase):
             result)
 
     @responses.activate
+    def test_virtual_accounts_close(self):
+        result = mock_file('fake_virtual_accounts')
+        url = '{}/{}'.format(self.base_url, 'fake_virtual_accounts_id')
+        responses.add(responses.PATCH,
+                      url,
+                      status=200,
+                      body=json.dumps(result),
+                      match_querystring=True)
+
+        self.assertEqual(self.client.virtual_account.close(
+            'fake_virtual_accounts_id'),
+            result)
+
+    @responses.activate
     def test_virtual_accounts_payments(self):
         result = mock_file('fake_payment')
         url = '{}/{}/payments'.format(self.base_url, 'fake_virtual_accounts_id')
