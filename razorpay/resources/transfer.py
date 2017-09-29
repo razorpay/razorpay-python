@@ -21,9 +21,8 @@ class Transfer(Resource):
             Dictionary of Transfer data
         """
         if 'payment_id' in data:
-            url = "payments/{}/transfers".format(
-                self.base_url,
-                data['payment_id'])
+            url = "/payments/{}/transfers".format(data['payment_id'])
+
             del data['payment_id']
             return self.get_url(url, data, **kwargs)
 
@@ -76,7 +75,7 @@ class Transfer(Resource):
         Returns:
             Transfer Dict which was reversed
         """
-        url = "{}/{}'/reversals".format(self.base_url, transfer_id)
+        url = "{}/{}/reversals".format(self.base_url, transfer_id)
         return self.post_url(url, data, **kwargs)
 
     def reversals(self, transfer_id, data={}, **kwargs):
@@ -90,5 +89,5 @@ class Transfer(Resource):
         Returns:
             Transfer Dict
         """
-        url = "{}/{}'/reversals".format(self.base_url, transfer_id)
+        url = "{}/{}/reversals".format(self.base_url, transfer_id)
         return self.get_url(url, data, **kwargs)
