@@ -88,5 +88,5 @@ class Payment(Resource):
         Returns:
             Payment dict after getting refunded
         """
-        url = "transfers/{}".format(payment_id)
+        url = "{}/{}/transfers".format(self.base_url, payment_id)
         return self.get_url(url, data, **kwargs)
