@@ -43,10 +43,10 @@ class VirtualAccount(Resource):
         Create Virtual Account from given dict
 
         Args:
-            TODO : FIX this
+            Param for Creating Virtual Account
 
         Returns:
-            TODO: FIX this
+            Virtual Account dict
         """
         url = self.base_url
         return self.post_url(url, data, **kwargs)
