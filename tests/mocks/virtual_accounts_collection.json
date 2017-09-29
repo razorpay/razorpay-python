@@ -1,0 +1,49 @@
+{
+  "count": 2,
+  "entity": "collection",
+  {
+  "items": [
+    {
+    "amount_paid": 0,
+    "created_at": 1506717714,
+    "customer_id": null,
+    "description": null,
+    "entity": "virtual_account",
+    "id": "va_8jHPWH8RzQUsDr",
+    "name": "Super Potato",
+    "notes": [],
+    "receivers":
+    [
+      {
+        "account_number": "RZRPAY00A7VRC4HQM",
+        "entity": "bank_account",
+        "id": "ba_8jHPWHXbSc9xc7",
+        "ifsc": "KKBK0000958",
+        "name": "Super Potato"
+      }
+    ],
+    "status": "closed"
+    },
+    {
+    "amount_paid": 0,
+    "created_at": 1506717714,
+    "customer_id": null,
+    "description": null,
+    "entity": "virtual_account",
+    "id": "va_8jHPWH8RzQUsDs",
+    "name": "Super Potato1",
+    "notes": [],
+    "receivers":
+    [
+      {
+        "account_number": "RZRPAY00A7VRC4HQM",
+        "entity": "bank_account",
+        "id": "ba_8jHPWHXbSc9xc7",
+        "ifsc": "KKBK0000958",
+        "name": "Super Potato"
+      }
+    ],
+    "status": "closed"
+    }
+  ]
+}
