@@ -79,6 +79,7 @@ class TestClientPayment(ClientTestCase):
                       match_querystring=True)
         self.assertEqual(self.client.payment.transfers(self.payment_id), result)
 
+    @responses.activate
     def test_bank_transfer_fetch(self):
         result = mock_file('fake_bank_transfer')
         url = '{}/{}/bank_transfer'.format(self.base_url, self.payment_id)

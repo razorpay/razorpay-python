@@ -147,13 +147,6 @@ class Client:
         """
         return self.request('get', path, params=params, **options)
 
-    def patch(self, path, data, **options):
-        """
-        Parses POST request options and dispatches a request
-        """
-        data, options = self._update_request(data, options)
-        return self.request('patch', path, data=data, **options)
-
     def post(self, path, data, **options):
         """
         Parses POST request options and dispatches a request

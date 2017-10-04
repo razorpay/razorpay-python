@@ -19,9 +19,6 @@ class Resource(object):
     def post_url(self, url, data, **kwargs):
         return self.client.post(url, data, **kwargs)
 
-    def patch_url(self, url, data, **kwargs):
-        return self.client.patch(url, data, **kwargs)
-
     def put_url(self, url, data, **kwargs):
         return self.client.put(url, data, **kwargs)
 
