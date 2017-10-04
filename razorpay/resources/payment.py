@@ -66,7 +66,7 @@ class Payment(Resource):
 
     def transfer(self, payment_id, data={}, **kwargs):
         """"
-        Transfer Payment for given Id
+        Create Transfer for given Payment Id
 
         Args:
             payment_id : Id for which payment object has to be transfered
@@ -79,7 +79,7 @@ class Payment(Resource):
 
     def transfers(self, payment_id, data={}, **kwargs):
         """"
-        Refund Payment for given Id
+        Fetches all transfer for given Payment Id
 
         Args:
             payment_id : Id for which payment object has to be refunded
