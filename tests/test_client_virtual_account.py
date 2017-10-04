@@ -67,7 +67,7 @@ class TestClientVirtualAccount(ClientTestCase):
 
     @responses.activate
     def test_virtual_accounts_payments(self):
-        result = mock_file('fake_payment')
+        result = mock_file('payment_collection')
         url = '{}/{}/payments'.format(self.base_url, 'fake_virtual_accounts_id')
         responses.add(responses.GET,
                       url,
