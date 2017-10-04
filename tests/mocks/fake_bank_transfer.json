@@ -2,6 +2,6 @@
   "amount": 10000,
   "payer_bank_account": null,
   "payer_bank_name": "Razorpay",
-  "payment_id": "pay_8J2ny5PThnuy6l",
+  "payment_id": "fake_payment_id",
   "virtual_account_id": "va_8J2ny4Naokqbpe"
 }
