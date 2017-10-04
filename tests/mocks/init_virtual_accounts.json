@@ -1,4 +1,4 @@
 {
-  "receiver_types":["bank_account"],
+  "receiver_types": ["bank_account"],
   "description": "First Virtual Account"
 }
