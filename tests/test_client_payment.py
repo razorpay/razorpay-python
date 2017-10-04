@@ -2,7 +2,6 @@ import responses
 import json
 
 from .helpers import mock_file, ClientTestCase
-from razorpay.errors import BadRequestError
 
 
 class TestClientPayment(ClientTestCase):
@@ -52,4 +51,13 @@ class TestClientPayment(ClientTestCase):
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.payment.refund(self.payment_id, 2000),
+                         result)
+
+    @responses.activate
+    def test_bank_transfer_fetch(self):
+        result = mock_file('fake_bank_transfer')
+        url = '{}/{}/bank_transfer'.format(self.base_url, self.payment_id)
+        responses.add(responses.GET, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.payment.bank_transfer(self.payment_id),
                          result)
