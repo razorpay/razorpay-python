@@ -1,21 +1,21 @@
 {
-  "amount_paid": 0,
-  "created_at": 1506717714,
-  "customer_id": null,
-  "description": null,
+  "id": "va_4xbQrmEoA5WJ0G",
   "entity": "virtual_account",
-  "id": "fake_virtual_accounts_id",
-  "name": "Super Potato",
-  "notes": [],
-  "receivers":
-  [
+  "description": "First Virtual Account",
+  "customer_id": "cust_805c8oBQdBGPwS",
+  "status": "active",
+  "amount_paid": 0,
+  "notes": {
+    "reference_key": "reference_value"
+  },
+  "receivers": [
     {
-      "account_number": "RZRPAY00A7VRC4HQM",
+      "id": "ba_4lsdkfldlteskf",
       "entity": "bank_account",
-      "id": "ba_8jHPWHXbSc9xc7",
-      "ifsc": "KKBK0000958",
-      "name": "Super Potato"
+      "name": "Merchant Billing Label",
+      "account_number": "RAZORPAY9876543210",
+      "ifsc": "RZPB0000001"
     }
   ],
-  "status": "closed"
+  "created_at": 1455696638
 }

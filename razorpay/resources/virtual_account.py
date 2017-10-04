@@ -1,17 +1,11 @@
 from .base import Resource
 from ..constants.url import URL
-import warnings
 
 
 class VirtualAccount(Resource):
     def __init__(self, client=None):
         super(VirtualAccount, self).__init__(client)
         self.base_url = URL.VIRTUAL_ACCOUNT_URL
-
-    def fetch_all(self, data={}, **kwargs):  # pragma: no cover
-        warnings.warn("Will be Deprecated in next release, use all",
-                      DeprecationWarning)
-        return self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
         """"
