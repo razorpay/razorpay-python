@@ -1,0 +1,26 @@
+{
+  "entity": "collection",
+  "count": 1,
+  "items": [
+    {
+      "id": "va_84lyVss1CRZ6eM",
+      "entity": "virtual_account",
+      "name": "Merchant Billing Label",
+      "description": "Second Virtual Account",
+      "status": "active",
+      "amount_paid": 1200,
+      "notes": [],
+      "customer_id": null,
+      "receivers": [
+        {
+          "id": "ba_87txVas2oSzzvx",
+          "entity": "bank_account",
+          "name": "Merchant Billing Label",
+          "account_number": "RAZORPAY9KWHB7BL92",
+          "ifsc": "RZPB0000001"
+        }
+      ],
+      "created_at": 1497873405
+    }
+  ]
+}

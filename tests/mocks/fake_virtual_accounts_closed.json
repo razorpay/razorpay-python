@@ -1,0 +1,21 @@
+{
+  "id": "va_4xbQrmEoA5WJ0G",
+  "entity": "virtual_account",
+  "description": "First Virtual Account",
+  "customer_id": "cust_805c8oBQdBGPwS",
+  "status": "closed",
+  "amount_paid": 0,
+  "notes": {
+    "reference_key": "reference_value"
+  },
+  "receivers": [
+    {
+      "id": "ba_4lsdkfldlteskf",
+      "entity": "bank_account",
+      "name": "Merchant Billing Label",
+      "account_number": "RAZORPAY9876543210",
+      "ifsc": "RZPB0000001"
+    }
+  ],
+  "created_at": 1455696638
+}

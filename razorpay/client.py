@@ -14,11 +14,16 @@ from .errors import (BadRequestError, GatewayError,
                      ServerError)
 
 
+def capitalize_camel_case(string):
+    return "".join(map(str.capitalize, string.split('_')))
+
+
 # Create a dict of resource classes
 RESOURCE_CLASSES = {}
 for name, module in resources.__dict__.items():
-    if isinstance(module, ModuleType) and name.capitalize() in module.__dict__:
-        RESOURCE_CLASSES[name] = module.__dict__[name.capitalize()]
+    if isinstance(module, ModuleType) and \
+            capitalize_camel_case(name) in module.__dict__:
+        RESOURCE_CLASSES[name] = module.__dict__[capitalize_camel_case(name)]
 
 UTILITY_CLASSES = {}
 for name, module in utility.__dict__.items():
@@ -66,7 +71,7 @@ class Client:
 
     def _update_user_agent_header(self, options):
         user_agent = "{}{} {}".format('Razorpay-Python/', self._get_version(),
-                                       self._get_app_details_ua())
+                                      self._get_app_details_ua())
 
         if 'headers' in options:
             options['headers']['User-Agent'] = user_agent
@@ -155,6 +160,13 @@ class Client:
         """
         data, options = self._update_request(data, options)
         return self.request('post', path, data=data, **options)
+
+    def patch(self, path, data, **options):
+        """
+        Parses PATCH request options and dispatches a request
+        """
+        data, options = self._update_request(data, options)
+        return self.request('patch', path, data=data, **options)
 
     def delete(self, path, data, **options):
         """
