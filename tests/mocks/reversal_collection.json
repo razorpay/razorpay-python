@@ -1,0 +1,16 @@
+{
+  "count": 1,
+  "entity": "collection",
+  "items":
+  [
+    {
+      "amount": 1000,
+      "created_at": 1496665032,
+      "currency": "INR",
+      "entity": "reversal",
+      "id": "fake_id",
+      "notes": [],
+      "transfer_id": "fake_transfer_id"
+    }
+  ]
+}

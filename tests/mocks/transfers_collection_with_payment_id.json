@@ -1,0 +1,23 @@
+{
+  "count": 2,
+  "entity": "collection",
+  "items": [
+    {
+      "amount": 100,
+      "amount_reversed": 0,
+      "created_at": 1506722466,
+      "currency": "INR",
+      "entity": "transfer",
+      "fees": 0,
+      "id": "trf_8jIlBetfktf1dG",
+      "notes": [],
+      "on_hold": false,
+      "on_hold_until": null,
+      "recipient": "acc_7jO4N6LScw5CEG",
+      "recipient_settlement_id": null,
+      "service_tax": 0,
+      "source": "acc_10000000000000",
+      "tax": 0
+    }
+  ]
+}

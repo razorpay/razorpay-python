@@ -6,4 +6,5 @@ class URL(object):
     REFUNDS_URL = "/refunds"
     CARD_URL = "/cards"
     CUSTOMER_URL = "/customers"
+    TRANSFER_URL = "/transfers"
     VIRTUAL_ACCOUNT_URL = "/virtual_accounts"
