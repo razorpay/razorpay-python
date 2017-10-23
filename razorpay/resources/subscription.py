@@ -1,6 +1,5 @@
 from .base import Resource
 from ..constants.url import URL
-import warnings
 
 
 class Subscription(Resource):
@@ -22,7 +21,7 @@ class Subscription(Resource):
         Fetch Subscription for given Id
 
         Args:
-            subscription_id : Id for which subscription object has to be retrieved
+            subscription_id : Id for which subscription object is retrieved
 
         Returns:
             Subscription dict for given subscription Id
@@ -34,7 +33,7 @@ class Subscription(Resource):
         Create Subscription from given dict
 
         Args:
-            data : Dictionary having keys using which Subscription have to be created
+            data : Dictionary using which Subscription has to be created
 
         Returns:
             Subscription Dict which was created
@@ -47,7 +46,7 @@ class Subscription(Resource):
         Cancel subscription given by subscription_id
 
         Args:
-            sunscription_id : Id for which subscription has to be cancelles
+            subscription_id : Id for which subscription has to be cancelled
 
         Returns:
             Subscription Dict for given subscription id
@@ -67,4 +66,3 @@ class Subscription(Resource):
         """
         url = "{}/{}/addons".format(self.base_url, subscription_id)
         return self.post_url(url, data, **kwargs)
-        

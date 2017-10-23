@@ -1,6 +1,5 @@
 from .base import Resource
 from ..constants.url import URL
-import warnings
 
 
 class Addon(Resource):

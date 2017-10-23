@@ -1,6 +1,5 @@
 from .base import Resource
 from ..constants.url import URL
-import warnings
 
 
 class Plan(Resource):
@@ -41,6 +40,3 @@ class Plan(Resource):
             Dictionary of plan data
         """
         return super(Plan, self).all(data, **kwargs)
-
-
-    
