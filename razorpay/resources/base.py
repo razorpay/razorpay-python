@@ -24,3 +24,7 @@ class Resource(object):
 
     def delete_url(self, url, data, **kwargs):
         return self.client.delete(url, data, **kwargs)
+
+    def delete(self, id, data, **kwargs):
+        url = "{}/{}/delete".format(self.base_url, id)
+        return self.delete_url(url, data, **kwargs)

@@ -1,0 +1,20 @@
+{
+  "status": "active",
+  "created_at": 1507032592,
+  "current_end": 1512239400,
+  "customer_notify": false,
+  "plan_id": "plan_8kihN0YqhnF8a7",
+  "charge_at": 1512239400,
+  "current_start": 1507032611,
+  "total_count": 6,
+  "notes": [],
+  "paid_count": 1,
+  "entity": "subscription",
+  "end_at": 1533234600,
+  "start_at": 1507032611,
+  "ended_at": null,
+  "customer_id": "cust_8kipRefUGdjnqY",
+  "id": "sub_8kip7ybbcOyc9J",
+  "auth_attempts": 0,
+  "quantity": 1
+}

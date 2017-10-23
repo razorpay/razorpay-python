@@ -1,0 +1,24 @@
+{
+	"invoice_id": null,
+	"created_at": 1508769839,
+	"entity": "addon",
+	"item": {
+		"description": null,
+		"tax_inclusive": false,
+		"tax_group_id": null,
+		"created_at": 1508769839,
+		"updated_at": 1508769839,
+		"currency": "INR",
+		"amount": 30000,
+		"unit_amount": 30000,
+		"active": true,
+		"tax_id": null,
+		"type": "addon",
+		"id": "item_8sg8LTuRkjcVnH",
+		"unit": null,
+		"name": "Extra Chair"
+	},
+	"subscription_id": "sub_8RlLljfA4AnDVx",
+	"id": "ao_8sg8LU73Y3ieav",
+	"quantity": 2
+}
