@@ -9,5 +9,5 @@ class URL(object):
     TRANSFER_URL = "/transfers"
     VIRTUAL_ACCOUNT_URL = "/virtual_accounts"
     SUBSCRIPTION_URL = "/subscriptions"
-    ADDON_URL = ""
-    PLAN_URL = ""
+    ADDON_URL = "/addons"
+    PLAN_URL = "/plans"
