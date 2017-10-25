@@ -8,3 +8,6 @@ class URL(object):
     CUSTOMER_URL = "/customers"
     TRANSFER_URL = "/transfers"
     VIRTUAL_ACCOUNT_URL = "/virtual_accounts"
+    SUBSCRIPTION_URL = "/subscriptions"
+    ADDON_URL = "/addons"
+    PLAN_URL = "/plans"
