@@ -1,5 +1,4 @@
 import responses
-import json
 
 from .helpers import mock_file, ClientTestCase
 
@@ -65,7 +64,8 @@ class TestClientVirtualAccount(ClientTestCase):
                       body=result,
                       match_querystring=True)
 
-        response = self.client.virtual_account.fetch(self.fake_virtual_account_id)
+        response = self.client.virtual_account.fetch(
+            self.fake_virtual_account_id)
         self.assertEqual(response['id'], self.fake_virtual_account_id)
         self.assertEqual(response['entity'], 'virtual_account')
         self.assertIsNotNone(response['receivers'][0]['account_number'])
@@ -80,7 +80,8 @@ class TestClientVirtualAccount(ClientTestCase):
                       body=result,
                       match_querystring=True)
 
-        response = self.client.virtual_account.close(self.fake_virtual_account_id)
+        response = self.client.virtual_account.close(
+            self.fake_virtual_account_id)
         self.assertEqual(response['id'], self.fake_virtual_account_id)
         self.assertEqual(response['entity'], 'virtual_account')
         self.assertEqual(response['status'], 'closed')
@@ -88,16 +89,18 @@ class TestClientVirtualAccount(ClientTestCase):
     @responses.activate
     def test_virtual_accounts_payments(self):
         result = mock_file('payment_collection')
-        url = '{}/{}/payments'.format(self.base_url, self.fake_virtual_account_id)
+        url = '{}/{}/payments'.format(
+            self.base_url,
+            self.fake_virtual_account_id)
         responses.add(responses.GET,
                       url,
                       status=200,
                       body=result,
                       match_querystring=True)
 
-        response = self.client.virtual_account.payments(self.fake_virtual_account_id)
+        response = self.client.virtual_account.payments(
+            self.fake_virtual_account_id)
         self.assertEqual(response['entity'], 'collection')
         self.assertEqual(response['count'], 2)
         self.assertEqual(len(response['items']), 2)
         self.assertEqual(response['items'][0]['entity'], 'payment')
-
