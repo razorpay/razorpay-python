@@ -202,6 +202,78 @@ that both app title and version are strings.
     client.utility.verify_webhook_signature(webhook_body, webhook_signature, webhook_secret)
     ```
 
+### Subscriptions
+
+- Create a new subscription
+
+    ```py
+    client.subscription.create(data=DATA)
+    DATA should contain these keys
+        plan_id           : plan_id of subscription
+        customer_id       : id of customer
+        total_count       : number of subscriptions
+    ```
+
+- Fetch a particular subscription
+
+    ```py
+    client.subscription.fetch("<SUBSCRIPTION_ID>")
+    ```
+
+- Fetch all subscriptions
+
+    ```py
+    client.subscription.all()
+    ```
+
+- Cancel subscription
+
+    ```py
+    client.subscription.cancel("<SUBSCRIPTION_ID>")
+    ```
+
+- Create an addon for subscription
+    ```
+    client.subscription.createAddon("<SUBSCRIPTION_ID>", data=DATA)
+    DATA should have these keys
+        item               : dict with keys amount, name and currency
+        quantity           : number of items
+    ```
+
+- Fetch a particular addon Info
+
+    ```py
+    client.addon.fetch(addon_id=addon_id)
+    ```
+
+- Delete an addon
+
+    ```py
+    client.addon.delete(addon_id=addon_id)
+    ```
+
+### Plans
+
+- Create a new plan
+
+    ```py
+    client.plan.create(data=DATA)
+    DATA should contain these keys
+        item_id           : corresponding item_id
+    ```
+
+- Fetch a particular plan
+
+    ```py
+    client.plan.fetch("<PLAN_ID>")
+    ```
+
+- Fetch all plans
+
+    ```py
+    client.plan.all()
+    ```
+
 ## Bugs? Feature requests? Pull requests?
 
 All of those are welcome. You can [file issues][issues] or [submit pull requests][pulls] in this repository.
