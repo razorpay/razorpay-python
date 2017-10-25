@@ -184,6 +184,41 @@ that both app title and version are strings.
     client.token.delete(customer_id=customer_id, token_id=token_id)
     ```
 
+### Virtual Account
+
+- fetch all virtual account entities
+
+    ```py
+    client.virtual_account.all()
+    ```
+
+- fetch single virtual account details
+
+    ```py
+    client.virtual_account.fetch(virtual_account_id=virtual_account_id)
+    ```
+
+- create virtual account
+
+    ```py
+    client.virtual_account.create(data=DATA)
+    DATA should contain these keys
+        receiver_types : receiver type in array e.g. ['bank_account']
+        description    : description associated with virtual account
+    ```
+
+- close virtual account
+
+    ```py
+    client.virtual_account.close(virtual_account_id=virtual_account_id)
+    ```
+
+- fetch all payments for virtual account id
+
+    ```py
+    client.virtual_account.payments(virtual_account_id=virtual_account_id)
+    ```
+
 ### Utility
 
 - Verify Payment Signature
