@@ -23,6 +23,9 @@ class TestClientAddon(ClientTestCase):
     def test_addon_delete(self):
         result = []
         url = '{}/{}/delete'.format(self.base_url, self.addon_id)
-        responses.add(responses.DELETE, url, status=200, body=json.dumps(result),
+        responses.add(responses.DELETE,
+                      url,
+                      status=200,
+                      body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.addon.delete(self.addon_id), result)
