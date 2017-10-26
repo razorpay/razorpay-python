@@ -73,6 +73,18 @@ that both app title and version are strings.
     client.payment.bank_transfer("<PAYMENT_ID>")
     ```
 
+- Create transfer for given payment id
+
+    ```py
+    client.payment.transfer("<PAYMENT_ID>")
+    ```
+
+- Get All transfer associated with the payment
+
+    ```py
+    client.payment.transfers("<PAYMENT_ID>")
+    ```
+
 ### Refunds
 
 - fetch a particular refund
@@ -324,10 +336,10 @@ that both app title and version are strings.
     client.transfer.all()
     ```
 
-- Fetch transfer by payment id
+- Fetch transfer by id
 
     ```py
-    client.transfer.fetch("<PAYMENT_ID>")
+    client.transfer.fetch("<TRANSFER_ID>")
     ```
 
 - Create Transfer from given data
