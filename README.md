@@ -67,6 +67,12 @@ that both app title and version are strings.
     Note: <AMOUNT_TO_BE_REFUNDED> should be equal/less than the original amount
     ```
 
+- Get Bank Transfer Entity for given payment
+
+    ```py
+    client.payment.bank_transfer("<PAYMENT_ID>")
+    ```
+
 ### Refunds
 
 - fetch a particular refund
@@ -203,8 +209,9 @@ that both app title and version are strings.
     ```py
     client.virtual_account.create(data=DATA)
     DATA should contain these keys
-        receiver_types : ['bank_account']
-        description    : 'Random Description'
+        receiver_types        : ['bank_account']
+        description           : 'Random Description'
+        customer_id(optional) : <CUSTOMER_ID>
     ```
 
 - close virtual account
