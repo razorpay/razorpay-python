@@ -203,8 +203,8 @@ that both app title and version are strings.
     ```py
     client.virtual_account.create(data=DATA)
     DATA should contain these keys
-        receiver_types : receiver type in array e.g. ['bank_account']
-        description    : description associated with virtual account
+        receiver_types : ['bank_account']
+        description    : 'Random Description'
     ```
 
 - close virtual account
