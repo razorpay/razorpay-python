@@ -3,6 +3,7 @@ import json
 
 from .helpers import mock_file, ClientTestCase
 
+
 class TestClientUserAgent(ClientTestCase):
 
     def setUp(self):

@@ -67,6 +67,12 @@ that both app title and version are strings.
     Note: <AMOUNT_TO_BE_REFUNDED> should be equal/less than the original amount
     ```
 
+- Get Bank Transfer Entity for given payment
+
+    ```py
+    client.payment.bank_transfer("<PAYMENT_ID>")
+    ```
+
 ### Refunds
 
 - fetch a particular refund
@@ -184,6 +190,42 @@ that both app title and version are strings.
     client.token.delete(customer_id=customer_id, token_id=token_id)
     ```
 
+### Virtual Account
+
+- fetch all virtual account entities
+
+    ```py
+    client.virtual_account.all()
+    ```
+
+- fetch single virtual account details
+
+    ```py
+    client.virtual_account.fetch(virtual_account_id=virtual_account_id)
+    ```
+
+- create virtual account
+
+    ```py
+    client.virtual_account.create(data=DATA)
+    DATA should contain these keys
+        receiver_types        : ['bank_account']
+        description           : 'Random Description'
+        customer_id(optional) : <CUSTOMER_ID>
+    ```
+
+- close virtual account
+
+    ```py
+    client.virtual_account.close(virtual_account_id=virtual_account_id)
+    ```
+
+- fetch all payments for virtual account id
+
+    ```py
+    client.virtual_account.payments(virtual_account_id=virtual_account_id)
+    ```
+
 ### Utility
 
 - Verify Payment Signature
@@ -200,6 +242,122 @@ that both app title and version are strings.
 
     ```py
     client.utility.verify_webhook_signature(webhook_body, webhook_signature, webhook_secret)
+    ```
+
+### Subscriptions
+
+- Create a new subscription
+
+    ```py
+    client.subscription.create(data=DATA)
+    DATA should contain these keys
+        plan_id           : plan_id of subscription
+        customer_id       : id of customer
+        total_count       : number of subscriptions
+    ```
+
+- Fetch a particular subscription
+
+    ```py
+    client.subscription.fetch("<SUBSCRIPTION_ID>")
+    ```
+
+- Fetch all subscriptions
+
+    ```py
+    client.subscription.all()
+    ```
+
+- Cancel subscription
+
+    ```py
+    client.subscription.cancel("<SUBSCRIPTION_ID>")
+    ```
+
+- Create an addon for subscription
+    ```
+    client.subscription.createAddon("<SUBSCRIPTION_ID>", data=DATA)
+    DATA should have these keys
+        item               : dict with keys amount, name and currency
+        quantity           : number of items
+    ```
+
+- Fetch a particular addon Info
+
+    ```py
+    client.addon.fetch(addon_id=addon_id)
+    ```
+
+- Delete an addon
+
+    ```py
+    client.addon.delete(addon_id=addon_id)
+    ```
+
+### Plans
+
+- Create a new plan
+
+    ```py
+    client.plan.create(data=DATA)
+    DATA should contain these keys
+        item_id           : corresponding item_id
+    ```
+
+- Fetch a particular plan
+
+    ```py
+    client.plan.fetch("<PLAN_ID>")
+    ```
+
+- Fetch all plans
+
+    ```py
+    client.plan.all()
+    ```
+
+### Transfers
+
+- Fetch all Transfers
+
+    ```py
+    client.transfer.all()
+    ```
+
+- Fetch transfer by payment id
+
+    ```py
+    client.transfer.fetch("<PAYMENT_ID>")
+    ```
+
+- Create Transfer from given data
+
+    ```py
+    client.transfer.create(data=DATA)
+    DATA should contain these keys
+        amount   : 100
+        currency : INR
+        account  : dummy
+    ```
+
+- Edit Transfer from given data
+
+    ```py
+    client.transfer.edit(transfer_id=transfer_id, data=DATA)
+    DATA should contain these keys
+        on_hold : True/False
+    ```
+
+- Reverse a given Transfer
+
+    ```py
+    client.transfer.reverse(transfer_id=transfer_id)
+    ```
+
+- Get all reversals for a given Transfer
+
+    ```py
+    client.transfer.reversals(transfer_id=transfer_id)
     ```
 
 ## Bugs? Feature requests? Pull requests?
