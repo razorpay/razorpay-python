@@ -352,14 +352,12 @@ that both app title and version are strings.
 
     ```py
     client.transfer.reverse(transfer_id=transfer_id)
-
     ```
 
 - Get all reversals for a given Transfer
 
     ```py
     client.transfer.reversals(transfer_id=transfer_id)
-
     ```
 
 ## Bugs? Feature requests? Pull requests?
