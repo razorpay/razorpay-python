@@ -78,8 +78,10 @@ that both app title and version are strings.
     ```py
     client.payment.transfer("<PAYMENT_ID>")
     ```
+    For List of params refer to the API guide :
+    https://razorpay.com/docs/route/api-reference/#creating-payments
 
-- Get All transfer associated with the payment
+- Fetch all transfers associated with the payment
 
     ```py
     client.payment.transfers("<PAYMENT_ID>")
@@ -87,13 +89,13 @@ that both app title and version are strings.
 
 ### Refunds
 
-- fetch a particular refund
+- Fetch a particular refund
 
     ```py
     client.refund.fetch("<refund_id>")
     ```
 
-- fetch all refunds
+- Fetch all refunds
 
     ```py
     client.refund.all()
@@ -336,7 +338,7 @@ that both app title and version are strings.
     client.transfer.all()
     ```
 
-- Fetch transfer by id
+- Fetch transfer by ID
 
     ```py
     client.transfer.fetch("<TRANSFER_ID>")
@@ -349,7 +351,7 @@ that both app title and version are strings.
     DATA should contain these keys
         amount   : 100
         currency : INR
-        account  : dummy
+        account  : acc_865rdfghu7632
     ```
 
 - Edit Transfer from given data
@@ -366,7 +368,7 @@ that both app title and version are strings.
     client.transfer.reverse(transfer_id=transfer_id)
     ```
 
-- Get all reversals for a given Transfer
+- Fetch all reversals for a given Transfer
 
     ```py
     client.transfer.reversals(transfer_id=transfer_id)
