@@ -358,9 +358,12 @@ that both app title and version are strings.
 
     ```py
     client.transfer.edit(transfer_id=transfer_id, data=DATA)
-    DATA should contain these keys
-        on_hold : True/False
+    DATA may contain these keys
+        on_hold       : True/False
+        on_hold_until : 15678903127
     ```
+    For details on Transfer edit, please refer to the API guide:
+    https://razorpay.com/docs/route/api-reference/#examples
 
 - Reverse a given Transfer
 
