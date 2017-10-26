@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Unreleased
 
+
+## [1.1.0] - 2017-10-26
+### Added
+- Added Client for Virtual Account, Transfer, Subscriptions
+
 ## [1.0.2] - 2017-07-31
 ### Fixed
 - Webhook signature verification
