@@ -316,6 +316,50 @@ that both app title and version are strings.
     client.plan.all()
     ```
 
+### Transfers
+
+- Fetch all Transfers
+
+    ```py
+    client.transfer.all()
+    ```
+
+- Fetch transfer by payment id
+
+    ```py
+    client.transfer.fetch("<PAYMENT_ID>")
+    ```
+
+- Create Transfer from given data
+
+    ```py
+    client.transfer.create(data=DATA)
+    DATA should contain these keys
+        amount   : 100
+        currency : INR
+        account  : dummy
+    ```
+
+- Edit Transfer from given data
+
+    ```py
+    client.transfer.edit(transfer_id=transfer_id, data=DATA)
+    DATA should contain these keys
+        on_hold : True/False
+    ```
+
+- Reverse a given Transfer
+
+    ```py
+    client.transfer.reverse(transfer_id=transfer_id)
+    ```
+
+- Get all reversals for a given Transfer
+
+    ```py
+    client.transfer.reversals(transfer_id=transfer_id)
+    ```
+
 ## Bugs? Feature requests? Pull requests?
 
 All of those are welcome. You can [file issues][issues] or [submit pull requests][pulls] in this repository.
