@@ -73,15 +73,29 @@ that both app title and version are strings.
     client.payment.bank_transfer("<PAYMENT_ID>")
     ```
 
+- Create transfer for given payment id
+
+    ```py
+    client.payment.transfer("<PAYMENT_ID>")
+    ```
+    For List of params refer to the API guide :
+    https://razorpay.com/docs/route/api-reference/#creating-payments
+
+- Fetch all transfers associated with the payment
+
+    ```py
+    client.payment.transfers("<PAYMENT_ID>")
+    ```
+
 ### Refunds
 
-- fetch a particular refund
+- Fetch a particular refund
 
     ```py
     client.refund.fetch("<refund_id>")
     ```
 
-- fetch all refunds
+- Fetch all refunds
 
     ```py
     client.refund.all()
@@ -324,10 +338,10 @@ that both app title and version are strings.
     client.transfer.all()
     ```
 
-- Fetch transfer by payment id
+- Fetch transfer by ID
 
     ```py
-    client.transfer.fetch("<PAYMENT_ID>")
+    client.transfer.fetch("<TRANSFER_ID>")
     ```
 
 - Create Transfer from given data
@@ -337,16 +351,19 @@ that both app title and version are strings.
     DATA should contain these keys
         amount   : 100
         currency : INR
-        account  : dummy
+        account  : acc_865rdfghu7632
     ```
 
 - Edit Transfer from given data
 
     ```py
     client.transfer.edit(transfer_id=transfer_id, data=DATA)
-    DATA should contain these keys
-        on_hold : True/False
+    DATA may contain these keys
+        on_hold       : True/False
+        on_hold_until : 15678903127
     ```
+    For details on Transfer edit, please refer to the API guide:
+    https://razorpay.com/docs/route/api-reference/#examples
 
 - Reverse a given Transfer
 
@@ -354,7 +371,7 @@ that both app title and version are strings.
     client.transfer.reverse(transfer_id=transfer_id)
     ```
 
-- Get all reversals for a given Transfer
+- Fetch all reversals for a given Transfer
 
     ```py
     client.transfer.reversals(transfer_id=transfer_id)
