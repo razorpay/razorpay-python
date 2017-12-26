@@ -1,0 +1,11 @@
+{
+  "email" : "test@razorpay.com",
+  "contact" : "9876543210",
+  "currency" : "INR",
+  "amount" : "10000",
+  "customer_id" : "cust_29sdkfldlteskf",
+  "token"     : "token_29QQoUBi67ar1d",
+  "recurring" : "1",
+  "notes" : {"detail1" : "x", "detail2" : "y"},
+  "description" : "Some descritpion"
+}
