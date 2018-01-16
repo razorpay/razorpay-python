@@ -5,6 +5,7 @@ python:
   - "3.3"
   - "3.4"
   - "3.5"
+  - "3.6"
 install: pip install requests responses coveralls
 script: nosetests -v --with-coverage --cover-package=razorpay
 after_success: coveralls

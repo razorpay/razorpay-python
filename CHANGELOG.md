@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Unreleased
 
+## [1.1.1] - 2018-01-15
+### Added
+- Added supported python versions in `setup.py` and README
 
 ## [1.1.0] - 2017-10-26
 ### Added
