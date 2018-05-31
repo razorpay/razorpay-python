@@ -67,6 +67,12 @@ that both app title and version are strings.
     Note: <AMOUNT_TO_BE_REFUNDED> should be equal/less than the original amount
     ```
 
+- Fetch all Refunds for a payment
+
+    ```py
+    client.payment.refunds("<PAYMENT_ID>")
+    ```
+
 - Get Bank Transfer Entity for given payment
 
     ```py

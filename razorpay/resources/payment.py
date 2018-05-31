@@ -64,6 +64,19 @@ class Payment(Resource):
         data['amount'] = amount
         return self.post_url(url, data, **kwargs)
 
+    def refunds(self, payment_id, data={}, **kwargs):  # pragma: no cover
+        """
+        Refunds for given Payment Id
+
+        Args:
+            payment_id : Id for which refunds have to be fetched
+
+        Returns:
+            Refunds for given Payment Id
+        """
+        url = "{}/{}/refunds".format(self.base_url, payment_id)
+        return self.get_url(url, data, **kwargs)
+
     def transfer(self, payment_id, data={}, **kwargs):
         """"
         Create Transfer for given Payment Id
