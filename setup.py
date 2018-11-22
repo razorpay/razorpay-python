@@ -6,7 +6,6 @@ setup(
     description="Razorpay Python Client",
     url="https://github.com/razorpay/razorpay-python",
     author="Team Razorpay",
-    author_email="support@razorpay.com",
     license="MIT",
     install_requires=["requests"],
     include_package_data=True,
