@@ -117,7 +117,7 @@ class Client:
         url = "{}{}".format(self.base_url, path)
 
         response = getattr(self.session, method)(url, auth=self.auth,
-                                                 verify=False,
+                                                 verify=self.cert_path,
                                                  **options)
         if ((response.status_code >= HTTP_STATUS_CODE.OK) and
                 (response.status_code < HTTP_STATUS_CODE.REDIRECT)):
