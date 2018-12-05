@@ -93,7 +93,6 @@ class TestClientPayment(ClientTestCase):
         self.assertEqual(response['virtual_account_id'], 'va_8J2ny4Naokqbpe')
         self.assertEqual(response['payment_id'], self.payment_id)
 
-
     @responses.activate
     def test_create_recurring(self):
         init = mock_file('init_recurring_payment')
@@ -102,4 +101,3 @@ class TestClientPayment(ClientTestCase):
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.payment.create_recurring(init), result)
-
