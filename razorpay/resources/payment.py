@@ -104,7 +104,6 @@ class Payment(Resource):
         url = "{}/{}/bank_transfer".format(self.base_url, payment_id)
         return self.get_url(url, data, **kwargs)
 
-
     def create_recurring(self, data={}, **kwargs):
         """"
         Create a recurring payment from the token generated
