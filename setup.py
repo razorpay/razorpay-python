@@ -7,7 +7,7 @@ setup(
     url="https://github.com/razorpay/razorpay-python",
     author="Team Razorpay",
     license="MIT",
-    install_requires=["requests"],
+    install_requires=["requests==2.21.0"],
     include_package_data=True,
     package_dir={'razorpay': 'razorpay', 'razorpay.resources': 'razorpay/resources'},
     packages=['razorpay', 'razorpay.resources'],
