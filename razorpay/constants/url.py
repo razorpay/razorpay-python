@@ -11,3 +11,4 @@ class URL(object):
     SUBSCRIPTION_URL = "/subscriptions"
     ADDON_URL = "/addons"
     PLAN_URL = "/plans"
+    SETTLEMENT_URL = "/settlements"
