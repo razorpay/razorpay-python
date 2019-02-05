@@ -87,6 +87,49 @@ that both app title and version are strings.
     client.payment.transfers("<PAYMENT_ID>")
     ```
 
+### Payment Link
+
+- Create payment link
+
+    ```py
+    DATA = {"customer": { "name": "Varun Test",
+                        "email": "[varuna@gmail.com](mailto:varuna@gmail.com)",
+                        "contact": "1234567"
+                    },
+            "type": "link",
+            "view_less": 1,
+            "amount": 2000,
+            "currency": "INR",
+            "description": "Payment link for this purpose - xyz."
+            }
+    client.invoice.create(data=DATA)
+    ```
+
+- fetch a particular payment link detail
+
+    ```py
+    client.invoice.fetch("<INVOICE_ID>")
+    ```
+
+- fetch all payment link detail
+
+    ```py
+    client.invoice.all()
+    ```
+
+- cancel payment link
+
+    ```py
+    client.invoice.cancel("<INVOICE_ID>")
+    ```
+
+- send/resend notifications
+
+    ```py
+    client.invoice.notify_by("<INVOICE_ID>", "<MEDIUM>")
+    MEDIUM  - sms/email
+    ```
+
 ### Refunds
 
 - Fetch a particular refund
@@ -133,48 +176,6 @@ that both app title and version are strings.
     client.order.payments("<ORDER_ID>")
     ```
 
-### Payment Link
-
-- Create payment link
-
-    ```py
-    DATA = {"customer": { "name": "Varun Test",
-                        "email": "[varuna@gmail.com](mailto:varuna@gmail.com)",
-                        "contact": "1234567"
-                    },
-            "type": "link",
-            "view_less": 1,
-            "amount": 2000,
-            "currency": "INR",
-            "description": "Payment link for this purpose - xyz."
-            }
-    client.invoice.create(data=DATA)
-    ```
-
-- fetch a particular payment link detail
-
-    ```py
-    client.invoice.fetch("<INVOICE_ID>")
-    ```
-
-- fetch all payment link detail
-
-    ```py
-    client.invoice.all()
-    ```
-
-- cancel payment link
-
-    ```py
-    client.invoice.cancel("<INVOICE_ID>")
-    ```
-
-- send/resend notifications
-
-    ```py
-    client.invoice.notify_by("<INVOICE_ID>", "<MEDIUM>")
-    MEDIUM  - sms/email
-    ```
 
 ### Invoices
 
