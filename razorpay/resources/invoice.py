@@ -96,7 +96,7 @@ class Invoice(Resource):
             Its response is the invoice entity, similar to create/update API response. Its status now would be issued.
         """
         url = "{}/{}/issue".format(self.base_url, invoice_id)
-        return self.delete_url(url, {}, **kwargs)
+        return self.post_url(url, {}, **kwargs)
 
     def edit(self, invoice_id, data={}, **kwargs):
         """"
