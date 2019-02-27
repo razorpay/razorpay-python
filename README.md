@@ -93,7 +93,7 @@ that both app title and version are strings.
 
     ```py
     DATA = {"customer": { "name": "Varun Test",
-                        "email": "[varuna@gmail.com](mailto:varuna@gmail.com)",
+                        "email": "[varuna@gmail.com]",
                         "contact": "1234567"
                     },
             "type": "link",

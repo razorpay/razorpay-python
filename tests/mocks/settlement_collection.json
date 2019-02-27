@@ -1,0 +1,36 @@
+{
+  "entity": "collection",
+  "count": 3,
+  "items": [
+    {
+      "id": "setl_7IZKKI4Pnt2kEe",
+      "entity": "settlement",
+      "amount": 50000,
+      "status" : "processed",
+      "fees": 123,
+      "tax": 12,
+      "utr": "RZRP173069230703",
+      "created_at": 1509622307
+    },
+    {
+      "id": "setl_4xbSwsPABDJ8oK",
+      "entity": "settlement",
+      "amount": 50000,
+      "status" : "processed",
+      "fees": 123,
+      "tax": 12,
+      "utr": "RZRP173069230702",
+      "created_at": 1509622306
+    },
+    {
+        "id": "setl_4xbSwsPABDJ8jE",
+        "entity": "settlement",
+        "amount": 10000,
+        "status" : "processed",
+        "fees": 50000,
+        "tax": 12,
+        "utr": "RZRP173069230701",
+        "created_at": 1509622506
+    }
+  ]
+}

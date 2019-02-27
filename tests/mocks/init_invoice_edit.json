@@ -1,0 +1,18 @@
+{
+  "line_items": [
+      {
+        "id": "li_gHQwerty123gg1",
+        "name": "Book / English August - Updated name and quantity",
+        "quantity": 1
+      },
+      {
+        "name": "Book / A Wild Sheep Chase",
+        "amount": 20000,
+        "currency": "INR",
+        "quantity": 1
+      }
+  ],
+  "notes": {
+    "updated-key": "An updated note."
+  }
+}
