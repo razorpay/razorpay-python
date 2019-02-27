@@ -28,7 +28,7 @@ class TestClientSettlement(ClientTestCase):
         self.assertEqual(self.client.settlement.all({'count': count}), result)
 
     @responses.activate
-    def test_invoice_fetch(self):
+    def test_settlement_fetch(self):
         result = mock_file('fake_settlement')
         url = '{}/{}'.format(self.base_url, self.settlement_id)
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
