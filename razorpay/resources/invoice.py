@@ -107,69 +107,8 @@ class Invoice(Resource):
             invoice_id : Id for delete the invoice
             data : Dictionary having keys using which invoice have to be updated
         Returns:
-            {
-                "id": "inv_gHQwerty123ggd",
-                "entity": "invoice",
-                "receipt": "BILL13375649",
-                "invoice_number": null,
-                "customer_id": "cust_gHQwerty123ggd",
-                "customer_details": {
-                    "name": null,
-                    "email": "gaurav.kumar@razorpay.com",
-                    "contact": "9123456789",
-                    "billing_address": null,
-                },
-                "order_id": null,
-                "line_items": [
-                    {
-                        "id": "li_gHQwerty123gg1",
-                        "item_id": null,
-                        "name": "Book / English August - Updated name and quantity",
-                        "description": "Funny story of an IAS officer wanting to be aything other than an IAS.",
-                        "amount": 20000,
-                        "unit_amount": 20000,
-                        "gross_amount": 20000,
-                        "tax_amount": 0,
-                        "net_amount": 20000,
-                        "currency": "INR",
-                        "type": "invoice",
-                        "tax_inclusive": false,
-                        "unit": null,
-                        "quantity": 1,
-                        "taxes": []
-                    }
-                ],
-                "payment_id": null,
-                "status": "draft",
-                "expire_by": null,
-                "issued_at": null,
-                "paid_at": null,
-                "cancelled_at": null,
-                "expired_at": null,
-                "sms_status": "pending",
-                "email_status": "pending",
-                "date": 1505937098,
-                "terms": "Updated terms and conditions",
-                "gross_amount": 20000,
-                "tax_amount": 0,
-                "amount": 20000,
-                "amount_paid": null,
-                "amount_due": null,
-                "currency": "INR",
-                "description": null,
-                "notes": {
-                    "updated-key": "An updated note."
-                },
-                "comment": "Updated comment for customer",
-                "short_url": null,
-                "view_less": true,
-                "billing_start": null,
-                "billing_end": null,
-                "type": "invoice",
-                "group_taxes_discounts": false,
-                "user_id": null,
-                "created_at": 1505935715
-            }
+            Its response is the invoice entity, similar to create/update API response. Its status now would be issued.
+            Refer https://razorpay.com/docs/invoices/api/#entity-structure
         """
         url = "{}/{}".format(self.base_url, invoice_id)
         return self.patch_url(url, data, **kwargs)
