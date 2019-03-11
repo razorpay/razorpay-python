@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Unreleased
 
+## [1.2.0] - 2019-03-11
+- https://github.com/razorpay/razorpay-python/pull/61 which includes 1) new settlements read apis and 2) adds issue, cancel, send/ resend notification, delete, edit methods on payment link and invoice entity.
+
 ## [1.1.1] - 2018-01-15
 ### Added
 - Added supported python versions in `setup.py` and README

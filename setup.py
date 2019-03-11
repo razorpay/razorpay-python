@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="razorpay",
-    version="1.1.1",
+    version="1.2.0",
     description="Razorpay Python Client",
     url="https://github.com/razorpay/razorpay-python",
     author="Team Razorpay",
