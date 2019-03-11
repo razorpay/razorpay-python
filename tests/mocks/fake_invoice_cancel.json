@@ -1,0 +1,31 @@
+{
+  "issued_at": 1481541533,
+  "customer_details":
+  {
+
+    "customer_contact": null,
+    "customer_address": null,
+    "customer_email": null,
+    "customer_name": null
+  },
+  "short_url": "http://bit.ly/link",
+  "receipt": null,
+  "entity": "invoice",
+  "currency": "INR",
+  "paid_at": null,
+  "view_less": true,
+  "id": "random_id",
+  "customer_id": null,
+  "type": null,
+  "status": "cancelled",
+  "description": "random decsription",
+  "order_id": "order_random_id",
+  "sms_status": null,
+  "date": 1481541533,
+  "payment_id": null,
+  "line_items": [],
+  "notes": [],
+  "amount": 100,
+  "email_status": null,
+  "created_at": 1481541534
+}

@@ -11,6 +11,7 @@ from .resources import VirtualAccount
 from .resources import Addon
 from .resources import Subscription
 from .resources import Plan
+from .resources import Settlement
 from .utility import Utility
 from .constants import ERROR_CODE
 from .constants import HTTP_STATUS_CODE
@@ -30,6 +31,7 @@ __all__ = [
         'Addon',
         'Subscription',
         'Plan',
+        'Settlement',
         'HTTP_STATUS_CODE',
         'ERROR_CODE',
 ]

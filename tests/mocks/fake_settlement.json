@@ -1,0 +1,10 @@
+{
+    "id": "setl_7IZKKI4Pnt2kEe",
+    "entity": "settlement",
+    "amount": 60000,
+    "status": "processed",
+    "fees": 123,
+    "tax": 12,
+    "utr": "RZRP111111111111",
+    "created_at": 1455696913
+}

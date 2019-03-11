@@ -1,0 +1,16 @@
+{
+  "entity": "collection",
+  "count": 1,
+  "items": [
+    {
+      "id": "setl_7IZKKI4Pnt2kEe",
+      "entity": "settlement",
+      "amount": 50000,
+      "status" : "processed",
+      "fees": 123,
+      "tax": 12,
+      "utr": "RZRP173069230703",
+      "created_at": 1509622307
+    }
+  ]
+}
