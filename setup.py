@@ -1,9 +1,14 @@
 from setuptools import setup
 
+with open('README.md') as readme:
+    readme_content = readme.read()
+
 setup(
     name="razorpay",
     version="1.2.0",
     description="Razorpay Python Client",
+    long_description=readme_content,
+    long_description_content_type='text/markdown',
     url="https://github.com/razorpay/razorpay-python",
     author="Team Razorpay",
     license="MIT",
