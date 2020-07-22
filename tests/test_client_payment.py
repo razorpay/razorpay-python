@@ -92,3 +92,17 @@ class TestClientPayment(ClientTestCase):
         response = self.client.payment.bank_transfer(self.payment_id)
         self.assertEqual(response['virtual_account_id'], 'va_8J2ny4Naokqbpe')
         self.assertEqual(response['payment_id'], self.payment_id)
+
+    @responses.activate
+    def test_upi_transfer_fetch(self):
+        result = mock_file('fake_upi_transfer')
+        url = '{}/{}/upi_transfer'.format(self.base_url, self.payment_id)
+        responses.add(responses.GET,
+                      url,
+                      status=200,
+                      body=result,
+                      match_querystring=True)
+
+        response = self.client.payment.upi_transfer(self.payment_id)
+        self.assertEqual(response['virtual_account_id'], 'va_8J2ny4Naokqbpf')
+        self.assertEqual(response['payment_id'], self.payment_id)
