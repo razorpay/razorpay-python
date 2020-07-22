@@ -103,3 +103,16 @@ class Payment(Resource):
         """
         url = "{}/{}/bank_transfer".format(self.base_url, payment_id)
         return self.get_url(url, data, **kwargs)
+
+    def upi_transfer(self, payment_id, data={}, **kwargs):
+        """"
+        UPI Transfer Entity for given Payment
+
+        Args:
+            payment_id : Id for which upi transfer entity has to be fetched
+
+        Returns:
+            UPI Transfer dict
+        """
+        url = "{}/{}/upi_transfer".format(self.base_url, payment_id)
+        return self.get_url(url, data, **kwargs)
