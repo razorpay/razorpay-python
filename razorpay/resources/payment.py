@@ -40,7 +40,7 @@ class Payment(Resource):
 
         Args:
             payment_id : Id for which payment object has to be retrieved
-            Amount : Amount for which the payment has to be retrieved
+            amount : Amount for which the payment has to be retrieved
 
         Returns:
             Payment dict after getting captured
@@ -55,7 +55,7 @@ class Payment(Resource):
 
         Args:
             payment_id : Id for which payment object has to be refunded
-            Amount : Amount for which the payment has to be refunded
+            amount : Amount for which the payment has to be refunded
 
         Returns:
             Payment dict after getting refunded
@@ -69,10 +69,10 @@ class Payment(Resource):
         Create Transfer for given Payment Id
 
         Args:
-            payment_id : Id for which payment object has to be transfered
+            payment_id : Id for which payment object has to be transferred
 
         Returns:
-            Payment dict after getting transfered
+            Payment dict after getting transferred
         """
         url = "{}/{}/transfers".format(self.base_url, payment_id)
         return self.post_url(url, data, **kwargs)
@@ -82,11 +82,11 @@ class Payment(Resource):
         Fetches all transfer for given Payment Id
 
         Args:
-            payment_id : Id for which payment object has to be refunded
-            Amount : Amount for which the payment has to be refunded
+            payment_id : Id for which all the transfers has to be fetched
 
         Returns:
-            Payment dict after getting refunded
+            A collection (dict) of transfers
+            items : The key containing a list of 'transfer' entities
         """
         url = "{}/{}/transfers".format(self.base_url, payment_id)
         return self.get_url(url, data, **kwargs)
