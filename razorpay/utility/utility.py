@@ -3,9 +3,6 @@ import hashlib
 import sys
 
 
-from ..errors import SignatureVerificationError
-
-
 class Utility(object):
     def __init__(self, client=None):
         self.client = client
@@ -40,9 +37,7 @@ class Utility(object):
         else:
             result = hmac.compare_digest(generated_signature, signature)
 
-        if not result:
-            raise SignatureVerificationError(
-                'Razorpay Signature Verification Failed')
+        # returns True if verified else returns False
         return result
 
     # Taken from Django Source Code
