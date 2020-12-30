@@ -8,6 +8,7 @@ from .token import Token
 from .transfer import Transfer
 from .virtual_account import VirtualAccount
 from .addon import Addon
+from .item import Item
 from .plan import Plan
 from .subscription import Subscription
 from .settlement import Settlement
@@ -24,6 +25,7 @@ __all__ = [
         'Transfer',
         'VirtualAccount',
         'Addon',
+        'Item',
         'Plan',
         'Subscription',
         'Settlement',

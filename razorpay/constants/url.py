@@ -10,5 +10,6 @@ class URL(object):
     VIRTUAL_ACCOUNT_URL = "/virtual_accounts"
     SUBSCRIPTION_URL = "/subscriptions"
     ADDON_URL = "/addons"
+    ITEM_URL = "/items"
     PLAN_URL = "/plans"
     SETTLEMENT_URL = "/settlements"
