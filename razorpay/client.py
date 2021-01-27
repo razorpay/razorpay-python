@@ -125,15 +125,25 @@ class Client:
         else:
             msg = ""
             code = ""
+            step = ""
+            reason = ""
             json_response = response.json()
             if 'error' in json_response:
                 if 'description' in json_response['error']:
                     msg = json_response['error']['description']
                 if 'code' in json_response['error']:
                     code = str(json_response['error']['code'])
+                if 'step' in json_response['error']:
+                    step = str(json_response['error']['step']
+                if 'reason' in json_response['error']:
+                    reason = str(json_response['error']['reason']
 
             if str.upper(code) == ERROR_CODE.BAD_REQUEST_ERROR:
-                raise BadRequestError(msg)
+                bre = BadRequestError(msg)
+                bre.__code = code
+                bre.__step = step
+                bre.__reason = reason
+                raise bre
             elif str.upper(code) == ERROR_CODE.GATEWAY_ERROR:
                 raise GatewayError(msg)
             elif str.upper(code) == ERROR_CODE.SERVER_ERROR:
