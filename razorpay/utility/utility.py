@@ -21,6 +21,17 @@ class Utility(object):
 
         return self.verify_signature(msg, razorpay_signature, secret)
 
+    def verify_subscription_payment_signature(self, parameters):
+        signature_id = str(parameters['razorpay_signature_id'])
+        payment_id = str(parameters['razorpay_payment_id'])
+        razorpay_signature = str(parameters['razorpay_signature'])
+
+        msg = "{}|{}".format(payment_id, signature_id)
+
+        secret = str(self.client.auth[1])
+
+        return self.verify_signature(msg, razorpay_signature, secret)
+
     def verify_webhook_signature(self, body, signature, secret):
         return self.verify_signature(body, signature, secret)
 
