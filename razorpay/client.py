@@ -134,15 +134,15 @@ class Client:
                 if 'code' in json_response['error']:
                     code = str(json_response['error']['code'])
                 if 'step' in json_response['error']:
-                    step = str(json_response['error']['step']
+                    step = str(json_response['error']['step'])
                 if 'reason' in json_response['error']:
-                    reason = str(json_response['error']['reason']
+                    reason = str(json_response['error']['reason'])
 
             if str.upper(code) == ERROR_CODE.BAD_REQUEST_ERROR:
                 bre = BadRequestError(msg)
-                bre.__code = code
-                bre.__step = step
-                bre.__reason = reason
+                bre.__code__ = code
+                bre.__step__ = step
+                bre.__reason__ = reason
                 raise bre
             elif str.upper(code) == ERROR_CODE.GATEWAY_ERROR:
                 raise GatewayError(msg)
