@@ -77,7 +77,8 @@ class TestClientPayment(ClientTestCase):
         url = '{}/{}/transfers'.format(self.base_url, self.payment_id)
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.payment.transfers(self.payment_id), result)
+        self.assertEqual(self.client.payment.transfers(
+            self.payment_id), result)
 
     @responses.activate
     def test_bank_transfer_fetch(self):
@@ -106,3 +107,12 @@ class TestClientPayment(ClientTestCase):
         response = self.client.payment.upi_transfer(self.payment_id)
         self.assertEqual(response['virtual_account_id'], 'va_8J2ny4Naokqbpf')
         self.assertEqual(response['payment_id'], self.payment_id)
+
+    @responses.activate
+    def test_refund_fetch(self):
+        result = mock_file('fake_refund')
+        url = '{}/{}/refunds'.format(self.base_url, self.payment_id)
+        responses.add(responses.GET, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.payment.refunds(
+            self.payment_id), result)

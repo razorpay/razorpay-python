@@ -9,10 +9,6 @@ class Resource(object):
     def all(self, data, **kwargs):
         return self.get_url(self.base_url, data, **kwargs)
 
-    def refunds(self, id, data, **kwargs):
-        url = "{}/{}{}".format(URL.PAYMENTS_URL, id, self.base_url)
-        return self.get_url(url, data, **kwargs)
-
     def fetch(self, id, data, **kwargs):
         url = "{}/{}".format(self.base_url, id)
         return self.get_url(url, data, **kwargs)

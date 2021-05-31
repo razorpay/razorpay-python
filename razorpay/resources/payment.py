@@ -116,3 +116,16 @@ class Payment(Resource):
         """
         url = "{}/{}/upi_transfer".format(self.base_url, payment_id)
         return self.get_url(url, data, **kwargs)
+
+    def refunds(self, payment_id, data={}, **kwargs):
+        """
+        Fetches all refunds for given Payment Id
+
+        Args:
+            payment_id : Id for which all the refunds has to be fetched
+
+        Returns:
+            A collection (dict) of refund entities
+        """
+        url = "{}/{}/refunds".format(self.base_url, payment_id)
+        return self.get_url(url, data, **kwargs)
