@@ -73,6 +73,12 @@ that both app title and version are strings.
     client.payment.bank_transfer("<PAYMENT_ID>")
     ```
 
+- Get all refunds against a payment
+
+    ```py
+    client.payment.refunds("<PAYMENT_ID>")
+    ```
+
 - Create transfer for given payment id
 
     ```py
