@@ -28,13 +28,13 @@ class TestClientRefund(ClientTestCase):
         self.assertEqual(self.client.refund.fetch(self.refund_id), result)
 
     @responses.activate
-    def test_refund_fetch_for_payment(self):
+    def test_refund(self):
         result = mock_file('fake_refund')
         url = '{}/{}/refunds'.format(self.payment_url,
                                      self.payment_id)
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.refund.fetch_for_payment(
+        self.assertEqual(self.client.refund.refunds(
             self.payment_id), result)
 
     @responses.activate

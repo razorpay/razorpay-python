@@ -13,11 +13,11 @@ class Refund(Resource):
                       DeprecationWarning)
         return self.all(data, **kwargs)
 
-    def fetch_for_payment(self, payment_id, data={}, **kwargs):
+    def refunds(self, payment_id, data={}, **kwargs):
         """
         Fetches all the refunds for given payment id
         """
-        return super(Refund, self).fetch_for_payment(payment_id, data, **kwargs)
+        return super(Refund, self).refunds(payment_id, data, **kwargs)
 
     def create(self, data={}, **kwargs):
         """
