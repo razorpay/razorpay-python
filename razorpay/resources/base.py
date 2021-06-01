@@ -1,6 +1,3 @@
-from ..constants.url import URL
-
-
 class Resource(object):
 
     def __init__(self, client=None):
