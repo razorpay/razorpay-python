@@ -13,3 +13,5 @@ class URL(object):
     PLAN_URL = "/plans"
     SETTLEMENT_URL = "/settlements"
     PAYOUTS_URL = "/payouts"
+    FUND_ACCOUNT_URL = "/fund_accounts"
+    CONTACT_URL = "/contacts"

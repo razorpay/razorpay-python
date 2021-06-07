@@ -20,4 +20,26 @@ class Payout(Resource):
         """
         return super(Payout, self).fetch(payout_id, data, **kwargs)
 
-    
+    def create(self, data={}, **kwargs):
+        """"
+        Create Payout from given dict
+
+        Returns:
+            Payout Dict which was created
+        """
+        url = self.base_url
+        return self.post_url(url, data, **kwargs)
+
+    def purposes(self, data={}, **kwargs):
+        """
+
+        """
+        url = "{}/purposes".format(self.base_url)
+        return self.get_url(url, data, **kwargs)
+
+    def cancel(self, payout_id, data={}, **kwargs):
+        """
+
+        """
+        url = "{}/{}/cancel".format(self.base_url,payout_id)
+        return self.post_url(url, data, **kwargs)

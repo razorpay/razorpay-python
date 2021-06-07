@@ -12,7 +12,8 @@ from .plan import Plan
 from .subscription import Subscription
 from .settlement import Settlement
 from .payout import Payout
-
+from .fund_account import FundAccount
+from .contact import Contact
 
 __all__ = [
         'Payment',
@@ -29,4 +30,6 @@ __all__ = [
         'Subscription',
         'Settlement',
         'Payout',
+        'FundAccount',
+        'Contact',
 ]
