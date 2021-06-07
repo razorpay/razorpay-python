@@ -11,6 +11,7 @@ from .addon import Addon
 from .plan import Plan
 from .subscription import Subscription
 from .settlement import Settlement
+from .payout import Payout
 
 
 __all__ = [
@@ -27,4 +28,5 @@ __all__ = [
         'Plan',
         'Subscription',
         'Settlement',
+        'Payout',
 ]

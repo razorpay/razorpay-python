@@ -12,3 +12,4 @@ class URL(object):
     ADDON_URL = "/addons"
     PLAN_URL = "/plans"
     SETTLEMENT_URL = "/settlements"
+    PAYOUTS_URL = "/payouts"
