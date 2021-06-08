@@ -41,14 +41,23 @@ class Payout(Resource):
 
     def purposes(self, data={}, **kwargs):
         """
+        Fetch all puposes
 
+        Returns:
+            Dictionary of all purposes
         """
         url = "{}/purposes".format(self.base_url)
         return self.get_url(url, data, **kwargs)
 
     def cancel(self, payout_id, data={}, **kwargs):
         """
+        Cancels Payout for given payout_id
 
+        Args:
+            payout_id: ID for which payout has to be cancelled.
+
+        Returns:
+            Payout Dict for the payout id.
         """
         url = "{}/{}/cancel".format(self.base_url,payout_id)
         return self.post_url(url, data, **kwargs)

@@ -41,19 +41,33 @@ class Contact(Resource):
 
     def update(self, contact_id, data={}, **kwargs):
         """
+        Update Contact from given Contact id with given dict
 
+        Returns:
+            Dict of Contact which was updated.
         """
         url = "{}/{}".format(self.base_url, contact_id)
         return super(Contact, self).patch_url(url, data, **kwargs)
 
     def get_types(self, data={}, **kwargs):
         """
+        Fetch all types for contacts
+
+        Returns:
+            Dict of all available types of contacts
         """
         url = "{}/types".format(self.base_url)
         return self.get_url(url, data, **kwargs)
 
     def post_type(self, data={}, **kwargs):
         """
+        Create type for contact from given dict
+
+        Args:
+            data: Dict to create type
+
+        Returns:
+            Dict of all available types of contacts
         """
         url = "{}/types".format(self.base_url)
         return self.post_url(url, data, **kwargs)
