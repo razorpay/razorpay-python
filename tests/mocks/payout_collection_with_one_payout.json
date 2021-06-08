@@ -1,0 +1,29 @@
+{
+    "count": 1,
+    "entity": "collection",
+    "items": [
+        {
+            "id": "pout_HCT",
+            "entity": "payout", 
+            "fund_account_id": "fa_HIg", 
+            "amount": 100, 
+            "currency": "INR", 
+            "notes": [], 
+            "fees": 0, 
+            "tax": 0, 
+            "status": "processed", 
+            "purpose": "refund", 
+            "utr": "02471", 
+            "mode": "IFT", 
+            "reference_id": null, 
+            "narration": "Test narration", 
+            "batch_id": null, 
+            "failure_reason": null, 
+            "created_at": 1692797795, 
+            "fee_type": null, 
+            "scheduled_at": null, 
+            "registered_name": "", 
+            "remarks": null
+        }
+    ]
+}

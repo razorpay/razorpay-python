@@ -35,4 +35,9 @@ class FundAccount(Resource):
     #     print(url)
     #     return self.delete_url(url, data, **kwargs)
 
-    
+    def update(self, fund_account_id, data={}, **kwargs):
+        """
+
+        """
+        url = "{}/{}".format(self.base_url, fund_account_id)
+        return super(FundAccount, self).patch_url(url, data, **kwargs)

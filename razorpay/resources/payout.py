@@ -20,6 +20,15 @@ class Payout(Resource):
         """
         return super(Payout, self).fetch(payout_id, data, **kwargs)
 
+    def all(self, data={}, **kwargs):
+        """"
+        Fetch all Payout entities
+
+        Returns:
+            Dictionary of Payout data
+        """
+        return super(Payout, self).all(data, **kwargs)
+
     def create(self, data={}, **kwargs):
         """"
         Create Payout from given dict
