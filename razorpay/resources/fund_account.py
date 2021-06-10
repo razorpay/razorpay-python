@@ -39,13 +39,6 @@ class FundAccount(Resource):
         """
         return super(FundAccount, self).all(data, **kwargs)
 
-    # def delete(self, fund_account_id, data={}, **kwargs):
-    #     """
-    #     """
-    #     url = "{}/{}".format(self.base_url, fund_account_id)
-    #     print(url)
-    #     return self.delete_url(url, data, **kwargs)
-
     def update(self, fund_account_id, data={}, **kwargs):
         """
         Update Fund Account from given fund account id with given dict
@@ -57,20 +50,34 @@ class FundAccount(Resource):
         return super(FundAccount, self).patch_url(url, data, **kwargs)
 
     def validation(self, data={}, **kwargs):
-        """
+        """"
+        Create Fund Account Validation from given dict
+
+        Returns:
+            Fund Account Validation Dict which was created
         """
         url = "{}/validations".format(self.base_url)
         return self.post_url(url, data, **kwargs)
 
     def all_validations(self, data={}, **kwargs):
-        """
+        """"
+        Fetch all Fund Account Validation entities
+
+        Returns:
+            Dictionary of Fund Account Validations data
         """
         url = "{}/validations".format(self.base_url)
         return self.get_url(url, data, **kwargs)
 
     def fetch_validation(self,fund_account_validation_id, data={}, **kwargs):
-        """
+        """"
+        Fetch Fund Account Validation for given Id
+
+        Args:
+            fund_account_validation_id : Id for which Fund Account Validation object has to be retrieved
+
+        Returns:
+            Fund Account Validation dict for given fund_account_validation Id
         """
         url = "{}/validations/{}".format(self.base_url, fund_account_validation_id)
         return self.get_url(url, data, **kwargs)
-        

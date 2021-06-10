@@ -29,6 +29,7 @@ class ClientTestCase(unittest.TestCase):
         self.payout_id = 'fake_payout_id'
         self.fund_account_id = 'fake_fund_account_id'
         self.contact_id = 'fake_contact_id'
+        self.transaction_id = 'fake_transaction_id'
         self.client = razorpay.Client(auth=('key_id', 'key_secret'))
         self.secondary_client = razorpay.Client(auth=('key_id', 'key_secret'),
                                                 base_url=self.secondary_url)

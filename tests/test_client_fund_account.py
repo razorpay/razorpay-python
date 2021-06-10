@@ -141,5 +141,3 @@ class TestClientFundAccount(ClientTestCase):
                       match_querystring=True)
 
         self.assertEqual(self.client.fund_account.all_validations({"count": count}), result)
-
-

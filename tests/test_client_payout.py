@@ -73,11 +73,3 @@ class TestClientPayout(ClientTestCase):
 
         response = self.client.payout.create(data=DATA)
         self.assertEqual(response, result)
-
-    
-
-
-        
-
-    
-    

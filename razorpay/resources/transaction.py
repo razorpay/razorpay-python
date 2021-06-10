@@ -25,6 +25,6 @@ class Transaction(Resource):
         Fetch all transaction entities
 
         Returns:
-            Dictionary of transaction data
+            Dictionary of transactions data
         """
         return super(Transaction, self).all(data,**kwargs)
