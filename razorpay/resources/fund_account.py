@@ -55,3 +55,22 @@ class FundAccount(Resource):
         """
         url = "{}/{}".format(self.base_url, fund_account_id)
         return super(FundAccount, self).patch_url(url, data, **kwargs)
+
+    def validation(self, data={}, **kwargs):
+        """
+        """
+        url = "{}/validations".format(self.base_url)
+        return self.post_url(url, data, **kwargs)
+
+    def all_validations(self, data={}, **kwargs):
+        """
+        """
+        url = "{}/validations".format(self.base_url)
+        return self.get_url(url, data, **kwargs)
+
+    def fetch_validation(self,fund_account_validation_id, data={}, **kwargs):
+        """
+        """
+        url = "{}/validations/{}".format(self.base_url, fund_account_validation_id)
+        return self.get_url(url, data, **kwargs)
+        

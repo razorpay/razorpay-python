@@ -14,6 +14,7 @@ from .settlement import Settlement
 from .payout import Payout
 from .fund_account import FundAccount
 from .contact import Contact
+from .transaction import Transaction
 
 __all__ = [
         'Payment',
@@ -32,4 +33,5 @@ __all__ = [
         'Payout',
         'FundAccount',
         'Contact',
+        'Transaction'
 ]

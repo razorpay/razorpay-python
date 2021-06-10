@@ -15,3 +15,5 @@ class URL(object):
     PAYOUTS_URL = "/payouts"
     FUND_ACCOUNT_URL = "/fund_accounts"
     CONTACT_URL = "/contacts"
+    TRANSACTION_URL = "/transactions"
+

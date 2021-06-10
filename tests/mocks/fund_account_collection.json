@@ -1,0 +1,33 @@
+{
+	"entity": "collection",
+	"count": 2,
+	"items": [{
+		"id": "fa_abc",
+		"entity": "fund_account",
+		"contact_id": "cont_Habc",
+		"account_type": "bank_account",
+		"bank_account": {
+			"ifsc": "ABC",
+			"bank_name": "ABC Bank of India",
+			"name": "math",
+			"notes": [],
+			"account_number": "1234567890"
+		},
+		"batch_id": null,
+		"active": true,
+		"created_at": 1623216207
+	}, {
+		"id": "fa_abcd",
+		"entity": "fund_account",
+		"contact_id": "cont_Habcd",
+		"account_type": "vpa",
+		"batch_id": null,
+		"vpa": {
+			"username": "abc",
+			"handle": "upi",
+			"address": "abc@upi"
+		},
+		"active": true,
+		"created_at": 1623155132
+	}]
+}

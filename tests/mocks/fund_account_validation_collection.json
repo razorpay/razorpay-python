@@ -1,0 +1,83 @@
+{
+	"entity": "collection",
+	"count": 2,
+	"items": [{
+		"id": "fav_abc1",
+		"entity": "fund_account.validation",
+		"fund_account": {
+			"id": "fa_abc1",
+			"entity": "fund_account",
+			"contact_id": "cont_abc1",
+			"account_type": "bank_account",
+			"bank_account": {
+				"ifsc": "ABCD",
+				"bank_name": "ABC Bank",
+				"name": "ABC DEF",
+				"notes": [],
+				"account_number": "12345"
+			},
+			"batch_id": null,
+			"active": true,
+			"created_at": 1623217702,
+			"details": {
+				"ifsc": "ABCD",
+				"bank_name": "ABC Bank",
+				"name": "ABC DEF",
+				"notes": [],
+				"account_number": "12345"
+			}
+		},
+		"status": "completed",
+		"amount": 100,
+		"currency": "INR",
+		"notes": {
+			"random_key_1": "Making the fav",
+			"random_key_2": "sdk"
+		},
+		"results": {
+			"account_status": "invalid",
+			"registered_name": null
+		},
+		"created_at": 1623217717,
+		"utr": null
+	}, {
+		"id": "fav_abc2",
+		"entity": "fund_account.validation",
+		"fund_account": {
+			"id": "fa_abc2",
+			"entity": "fund_account",
+			"contact_id": "cont_abc2",
+			"account_type": "bank_account",
+			"bank_account": {
+				"ifsc": "ABCD",
+				"bank_name": "ABCD Bank",
+				"name": "ABCD EFGH",
+				"notes": [],
+				"account_number": "123456"
+			},
+			"batch_id": null,
+			"active": true,
+			"created_at": 1618379432,
+			"details": {
+				"ifsc": "ABCD",
+				"bank_name": "ABCD Bank",
+				"name": "ABCD EFGH",
+				"notes": [],
+				"account_number": "123456"
+			}
+		},
+		"status": "completed",
+		"amount": 100,
+		"currency": "INR",
+		"notes": {
+			"random_key_1": "Making",
+			"random_key_2": "sdk2"
+		},
+		"results": {
+			"account_status": "active",
+			"registered_name": "ABCD EFGH"
+		},
+		"created_at": 1623158655,
+		"utr": null
+	}]
+}

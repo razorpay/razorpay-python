@@ -41,7 +41,7 @@ class Contact(Resource):
 
     def update(self, contact_id, data={}, **kwargs):
         """
-        Update Contact from given Contact id with given dict
+        Update Contact for given Contact id with given dict
 
         Returns:
             Dict of Contact which was updated.
