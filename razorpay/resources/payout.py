@@ -1,6 +1,7 @@
 from .base import Resource
 from ..constants.url import URL
 import warnings
+from ..errors import BadRequestError
 
 
 class Payout(Resource):
@@ -29,13 +30,26 @@ class Payout(Resource):
         """
         return super(Payout, self).all(data, **kwargs)
 
-    def create(self, data={}, **kwargs):
+    def create(self, idempotency_key, data={}, **kwargs):
         """"
         Create Payout from given dict
+
+        Args:
+            idempotency_key: idempotency key which will be unique for each payout. idempotency_key should be a none empty string.
 
         Returns:
             Payout Dict which was created
         """
+
+        if idempotency_key == None:
+            msg = "Idempotency Key can't be None"
+            raise BadRequestError(msg)
+
+        if not idempotency_key.strip():
+            msg = "Idempotency Key can't be empty"
+            raise BadRequestError(msg)
+        
+        kwargs['headers'] = {'X-Payout-Idempotency': idempotency_key}
         url = self.base_url
         return self.post_url(url, data, **kwargs)
 

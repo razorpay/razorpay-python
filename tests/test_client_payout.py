@@ -2,6 +2,7 @@ import responses
 import json
 
 from .helpers import mock_file, ClientTestCase
+from razorpay.errors import BadRequestError
 
 
 class TestClientPayout(ClientTestCase):
@@ -71,5 +72,24 @@ class TestClientPayout(ClientTestCase):
                       body=json.dumps(result), 
                       match_querystring=True)
 
-        response = self.client.payout.create(data=DATA)
+        response = self.client.payout.create('fake_idempotency_key', data = DATA)
         self.assertEqual(response, result)
+
+    @responses.activate
+    def test_payout_create_without_idempotency_key(self):
+        url = self.base_url
+
+        DATA = {
+            "fund_account_id": "fa_HIg",
+        	"amount": 100,
+        	"mode": "IFT",
+        	"currency": "INR",
+        	"account_number": "004705015597",
+        	"purpose": "refund"
+        }
+        
+        with self.assertRaises(BadRequestError, msg = "Idempotency Key can't be None") as exception_caught:
+            self.client.payout.create(None, data=DATA)
+            
+        self.assertEqual(str(exception_caught.exception), "Idempotency Key can't be None")
+
