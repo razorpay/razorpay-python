@@ -1,3 +1,24 @@
+## Table of Contents
+- [Razorpay Python Client](#razorpay-python-client)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [App Details](#app-details)
+    - [Payments](#payments)
+    - [Refunds](#refunds)
+    - [Orders](#orders)
+    - [Payment Links](#payment-links)
+    - [Invoices](#invoices)
+    - [Settlements](#settlements)
+    - [Card](#card)
+    - [Customers](#customers)
+    - [Token](#token)
+    - [Virtual Account](#virtual-account)
+    - [Utility](#utility)
+    - [Subscriptions](#subscriptions)
+    - [Plans](#plans)
+    - [Transfers](#transfers)
+  - [Bugs? Feature requests? Pull requests?](#bugs-feature-requests-pull-requests)
+
 # Razorpay Python Client
 
 [![PyPI Version](https://img.shields.io/pypi/v/razorpay.svg)](https://pypi.python.org/pypi/razorpay) [![Build Status](https://travis-ci.org/razorpay/razorpay-python.svg?branch=master)](https://travis-ci.org/razorpay/razorpay-python) [![Coverage Status](https://coveralls.io/repos/github/razorpay/razorpay-python/badge.svg?branch=master)](https://coveralls.io/github/razorpay/razorpay-python?branch=master) [![PyPI](https://img.shields.io/pypi/pyversions/razorpay.svg)]() [![License](https://img.shields.io/:license-mit-blue.svg)](https://opensource.org/licenses/MIT)
@@ -134,7 +155,7 @@ that both app title and version are strings.
     ```
 
 
-### Payment Link
+### Payment Links
 
 - Create payment link
 
@@ -257,7 +278,7 @@ that both app title and version are strings.
     client.card.fetch(card_id=card_id)
     ```
 
-### Customer
+### Customers
 
 - fetch a particular customer Info
 
