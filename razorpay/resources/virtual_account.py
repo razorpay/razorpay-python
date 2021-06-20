@@ -53,9 +53,8 @@ class VirtualAccount(Resource):
             virtual_account_id :
                 Id for which Virtual Account objects has to be Closed
         """
-        url = "{}/{}".format(self.base_url, virtual_account_id)
-        data['status'] = 'closed'
-        return self.patch_url(url, data, **kwargs)
+        url = "{}/{}/close".format(self.base_url, virtual_account_id)
+        return self.post_url(url, data, **kwargs)
 
     def payments(self, virtual_account_id, data={}, **kwargs):
         """"
