@@ -10,6 +10,7 @@ from .resources import Transfer
 from .resources import VirtualAccount
 from .resources import Addon
 from .resources import Subscription
+from .resources import Item
 from .resources import Plan
 from .resources import Settlement
 from .utility import Utility
@@ -30,6 +31,7 @@ __all__ = [
         'VirtualAccount',
         'Addon',
         'Subscription',
+        'Item',
         'Plan',
         'Settlement',
         'HTTP_STATUS_CODE',
