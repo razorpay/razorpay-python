@@ -1,0 +1,18 @@
+{
+	"entity": "collection",
+	"count": 4,
+	"items": [
+        {
+			"type": "Homie"
+		},
+		{
+			"type": "employee"
+		},
+		{
+			"type": "vendor"
+        },
+		{
+			"type": "SDK"
+		}
+	]
+}

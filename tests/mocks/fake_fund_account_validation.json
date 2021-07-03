@@ -1,0 +1,40 @@
+{
+	"id": "fake_fund_account_validation",
+	"entity": "fund_account.validation",
+	"fund_account": {
+		"id": "fake_fund_account",
+		"entity": "fund_account",
+		"contact_id": "fake_contact",
+		"account_type": "bank_account",
+		"bank_account": {
+			"ifsc": "ABC0001",
+			"bank_name": "ABC Bank",
+			"name": "abc",
+			"notes": [],
+			"account_number": "12345"
+		},
+		"batch_id": null,
+		"active": true,
+		"created_at": 1618379432,
+		"details": {
+			"ifsc": "ABC0001",
+			"bank_name": "ABC Bank",
+			"name": "abc",
+			"notes": [],
+			"account_number": "12345"
+		}
+	},
+	"status": "completed",
+	"amount": 100,
+	"currency": "INR",
+	"notes": {
+		"random_key_1": "Making the test",
+		"random_key_2": "SDK test."
+	},
+	"results": {
+		"account_status": "active",
+		"registered_name": "ABC"
+	},
+	"created_at": 1623158655,
+	"utr": null
+}

@@ -11,7 +11,10 @@ from .addon import Addon
 from .plan import Plan
 from .subscription import Subscription
 from .settlement import Settlement
-
+from .payout import Payout
+from .fund_account import FundAccount
+from .contact import Contact
+from .transaction import Transaction
 
 __all__ = [
         'Payment',
@@ -27,4 +30,8 @@ __all__ = [
         'Plan',
         'Subscription',
         'Settlement',
+        'Payout',
+        'FundAccount',
+        'Contact',
+        'Transaction'
 ]

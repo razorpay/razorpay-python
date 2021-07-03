@@ -1,0 +1,50 @@
+{
+	"entity": "collection",
+	"count": 3,
+	"items": [{
+		"id": "txn_ABC",
+		"entity": "transaction",
+		"account_number": "12345",
+		"amount": 100,
+		"currency": "INR",
+		"credit": 100,
+		"debit": 0,
+		"balance": 43546890,
+		"source": {
+			"utr": null,
+			"amount": 100,
+			"entity": "external"
+		},
+		"created_at": 1623260228
+	}, {
+		"id": "txn_abc2",
+		"entity": "transaction",
+		"account_number": "12345",
+		"amount": 100,
+		"currency": "INR",
+		"credit": 100,
+		"debit": 0,
+		"balance": 43546790,
+		"source": {
+			"utr": null,
+			"amount": 100,
+			"entity": "external"
+		},
+		"created_at": 1623245689
+	}, {
+		"id": "txn_abc3",
+		"entity": "transaction",
+		"account_number": "12345",
+		"amount": 100,
+		"currency": "INR",
+		"credit": 0,
+		"debit": 100,
+		"balance": 43546690,
+		"source": {
+			"utr": "000180851598",
+			"amount": 100,
+			"entity": "external"
+		},
+		"created_at": 1623212463
+	}]
+}

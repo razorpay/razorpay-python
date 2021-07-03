@@ -12,3 +12,8 @@ class URL(object):
     ADDON_URL = "/addons"
     PLAN_URL = "/plans"
     SETTLEMENT_URL = "/settlements"
+    PAYOUTS_URL = "/payouts"
+    FUND_ACCOUNT_URL = "/fund_accounts"
+    CONTACT_URL = "/contacts"
+    TRANSACTION_URL = "/transactions"
+

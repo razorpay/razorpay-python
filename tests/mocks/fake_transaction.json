@@ -1,0 +1,16 @@
+{
+    "id": "fake_transaction",
+    "entity": "transaction",
+    "account_number": "12345",
+    "amount": 100,
+    "currency": "INR",
+    "credit": 100,
+    "debit": 0,
+    "balance": 43546890,
+    "source": {
+        "utr": null,
+        "amount": 100,
+        "entity": "external"
+    },
+    "created_at": 1623260228
+}
