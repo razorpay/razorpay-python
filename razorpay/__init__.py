@@ -3,6 +3,7 @@ from .resources import Order
 from .resources import Payment
 from .resources import Refund
 from .resources import Invoice
+from .resources import PaymentLink
 from .resources import Customer
 from .resources import Card
 from .resources import Token
@@ -22,6 +23,7 @@ __all__ = [
         'Order',
         'Client',
         'Invoice',
+        'PaymentLink',
         'Utility',
         'Customer',
         'Card',
