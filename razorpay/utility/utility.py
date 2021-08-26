@@ -30,7 +30,7 @@ class Utility(object):
         payment_id = str(parameters['razorpay_payment_id'])
         razorpay_signature = str(parameters['razorpay_signature'])
 
-        msg = "{}|{}".format(subscription_id, payment_id)
+        msg = "{}|{}".format(payment_id, subscription_id)
         secret = str(self.client.auth[1])
 
         return self.verify_signature(msg, razorpay_signature, secret)
