@@ -85,7 +85,7 @@ class Client:
         try:
             version = pkg_resources.require("razorpay")[0].version
         except DistributionNotFound:  # pragma: no cover
-            pass
+            print("razorpay version not found.")
         return version
 
     def _get_app_details_ua(self):
