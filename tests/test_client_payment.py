@@ -106,3 +106,16 @@ class TestClientPayment(ClientTestCase):
         response = self.client.payment.upi_transfer(self.payment_id)
         self.assertEqual(response['virtual_account_id'], 'va_8J2ny4Naokqbpf')
         self.assertEqual(response['payment_id'], self.payment_id)
+
+    @responses.activate
+    def createRecurring(self):
+        init = mock_file('init_create_recurring')
+        result = mock_file('fake_create_recurring')
+        url = "{}/{}/recurring".format(self.base_url,'create')
+        responses.add(responses.POST,
+                      url,
+                      status=200,
+                      body=json.dumps(result),
+                      match_querystring=True)
+
+        self.assertEqual(self.client.payment.createRecurring(init), result)    

@@ -116,3 +116,13 @@ class Payment(Resource):
         """
         url = "{}/{}/upi_transfer".format(self.base_url, payment_id)
         return self.get_url(url, data, **kwargs)
+    
+    def createRecurring(self, data={}, **kwargs):
+        """"
+        Create Recurring Payments
+
+        Return:
+            Recurring Payments dict
+        """
+        url = "{}/{}/recurring".format(self.base_url,'create')
+        return self.post_url(url, data, **kwargs)

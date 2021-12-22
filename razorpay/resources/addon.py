@@ -27,3 +27,13 @@ class Addon(Resource):
             addon_id : Id for which addon object has to be deleted
         """
         return super(Addon, self).delete(addon_id, data, **kwargs)
+   
+    def all(self, data={}, **kwargs):
+        """"
+        Fetch all Add-ons
+
+        Returns:
+            Dictionary of Add-ons
+        """
+        print(data)
+        return super(Addon, self).all(data, **kwargs)
