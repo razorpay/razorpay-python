@@ -23,7 +23,7 @@ setup(
         "License :: OSI Approved :: MIT License",
 
         # List of supported Python versions
-        # Make sure that this is reflected in .travis.yml as well
+        # Make sure that this is reflected in .github/workflows/python.yml as well
         "Programming Language :: Python",
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
