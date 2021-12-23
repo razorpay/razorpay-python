@@ -9,8 +9,10 @@
 name:  Python Package
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   deploy:
