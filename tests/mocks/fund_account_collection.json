@@ -1,0 +1,38 @@
+{
+    "entity":"collection",
+    "count":1,
+    "items":[
+        {
+            "id": "fa_IJXLAImwGqjlkS",
+            "entity": "fund_account",
+            "customer_id": "cust_IEfAt3ruD4OEzo",
+            "account_type": "bank_account",
+            "bank_account": {
+                "ifsc": "HDFC0000053",
+                "bank_name": "HDFC Bank",
+                "name": "Gaurav Kumar",
+                "notes": [],
+                "account_number": "11214311215411"
+            },
+            "batch_id": null,
+            "active": true,
+            "created_at": 1636467835
+        },
+        {
+            "id": "fa_IJXI5ppTQAc3YB",
+            "entity": "fund_account",
+            "customer_id": "cust_IEfAt3ruD4OEzo",
+            "account_type": "bank_account",
+            "bank_account": {
+                "ifsc": "HDFC0000053",
+                "bank_name": "HDFC Bank",
+                "name": "Gaurav Kumar",
+                "notes": [],
+                "account_number": "11214311215411"
+            },
+            "batch_id": null,
+            "active": true,
+            "created_at": 1636467660
+        }
+    ]
+  }
