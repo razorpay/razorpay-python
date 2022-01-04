@@ -34,5 +34,4 @@ class Addon(Resource):
         Returns:
             Dictionary of Add-ons
         """
-        print(data)
         return super(Addon, self).all(data, **kwargs)    
