@@ -13,3 +13,4 @@ class URL(object):
     ADDON_URL = "/addons"
     PLAN_URL = "/plans"
     SETTLEMENT_URL = "/settlements"
+    QRCODE_URL = "/payments/qr_codes"

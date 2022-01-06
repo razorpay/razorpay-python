@@ -11,6 +11,7 @@ from .virtual_account import VirtualAccount
 from .addon import Addon
 from .plan import Plan
 from .subscription import Subscription
+from .qrcode import Qrcode
 from .settlement import Settlement
 
 __all__ = [
@@ -28,4 +29,5 @@ __all__ = [
     'Plan',
     'Subscription',
     'Settlement',
+    'QrCode'
 ]
