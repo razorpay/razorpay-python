@@ -106,3 +106,30 @@ class TestClientPayment(ClientTestCase):
         response = self.client.payment.upi_transfer(self.payment_id)
         self.assertEqual(response['virtual_account_id'], 'va_8J2ny4Naokqbpf')
         self.assertEqual(response['payment_id'], self.payment_id)
+    
+    @responses.activate
+    def test_payment_refund(self):
+        init = {
+            "amount": "100"
+         }
+        result = mock_file('fake_refund')
+        url = '{}/{}/refund'.format(self.base_url, 'fake_refund_id')
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.payment.refund('fake_refund_id',init), result)            
+
+    @responses.activate
+    def test_payment_fetch_multiple_refund(self):
+        result = mock_file('refund_collection')
+        url = "{}/{}/refunds".format(self.base_url, 'fake_payment_id')
+        responses.add(responses.GET, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.payment.fetch_multiple_refund(self.payment_id), result)    
+
+    @responses.activate
+    def test_payment_fetch_refund_id(self):
+        result = mock_file('refund_collection')
+        url = "{}/{}/refunds/{}".format(self.base_url, 'fake_payment_id', 'fake_refund_id')
+        responses.add(responses.GET, url, status=200, body=json.dumps(result),
+                    match_querystring=True)
+        self.assertEqual(self.client.payment.fetch_refund_id('fake_payment_id', 'fake_refund_id'), result)    
