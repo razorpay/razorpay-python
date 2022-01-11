@@ -65,4 +65,55 @@ class Subscription(Resource):
             Subscription dict for given subscription id
         """
         url = "{}/{}/addons".format(self.base_url, subscription_id)
+        return self.post_url(url, data, **kwargs) 
+
+    def edit(self, subscription_id, data={}, **kwargs):
+        """"
+         Update particular subscription
+
+        Args:
+            subscription_id : Id for which subscription has to be edited         
+        Returns:
+            Subscription dict for given subscription id
+        """
+        url = '{}/{}'.format(self.base_url, subscription_id)   
+        return self.patch_url(url, data, **kwargs) 
+
+    def pending_update(self, subscription_id, **kwargs):
+        """"
+        Fetch Subscription for given Id
+
+        Args:
+            subscription_id : Id for which subscription object is retrieved
+
+        Returns:
+            Subscription dict for given subscription Id
+        """
+        url = '{}/{}/retrieve_scheduled_changes'.format(self.base_url, subscription_id)   
+        return self.get_url(url, {}, **kwargs)    
+
+    def pause(self, subscription_id, data={}, **kwargs):
+        """
+        Cancel subscription given by subscription_id
+
+        Args:
+            subscription_id : Id for which subscription has to be paused
+
+        Returns:
+            Subscription Dict for given subscription id
+        """
+        url = "{}/{}/pause".format(self.base_url, subscription_id)
         return self.post_url(url, data, **kwargs)
+
+    def resume(self, subscription_id, data={}, **kwargs):
+        """
+        Cancel subscription given by subscription_id
+
+        Args:
+            subscription_id : Id for which subscription has to be resume
+
+        Returns:
+            Subscription Dict for given subscription id
+        """
+        url = "{}/{}/resume".format(self.base_url, subscription_id)
+        return self.post_url(url, data, **kwargs)             
