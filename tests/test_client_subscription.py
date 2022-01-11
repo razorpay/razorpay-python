@@ -68,3 +68,50 @@ class TestClientSubscription(ClientTestCase):
         self.assertEqual(response['entity'], 'addon')
         self.assertEqual(response['item']['name'], 'Extra Chair')
         self.assertEqual(response['item']['amount'], 30000)
+
+    @responses.activate
+    def test_subscription_edit(self):
+        param = {
+                 "quantity":2,
+                 "schedule_change_at":"cycle_end",
+               }
+
+        result = mock_file('fake_subscription')
+        url = '{}/{}'.format(self.base_url, 'subscription_id')
+        responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.subscription.edit('subscription_id', param), result)     
+
+    @responses.activate
+    def test_subscription_pending_update(self):
+        result = mock_file('fake_subscription')
+        url = '{}/{}/retrieve_scheduled_changes'.format(self.base_url, 'fake_subscription_id')
+        responses.add(responses.GET, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(
+            self.client.subscription.pending_update('fake_subscription_id'),
+            result)
+
+    @responses.activate
+    def test_subscription_pause(self):
+        result = mock_file('fake_subscription_paused')
+        url = '{}/{}/pause'.format(self.base_url, self.subscription_id)
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        response = json.loads(
+            self.client.subscription.cancel(self.subscription_id))
+        self.assertEqual(response['id'], self.subscription_id)
+        self.assertEqual(response['entity'], 'subscription')
+        self.assertEqual(response['status'], 'paused')  
+
+    @responses.activate
+    def test_subscription_resume(self):
+        result = mock_file('fake_subscription_resumed')
+        url = '{}/{}/resume'.format(self.base_url, self.subscription_id)
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        response = json.loads(
+            self.client.subscription.cancel(self.subscription_id))
+        self.assertEqual(response['id'], self.subscription_id)
+        self.assertEqual(response['entity'], 'subscription')
+        self.assertEqual(response['status'], 'resumed')            
