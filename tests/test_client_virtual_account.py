@@ -73,8 +73,8 @@ class TestClientVirtualAccount(ClientTestCase):
     @responses.activate
     def test_virtual_accounts_close(self):
         result = mock_file('fake_virtual_accounts_closed')
-        url = '{}/{}'.format(self.base_url, self.fake_virtual_account_id)
-        responses.add(responses.PATCH,
+        url = '{}/{}/close'.format(self.base_url, self.fake_virtual_account_id)
+        responses.add(responses.POST,
                       url,
                       status=200,
                       body=result,

@@ -8,7 +8,9 @@ def mock_file(filename):
         return ''
     file_dir = os.path.dirname(__file__)
     file_path = "{}/mocks/{}.json".format(file_dir, filename)
-    return open(file_path).read()
+    with open(file_path) as f:
+        mock_file_data = f.read()
+    return mock_file_data
 
 
 class ClientTestCase(unittest.TestCase):

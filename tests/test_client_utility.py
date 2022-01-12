@@ -19,7 +19,7 @@ class TestClientValidator(ClientTestCase):
 
         self.assertEqual(
              self.client.utility.verify_payment_signature(parameters),
-             None)
+             True)
 
     @responses.activate
     def test_verify_payment_signature_with_exception(self):
@@ -41,7 +41,7 @@ class TestClientValidator(ClientTestCase):
 
         self.assertEqual(
              self.client.utility.verify_webhook_signature(body, sig, secret),
-             None)
+             True)
 
     @responses.activate
     def test_verify_webhook_signature_with_exception(self):
