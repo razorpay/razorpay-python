@@ -54,6 +54,32 @@ class Subscription(Resource):
         url = "{}/{}/cancel".format(self.base_url, subscription_id)
         return self.post_url(url, data, **kwargs)
 
+    def pause(self, subscription_id, data={}, **kwargs):
+        """
+        Cancel subscription given by subscription_id
+
+        Args:
+            subscription_id : Id for which subscription has to be cancelled
+
+        Returns:
+            Subscription Dict for given subscription id
+        """
+        url = "{}/{}/pause".format(self.base_url, subscription_id)
+        return self.post_url(url, data, **kwargs)
+
+    def resume(self, subscription_id, data={}, **kwargs):
+        """
+        Cancel subscription given by subscription_id
+
+        Args:
+            subscription_id : Id for which subscription has to be cancelled
+
+        Returns:
+            Subscription Dict for given subscription id
+        """
+        url = "{}/{}/resume".format(self.base_url, subscription_id)
+        return self.post_url(url, data, **kwargs)
+
     def createAddon(self, subscription_id, data={}, **kwargs):
         """
         Create addon for given subscription
