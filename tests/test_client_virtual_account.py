@@ -1,5 +1,5 @@
 import responses
-
+import json
 from .helpers import mock_file, ClientTestCase
 
 
@@ -104,3 +104,61 @@ class TestClientVirtualAccount(ClientTestCase):
         self.assertEqual(response['count'], 2)
         self.assertEqual(len(response['items']), 2)
         self.assertEqual(response['items'][0]['entity'], 'payment')
+    
+    @responses.activate
+    def test_virtual_add_receiver(self):
+        init =  {
+                  "types": ["vpa"],
+                  "vpa": {
+                      "descriptor": "gaurikumar"
+                   }
+                }
+        result = mock_file('fake_virtual_accounts_closed')
+        url = "{}/{}/receivers".format(self.base_url, self.fake_virtual_account_id)
+        responses.add(responses.POST,
+                      url,
+                      status=200,
+                      body=result,
+                      match_querystring=True)
+
+        response = self.client.virtual_account.add_receiver(
+            self.fake_virtual_account_id, init)
+        self.assertEqual(response['id'], self.fake_virtual_account_id)
+        self.assertEqual(response['entity'], 'virtual_account')
+
+    @responses.activate
+    def test_virtual_add_allowed_player(self):
+        init =  {
+                  "type": "bank_account",
+                  "bank_account": {
+                      "ifsc": "UTIB0000013",
+                      "account_number": "914010012345679"
+                    }
+                }
+        result = mock_file('fake_virtual_accounts_closed')
+        url = "{}/{}/allowed_payers".format(self.base_url, self.fake_virtual_account_id)
+        responses.add(responses.POST,
+                      url,
+                      status=200,
+                      body=result,
+                      match_querystring=True)
+
+        response = self.client.virtual_account.add_allowed_player(
+            self.fake_virtual_account_id, init)   
+        self.assertEqual(response['id'], self.fake_virtual_account_id)
+        self.assertEqual(response['entity'], 'virtual_account')
+
+   
+    @responses.activate
+    def test_virtual_delete_allowed_player(self):
+        result = json.dumps({ "success" : True })    
+        url = "{}/{}/allowed_payers/{}".format(self.base_url, self.fake_virtual_account_id, 'fake_allowed_player_id')
+        responses.add(responses.DELETE,
+                      url,
+                      status=200,
+                      body=result,
+                      match_querystring=True)
+        self.assertEqual(self.client.virtual_account.delete_allowed_player(
+            self.fake_virtual_account_id, 'fake_allowed_player_id'), result)
+          
+   
