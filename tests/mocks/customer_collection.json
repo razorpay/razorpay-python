@@ -1,0 +1,19 @@
+{
+    "entity":"collection",
+    "count":1,
+    "items":[
+      {
+        "id":"cust_1Aa00000000001",
+        "entity":"customer",
+        "name":"Gaurav Kumar",
+        "email":"gaurav.kumar@example.com",
+        "contact":"9876543210",
+        "gstin":"29XAbbA4369J1PA",
+        "notes":{
+          "note_key_1":"September",
+          "note_key_2":"Make it so."
+        },
+        "created_at ":1234567890
+      }
+    ]
+  }

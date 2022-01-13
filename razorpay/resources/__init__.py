@@ -12,6 +12,7 @@ from .addon import Addon
 from .plan import Plan
 from .subscription import Subscription
 from .settlement import Settlement
+from .item import Item
 
 __all__ = [
     'Payment',
@@ -28,4 +29,5 @@ __all__ = [
     'Plan',
     'Subscription',
     'Settlement',
+    'Item'
 ]
