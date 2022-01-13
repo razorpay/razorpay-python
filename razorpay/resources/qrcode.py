@@ -31,7 +31,7 @@ class Qrcode(Resource):
     
     def all(self, data={}, **kwargs):
         """"
-        Fetch All Refund
+        Fetch All Qr Code
 
         Returns:
             Qrcode dict
