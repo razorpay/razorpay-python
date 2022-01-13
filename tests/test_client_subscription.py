@@ -99,7 +99,7 @@ class TestClientSubscription(ClientTestCase):
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         response = json.loads(
-            self.client.subscription.cancel(self.subscription_id))
+            self.client.subscription.pause(self.subscription_id))
         self.assertEqual(response['id'], self.subscription_id)
         self.assertEqual(response['entity'], 'subscription')
         self.assertEqual(response['status'], 'paused')  
@@ -111,7 +111,18 @@ class TestClientSubscription(ClientTestCase):
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         response = json.loads(
-            self.client.subscription.cancel(self.subscription_id))
+            self.client.subscription.resume(self.subscription_id))
         self.assertEqual(response['id'], self.subscription_id)
         self.assertEqual(response['entity'], 'subscription')
-        self.assertEqual(response['status'], 'resumed')            
+        self.assertEqual(response['status'], 'active')
+
+    @responses.activate
+    def test_subscription_delete_offer(self):
+        result = mock_file('fake_subscription')
+        url = '{}/{}/{}'.format(self.base_url, 'sub_8kip7ybbcOyc9J','offer_IjA06IHSz33cw2')
+        responses.add(responses.DELETE, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        response = json.loads(
+            self.client.subscription.delete_offer('sub_8kip7ybbcOyc9J','offer_IjA06IHSz33cw2'))
+        self.assertEqual(response['id'], 'sub_8kip7ybbcOyc9J')
+        self.assertEqual(response['entity'], 'subscription')               

@@ -116,4 +116,18 @@ class Subscription(Resource):
             Subscription Dict for given subscription id
         """
         url = "{}/{}/resume".format(self.base_url, subscription_id)
-        return self.post_url(url, data, **kwargs)             
+        return self.post_url(url, data, **kwargs)
+
+    def delete_offer(self, subscription_id, offer_id, data={}, **kwargs):
+        """
+        Delete offer linked to a subscription
+
+        Args:
+            subscription_id : The id of the subscription to offer need to be deleted
+            offer_id : The id of the offer linked to subscription
+
+        Returns:
+            Subscription Dict for given subscription id
+        """
+        url = "{}/{}/{}".format(self.base_url, subscription_id, offer_id)
+        return self.delete_url(url, data, **kwargs)                 
