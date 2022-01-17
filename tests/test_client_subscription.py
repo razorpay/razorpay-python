@@ -51,6 +51,17 @@ class TestClientSubscription(ClientTestCase):
         self.assertEqual(response['status'], 'cancelled')
 
     @responses.activate
+    def test_subscription_cancel_scheduled_changes(self):
+        result = mock_file('fake_subscription_resumed')
+        url = '{}/{}/cancel_scheduled_changes'.format(self.base_url, self.subscription_id)
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        response = json.loads(
+            self.client.subscription.cancel_scheduled_changes(self.subscription_id))
+        self.assertEqual(response['id'], self.subscription_id)
+        self.assertEqual(response['entity'], 'subscription')   
+
+    @responses.activate
     def test_subscription_create_addon(self):
         result = mock_file('fake_subscription_addon')
         url = '{}/{}/addons'.format(self.base_url, self.subscription_id)
