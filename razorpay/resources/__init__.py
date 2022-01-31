@@ -14,6 +14,7 @@ from .subscription import Subscription
 from .qrcode import Qrcode
 from .registration_link import RegistrationLink
 from .settlement import Settlement
+from .item import Item
 from .fund_account import FundAccount
 
 __all__ = [
@@ -32,6 +33,7 @@ __all__ = [
     'Subscription',
     'RegistrationLink',
     'Settlement',
-    'QrCode'
+    'Item',
+    'QrCode',
     'FundAccount'
 ]
