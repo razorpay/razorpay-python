@@ -67,3 +67,18 @@ class TestClientOrder(ClientTestCase):
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.order.create(init), result)
+
+    @responses.activate
+    def test_order_edit(self):
+        param = {
+                  "notes": {
+                    "key1": "value3",
+                    "key2": "value2"
+                   }
+                }
+        
+        result = mock_file('edit_order')
+        url = '{}/{}'.format(self.base_url, 'dummy_id')
+        responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.order.edit('dummy_id', param), result)

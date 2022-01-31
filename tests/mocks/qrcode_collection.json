@@ -1,0 +1,50 @@
+{
+    "entity": "collection",
+    "count": 2,
+    "items": [
+      {
+        "id": "qr_HO2jGkWReVBMNu",
+        "entity": "qr_code",
+        "created_at": 1623914648,
+        "name": "Store_1",
+        "usage": "single_use",
+        "type": "upi_qr",
+        "image_url": "https://rzp.io/i/w2CEwYmkAu",
+        "payment_amount": 300,
+        "status": "active",
+        "description": "For Store 1",
+        "fixed_amount": true,
+        "payments_amount_received": 0,
+        "payments_count_received": 0,
+        "notes": {
+          "purpose": "Test UPI QR code notes"
+        },
+        "customer_id": "cust_HKsR5se84c5LTO",
+        "close_by": 1681615838,
+        "closed_at": null,
+        "close_reason": null
+      },
+      {
+        "id": "qr_HO2e0813YlchUn",
+        "entity": "qr_code",
+        "created_at": 1623914349,
+        "name": "Acme Groceries",
+        "usage": "multiple_use",
+        "type": "upi_qr",
+        "image_url": "https://rzp.io/i/X6QM7LL",
+        "payment_amount": null,
+        "status": "closed",
+        "description": "Buy fresh groceries",
+        "fixed_amount": false,
+        "payments_amount_received": 200,
+        "payments_count_received": 1,
+        "notes": {
+          "Branch": "Bangalore - Rajaji Nagar"
+        },
+        "customer_id": "cust_HKsR5se84c5LTO",
+        "close_by": 1625077799,
+        "closed_at": 1623914515,
+        "close_reason": "on_demand"
+      }
+    ]
+  }

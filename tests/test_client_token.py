@@ -16,7 +16,7 @@ class TestClientCustomer(ClientTestCase):
         url = '{}/{}/tokens'.format(self.base_url, self.customer_id)
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.token.all(self.customer_id, self.token_id),
+        self.assertEqual(self.client.token.all(self.customer_id),
                          result)
 
     @responses.activate

@@ -1,0 +1,9 @@
+{
+    "razorpay_payment_id": "pay_Ia5nRCnwjqXGxv",
+    "razorpay_order_id": "order_Ia5nABHSOWXg0Q",
+    "razorpay_signature": "1aa6e8472135fad2925071d547c6682a95a42d8b773e8346ddffec1c67ef3edf",
+    "org_logo": "",
+    "org_name": "Razorpay Software Private Ltd",
+    "checkout_logo": "https://cdn.razorpay.com/logo.png",
+    "custom_branding": false
+}

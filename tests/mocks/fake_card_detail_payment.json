@@ -1,0 +1,12 @@
+{
+    "id": "card_6krZ6bcjoeqyV9",
+    "entity": "card",
+    "name": "Gaurav",
+    "last4": "3335",
+    "network": "Visa",
+    "type": "debit",
+    "issuer": "SBIN",
+    "international": false,
+    "emi": null,
+    "sub_type": "business"
+  }
