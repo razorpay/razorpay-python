@@ -37,12 +37,11 @@ class TestClientSettlement(ClientTestCase):
 
     @responses.activate
     def test_settlement_report(self):
-        init = {"year":2020,"month":9}
         result = mock_file('settlement_collection')
         url = "{}/recon/{}".format(self.base_url, 'combined')
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.settlement.report(self.settlement_id), result)    
+        self.assertEqual(self.client.settlement.report(), result)    
 
     @responses.activate
     def test_settlement_create_ondemand_settlement(self):
