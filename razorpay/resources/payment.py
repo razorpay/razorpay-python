@@ -116,8 +116,37 @@ class Payment(Resource):
         """
         url = "{}/{}/upi_transfer".format(self.base_url, payment_id)
         return self.get_url(url, data, **kwargs)
+    
+    def refund(self, payment_id, data={}, **kwargs):
+        """"
+        Create a normal refund
 
+        Returns:
+            Payment dict after getting refund
+        """
+        url = "{}/{}/refund".format(self.base_url, payment_id)
+        return self.post_url(url, data, **kwargs)
 
+    def fetch_multiple_refund(self, payment_id, data={}, **kwargs):
+        """"
+        Fetch multiple refunds for a payment
+
+        Returns:
+            refunds dict
+        """
+        url = "{}/{}/refunds".format(self.base_url, payment_id)
+        return self.get_url(url, data, **kwargs) 
+
+    def fetch_refund_id(self, payment_id, refund_id, **kwargs):
+        """"
+        Fetch multiple refunds for a payment
+
+        Returns:
+            Refund dict
+        """
+        url = "{}/{}/refunds/{}".format(self.base_url, payment_id, refund_id)
+        return self.get_url(url, {}, **kwargs)  
+  
     def edit(self, payment_id, data={}, **kwargs):
         """"
          Update the Payment
@@ -193,5 +222,4 @@ class Payment(Resource):
             Recurring Payments dict
         """
         url = "{}/{}/recurring".format(self.base_url,'create')
-        return self.post_url(url, data, **kwargs)    
-
+        return self.post_url(url, data, **kwargs)

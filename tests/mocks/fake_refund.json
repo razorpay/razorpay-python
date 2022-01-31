@@ -1,8 +1,19 @@
 {
-  "id": "fake_refund_id",
+  "id": "rfnd_FP8DDKxqJif6ca",
   "entity": "refund",
-  "amount": 2000,
+  "amount": 300100,
   "currency": "INR",
-  "payment_id": "fake_payment_id",
-  "created_at": 1500826750
+  "payment_id": "pay_FIKOnlyii5QGNx",
+  "notes": {
+      "notes_key_1": "Beam me up Scotty.",
+      "notes_key_2": "Engage"
+  },
+  "receipt": "#126",
+  "acquirer_data": {
+      "arn": "10000000000000"
+  },
+  "created_at": 1597078124,
+  "status": "processed",
+  "speed_processed": "normal",
+  "speed_requested": "optimum"
 }
