@@ -54,6 +54,19 @@ class Subscription(Resource):
         url = "{}/{}/cancel".format(self.base_url, subscription_id)
         return self.post_url(url, data, **kwargs)
 
+    def cancel_scheduled_changes(self, subscription_id, data={}, **kwargs):
+        """
+        Cancel a update
+
+        Args:
+            subscription_id : Id for which subscription has to be cancelled
+
+        Returns:
+            Subscription Dict for given subscription id
+        """
+        url = "{}/{}/cancel_scheduled_changes".format(self.base_url, subscription_id)
+        return self.post_url(url, data, **kwargs)    
+
     def createAddon(self, subscription_id, data={}, **kwargs):
         """
         Create addon for given subscription
