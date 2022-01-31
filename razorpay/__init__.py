@@ -11,6 +11,7 @@ from .resources import Transfer
 from .resources import VirtualAccount
 from .resources import Addon
 from .resources import Subscription
+from .resources import RegistrationLink
 from .resources import Plan
 from .resources import Settlement
 from .resources import FundAccount
@@ -33,6 +34,7 @@ __all__ = [
         'VirtualAccount',
         'Addon',
         'Subscription',
+        'RegistrationLink',
         'Plan',
         'FundAccount',
         'Settlement',
