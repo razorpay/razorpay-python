@@ -14,6 +14,7 @@ from .resources import Subscription
 from .resources import RegistrationLink
 from .resources import Plan
 from .resources import Settlement
+from .resources import Qrcode
 from .resources import FundAccount
 from .utility import Utility
 from .constants import ERROR_CODE
@@ -38,6 +39,7 @@ __all__ = [
         'Plan',
         'FundAccount',
         'Settlement',
+        'Qrcode',
         'HTTP_STATUS_CODE',
         'ERROR_CODE',
 ]

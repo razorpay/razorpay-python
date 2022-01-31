@@ -11,6 +11,7 @@ from .virtual_account import VirtualAccount
 from .addon import Addon
 from .plan import Plan
 from .subscription import Subscription
+from .qrcode import Qrcode
 from .registration_link import RegistrationLink
 from .settlement import Settlement
 from .fund_account import FundAccount
@@ -31,5 +32,6 @@ __all__ = [
     'Subscription',
     'RegistrationLink',
     'Settlement',
+    'QrCode'
     'FundAccount'
 ]
