@@ -13,6 +13,7 @@ from .plan import Plan
 from .subscription import Subscription
 from .registration_link import RegistrationLink
 from .settlement import Settlement
+from .fund_account import FundAccount
 
 __all__ = [
     'Payment',
@@ -30,4 +31,5 @@ __all__ = [
     'Subscription',
     'RegistrationLink',
     'Settlement',
+    'FundAccount'
 ]
