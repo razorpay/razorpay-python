@@ -1,0 +1,72 @@
+{
+    "payment_links": [
+      {
+        "accept_partial": false,
+        "amount": 100,
+        "amount_paid": 0,
+        "cancelled_at": 0,
+        "created_at": 1602523443,
+        "currency": "INR",
+        "customer": {
+          "contact": "9999999999",
+          "email": "gaurav.kumar@razorpay.com",
+          "name": "Gaurav Kumar"
+        },
+        "description": "Payment for policy no #23456",
+        "expire_by": 0,
+        "expired_at": 0,
+        "first_min_partial_amount": 0,
+        "id": "plink_Fo4T7Ht271epg3",
+        "notes": {
+          "policy_name": "Jeevan Bima"
+        },
+        "notify": {
+          "email": false,
+          "sms": true
+        },
+        "payments": [],
+        "reference_id": "#41956",
+        "reminder_enable": true,
+        "reminders": {
+          "status": "in_progress"
+        },
+        "short_url": "https://rzp.io/i/LXnmFr3a",
+        "status": "created",
+        "updated_at": 1602523443,
+        "upi_link": true,
+        "user_id": ""
+      },
+      {
+        "accept_partial": false,
+        "amount": 100,
+        "amount_paid": 0,
+        "cancelled_at": 1602522621,
+        "created_at": 1602522615,
+        "currency": "INR",
+        "customer": {
+          "contact": "9999999999",
+          "email": "gaurav.kumar@razorpay.com"
+        },
+        "description": "Payment for Acme Inc",
+        "expire_by": 0,
+        "expired_at": 0,
+        "first_min_partial_amount": 0,
+        "id": "plink_Fo4EWsg3KmfWGW",
+        "notes": [],
+        "notify": {
+          "email": true,
+          "sms": true
+        },
+        "order_id": "order_Fo4EayQh1zSGxn",
+        "payments": [],
+        "reference_id": "",
+        "reminder_enable": false,
+        "reminders": [],
+        "short_url": "https://rzp.io/i/2agF8tv",
+        "status": "cancelled",
+        "updated_at": 1602522621,
+        "upi_link": true,
+        "user_id": "FmjfFPCOUOAcSH"
+      }
+    ]
+  }

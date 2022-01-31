@@ -22,6 +22,35 @@ class TestClientValidator(ClientTestCase):
              True)
 
     @responses.activate
+    def test_subscription_payment_signature(self):
+        sig = '601f383334975c714c91a7d97dd723eb56520318355863dcf3821c0d07a17693'
+        parameters = {}
+        parameters['razorpay_subscription_id'] = 'sub_ID6MOhgkcoHj9I'
+        parameters['razorpay_payment_id'] = 'pay_IDZNwZZFtnjyym'
+        parameters['razorpay_signature'] = sig
+        parameters['secret'] = 'EnLs21M47BllR3X8PSFtjtbd'
+
+        self.assertEqual(
+             self.client.utility.verify_subscription_payment_signature(parameters),
+             True)
+
+    @responses.activate
+    def test_verify_payment_link_signature(self):
+        sig = '07ae18789e35093e51d0a491eb9922646f3f82773547e5b0f67ee3f2d3bf7d5b'
+        parameters = {}
+        parameters['razorpay_payment_id'] = 'pay_IH3d0ara9bSsjQ'
+        parameters['payment_link_id'] = 'plink_IH3cNucfVEgV68'
+        parameters['payment_link_reference_id'] = 'TSsd1989'
+        parameters['payment_link_status'] = 'paid'
+        parameters['razorpay_signature'] = sig
+        parameters['secret'] = 'EnLs21M47BllR3X8PSFtjtbd'
+       # x = self.client.utility.verify_payment_link_signature(parameters)
+
+        self.assertEqual(
+             self.client.utility.verify_payment_link_signature(parameters),
+             True)
+
+    @responses.activate
     def test_verify_payment_signature_with_exception(self):
         parameters = {}
         parameters['razorpay_order_id'] = 'fake_order_id'
