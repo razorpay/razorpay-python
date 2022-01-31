@@ -1,0 +1,60 @@
+{
+    "entity": "collection",
+    "count": 2,
+    "items": [
+        {
+            "id": "ao_IZfz8DsvzEu2w4",
+            "entity": "addon",
+            "item": {
+                "id": "item_IZfz8DdzVw4Sda",
+                "active": true,
+                "name": "Shipping charges",
+                "description": "Shipping charges",
+                "amount": 500,
+                "unit_amount": 500,
+                "currency": "INR",
+                "type": "addon",
+                "unit": null,
+                "tax_inclusive": false,
+                "hsn_code": null,
+                "sac_code": null,
+                "tax_rate": null,
+                "tax_id": null,
+                "tax_group_id": null,
+                "created_at": 1639991720,
+                "updated_at": 1639991720
+            },
+            "quantity": 1,
+            "created_at": 1639991720,
+            "subscription_id": "sub_IZfz84gerEXmVG",
+            "invoice_id": "inv_IZfz8cWWBAjU12"
+        },
+        {
+            "id": "ao_IZe1vykIM4hmFv",
+            "entity": "addon",
+            "item": {
+                "id": "item_IZe1vyVGweG3ya",
+                "active": true,
+                "name": "Shipping charges",
+                "description": "Shipping charges",
+                "amount": 500,
+                "unit_amount": 500,
+                "currency": "INR",
+                "type": "addon",
+                "unit": null,
+                "tax_inclusive": false,
+                "hsn_code": null,
+                "sac_code": null,
+                "tax_rate": null,
+                "tax_id": null,
+                "tax_group_id": null,
+                "created_at": 1639984836,
+                "updated_at": 1639984836
+            },
+            "quantity": 1,
+            "created_at": 1639984836,
+            "subscription_id": "sub_IZe1vrmbHpvgCh",
+            "invoice_id": "inv_IZe1wNpGVcDHZD"
+        }
+    ]
+}

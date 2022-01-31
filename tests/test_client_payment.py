@@ -108,6 +108,7 @@ class TestClientPayment(ClientTestCase):
         self.assertEqual(response['payment_id'], self.payment_id)
 
     @responses.activate
+
     def test_payment_edit(self):
         param = {
                   "notes": {
@@ -169,3 +170,16 @@ class TestClientPayment(ClientTestCase):
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.payment.createPaymentJson(param), result)
+
+    def createRecurring(self):
+        init = mock_file('init_create_recurring')
+        result = mock_file('fake_create_recurring')
+        url = "{}/{}/recurring".format(self.base_url,'create')
+        responses.add(responses.POST,
+                      url,
+                      status=200,
+                      body=json.dumps(result),
+                      match_querystring=True)
+
+        self.assertEqual(self.client.payment.createRecurring(init), result)    
+

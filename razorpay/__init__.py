@@ -11,8 +11,10 @@ from .resources import Transfer
 from .resources import VirtualAccount
 from .resources import Addon
 from .resources import Subscription
+from .resources import RegistrationLink
 from .resources import Plan
 from .resources import Settlement
+from .resources import FundAccount
 from .utility import Utility
 from .constants import ERROR_CODE
 from .constants import HTTP_STATUS_CODE
@@ -32,7 +34,9 @@ __all__ = [
         'VirtualAccount',
         'Addon',
         'Subscription',
+        'RegistrationLink',
         'Plan',
+        'FundAccount',
         'Settlement',
         'HTTP_STATUS_CODE',
         'ERROR_CODE',
