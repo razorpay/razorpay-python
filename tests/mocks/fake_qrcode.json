@@ -1,0 +1,22 @@
+{
+    "id": "qr_HO2r1MDprYtWRT",
+    "entity": "qr_code",
+    "created_at": 1623915088,
+    "name": "Store_1",
+    "usage": "single_use",
+    "type": "upi_qr",
+    "image_url": "https://rzp.io/i/oCswTOcCo",
+    "payment_amount": 300,
+    "status": "active",
+    "description": "For Store 1",
+    "fixed_amount": true,
+    "payments_amount_received": 0,
+    "payments_count_received": 0,
+    "notes": {
+      "purpose": "Test UPI QR code notes"
+    },
+    "customer_id": "cust_HKsR5se84c5LTO",
+    "close_by": 1681615838,
+    "closed_at": null,
+    "close_reason": null
+  }

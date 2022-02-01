@@ -1,0 +1,39 @@
+{
+    "id": "setlod_FNj7g2YS5J67Rz",
+    "entity": "settlement.ondemand",
+    "amount_requested": 200000,
+    "amount_settled": 0,
+    "amount_pending": 199410,
+    "amount_reversed": 0,
+    "fees": 590,
+    "tax": 90,
+    "currency": "INR",
+    "settle_full_balance": 0,
+    "status": "initiated",
+    "description": "Need this to make vendor payments.",
+    "notes": {
+        "notes_key_1": "Tea, Earl Grey, Hot",
+        "notes_key_2": "Tea, Earl Grey… decaf."
+    },
+    "created_at": 1596771429,
+    "ondemand_payouts": {
+        "entity": "collection",
+        "count": 1,
+        "items": [
+        {
+            "id": "setlodp_FNj7g2cbvw8ueO",
+            "entity": "settlement.ondemand_payout",
+            "initiated_at": null,
+            "processed_at": null,
+            "reversed_at": null,
+            "amount": 200000,
+            "amount_settled": null,
+            "fees": 590,
+            "tax": 90,
+            "utr": null,
+            "status": "created",
+            "created_at": 1596771429
+        }
+        ]
+    }
+}
