@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
-## [1.3.0][1.3.0] - 2022-01-17
+## [1.3.0][1.3.0] - 2022-02-01
 
 ### Added
 - Added Item Api
