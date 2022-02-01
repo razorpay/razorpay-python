@@ -6,6 +6,7 @@ import pkg_resources
 from pkg_resources import DistributionNotFound
 
 from types import ModuleType
+
 from .constants import HTTP_STATUS_CODE, ERROR_CODE, URL
 
 from . import resources, utility
@@ -121,7 +122,7 @@ class Client:
                                                  **options)
         if ((response.status_code >= HTTP_STATUS_CODE.OK) and
                 (response.status_code < HTTP_STATUS_CODE.REDIRECT)):
-            return response.json()
+            return json.dumps({}) if(response.status_code==204) else response.json()
         else:
             msg = ""
             code = ""
