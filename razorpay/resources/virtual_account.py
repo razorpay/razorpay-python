@@ -104,5 +104,4 @@ class VirtualAccount(Resource):
             204        
         """
         url = "{}/{}/allowed_payers/{}".format(self.base_url, virtual_account_id, allowed_player_id)
-        self.delete_url(url, data, **kwargs)  
-        return json.dumps({ "success" : True })      
+        return self.delete_url(url, data, **kwargs)

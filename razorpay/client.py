@@ -122,7 +122,7 @@ class Client:
                                                  **options)
         if ((response.status_code >= HTTP_STATUS_CODE.OK) and
                 (response.status_code < HTTP_STATUS_CODE.REDIRECT)):
-            return response.json() if(len(response.text) > 0) else response.status_code
+            return json.dumps({}) if(response.status_code==204) else response.json()
         else:
             msg = ""
             code = ""
