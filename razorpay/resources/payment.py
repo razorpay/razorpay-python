@@ -116,3 +116,110 @@ class Payment(Resource):
         """
         url = "{}/{}/upi_transfer".format(self.base_url, payment_id)
         return self.get_url(url, data, **kwargs)
+    
+    def refund(self, payment_id, data={}, **kwargs):
+        """"
+        Create a normal refund
+
+        Returns:
+            Payment dict after getting refund
+        """
+        url = "{}/{}/refund".format(self.base_url, payment_id)
+        return self.post_url(url, data, **kwargs)
+
+    def fetch_multiple_refund(self, payment_id, data={}, **kwargs):
+        """"
+        Fetch multiple refunds for a payment
+
+        Returns:
+            refunds dict
+        """
+        url = "{}/{}/refunds".format(self.base_url, payment_id)
+        return self.get_url(url, data, **kwargs) 
+
+    def fetch_refund_id(self, payment_id, refund_id, **kwargs):
+        """"
+        Fetch multiple refunds for a payment
+
+        Returns:
+            Refund dict
+        """
+        url = "{}/{}/refunds/{}".format(self.base_url, payment_id, refund_id)
+        return self.get_url(url, {}, **kwargs)  
+  
+    def edit(self, payment_id, data={}, **kwargs):
+        """"
+         Update the Payment
+        Args:
+            data : Dictionary having keys using which order have to be edited
+                'notes' : key value pair as notes
+            
+            Returns:
+            Payment Dict which was edited
+        """
+        url = '{}/{}'.format(self.base_url, payment_id)
+
+        return self.patch_url(url, data, **kwargs) 
+    
+    def fetchCardDetails(self, payment_id, **kwargs):
+        """"
+        Fetch Card Details of a Payment
+
+        Args:
+            payment_id : Id for which payment objects has to be retrieved
+
+        Returns:
+            Payment dict for given Order Id
+        """
+        url = "{}/{}/card".format(self.base_url, payment_id)
+        return self.get_url(url, {}, **kwargs)
+
+    def fetchDownTime(self, **kwargs):
+        """"
+        Fetch Card Details of a Payment
+
+        Args:
+            payment_id : Id for which payment objects has to be retrieved
+
+        Returns:
+            Payment dict for given Order Id
+        """
+        url = "{}/{}".format(self.base_url,'downtimes')
+        return self.get_url(url, {}, **kwargs)        
+    
+    def fetchDownTimeById(self, downtime_id, **kwargs):
+        """"
+        Fetch Payment Downtime Details by ID
+
+        Args:
+            payment_id : Id for which payment objects has to be retrieved
+
+        Returns:
+            Payment dict for given Order Id
+        """
+        url = "{}/downtimes/{}".format(self.base_url, downtime_id)
+        return self.get_url(url, {}, **kwargs)
+    
+    def createPaymentJson(self ,data={}, **kwargs):
+        """"
+        Create a Payment
+
+        Args:
+            payment_id : Id for which payment object has to be refunded
+            amount : Amount for which the payment has to be refunded
+
+        Returns:
+            Payment Dict which was created
+        """
+        url = "{}/create/{}".format(self.base_url, 'json')
+
+        return self.post_url(url, data, **kwargs)  
+
+    def createRecurring(self, data={}, **kwargs):
+        """"
+        Create Recurring Payments
+        Return:
+            Recurring Payments dict
+        """
+        url = "{}/{}/recurring".format(self.base_url,'create')
+        return self.post_url(url, data, **kwargs)

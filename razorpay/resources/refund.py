@@ -40,3 +40,13 @@ class Refund(Resource):
             Refund dict for given refund Id
         """
         return super(Refund, self).fetch(refund_id, data, **kwargs)
+
+    def edit(self, refund_id, data={}, **kwargs):
+        """"
+        Update Refund
+
+        Returns:
+            Refund Dict which was edited
+        """
+        url = "{}/{}".format(self.base_url, refund_id)
+        return self.patch_url(url, data, **kwargs)     

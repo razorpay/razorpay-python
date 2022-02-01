@@ -34,3 +34,17 @@ class TestClientRefund(ClientTestCase):
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.refund.create(init), result)
+
+    @responses.activate
+    def test_refund_edit(self):
+        param = {
+                   "notes": {
+                   "notes_key_1":"Beam me up Scotty.",
+                   "notes_key_2":"Engage"
+                    }
+                }
+        result = mock_file('fake_refund')
+        url = "{}/{}".format(self.base_url,'rfnd_DfjjhJC6eDvUAi')
+        responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.refund.edit('rfnd_DfjjhJC6eDvUAi', param), result)

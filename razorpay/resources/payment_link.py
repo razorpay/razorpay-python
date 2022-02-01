@@ -58,4 +58,32 @@ class PaymentLink(Resource):
         """
         url = "{}/{}/cancel".format(self.base_url, payment_link_id)
         return self.post_url(url, {}, **kwargs)
+   
+    def edit(self, payment_link_id, data={}, **kwargs):
+        """"
+        Edit the Payment link
+        Args:
+            data : Dictionary having keys using which order have to be edited
+                reference_id : Adds a unique reference number to an existing link.
 
+                expire_by : Timestamp, in Unix format, when the payment links should expire.
+
+                notes : key value pair as notes
+            
+            Returns:
+            Payment Link Dict which was edited
+        """
+        url = '{}/{}'.format(self.base_url, payment_link_id)
+        return self.patch_url(url, data, **kwargs)
+
+    def notifyBy(self, payment_link_id, medium, **kwargs):
+        """"
+        Send notification
+
+        Args:
+            payment_link_id : Unique identifier of the Payment Link that should be resent.
+            
+            medium : sms/email
+        """
+        url = "{}/{}/notify_by/{}".format(self.base_url, payment_link_id, medium)
+        return self.post_url(url, {}, **kwargs) 

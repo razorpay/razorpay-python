@@ -1,0 +1,32 @@
+{
+    "accept_partial": false,
+    "amount": 100,
+    "amount_paid": 0,
+    "cancelled_at": 1602524667,
+    "created_at": 1602524646,
+    "currency": "INR",
+    "customer": {
+      "contact": "9999999999",
+      "email": "gaurav.kumar@razorpay.com"
+    },
+    "description": "Payment for Acme Inc",
+    "expire_by": 0,
+    "expired_at": 0,
+    "first_min_partial_amount": 0,
+    "id": "plink_Fo4oI0cXjpQIz3",
+    "notes": null,
+    "notify": {
+      "email": true,
+      "sms": true
+    },
+    "order_id": "order_Fo4oOGcvR4srav",
+    "payments": [],
+    "reference_id": "",
+    "reminder_enable": false,
+    "reminders": [],
+    "short_url": "https://rzp.io/i/foDnrXbBD",
+    "status": "cancelled",
+    "updated_at": 1602524667,
+    "upi_link": true,
+    "user_id": "FmjfFPCOUOAcSH"
+  }

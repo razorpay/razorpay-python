@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## [1.3.0][1.3.0] - 2022-02-01
+
+### Added
+- Added Item Api
+- Added RegistrationLink Api
+- QR code end point API
+- Update, cancel update ,fetch details of a Pending Update, pause, resume subscription & delete offer API
+- Add create ondemand , fetch all demand, fetch demand by id & report for settlement 
+- Add/Delete TPV Bank Account 
+- Register emandate and charge first payment together 
+- PaperNACH/Register NACH and charge first payment together 
+- Added create recurring payment, fetch card details, card downtime & card downtime by Id , create payment json API's for payment
+- Added edit and notify API's for payment links 
+- Added edit, refund, fetch multiple refund, fetch multiple refund by id API's for refunds 
+- Added edit order API 
+- Fund API's end point 
+- UPI 
+- Added Verfiy payment link ,payment & subscription verification 
+- Update Testcases
+- Update readme file 
+
 ## [1.2.0][1.2.0] - 2019-03-11
 
 ### Added

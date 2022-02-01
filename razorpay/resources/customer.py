@@ -39,3 +39,12 @@ class Customer(Resource):
         url = '{}/{}'.format(self.base_url, customer_id)
 
         return self.put_url(url, data, **kwargs)
+    
+    def all(self, data={}, **kwargs):
+        """"
+        Fetch all customer
+
+        Returns:
+            Dictionary of Customers data
+        """
+        return super(Customer, self).all(data, **kwargs)

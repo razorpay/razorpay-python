@@ -1,0 +1,15 @@
+{
+    "email": "gaurav.kumar@example.com",
+    "contact": "9876543567",
+    "amount": 10000,
+    "currency": "INR",
+    "order_id": "order_Ia5nABHSOWXg0Q",
+    "customer_id": "cust_DzYEzfJLV03rkp",
+    "token": "token_Ia5ip8Ix07JDRm",
+    "recurring": "1",
+    "notes": {
+      "note_key_1": "Tea. Earl grey. Hot.",
+      "note_key_2": "Tea. Earl grey. Decaf."
+    },
+    "description": "Creating recurring payment for Gaurav Kumar"
+  }

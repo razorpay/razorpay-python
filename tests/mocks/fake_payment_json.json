@@ -1,0 +1,41 @@
+{
+    "type": "respawn",
+    "request": {
+        "url": "https://api.razorpay.com/v1/payments?key_id=rzp_test_pNL6H0AmbBEyjD",
+        "method": "POST",
+        "content": {
+            "amount": "500",
+            "currency": "INR",
+            "email": "gaurav.kumar@example.com",
+            "contact": "9123456789",
+            "order_id": "order_IfCiyxcRYv1bbf",
+            "method": "upi",
+            "card": {
+                "number": "4854980604708430",
+                "cvv": "123",
+                "expiry_month": "12",
+                "expiry_year": "21",
+                "name": "Gaurav Kumar"
+            },
+            "_": {
+                "library": "s2s"
+            },
+            "upi": {
+                "flow": "collect",
+                "type": "default"
+            }
+        }
+    },
+    "image": null,
+    "theme": "#3594E2",
+    "method": "upi",
+    "version": "1",
+    "missing": [
+        "vpa"
+    ],
+    "base": "api.razorpay.com",
+    "org_logo": "",
+    "org_name": "Razorpay Software Private Ltd",
+    "checkout_logo": "https://cdn.razorpay.com/logo.png",
+    "custom_branding": false
+}

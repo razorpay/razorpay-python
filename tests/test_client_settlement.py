@@ -34,3 +34,43 @@ class TestClientSettlement(ClientTestCase):
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.settlement.fetch(self.settlement_id), result)
+
+    @responses.activate
+    def test_settlement_report(self):
+        result = mock_file('settlement_collection')
+        url = "{}/recon/{}".format(self.base_url, 'combined')
+        responses.add(responses.GET, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.settlement.report(), result)    
+
+    @responses.activate
+    def test_settlement_create_ondemand_settlement(self):
+        init = {
+                 "amount": 1221,
+                 "description": "Need this to make vendor",
+                 "notes": {
+                     "notes_key_1": "Tea, Earl Grey, Hot",
+                     "notes_key_2": "Tea, Earl Grey… decaf."
+                 }
+               }
+        result = mock_file('init_settlement')
+        url = "{}/{}".format(self.base_url,"ondemand")
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.settlement.create_ondemand_settlement(init), result)     
+
+    @responses.activate
+    def test_settlement_fetch_all_ondemand_settlement(self):
+        result = mock_file('settlement_collection')
+        url = "{}/{}".format(self.base_url,"ondemand")
+        responses.add(responses.GET, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.settlement.fetch_all_ondemand_settlement(), result)        
+
+    @responses.activate
+    def test_settlement_fetch_ondemand_settlement_id(self):
+        result = mock_file('init_settlement')
+        url = "{}/ondemand/{}".format(self.base_url, 'fake_settlement_id')
+        responses.add(responses.GET, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.settlement.fetch_ondemand_settlement_id('fake_settlement_id'), result)
