@@ -6,6 +6,7 @@
 client.payment.fetch(paymentId,{
    "transfers": [
     {
+      "account": 'acc_HgzcrXeSLfNP9U',
       "amount": 100,
       "currency": "INR",
       "notes": {
