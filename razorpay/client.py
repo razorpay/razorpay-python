@@ -83,7 +83,7 @@ class Client:
 
     def _get_version(self):
         version = ""
-        try:
+        try: # nosemgrep : gitlab.bandit.B110
             version = pkg_resources.require("razorpay")[0].version
         except DistributionNotFound:  # pragma: no cover
             pass
