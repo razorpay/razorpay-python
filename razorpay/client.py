@@ -137,7 +137,7 @@ class Client:
                 raise BadRequestError(msg)
             elif str.upper(code) == ERROR_CODE.GATEWAY_ERROR:
                 raise GatewayError(msg)
-            elif str.upper(code) == ERROR_CODE.SERVER_ERROR:
+            elif str.upper(code) == ERROR_CODE.SERVER_ERROR: # nosemgrep : python.lang.maintainability.useless-ifelse.useless-if-body
                 raise ServerError(msg)
             else:
                 raise ServerError(msg)
