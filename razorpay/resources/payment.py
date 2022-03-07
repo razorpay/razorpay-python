@@ -34,7 +34,7 @@ class Payment(Resource):
         """
         return super(Payment, self).fetch(payment_id, data, **kwargs)
 
-    def capture(self, payment_id, amount, data={}, **kwargs):
+    def capture(self, payment_id, amount, data={}, **kwargs): # nosemgrep : python.lang.correctness.common-mistakes.default-mutable-dict.default-mutable-dict
         """"
         Capture Payment for given Id
 
@@ -49,7 +49,7 @@ class Payment(Resource):
         data['amount'] = amount
         return self.post_url(url, data, **kwargs)
 
-    def refund(self, payment_id, amount, data={}, **kwargs):  # pragma: no cover
+    def refund(self, payment_id, amount, data={}, **kwargs):  # pragma: no cover # nosemgrep : python.lang.correctness.common-mistakes.default-mutable-dict.default-mutable-dict
         """"
         Refund Payment for given Id
 
