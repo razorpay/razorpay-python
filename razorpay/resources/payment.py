@@ -223,3 +223,14 @@ class Payment(Resource):
         """
         url = "{}/{}/recurring".format(self.base_url,'create')
         return self.post_url(url, data, **kwargs)
+      
+    def update_payment(self, payment_id, data={}, **kwargs):
+        """"
+        Update a payment: https://razorpay.com/docs/api/payments/#update-the-payment
+
+        Returns:
+            Payment dict after getting updated
+        """
+        url = "{}/{}/".format(self.base_url, payment_id)
+        return self.patch_url(url, data, **kwargs)    
+
