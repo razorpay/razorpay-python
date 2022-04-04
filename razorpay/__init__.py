@@ -21,7 +21,6 @@ from .resources import Contact
 from .utility import Utility
 from .constants import ERROR_CODE
 from .constants import HTTP_STATUS_CODE
-f
 
 __all__ = [
         'Payment',
