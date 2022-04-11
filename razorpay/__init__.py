@@ -17,6 +17,7 @@ from .resources import Settlement
 from .resources import Item
 from .resources import Qrcode
 from .resources import FundAccount
+from .resources import Payout
 from .utility import Utility
 from .constants import ERROR_CODE
 from .constants import HTTP_STATUS_CODE
@@ -39,6 +40,7 @@ __all__ = [
         'RegistrationLink',
         'Plan',
         'FundAccount',
+        'Payout',
         'Settlement',
         'Item',
         'Qrcode',
