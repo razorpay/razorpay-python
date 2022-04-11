@@ -17,3 +17,5 @@ class URL(object):
     QRCODE_URL = "/payments/qr_codes"
     REGISTRATION_LINK_URL = "/subscription_registration"
     FUND_ACCOUNT_URL = "/fund_accounts"
+    PAYOUT_LINKS_URL = "/payout-links"
+    TRANSACTION_URL = "/transactions"
