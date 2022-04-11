@@ -31,3 +31,36 @@ class FundAccount(Resource):
         """
         url = self.base_url
         return self.post_url(url, data, **kwargs)
+
+    def fetch(self, fundaccount_id, data={}, **kwargs):
+        """"
+        Fetch fund account for given Id
+
+        Args:
+            fundaccount_id : Id for which fund account object has to be retrieved
+
+        Returns:
+            fund account dict
+        """
+        return super(FundAccount, self).fetch(fundaccount_id, data, **kwargs)
+
+    def status(self, fundaccount_id, data={}, **kwargs):
+        """"
+        Update the status of  fund account from given dict (ACTIVE/INACTIVE)
+
+        Returns:
+            fund account dict which was edited
+        """
+        url = '{}/{}'.format(self.base_url, fundaccount_id)
+
+        return self.patch_url(url, data, **kwargs)
+
+    def create_public(self, data={}, **kwargs):
+        """"
+        Create Fund account for cards (only for Non- PCI DSS Compliant) from given dict
+
+        Returns:
+            Fund account Dict which was created
+        """
+        url = '{}/public'.format(self.base_url)
+        return self.post_url(url, data, **kwargs)
