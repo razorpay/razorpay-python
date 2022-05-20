@@ -196,8 +196,9 @@ class TestClientPayment(ClientTestCase):
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.payment.createPaymentJson(param), result)
-
-    def createRecurring(self):
+    
+    @responses.activate
+    def test_createRecurring(self):
         init = mock_file('init_create_recurring')
         result = mock_file('fake_create_recurring')
         url = "{}/{}/recurring".format(self.base_url,'create')
@@ -208,3 +209,43 @@ class TestClientPayment(ClientTestCase):
                       match_querystring=True)
 
         self.assertEqual(self.client.payment.createRecurring(init), result)
+
+    @responses.activate
+    def test_otpGenerate(self):
+        result = mock_file('fake_otp_generate')
+        url = "{}/{}/otp_generate".format(self.base_url,'dummy_id')
+        responses.add(responses.POST,
+                      url,
+                      status=200,
+                      body=json.dumps(result),
+                      match_querystring=True)
+
+        self.assertEqual(self.client.payment.otpGenerate('dummy_id'), result)
+
+    @responses.activate
+    def test_otpSubmit(self):
+        param = {
+            "otp": "123456"
+        }
+
+        result = mock_file('fake_otp_submit')
+        url = "{}/{}/otp/submit".format(self.base_url,'dummy_id')
+        responses.add(responses.POST,
+                      url,
+                      status=200,
+                      body=json.dumps(result),
+                      match_querystring=True)
+
+        self.assertEqual(self.client.payment.otpSubmit('dummy_id',param), result)        
+    
+    @responses.activate
+    def test_otpResend(self):
+        result = mock_file('fake_otp_resend')
+        url = "{}/{}/otp/resend".format(self.base_url,'dummy_id')
+        responses.add(responses.POST,
+                      url,
+                      status=200,
+                      body=json.dumps(result),
+                      match_querystring=True)
+
+        self.assertEqual(self.client.payment.otpResend('dummy_id'), result)
