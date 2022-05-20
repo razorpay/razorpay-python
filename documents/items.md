@@ -17,8 +17,8 @@ client.item.create({
 |-----------------|---------|------------------------------------------------------------------------------|
 | name*          | string | Name of the item.                    |
 | description        | string  | A brief description of the item.  |
-| amount         | integer  | Amount of the order to be paid     |
-| currency           | string  | Currency of the order. Currently only `INR` is supported.    |
+| amount*         | integer  | Amount of the order to be paid     |
+| currency*           | string  | Currency of the order. Currently only `INR` is supported.    |
 
 **Response:**
 ```json
@@ -47,11 +47,6 @@ client.item.all(options)
 | to    | timestamp | timestamp before which the item were created |
 | count | integer   | number of item to fetch (default: 10)        |
 | skip  | integer   | number of item to be skipped (default: 0)    |
-| name        | string | Name of the item.                    |
-| description        | string  | A brief description of the item.  |
-| amount         | integer  | Amount of the order to be paid     |
-| currency           | string  | Currency of the order. Currently only `INR` is supported.    |
-| active   | boolean  | Possible values is `0` or `1` |
 
 **Response:**
 ```json
@@ -115,7 +110,7 @@ client.item.fetch(itemId)
 ### Update item
 
 ```py
-client.item.edit({
+client.item.edit(itemId,{
   "name": "Book / Ignited Minds - Updated name!",
   "description": "New descirption too. :).",
   "amount": 20000,

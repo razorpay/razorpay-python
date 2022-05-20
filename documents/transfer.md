@@ -3,7 +3,7 @@
 ### Create transfers from payment
 
 ```py
-instance.payments.transfer(paymentId,{
+client.payment.fetch(paymentId,{
    "transfers": [
     {
       "account": 'acc_HgzcrXeSLfNP9U',
@@ -33,31 +33,37 @@ instance.payments.transfer(paymentId,{
 **Response:**
 ```json
 {
-  "entity": "collection",
-  "count": 1,
-  "items": [
-    {
-      "id": "trf_E9uhYLFLLZ2pks",
-      "entity": "transfer",
-      "source": "pay_E8JR8E0XyjUSZd",
-      "recipient": "acc_CPRsN1LkFccllA",
-      "amount": 100,
-      "currency": "INR",
-      "amount_reversed": 0,
-      "notes": {
-        "name": "Gaurav Kumar",
-        "roll_no": "IEC2011025"
-      },
-      "on_hold": true,
-      "on_hold_until": 1671222870,
-      "recipient_settlement_id": null,
-      "created_at": 1580218356,
-      "linked_account_notes": [
-        "roll_no"
-      ],
-      "processed_at": 1580218357
-    }
-  ]
+  "id": "pay_DJiaO3iqUZaZrO",
+  "entity": "payment",
+  "amount": 5000,
+  "currency": "INR",
+  "status": "captured",
+  "order_id": null,
+  "invoice_id": null,
+  "international": false,
+  "method": "netbanking",
+  "amount_refunded": 0,
+  "refund_status": null,
+  "captured": true,
+  "description": "Credits towards consultation",
+  "card_id": null,
+  "bank": "UTIB",
+  "wallet": null,
+  "vpa": null,
+  "email": "void@razorpay.com",
+  "contact": "+919191919191",
+  "notes": [],
+  "fee": 171,
+  "tax": 26,
+  "error_code": null,
+  "error_description": null,
+  "error_source": null,
+  "error_step": null,
+  "error_reason": null,
+  "acquirer_data": {
+    "bank_transaction_id": "7909502"
+  },
+  "created_at": 1568822005
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -162,6 +168,7 @@ client.order.create({
 
 ```py
 client.transfer.create({
+  "account": accountId,
   "amount": 500,
   "currency": "INR"
 })
@@ -242,7 +249,7 @@ client.payment.transfers(paymentId)
 ### Fetch transfer for an order
 
 ```py
-client.order.fetch(orderId,{
+client.order.fetch(orderId, {
   "expand[]": "transfers"
 })
 ```
@@ -557,9 +564,14 @@ client.transfer.reverse(transferId,{
 ### Hold settlements for transfers
 ```py
 client.payment.transfer(paymentId,{
-  "amount": 500,
-  "currency": "INR",
-  "on_hold": "1"
+  "transfers": [
+    {
+      "amount": 100,
+      "account": "acc_CMaomTz4o0FOFz",
+      "currency": "INR",
+      "on_hold": 1
+    }
+  ]
 })
 ```
 
@@ -568,7 +580,10 @@ client.payment.transfer(paymentId,{
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
 | paymentId*   | string      | The id of the payment to be fetched  |
-| transfers   | array     | All parameters listed here https://razorpay.com/docs/api/route/#hold-settlements-for-transfers are supported |
+| transfers.account*   | string   | The id of the account to be fetched   |
+| transfers.amount*   | string    | The transaction amount, in paise |
+| transfers.currency*   | string  | The currency of the payment (defaults to INR) |
+| transfers.on_hold*   | string   | Possible values is `0` or `1` |
 
 **Response:**
 ```json
@@ -601,7 +616,7 @@ client.payment.transfer(paymentId,{
 
 ### Modify settlement hold for transfers
 ```py
-client.transfer.edit(paymentId,{
+client.transfer.edit(transferId,{
   "on_hold": "1",
   "on_hold_until": "1679691505"
 })
@@ -611,7 +626,7 @@ client.transfer.edit(paymentId,{
 
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
-| paymentId*   | string      | The id of the payment to be fetched  |
+| transferId*   | string      | The id of the transfer to be fetched   |
 | transfers   | array     | All parameters listed here https://razorpay.com/docs/api/route/#hold-settlements-for-transfers are supported |
 
 **Response:**

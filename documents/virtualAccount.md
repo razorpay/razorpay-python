@@ -168,6 +168,7 @@ client.virtual_account.create({
 |---------------|-------------|---------------------------------------------|
 | receivers*    | array      | Array that defines what receivers are available for this Virtual Account                        |
 | description  | string      | A brief description of the payment.   |
+| customer_id  | string      | Unique identifier of the customer to whom the virtual account must be tagged.                    |
 | amount_expected  | integer   | The maximum amount you expect to receive in this virtual account. Pass `69999` for ₹699.99.   |
 | notes       | object | All keys listed [here](https://razorpay.com/docs/payments/payments/payment-methods/bharatqr/api/#create) are supported   |
 
@@ -455,7 +456,7 @@ For add receiver to an existing virtual account response please click [here](htt
 ### Add an Allowed Payer Account
 ```py
 client.virtual_account.add_allowed_player(virtualId,{
-  "types": "bank_account",
+  "type": "bank_account",
   "bank_account": {
     "ifsc": "UTIB0000013",
     "account_number": 914010012345679
@@ -468,7 +469,7 @@ client.virtual_account.add_allowed_player(virtualId,{
 | Name  | Type      | Description                                      |
 |-------|-----------|--------------------------------------------------|
 | virtualId*  | string    | The id of the virtual to be updated  |
-| types*  | object | The receiver type to be added to the virtual account. Possible values are `vpa` or `bank_account`  |
+| type*  | object | The receiver type to be added to the virtual account. Possible values are `vpa` or `bank_account`  |
 | bank_account*    | object | Indicates the bank account details such as `ifsc` and `account_number` |
 
 **Response:**
