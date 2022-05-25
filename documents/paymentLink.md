@@ -114,7 +114,7 @@ For fetch specific payment link response please click [here](https://razorpay.co
 ### Update payment link
 
 ```py
-client.payment_link.edit({
+client.payment_link.edit(paymentLinkId, {
     "reference_id": "TS35",
     "expire_by": 1653347540,
     "reminder_enable":false,
