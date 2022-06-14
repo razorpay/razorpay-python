@@ -24,18 +24,20 @@ client.fund_account.create({
 **Response:**
 ```json
 {
-  "id":"fa_Aa00000000001",
-  "entity":"fund_account",
-  "customer_id":"cust_Aa000000000001",
-  "account_type":"bank_account",
-  "bank_account":{
-    "name":"Gaurav Kumar",
-    "account_number":"11214311215411",
-    "ifsc":"HDFC0000053",
-    "bank_name":"HDFC Bank"
+  "id": "fa_JexSeA2SS1S19D",
+  "entity": "fund_account",
+  "customer_id": "cust_JdumbHq5F3kKu6",
+  "account_type": "bank_account",
+  "bank_account": {
+    "ifsc": "HDFC0000053",
+    "bank_name": "HDFC Bank",
+    "name": "Gaurav Kumar",
+    "notes": [],
+    "account_number": "11214311215411"
   },
-  "active":true,
-  "created_at":1543650891
+  "batch_id": null,
+  "active": true,
+  "created_at": 1654682051
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -43,7 +45,7 @@ client.fund_account.create({
 ### Fetch all fund accounts
 
 ```py
-client.fund_account.fetch(customerId)
+client.fund_account.all({"customer_id":customerId})
 ```
 
 **Parameters:**
@@ -55,18 +57,42 @@ client.fund_account.fetch(customerId)
 **Response:**
 ```json
 {
-  "id":"fa_Aa00000000001",
-  "entity":"fund_account",
-  "customer_id":"cust_Aa000000000001",
-  "account_type":"bank_account",
-  "bank_account":{
-    "name":"Gaurav Kumar",
-    "account_number":"11214311215411",
-    "ifsc":"HDFC0000053",
-    "bank_name":"HDFC Bank"
-  },
-  "active":true,
-  "created_at":1543650891
+  "entity": "collection",
+  "count": 2,
+  "items": [
+    {
+      "id": "fa_JcXaLomo4ck5IY",
+      "entity": "fund_account",
+      "customer_id": "cust_JZse2vlC5nK9AQ",
+      "account_type": "bank_account",
+      "bank_account": {
+        "ifsc": "HDFC0000053",
+        "bank_name": "HDFC Bank",
+        "name": "Gaurav Kumar",
+        "notes": [],
+        "account_number": "11214311215411"
+      },
+      "batch_id": null,
+      "active": true,
+      "created_at": 1654154246
+    },
+    {
+      "id": "fa_JcXYtecLkhW74k",
+      "entity": "fund_account",
+      "customer_id": "cust_JZse2vlC5nK9AQ",
+      "account_type": "bank_account",
+      "bank_account": {
+        "ifsc": "HDFC0000053",
+        "bank_name": "HDFC Bank",
+        "name": "Gaurav Kumar",
+        "notes": [],
+        "account_number": "11214311215411"
+      },
+      "batch_id": null,
+      "active": true,
+      "created_at": 1654154163
+    }
+  ]
 }
 ```
 -------------------------------------------------------------------------------------------------------
