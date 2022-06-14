@@ -43,6 +43,8 @@ that both app title and version are strings.
 
 - [Token](documents/token.md)
 
+- [Fund](documents/fund.md)
+
 - [Order](documents/order.md)
 
 - [Payments](documents/payment.md)
