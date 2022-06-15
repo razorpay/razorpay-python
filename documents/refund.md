@@ -249,7 +249,7 @@ client.refund.fetch(refundId)
 
 ### Update the refund
 ```py
-client.refund.edit({
+client.refund.edit(refundId,{
   "notes": {
     "notes_key_1": "Beam me up Scotty.",
     "notes_key_2": "Engage"
