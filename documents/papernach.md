@@ -74,27 +74,16 @@ client.order.create({
 ```
 
 **Parameters:**
-| Name            | Type    |Description     |
+
+| Name            | Type    | Description                                                                  |
 |-----------------|---------|------------------------------------------------------------------------------|
 | amount*   | integer      | The amount to be captured (should be equal to the authorized amount, in paise) |
 | currency*   | string  | The currency of the payment (defaults to INR)  |
 | customerId*   | string      | The id of the customer to be fetched |
 | method*      | string  | Payment method used to make the registration transaction. Possible value is `nach`.  |
 | receipt      | string  | Your system order reference id.  |
-| token.auth_type*  | string  | Possible value is `physical`|
-| token.max_amount  | integer  | Use to set the maximum amount per debit request. The value can range from `500` - `1000000000` (1cr, default value)  |
-| token.expire_at  | integer | The timestamp, in Unix format, till when the  registration link should expire |
-| token.notes  | object  | A key-value pair  |
-| bank.account_number*  | string  | Customer's bank account number.  |
-| bank.ifsc_code*  | string  | Customer's bank IFSC  |
-| bank.beneficiary_name*  | string  |  Customer's name  |
-| bank.account_type*  | string  | Customer's bank account. Possible value is `saving`(default), `current`, `cc`, `nre`, `nro`  |
-| nach.form_reference1  | string  | A user-entered reference that appears on the NACH form  |
-| nach.form_reference2  | string  | A user-entered reference that appears on the NACH form  |
-| nach.description  | string  | All keys listed  |
+| token  | array  | All parameters listed [here](https://razorpay.com/docs/api/payments/recurring-payments/paper-nach/create-authorization-transaction/#112-create-an-order) are supported |
 | notes | object  | A key-value pair  |
-
-All parameters listed [here](https://razorpay.com/docs/api/payments/recurring-payments/paper-nach/create-authorization-transaction/#112-create-an-order) are supported
 
 **Response:**
 ```json
@@ -601,6 +590,7 @@ client.order.create({
   "amount":1000,
   "currency":"INR",
   "receipt":"Receipt No. 1",
+  "payment_capture":True,
   "notes": {
     "notes_key_1":"Tea, Earl Grey, Hot",
     "notes_key_2":"Tea, Earl Grey… decaf."
@@ -614,8 +604,10 @@ client.order.create({
 |-----------------|---------|------------------------------------------------------------------------------|
 | amount*          | integer | Amount of the order to be paid                                               |
 | currency*        | string  | Currency of the order. Currently only `INR` is supported.                      |
+| payment_capture*  | boolean  | Indicates whether payment status should be changed to captured automatically or not. Possible values: true - Payments are captured automatically. false - Payments are not captured automatically. |
 | receipt         | string  | Your system order reference id.                                              |
-| notes           | object  | A key-value pair                                                             |
+| notes           | array  | A key-value pair                                                             |
+
 **Response:**
 ```json
 {
