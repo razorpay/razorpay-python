@@ -47,9 +47,10 @@ client.customer.create({
 
 ```py
 client.order.create({
-  "amount": 100,
+  "amount": 0,
   "currency": "INR",
   "method": "nach",
+  "customer_id": "cust_1Aa00000000001",
   "receipt": "Receipt No. 5",
   "notes": {
     "note_key 1"": "Beam me up Scotty",
@@ -89,6 +90,7 @@ client.order.create({
 | method*      | string  | Payment method used to make the registration transaction. Possible value is `nach`.  |
 | token  | array  |  All parameters listed [here](https://razorpay.com/docs/api/payments/recurring-payments/paper-nach/auto-debit/#112-create-an-order) are supported |
 | notes | array  | A key-value pair  |
+| receipt      | string  | Your system order reference id.  |
 
 **Response:**
 ```json
@@ -386,9 +388,7 @@ client.payment.createRecurring({
 **Response:**
 ```json
 {
-  "razorpay_payment_id" : "pay_1Aa00000000001",
-  "razorpay_order_id" : "order_1Aa00000000001",
-  "razorpay_signature" : "9ef4dffbfd84f1318f6739a3ce19f9d85851857ae648f114332d8401e0949a3d"
+  "razorpay_payment_id" : "pay_1Aa00000000001"
 }
 ```
 -------------------------------------------------------------------------------------------------------
