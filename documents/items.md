@@ -23,12 +23,22 @@ client.item.create({
 **Response:**
 ```json
 {
-  "id": "item_7Oxp4hmm6T4SCn",
+  "id": "item_JnQ2kRGq8Kbte3",
   "active": true,
   "name": "Book / English August",
   "description": "An indian story, Booker prize winner.",
   "amount": 20000,
-  "currency": "INR"
+  "unit_amount": 20000,
+  "currency": "INR",
+  "type": "invoice",
+  "unit": null,
+  "tax_inclusive": false,
+  "hsn_code": null,
+  "sac_code": null,
+  "tax_rate": null,
+  "tax_id": null,
+  "tax_group_id": null,
+  "created_at": 1656529427
 }
 ```
 
@@ -52,31 +62,25 @@ client.item.all(options)
 ```json
 {
   "entity": "collection",
-  "count": 3,
+  "count": 1,
   "items": [
     {
-      "id": "item_7Oy8OMV6BdEAac",
-      "active": true,
-      "name": "Book / Ignited Minds",
-      "description": null,
-      "amount": 15000,
-      "currency": "INR"
-    },
-    {
-      "id": "item_7Oxp4hmm6T4SCn",
+      "id": "item_JnQ2kRGq8Kbte3",
       "active": true,
       "name": "Book / English August",
       "description": "An indian story, Booker prize winner.",
       "amount": 20000,
-      "currency": "INR"
-    },
-    {
-      "id": "item_7OxoGnoxCuUKbo",
-      "active": true,
-      "name": "Book / English August",
-      "description": null,
-      "amount": 20000,
-      "currency": "INR"
+      "unit_amount": 20000,
+      "currency": "INR",
+      "type": "invoice",
+      "unit": null,
+      "tax_inclusive": false,
+      "hsn_code": null,
+      "sac_code": null,
+      "tax_rate": null,
+      "tax_id": null,
+      "tax_group_id": null,
+      "created_at": 1656529427
     }
   ]
 }
@@ -96,12 +100,22 @@ client.item.fetch(itemId)
 **Response:**
 ```json
 {
-  "id": "item_7Oxp4hmm6T4SCn",
+  "id": "item_JnQ2kRGq8Kbte3",
   "active": true,
   "name": "Book / English August",
   "description": "An indian story, Booker prize winner.",
   "amount": 20000,
-  "currency": "INR"
+  "unit_amount": 20000,
+  "currency": "INR",
+  "type": "invoice",
+  "unit": null,
+  "tax_inclusive": false,
+  "hsn_code": null,
+  "sac_code": null,
+  "tax_rate": null,
+  "tax_id": null,
+  "tax_group_id": null,
+  "created_at": 1656529427
 }
 ```
 
@@ -115,7 +129,7 @@ client.item.edit(itemId,{
   "description": "New descirption too. :).",
   "amount": 20000,
   "currency": "INR",
-  "active": true
+  "active": True
 })
 ```
 **Parameters**
@@ -132,12 +146,22 @@ client.item.edit(itemId,{
 **Response:**
 ```json
 {
-  "id": "item_7Oy8OMV6BdEAac",
+  "id": "item_JnQ2kRGq8Kbte3",
   "active": true,
   "name": "Book / Ignited Minds - Updated name!",
-  "description": "New descirption too. :)",
-  "amount": 15000,
-  "currency": "INR"
+  "description": "New descirption too. :).",
+  "amount": 20000,
+  "unit_amount": 20000,
+  "currency": "INR",
+  "type": "invoice",
+  "unit": null,
+  "tax_inclusive": false,
+  "hsn_code": null,
+  "sac_code": null,
+  "tax_rate": null,
+  "tax_id": null,
+  "tax_group_id": null,
+  "created_at": 1656529427
 }
 ```
 -------------------------------------------------------------------------------------------------------
