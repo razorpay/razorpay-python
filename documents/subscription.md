@@ -32,11 +32,12 @@ client.subscription.create({
 | plan_id*          | string | The unique identifier for a plan that should be linked to the subscription.|
 | total_count*   | string | The number of billing cycles for which the customer should be charged  |
 | customer_notify    | boolean | Indicates whether the communication to the customer would be handled by you or us |
-| quantity    | integer | The number of times the customer should be charged the plan amount per invoice |
+| quantity      | integer | The number of times the customer should be charged the plan amount per invoice |
 | start_at    | integer | The timestamp, in Unix format, for when the subscription should start. If not passed, the subscription starts immediately after the authorization payment. |
 | expire_by    | integer | The timestamp, in Unix format, till when the customer can make the authorization payment. |
-| addons    | object | Object that contains details of any upfront amount you want to collect as part of the authorization transaction. |
-| notes          | object | Notes you can enter for the contact for future reference.   |
+| addons    | array  | All parameters listed [here](https://razorpay.com/docs/api/payments/subscriptions/#create-a-subscription) are supported |
+| notes          | array | Notes you can enter for the contact for future reference.   |
+| offer_id   | string | The unique identifier of the offer that is linked to the subscription. |
 
 **Response:**
 ```json
@@ -111,9 +112,10 @@ client.subscription.create({
 | quantity    | integer | The number of times the customer should be charged the plan amount per invoice |
 | start_at    | integer | The timestamp, in Unix format, for when the subscription should start. If not passed, the subscription starts immediately after the authorization payment. |
 | expire_by    | integer | The timestamp, in Unix format, till when the customer can make the authorization payment. |
-| addons    | object | Object that contains details of any upfront amount you want to collect as part of the authorization transaction. |
-| notes          | object | Notes you can enter for the contact for future reference.   |
-| notify_info          | object | The customer's email and phone number to which notifications are to be sent. (PN: Use this object only if you have set the `customer_notify` parameter to 1. That is, Razorpay sends notifications to the customer.)  |
+| addons    | array  | All parameters listed [here](https://razorpay.com/docs/api/payments/subscriptions/#create-a-subscription-link) are supported |
+| notes          | array | Notes you can enter for the contact for future reference.   |
+| notify_info    | array  | All parameters listed [here](https://razorpay.com/docs/api/payments/subscriptions/#create-a-subscription-link) are supported |
+| offer_id   | string | The unique identifier of the offer that is linked to the subscription. |
 
 **Response:**
 ```json
