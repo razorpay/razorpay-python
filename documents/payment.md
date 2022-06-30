@@ -70,6 +70,7 @@ client.payment.all(option)
 | to    | timestamp | timestamp before which the payments were created |
 | count | integer   | number of payments to fetch (default: 10)        |
 | skip  | integer   | number of payments to be skipped (default: 0)    |
+| expand[]  | string    |  Used to retrieve additional information about the payment. Possible value is `card`, `offers`, `transaction`, `transaction.settlement`, `refunds`, `token` or `emi`|
 
 **Response:**
 ```json
@@ -127,7 +128,7 @@ client.payment.fetch(paymentId)
 | Name       | Type   | Description                       |
 |------------|--------|-----------------------------------|
 | paymentId* | string | Id of the payment to be retrieved |
-| expand[]  | string    |  Used to retrieve additional information about the payment. Possible value is `card`, `offers` or `emi`|
+| expand[]  | string    |  Used to retrieve additional information about the payment. Possible value is `card`, `offers`, `transaction`, `transaction.settlement`, `refunds`, `token` or `emi`|
 
 **Response:**
 ```json
@@ -385,17 +386,21 @@ client.order.create({
 **Response:** <br>
 ```json
 {
-  "id": "order_DBJOWzybf0sJbb",
+  "id": "order_Jng8xOZRVEf97O",
   "entity": "order",
   "amount": 50000,
   "amount_paid": 0,
   "amount_due": 50000,
   "currency": "INR",
   "receipt": "rcptid_11",
+  "offer_id": "offer_JTUADI4ZWBGWur",
+  "offers": [
+    "offer_JTUADI4ZWBGWur"
+  ],
   "status": "created",
   "attempts": 0,
   "notes": [],
-  "created_at": 1566986570
+  "created_at": 1656586126
 }
 ```
 -------------------------------------------------------------------------------------------------------
