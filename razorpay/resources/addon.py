@@ -26,7 +26,9 @@ class Addon(Resource):
         Args:
             addon_id : Id for which addon object has to be deleted
         """
-        return super(Addon, self).delete(addon_id, data, **kwargs)
+        url = '{}/{}'.format(self.base_url, addon_id)
+
+        return self.delete_url(url, data, **kwargs)
 
     def all(self, data={}, **kwargs):
         """"

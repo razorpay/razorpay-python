@@ -22,7 +22,7 @@ class TestClientAddon(ClientTestCase):
     @responses.activate
     def test_addon_delete(self):
         result = []
-        url = '{}/{}/delete'.format(self.base_url, self.addon_id)
+        url = '{}/{}'.format(self.base_url, self.addon_id)
         responses.add(responses.DELETE,
                       url,
                       status=200,
