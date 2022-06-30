@@ -40,7 +40,9 @@ client.payment_link.create({
   "currency": "INR",
   "accept_partial": True,
   "first_min_partial_amount": 100,
-  "description": "For XYZ purpose",
+  "expire_by": 1691097057,
+  "reference_id": "TS1989",
+  "description": "Payment for policy no #23456",
   "customer": {
     "name": "Gaurav Kumar",
     "email": "gaurav.kumar@example.com",
@@ -70,10 +72,13 @@ client.payment_link.create({
 |description           | string  | A brief description of the Payment Link                     |
 |first_min_partial_amount           | integer  |Minimum amount, in currency subunits, that must be paid by the customer as the first partial payment. // UPI Payment Link is not supported partial payment  |
 |reference_id           | string  | Reference number tagged to a Payment Link.                      |
-|customer           | object  | All parameters listed [here](https://razorpay.com/docs/api/payments/payment-links/#sample-codes-for-standard-payment-links) are supported                 |
+|customer           | object  | All parameters listed [here](https://razorpay.com/docs/api/payments/payment-links/#sample-codes-for-upi-payment-links) are supported                 |
 |expire_by           | integer  | Timestamp, in Unix, at which the Payment Link will expire. By default, a Payment Link will be valid for six months from the date of creation.                     |
 |notify           | object  | sms or email (boolean)                     |
 |notes           | json object  | Key-value pair that can be used to store additional information about the entity. Maximum 15 key-value pairs, 256 characters (maximum) each. For example, "note_key": "Beam me up Scotty”                     |
+| callback_url | string | If specified, adds a redirect URL to the Payment Link. Once customers completes the payment, they are redirected to the specified URL. |
+| callback_method | string | If callback_url parameter is passed, callback_method must be passed with the value `get`. |
+| reminder_enable | boolean | Used to send reminders for the Payment Link. Possible values is `true` or `false` |
 
 **Response:**
 For create payment link response please click [here](https://razorpay.com/docs/api/payment-links/#create-payment-link)
