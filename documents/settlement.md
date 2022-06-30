@@ -69,9 +69,9 @@ client.settlement.fetch(settlementId)
 
 ```py
 client.settlement.report({
-  year: 2020,
-  month: 9,
-  day:11
+  "year": 2020,
+  "month": 9,
+  "day":11
 })
 ```
 **Parameters:**
