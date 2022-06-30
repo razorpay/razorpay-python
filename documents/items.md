@@ -57,6 +57,7 @@ client.item.all(options)
 | to    | timestamp | timestamp before which the item were created |
 | count | integer   | number of item to fetch (default: 10)        |
 | skip  | integer   | number of item to be skipped (default: 0)    |
+| active  | integer   | Fetches number of active or inactive items. The value is `1` for active items and `0` for inactive items. |
 
 **Response:**
 ```json
