@@ -10,7 +10,7 @@ client.payment.refund(paymentId,{
     "notes_key_1": "Beam me up Scotty.",
     "notes_key_2": "Engage"
   },
-  "receipt": "Receipt No. 31"
+  "receipt": "#Receipt No. 131"
 })
 ```
 
