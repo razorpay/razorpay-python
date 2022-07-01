@@ -55,7 +55,7 @@ client.payment.refund(paymentId,{
 client.payment.refund(paymentId,{
   "amount": "100",
   "speed": "optimum",
-  "receipt": "Receipt No. 31"
+  "receipt": "#Receipt No. 132"
 })
 ```
 
