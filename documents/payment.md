@@ -15,7 +15,7 @@ client.payment.capture(paymentId,{
 |-----------|---------|--------------------------------------------------------------------------------|
 | paymentId* | string  | Id of the payment to capture                                                   |
 | amount*    | integer | The amount to be captured (should be equal to the authorized amount, in paise) |
-| currency   | string  | The currency of the payment (defaults to INR)                                  |
+| currency*   | string  | The currency of the payment (defaults to INR)                                  |
 
 **Response:**
 ```json
@@ -127,6 +127,7 @@ client.payment.fetch(paymentId)
 | Name       | Type   | Description                       |
 |------------|--------|-----------------------------------|
 | paymentId* | string | Id of the payment to be retrieved |
+| expand[]  | string    |  Used to retrieve additional information about the payment. Possible value is `card`, `offers` or `emi`|
 
 **Response:**
 ```json
@@ -259,6 +260,7 @@ client.payment.edit(paymentId,{
   "wallet": null,
   "vpa": null,
   "email": "testme@acme.com",
+  "customer_id": "cust_JR4BVKjKyJ7enk",
   "notes": {
     "key1": "value1",
     "key2": "value2"
@@ -312,16 +314,17 @@ client.payment.fetchCardDetails(paymentId)
 **Response:**
 ```json
 {
-  "id": "card_6krZ6bcjoeqyV9",
+  "id": "card_JXPULjlKqC5j0i",
   "entity": "card",
-  "name": "Gaurav",
-  "last4": "3335",
+  "name": "gaurav",
+  "last4": "4366",
   "network": "Visa",
-  "type": "debit",
-  "issuer": "SBIN",
+  "type": "credit",
+  "issuer": "UTIB",
   "international": false,
-  "emi": null,
-  "sub_type": "business"
+  "emi": true,
+  "sub_type": "consumer",
+  "token_iin": null
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -329,7 +332,7 @@ client.payment.fetchCardDetails(paymentId)
 ### Fetch Payment Downtime Details
 
 ```py
-client.payment.fetchPaymentDowntime()
+client.payment.fetchDownTime()
 ```
 **Response:** <br>
 For payment downtime response please click [here](https://razorpay.com/docs/api/payments/downtime/#fetch-payment-downtime-details)
