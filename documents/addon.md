@@ -19,8 +19,8 @@ client.subscription.createAddon('sub_I55auG9GnbsR8u',{
 | Name  | Type      | Description                                      |
 |-------|-----------|--------------------------------------------------|
 | subscriptionId*  | boolean | The subscription ID to which the add-on is being added. |
-| items*  | object | Details of the add-on you want to create. |
-| quantity*  | integer | This specifies the number of units of the add-on to be charged to the customer. |
+| items  | array  | All parameters listed [here](https://razorpay.com/docs/api/payments/subscriptions/#create-an-add-on) |
+| quantity  | integer | This specifies the number of units of the add-on to be charged to the customer. |
 
 **Response:**
 ```json
