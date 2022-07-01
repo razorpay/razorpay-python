@@ -90,8 +90,8 @@ client.customer.all(options)
 
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
-| count | integer   | number of payments to fetch (default: 10)        |
-| skip  | integer   | number of payments to be skipped (default: 0)    |
+| count | integer   | number of customers to fetch (default: 10)        |
+| skip  | integer   | number of customers to be skipped (default: 0)    |
 
 **Response:**
 ```json

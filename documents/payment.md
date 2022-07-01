@@ -15,7 +15,7 @@ client.payment.capture(paymentId,{
 |-----------|---------|--------------------------------------------------------------------------------|
 | paymentId* | string  | Id of the payment to capture                                                   |
 | amount*    | integer | The amount to be captured (should be equal to the authorized amount, in paise) |
-| currency   | string  | The currency of the payment (defaults to INR)                                  |
+| currency*   | string  | The currency of the payment (defaults to INR)                                  |
 
 **Response:**
 ```json
@@ -70,6 +70,7 @@ client.payment.all(option)
 | to    | timestamp | timestamp before which the payments were created |
 | count | integer   | number of payments to fetch (default: 10)        |
 | skip  | integer   | number of payments to be skipped (default: 0)    |
+| expand[]  | string    |  Used to retrieve additional information about the payment. Possible value is `card`, `offers`, `transaction`, `transaction.settlement`, `refunds`, `token` or `emi`|
 
 **Response:**
 ```json
@@ -127,6 +128,7 @@ client.payment.fetch(paymentId)
 | Name       | Type   | Description                       |
 |------------|--------|-----------------------------------|
 | paymentId* | string | Id of the payment to be retrieved |
+| expand[]  | string    |  Used to retrieve additional information about the payment. Possible value is `card`, `offers`, `transaction`, `transaction.settlement`, `refunds`, `token` or `emi`|
 
 **Response:**
 ```json
@@ -259,6 +261,7 @@ client.payment.edit(paymentId,{
   "wallet": null,
   "vpa": null,
   "email": "testme@acme.com",
+  "customer_id": "cust_JR4BVKjKyJ7enk",
   "notes": {
     "key1": "value1",
     "key2": "value2"
@@ -312,16 +315,17 @@ client.payment.fetchCardDetails(paymentId)
 **Response:**
 ```json
 {
-  "id": "card_6krZ6bcjoeqyV9",
+  "id": "card_JXPULjlKqC5j0i",
   "entity": "card",
-  "name": "Gaurav",
-  "last4": "3335",
+  "name": "gaurav",
+  "last4": "4366",
   "network": "Visa",
-  "type": "debit",
-  "issuer": "SBIN",
+  "type": "credit",
+  "issuer": "UTIB",
   "international": false,
-  "emi": null,
-  "sub_type": "business"
+  "emi": true,
+  "sub_type": "consumer",
+  "token_iin": null
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -329,7 +333,7 @@ client.payment.fetchCardDetails(paymentId)
 ### Fetch Payment Downtime Details
 
 ```py
-client.payment.fetchPaymentDowntime()
+client.payment.fetchDownTime()
 ```
 **Response:** <br>
 For payment downtime response please click [here](https://razorpay.com/docs/api/payments/downtime/#fetch-payment-downtime-details)
@@ -377,22 +381,27 @@ client.order.create({
 | amount*          | integer | Amount of the order to be paid                                               |
 | currency*        | string  | Currency of the order. Currently only `INR` is supported.       |
 | receipt         | string  | Your system order reference id.                                              |
-| payment         | object  | please refer this [doc](https://razorpay.com/docs/payments/payments/capture-settings/api/) for params                       |
+| payment         | object  | please refer this [doc](https://razorpay.com/docs/payments/payments/capture-settings/api/) for params       |
+| notes       | object  | A key-value pair  |
 
 **Response:** <br>
 ```json
 {
-  "id": "order_DBJOWzybf0sJbb",
+  "id": "order_Jng8xOZRVEf97O",
   "entity": "order",
   "amount": 50000,
   "amount_paid": 0,
   "amount_due": 50000,
   "currency": "INR",
   "receipt": "rcptid_11",
+  "offer_id": "offer_JTUADI4ZWBGWur",
+  "offers": [
+    "offer_JTUADI4ZWBGWur"
+  ],
   "status": "created",
   "attempts": 0,
   "notes": [],
-  "created_at": 1566986570
+  "created_at": 1656586126
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -576,6 +585,71 @@ client.payment.createUpi({
 {
   "razorpay_payment_id": "pay_CMeM6XvOPGFiF",
   "link": "upi://pay?pa=success@razorpay&pn=xyz&tr=xxxxxxxxxxx&tn=gourav&am=1&cu=INR&mc=xyzw"
+}  
+-------------------------------------------------------------------------------------------------------
+### OTP Generate
+
+```py
+client.payment.otpGenerate(paymentId)
+```
+
+**Parameters:**
+
+| Name        | Type    | Description                          |
+|-------------|---------|--------------------------------------|
+| paymentId*    | integer | Unique identifier of the payment                                               |
+
+Doc reference [doc](https://razorpay.com/docs/payments/payment-gateway/s2s-integration/json/v2/build-integration/cards/#otp-generation-)
+
+**Response:** <br>
+
+```json
+{
+ "razorpay_payment_id": "pay_FVmAstJWfsD3SO",
+ "next": [
+  {
+   "action": "otp_submit",
+   "url": "https://api.razorpay.com/v1/payments/pay_FVmAstJWfsD3SO/otp_submit/ac2d415a8be7595de09a24b41661729fd9028fdc?key_id=<YOUR_KEY_ID>"
+  },
+  {
+   "action": "otp_resend",
+   "url": "https://api.razorpay.com/v1/payments/pay_FVmAstJWfsD3SO/otp_resend/json?key_id=<YOUR_KEY_ID>"
+  }
+ ],
+ "metadata": {
+  "issuer": "HDFC",
+  "network": "MC",
+  "last4": "1111",
+  "iin": "411111"
+ }
+}
+```
+-------------------------------------------------------------------------------------------------------
+
+### OTP Submit
+
+```py
+client.payment.otpSubmit(paymentId,{
+ 	"otp": "12345"
+ })
+```
+
+**Parameters:**
+
+| Name        | Type    | Description                          |
+|-------------|---------|--------------------------------------|
+| paymentId*    | integer | Unique identifier of the payment                                               |
+| otp*    | string | The customer receives the OTP using their preferred notification medium - SMS or email |
+
+Doc reference [doc](https://razorpay.com/docs/payments/payment-gateway/s2s-integration/json/v2/build-integration/cards/#response-on-submitting-otp)
+
+**Response:** <br>
+Success
+```json
+{
+ "razorpay_payment_id": "pay_D5jmY2H6vC7Cy3",
+ "razorpay_order_id": "order_9A33XWu170gUtm",
+ "razorpay_signature": "9ef4dffbfd84f1318f6739a3ce19f9d85851857ae648f114332d8401e0949a3d"
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -615,6 +689,32 @@ client.payment.fetchPaymentMethods()
 **Response:** <br>
  please refer this [doc](https://razorpay.com/docs/payments/third-party-validation/s2s-integration/methods-api/#fetch-payment-methods) for response
 
+```
+=======
+### OTP Resend
+
+```py
+client.payment.otpResend(paymentId)
+```
+
+**Parameters:**
+
+| Name        | Type    | Description                          |
+|-------------|---------|--------------------------------------|
+| paymentId*    | integer | Unique identifier of the payment                                               |
+
+Doc reference [doc](https://razorpay.com/docs/payments/payment-methods/cards/authentication/native-otp/#otp-resend)
+
+**Response:** <br>
+
+```json
+{
+  "next": [
+    "otp_submit",
+    "otp_resend"
+  ],
+  "razorpay_payment_id": "pay_JWaNvYmrx75sXo"
+}
 ```
 -------------------------------------------------------------------------------------------------------
 
