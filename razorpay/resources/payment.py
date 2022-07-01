@@ -223,3 +223,30 @@ class Payment(Resource):
         """
         url = "{}/{}/recurring".format(self.base_url,'create')
         return self.post_url(url, data, **kwargs)
+
+    def createUpi(self, data={}, **kwargs):
+        """"
+        Initiate a payment
+        Return:
+          Payments dict
+        """
+        url = "{}/create/{}".format(self.base_url,'upi')
+        return self.post_url(url, data, **kwargs)
+
+    def validateVpa(self, data={}, **kwargs):
+        """"
+        Validate the VPA
+        Return:
+          Payments dict
+        """
+        url = "{}/validate/{}".format(self.base_url,'vpa')
+        return self.post_url(url, data, **kwargs)            
+
+    def fetchPaymentMethods(self, **kwargs):
+        """"
+        Fetch payment methods
+        Return:
+          Payments dict
+        """
+        url = "/{}".format('methods')
+        return self.get_url(url, {}, **kwargs) 
