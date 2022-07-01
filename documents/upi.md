@@ -47,24 +47,20 @@ client.customer.create({
 
 ```py
 client.order.create({
-  "amount": 0,
+  "amount": 100,
   "currency": "INR",
   "method": "upi",
   "customer_id": "cust_1Aa00000000001",
   "receipt": "Receipt No. 1",
+  "token": {
+   "max_amount": 9999900,
+   "expire_at": 4102444799,
+   "frequency": "monthly"
+  },
   "notes": {
     "notes_key_1": "Beam me up Scotty",
    "notes_key_2": "Engage"
   },
-  "token": {
-    "auth_type": "netbanking",
-    "max_amount": 9999900,
-    "expire_at": 4102444799,
-    "notes": {
-      "notes_key_1": "Tea, Earl Grey, Hot",
-      "notes_key_2": "Tea, Earl Grey… decaf."
-    }
-  }
 })
 ```
 
@@ -77,7 +73,8 @@ client.order.create({
 | method*        | string  | The authorization method. In this case the value will be `emandate`                      |
 | receipt         | string  | Your system order reference id.                                              |
 | notes           | object  | A key-value pair                                                             |
-| token           | object  | A key-value pair                                                             |
+| token           | object  | All parameters listed [here](https://razorpay.com/docs/api/payments/recurring-payments/upi/create-authorization-transaction#112-create-an-order) are supported |
+
 
 **Response:**
 ```json
