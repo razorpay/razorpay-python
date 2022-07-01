@@ -213,7 +213,9 @@ client.virtual_account.fetch(virtualId)
 | virtualId*          | string      | The id of the virtual to be updated  |
 
 **Response:**
+
 For fetch virtual account by id response please click [here](https://razorpay.com/docs/api/smart-collect/#fetch-a-virtual-account-by-id)
+
 -------------------------------------------------------------------------------------------------------
 
 ### Fetch all virtual account
