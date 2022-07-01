@@ -27,20 +27,24 @@ client.payment.refund(paymentId,{
 **Response:**
 ```json
 {
-  "id": "rfnd_FP8QHiV938haTz",
+  "id": "rfnd_JnzyQwYOOBNJJu",
   "entity": "refund",
-  "amount": 500100,
-  "receipt": "Receipt No. 31",
+  "amount": 100,
   "currency": "INR",
-  "payment_id": "pay_FCXKPFtYfPXJPy",
-  "notes": [],
+  "payment_id": "pay_JRSS9bMrRMds3w",
+  "notes": {
+    "notes_key_1": "Beam me up Scotty.",
+    "notes_key_2": "Engage"
+  },
+  "receipt": "#Receipt No. 131",
   "acquirer_data": {
     "arn": null
   },
-  "created_at": 1597078866,
+  "created_at": 1656655960,
   "batch_id": null,
   "status": "processed",
-  "speed_processed": "normal"
+  "speed_processed": "normal",
+  "speed_requested": "normal"
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -67,22 +71,20 @@ client.payment.refund(paymentId,{
 **Response:**
 ```json
 {
-  "id": "rfnd_FP8R8EGjGbPkVb",
+  "id": "rfnd_Jo00DtIBzADMi6",
   "entity": "refund",
-  "amount": 500100,
+  "amount": 100,
   "currency": "INR",
-  "payment_id": "pay_FC8MmhMBZPKDHF",
-  "notes": {
-    "notes_key_1": "Tea, Earl Grey, Hot",
-    "notes_key_2": "Tea, Earl Grey… decaf."
-  },
-  "receipt": "Receipt No. 31",
+  "payment_id": "pay_JRP3Y66cNcf2qF",
+  "notes": [],
+  "receipt": "#Receipt No. 132",
   "acquirer_data": {
     "arn": null
   },
-  "created_at": 1597078914,
+  "created_at": 1656656062,
   "batch_id": null,
-  "status": "processed",
+  "status": "pending",
+  "speed_processed": "instant",
   "speed_requested": "optimum"
 }
 ```
@@ -99,10 +101,10 @@ client.payment.fetch_multiple_refund(paymentId,option)
 | Name  | Type      | Description                                      |
 |-------|-----------|--------------------------------------------------|
 | paymentId*  | string      | The id of the payment                       |
-| from  | timestamp | timestamp after which the payments were created  |
-| to    | timestamp | timestamp before which the payments were created |
-| count | integer   | number of payments to fetch (default: 10)        |
-| skip  | integer   | number of payments to be skipped (default: 0)    |
+| from  | timestamp | timestamp after which the refunds were created  |
+| to    | timestamp | timestamp before which the refunds were created |
+| count | integer   | number of refunds to fetch (default: 10)        |
+| skip  | integer   | number of refunds to be skipped (default: 0)    |
 
 **Refund:**
 ```json
@@ -179,10 +181,10 @@ client.refund.all(options)
 
 | Name  | Type      | Description                                      |
 |-------|-----------|--------------------------------------------------|
-| from  | timestamp | timestamp after which the payments were created  |
-| to    | timestamp | timestamp before which the payments were created |
-| count | integer   | number of payments to fetch (default: 10)        |
-| skip  | integer   | number of payments to be skipped (default: 0)    |
+| from  | timestamp | timestamp after which the refunds were created  |
+| to    | timestamp | timestamp before which the refunds were created |
+| count | integer   | number of refunds to fetch (default: 10)        |
+| skip  | integer   | number of refunds to be skipped (default: 0)    |
 
 **Response:**
 ```json
