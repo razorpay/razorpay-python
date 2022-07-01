@@ -185,22 +185,33 @@ client.transfer.create({
 **Response:**
 ```json
 {
-  "id": "trf_E9utgtfGTcpcmm",
+  "id": "trf_JnRRvcSbZb1VHN",
   "entity": "transfer",
-  "source": "acc_CJoeHMNpi0nC7k",
-  "recipient": "acc_CPRsN1LkFccllA",
-  "amount": 100,
+  "status": "processed",
+  "source": "acc_HZbJUcl6DBDLIN",
+  "recipient": "acc_HjVXbtpSCIxENR",
+  "amount": 500,
   "currency": "INR",
   "amount_reversed": 0,
-  "notes": [],
   "fees": 1,
   "tax": 0,
+  "notes": [],
+  "linked_account_notes": [],
   "on_hold": false,
   "on_hold_until": null,
   "recipient_settlement_id": null,
-  "created_at": 1580219046,
-  "linked_account_notes": [],
-  "processed_at": 1580219046
+  "created_at": 1656534379,
+  "processed_at": 1656534379,
+  "error": {
+    "code": null,
+    "description": null,
+    "reason": null,
+    "field": null,
+    "step": null,
+    "id": "trf_JnRRvcSbZb1VHN",
+    "source": null,
+    "metadata": null
+  }
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -224,22 +235,34 @@ client.payment.transfers(paymentId)
   "count": 1,
   "items": [
     {
-      "id": "trf_EAznuJ9cDLnF7Y",
+      "id": "trf_I8kA5qRv9czK3Y",
       "entity": "transfer",
-      "source": "pay_E9up5WhIfMYnKW",
-      "recipient": "acc_CMaomTz4o0FOFz",
-      "amount": 1000,
+      "status": "processed",
+      "source": "pay_I7watngocuEY4P",
+      "recipient": "acc_HjVXbtpSCIxENR",
+      "amount": 10000,
       "currency": "INR",
-      "amount_reversed": 100,
+      "amount_reversed": 0,
+      "fees": 12,
+      "tax": 2,
       "notes": [],
-      "fees": 3,
-      "tax": 0,
+      "linked_account_notes": [],
       "on_hold": false,
       "on_hold_until": null,
+      "settlement_status": "pending",
       "recipient_settlement_id": null,
-      "created_at": 1580454666,
-      "linked_account_notes": [],
-      "processed_at": 1580454666
+      "created_at": 1634111246,
+      "processed_at": 1634111251,
+      "error": {
+        "code": null,
+        "description": null,
+        "reason": null,
+        "field": null,
+        "step": null,
+        "id": "trf_I8kA5qRv9czK3Y",
+        "source": null,
+        "metadata": null
+      }
     }
   ]
 }
@@ -259,54 +282,62 @@ client.order.fetch(orderId, {
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
 | orderId*   | string      | The id of the order to be fetched  |
-| expand*   | string    | Supported value is `transfer`  |
+| expand[]*   | string    | Supported value is `transfer`  |
 
 **Response:**
 ```json
 {
-  "id": "order_DSkl2lBNvueOly",
+  "id": "order_I7waiV9PUGADuv",
   "entity": "order",
-  "amount": 1000,
-  "amount_paid": 1000,
+  "amount": 50000,
+  "amount_paid": 50000,
   "amount_due": 0,
   "currency": "INR",
-  "receipt": null,
+  "receipt": "55",
   "offer_id": null,
   "status": "paid",
   "attempts": 1,
-  "notes": [],
-  "created_at": 1570794714,
+  "notes": {
+    "woocommerce_order_number": "55"
+  },
+  "created_at": 1633936677,
   "transfers": {
     "entity": "collection",
     "count": 1,
     "items": [
       {
-        "id": "trf_DSkl2lXWbiADZG",
+        "id": "trf_I7waiajxgS5jWL",
         "entity": "transfer",
-        "source": "order_DSkl2lBNvueOly",
-        "recipient": "acc_CNo3jSI8OkFJJJ",
-        "amount": 500,
+        "status": "processed",
+        "source": "order_I7waiV9PUGADuv",
+        "recipient": "acc_HalyQGZh9ZyiGg",
+        "amount": 10000,
         "currency": "INR",
         "amount_reversed": 0,
-        "notes": {
-          "branch": "Acme Corp Bangalore North",
-          "name": "Gaurav Kumar"
-        },
-        "fees": 2,
-        "tax": 0,
-        "on_hold": true,
-        "on_hold_until": 1670776632,
+        "fees": 12,
+        "tax": 2,
+        "notes": [],
+        "linked_account_notes": [],
+        "on_hold": false,
+        "on_hold_until": null,
+        "settlement_status": "pending",
         "recipient_settlement_id": null,
-        "created_at": 1570794714,
-        "linked_account_notes": [
-          "Acme Corp Bangalore North"
-        ],
-        "processed_at": 1570794772
+        "created_at": 1633936677,
+        "processed_at": 1633936700,
+        "error": {
+          "code": null,
+          "description": null,
+          "reason": null,
+          "field": null,
+          "step": null,
+          "id": "trf_I7waiajxgS5jWL",
+          "source": null,
+          "metadata": null
+        }
       }
     ]
   }
 }
-
 ```
 -------------------------------------------------------------------------------------------------------
 
@@ -325,22 +356,34 @@ client.transfer.fetch(transferId)
 **Response:**
 ```json
 {
-  "id": "trf_E7V62rAxJ3zYMo",
+  "id": "trf_I7waiajxgS5jWL",
   "entity": "transfer",
-  "source": "pay_E6j30Iu1R7XbIG",
-  "recipient": "acc_CMaomTz4o0FOFz",
-  "amount": 100,
+  "status": "processed",
+  "source": "order_I7waiV9PUGADuv",
+  "recipient": "acc_HalyQGZh9ZyiGg",
+  "amount": 10000,
   "currency": "INR",
   "amount_reversed": 0,
+  "fees": 12,
+  "tax": 2,
   "notes": [],
-  "fees": 1,
-  "tax": 0,
+  "linked_account_notes": [],
   "on_hold": false,
   "on_hold_until": null,
+  "settlement_status": "pending",
   "recipient_settlement_id": null,
-  "created_at": 1579691505,
-  "linked_account_notes": [],
-  "processed_at": 1579691505
+  "created_at": 1633936677,
+  "processed_at": 1633936700,
+  "error": {
+    "code": null,
+    "description": null,
+    "reason": null,
+    "field": null,
+    "step": null,
+    "id": "trf_I7waiajxgS5jWL",
+    "source": null,
+    "metadata": null
+  }
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -366,22 +409,34 @@ client.transfer.all({
   "count": 1,
   "items": [
     {
-      "id": "trf_DGSTeXzBkEVh48",
+      "id": "trf_HWjmkReRGPhguR",
       "entity": "transfer",
-      "source": "pay_DGSRhvMbOqeCe7",
-      "recipient": "acc_CMaomTz4o0FOFz",
-      "amount": 500,
+      "status": "processed",
+      "source": "pay_HWjY9DZSMsbm5E",
+      "recipient": "acc_HWjl1kqobJzf4i",
+      "amount": 1000,
       "currency": "INR",
       "amount_reversed": 0,
-      "notes": [],
-      "fees": 2,
+      "fees": 3,
       "tax": 0,
+      "notes": [],
+      "linked_account_notes": [],
       "on_hold": false,
       "on_hold_until": null,
-      "recipient_settlement_id": "setl_DHYJ3dRPqQkAgV",
-      "created_at": 1568110256,
-      "linked_account_notes": [],
-      "processed_at": null
+      "settlement_status": "settled",
+      "recipient_settlement_id": "setl_HYIIk3H0J4PYdX",
+      "created_at": 1625812996,
+      "processed_at": 1625812996,
+      "error": {
+        "code": null,
+        "description": null,
+        "reason": null,
+        "field": null,
+        "step": null,
+        "id": "trf_HWjmkReRGPhguR",
+        "source": null,
+        "metadata": null
+      }
     }
   ]
 }
@@ -409,32 +464,35 @@ client.transfer.all({
   "count": 1,
   "items": [
     {
-      "id": "trf_DGSTeXzBkEVh48",
+      "id": "trf_JnRRvcSbZb1VHN",
       "entity": "transfer",
-      "source": "pay_DGSRhvMbOqeCe7",
-      "recipient": "acc_CMaomTz4o0FOFz",
+      "status": "processed",
+      "source": "acc_HZbJUcl6DBDLIN",
+      "recipient": "acc_HjVXbtpSCIxENR",
       "amount": 500,
       "currency": "INR",
       "amount_reversed": 0,
-      "notes": [],
-      "fees": 2,
+      "fees": 1,
       "tax": 0,
+      "notes": [],
+      "linked_account_notes": [],
       "on_hold": false,
       "on_hold_until": null,
-      "recipient_settlement_id": "setl_DHYJ3dRPqQkAgV",
-      "recipient_settlement": {
-        "id": "setl_DHYJ3dRPqQkAgV",
-        "entity": "settlement",
-        "amount": 500,
-        "status": "failed",
-        "fees": 0,
-        "tax": 0,
-        "utr": "CN0038699836",
-        "created_at": 1568349124
-      },
-      "created_at": 1568110256,
-      "linked_account_notes": [],
-      "processed_at": null
+      "settlement_status": null,
+      "recipient_settlement_id": null,
+      "recipient_settlement": null,
+      "created_at": 1656534379,
+      "processed_at": 1656534379,
+      "error": {
+        "code": null,
+        "description": null,
+        "reason": null,
+        "field": null,
+        "step": null,
+        "id": "trf_JnRRvcSbZb1VHN",
+        "source": null,
+        "metadata": null
+      }
     }
   ]
 }
@@ -461,17 +519,21 @@ client.payment.refund(paymentId,{
 **Response:**
 ```json
 {
-  "id": "rfnd_EAzovSwG8jBnGf",
+  "id": "rfnd_JJFNlNXPHY640A",
   "entity": "refund",
   "amount": 100,
   "currency": "INR",
-  "payment_id": "pay_EAdwQDe4JrhOFX",
+  "payment_id": "pay_JJCqynf4fQS0N1",
   "notes": [],
   "receipt": null,
   "acquirer_data": {
-    "rrn": null
+    "arn": null
   },
-  "created_at": 1580454723
+  "created_at": 1649941680,
+  "batch_id": null,
+  "status": "processed",
+  "speed_processed": "normal",
+  "speed_requested": "normal"
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -497,31 +559,37 @@ client.payment.all({
   "count": 2,
   "items": [
     {
-      "id": "pay_E9uth3WhYbh9QV",
+      "id": "pay_JJCqynf4fQS0N1",
       "entity": "payment",
-      "amount": 100,
+      "amount": 10000,
       "currency": "INR",
       "status": "captured",
-      "order_id": null,
+      "order_id": "order_JJCqnZG8f3754z",
       "invoice_id": null,
-      "international": null,
-      "method": "transfer",
+      "international": false,
+      "method": "netbanking",
       "amount_refunded": 0,
       "refund_status": null,
       "captured": true,
-      "description": null,
+      "description": "#JJCqaOhFihfkVE",
       "card_id": null,
-      "bank": null,
+      "bank": "YESB",
       "wallet": null,
       "vpa": null,
-      "email": "",
-      "contact": null,
+      "email": "john.example@example.com",
+      "contact": "+919820958250",
       "notes": [],
-      "fee": 0,
-      "tax": 0,
+      "fee": 236,
+      "tax": 36,
       "error_code": null,
       "error_description": null,
-      "created_at": 1580219046
+      "error_source": null,
+      "error_step": null,
+      "error_reason": null,
+      "acquirer_data": {
+        "bank_transaction_id": "2118867"
+      },
+      "created_at": 1649932775
     }
   ]
 }
@@ -546,17 +614,21 @@ client.transfer.reverse(transferId,{
 **Response:**
 ```json
 {
-  "id": "rvrsl_EB0BWgGDAu7tOz",
-  "entity": "reversal",
-  "transfer_id": "trf_EAznuJ9cDLnF7Y",
+  "id": "rfnd_JJFNlNXPHY640A",
+  "entity": "refund",
   "amount": 100,
-  "fee": 0,
-  "tax": 0,
   "currency": "INR",
+  "payment_id": "pay_JJCqynf4fQS0N1",
   "notes": [],
-  "initiator_id": "CJoeHMNpi0nC7k",
-  "customer_refund_id": null,
-  "created_at": 1580456007
+  "receipt": null,
+  "acquirer_data": {
+    "arn": null
+  },
+  "created_at": 1649941680,
+  "batch_id": null,
+  "status": "processed",
+  "speed_processed": "normal",
+  "speed_requested": "normal"
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -580,10 +652,7 @@ client.payment.transfer(paymentId,{
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
 | paymentId*   | string      | The id of the payment to be fetched  |
-| transfers.account*   | string   | The id of the account to be fetched   |
-| transfers.amount*   | string    | The transaction amount, in paise |
-| transfers.currency*   | string  | The currency of the payment (defaults to INR) |
-| transfers.on_hold*   | string   | Possible values is `0` or `1` |
+| transfers   | array     | All parameters listed [here](https://razorpay.com/docs/api/route/#hold-settlements-for-transfers) are supported |
 
 **Response:**
 ```json
@@ -592,22 +661,31 @@ client.payment.transfer(paymentId,{
   "count": 1,
   "items": [
     {
-      "id": "trf_EB1VJ4Ux4GMmxQ",
+      "id": "trf_Jfm1KCF6w1oWgy",
       "entity": "transfer",
-      "source": "pay_EB1R2s8D4vOAKG",
-      "recipient": "acc_CMaomTz4o0FOFz",
+      "status": "pending",
+      "source": "pay_JXPULbHbkkkS8D",
+      "recipient": "acc_I0QRP7PpvaHhpB",
       "amount": 100,
       "currency": "INR",
       "amount_reversed": 0,
       "notes": [],
-      "fees": 1,
-      "tax": 0,
+      "linked_account_notes": [],
       "on_hold": true,
       "on_hold_until": null,
       "recipient_settlement_id": null,
-      "created_at": 1580460652,
-      "linked_account_notes": [],
-      "processed_at": 1580460652
+      "created_at": 1654860101,
+      "processed_at": null,
+      "error": {
+        "code": null,
+        "description": null,
+        "reason": null,
+        "field": null,
+        "step": null,
+        "id": "trf_Jfm1KCF6w1oWgy",
+        "source": null,
+        "metadata": null
+      }
     }
   ]
 }
@@ -626,28 +704,44 @@ client.transfer.edit(transferId,{
 
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
-| transferId*   | string      | The id of the transfer to be fetched   |
-| transfers   | array     | All parameters listed here https://razorpay.com/docs/api/route/#hold-settlements-for-transfers are supported |
+| transferId*   | string      | The id of the payment to be fetched  |
+| on_hold*   | boolean      | Possible values is `0` or `1`  |
+| on_hold_until   | integer      | Timestamp, in Unix, that indicates until when the settlement of the transfer must be put on hold |
 
 **Response:**
 ```json
 {
-  "id": "trf_EB17rqOUbzSCEE",
-  "entity": "transfer",
-  "source": "pay_EAeSM2Xul8xYRo",
-  "recipient": "acc_CMaomTz4o0FOFz",
-  "amount": 100,
-  "currency": "INR",
-  "amount_reversed": 0,
-  "notes": [],
-  "fees": 1,
-  "tax": 0,
-  "on_hold": true,
-  "on_hold_until": 1679691505,
-  "recipient_settlement_id": null,
-  "created_at": 1580459321,
-  "linked_account_notes": [],
-  "processed_at": 1580459321
+    "entity": "collection",
+    "count": 1,
+    "items": [
+        {
+            "id": "trf_JhemwjNekar9Za",
+            "entity": "transfer",
+            "status": "pending",
+            "source": "pay_I7watngocuEY4P",
+            "recipient": "acc_HjVXbtpSCIxENR",
+            "amount": 100,
+            "currency": "INR",
+            "amount_reversed": 0,
+            "notes": [],
+            "linked_account_notes": [],
+            "on_hold": true,
+            "on_hold_until": null,
+            "recipient_settlement_id": null,
+            "created_at": 1655271313,
+            "processed_at": null,
+            "error": {
+                "code": null,
+                "description": null,
+                "reason": null,
+                "field": null,
+                "step": null,
+                "id": "trf_JhemwjNekar9Za",
+                "source": null,
+                "metadata": null
+            }
+        }
+    ]
 }
 ```
 
