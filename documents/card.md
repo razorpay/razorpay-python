@@ -46,13 +46,20 @@ client.customer.create({
 
 ```py
 client.order.create({
-  "amount": 50000,
-  "currency": "INR",
-  "receipt": "receipt#1",
-  "notes": {
-    "key1": "value3",
-    "key2": "value2"
-  }
+   "amount":100,
+   "currency":"INR",
+   "customer_id":"cust_4xbQrmEoA5WJ01",
+   "method":"card",
+   "token":{
+      "max_amount":5000,
+      "expire_at":2709971120,
+      "frequency":"monthly"
+   },
+   "receipt":"Receipt No. 1",
+   "notes":{
+      "notes_key_1":"Tea, Earl Grey, Hot",
+      "notes_key_2":"Tea, Earl Grey... decaf."
+   }
 })
 ```
 
@@ -62,24 +69,35 @@ client.order.create({
 |-----------------|---------|------------------------------------------------------------------------------|
 | amount*   | integer      | The amount to be captured (should be equal to the authorized amount, in paise) |
 | currency*   | string  | The currency of the payment (defaults to INR)  |
+| customerId*   | string      | The id of the customer to be fetched |
 | receipt      | string  | Your system order reference id.  |
+| method*      | string  | Payment method used to make the registration transaction. Possible value is `card`.  |
+| token  | object  | All keys listed [here](https://razorpay.com/docs/api/recurring-payments/cards/authorization-transaction/#112-create-an-order) are supported |
 | notes | object  | A key-value pair  |
 
 **Response:**
 ```json
 {
-  "id": "order_EKwxwAgItmmXdp",
+  "id": "order_JmugUU7mFbXTRN",
   "entity": "order",
-  "amount": 50000,
+  "amount": 100,
   "amount_paid": 0,
-  "amount_due": 50000,
+  "amount_due": 100,
   "currency": "INR",
-  "receipt": "receipt#1",
+  "receipt": "Receipt No. 1",
   "offer_id": null,
   "status": "created",
   "attempts": 0,
-  "notes": [],
-  "created_at": 1582628071
+  "notes": {
+    "notes_key_1": "Tea, Earl Grey, Hot",
+    "notes_key_2": "Tea, Earl Grey... decaf."
+  },
+  "created_at": 1656418993,
+  "token": {
+    "max_amount": 5000,
+    "expire_at": 2709971120
+  },
+  "method": "card"
 }
 ```
 -------------------------------------------------------------------------------------------------------
@@ -117,8 +135,7 @@ client.registration_link.create({
 
 | Name            | Type    | Description                                                                  |
 |-----------------|---------|------------------------------------------------------------------------------|
-| customer   | object      | Details of the customer to whom the registration link will be sent. |
-| type*  | string | the value is `link`. |
+| customer   | object    | All keys listed [here](https://razorpay.com/docs/api/recurring-payments/cards/authorization-transaction/#121-create-a-registration-link) are supported  |
 | amount*   | integer      | The amount to be captured (should be equal to the authorized amount, in paise) |
 | currency*   | string  | The currency of the payment (defaults to INR)  |
 | description*  | string      | A brief description of the payment.   |
@@ -515,8 +532,24 @@ client.card.fetch(cardId)
 
 | Name            | Type    | Description                                                                  |
 |-----------------|---------|------------------------------------------------------------------------------|
-| cardId*          | string | card id to be fetched                                               |
+| cardId*          | string | card id to be fetched     |
 
+**Response:**
+```json
+{
+    "id": "card_JXPULjlKqC5j0i",
+    "entity": "card",
+    "name": "Gaurav",
+    "last4": "4366",
+    "network": "Visa",
+    "type": "credit",
+    "issuer": "UTIB",
+    "international": false,
+    "emi": true,
+    "sub_type": "consumer",
+    "token_iin": null
+}
+```
 -------------------------------------------------------------------------------------------------------
 
 ## Delete tokens
