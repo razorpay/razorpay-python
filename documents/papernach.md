@@ -23,6 +23,7 @@ client.customer.create({
 | email        | string      | Email of the customer                       |
 | contact      | string      | Contact number of the customer              |
 | notes         | object      | A key-value pair                            |
+| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `0` or `1`|
 
 **Response:**
 ```json
@@ -74,16 +75,16 @@ client.order.create({
 ```
 
 **Parameters:**
+
 | Name            | Type    | Description                                                                  |
 |-----------------|---------|------------------------------------------------------------------------------|
-| amount*          | integer | Amount of the order to be paid                                               |
-| currency*        | string  | Currency of the order. Currently only `INR` is supported.                      |
-| method*        | string  | The authorization method. In this case the value will be `emandate`                      |
-| receipt         | string  | Your system order reference id.                                              |
-| notes           | object  | A key-value pair                                                             |
-| token           | object  | A key-value pair                                                             |
-
-All parameters listed [here](https://razorpay.com/docs/api/route/#create-transfers-from-payments) are supported
+| amount*   | integer      | The amount to be captured (should be equal to the authorized amount, in paise) |
+| currency*   | string  | The currency of the payment (defaults to INR)  |
+| customerId*   | string      | The id of the customer to be fetched |
+| method*      | string  | Payment method used to make the registration transaction. Possible value is `nach`.  |
+| receipt      | string  | Your system order reference id.  |
+| token  | array  | All parameters listed [here](https://razorpay.com/docs/api/payments/recurring-payments/paper-nach/create-authorization-transaction/#112-create-an-order) are supported |
+| notes | object  | A key-value pair  |
 
 **Response:**
 ```json
@@ -590,6 +591,7 @@ client.order.create({
   "amount":1000,
   "currency":"INR",
   "receipt":"Receipt No. 1",
+  "payment_capture":True,
   "notes": {
     "notes_key_1":"Tea, Earl Grey, Hot",
     "notes_key_2":"Tea, Earl Grey… decaf."
@@ -603,8 +605,10 @@ client.order.create({
 |-----------------|---------|------------------------------------------------------------------------------|
 | amount*          | integer | Amount of the order to be paid                                               |
 | currency*        | string  | Currency of the order. Currently only `INR` is supported.                      |
+| payment_capture*  | boolean  | Indicates whether payment status should be changed to captured automatically or not. Possible values: true - Payments are captured automatically. false - Payments are not captured automatically. |
 | receipt         | string  | Your system order reference id.                                              |
-| notes           | object  | A key-value pair                                                             |
+| notes           | array  | A key-value pair                                                             |
+
 **Response:**
 ```json
 {
@@ -659,8 +663,8 @@ client.payment.createRecurring({
 | customer_id*        | string  | The `customer_id` for the customer you want to charge.  |
 | token*        | string  | The `token_id` generated when the customer successfully completes the authorization payment. Different payment instruments for the same customer have different `token_id`.|
 | recurring*        | string  | Determines if recurring payment is enabled or not. Possible values:<br>* `1` - Recurring is enabled.* `0` - Recurring is not enabled.|
-| description*        | string  | A user-entered description for the payment.|
-| notes*        | object  | Key-value pair that can be used to store additional information about the entity. Maximum 15 key-value pairs, 256 characters (maximum) each. |
+| description        | string  | A user-entered description for the payment.|
+| notes        | object  | Key-value pair that can be used to store additional information about the entity. Maximum 15 key-value pairs, 256 characters (maximum) each. |
 
 **Response:**
 ```json

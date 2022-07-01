@@ -223,3 +223,69 @@ class Payment(Resource):
         """
         url = "{}/{}/recurring".format(self.base_url,'create')
         return self.post_url(url, data, **kwargs)
+
+    def createUpi(self, data={}, **kwargs):
+        """"
+        Initiate a payment
+        Return:
+          Payments dict
+        """
+        url = "{}/create/{}".format(self.base_url,'upi')
+        return self.post_url(url, data, **kwargs)
+
+    def validateVpa(self, data={}, **kwargs):
+        """"
+        Validate the VPA
+        Return:
+          Payments dict
+        """
+        url = "{}/validate/{}".format(self.base_url,'vpa')
+        return self.post_url(url, data, **kwargs)            
+
+    def fetchPaymentMethods(self, **kwargs):
+        """"
+        Fetch payment methods
+        Return:
+          Payments dict
+        """
+        url = "/{}".format('methods')
+        return self.get_url(url, {}, **kwargs)
+    
+    def otpGenerate(self, payment_id, data={}, **kwargs):
+        """"
+        Otp Generate
+
+        Args:
+            payment_id : Id for which upi transfer entity has to be fetched
+
+        Returns:
+            Otp Dict which was created
+        """
+        url = "{}/{}/otp_generate".format(self.base_url, payment_id)
+        return self.post_url(url, data, **kwargs)
+
+    def otpSubmit(self, payment_id, data={}, **kwargs):
+        """"
+        Otp Submit
+
+        Args:
+            payment_id : Id for which upi transfer entity has to be fetched
+
+        Returns:
+            Otp Dict which was created
+        """
+        url = "{}/{}/otp/submit".format(self.base_url, payment_id)
+        return self.post_url(url, data, **kwargs)
+
+    def otpResend(self, payment_id, data={}, **kwargs):
+        """"
+        Otp Resend
+
+        Args:
+            payment_id : Id for which upi transfer entity has to be fetched
+
+        Returns:
+            Otp Dict which was created
+        """
+        url = "{}/{}/otp/resend".format(self.base_url, payment_id)
+        return self.post_url(url, data, **kwargs)

@@ -5,10 +5,10 @@
 Request #1
 In this example, an invoice is created using the customer and item details. Here, the customer and item are created while creating the invoice.
 ```py
-client.order.create({
+client.invoice.create({
   "type": "invoice",
   "description": "Invoice for the month of January 2020",
-  "partial_payment": 1,
+  "partial_payment": true,
   "customer": {
     "name": "Gaurav Kumar",
     "contact": 9999999999,
@@ -16,7 +16,7 @@ client.order.create({
     "billing_address": {
       "line1": "Ground & 1st Floor, SJR Cyber Laskar",
       "line2": "Hosur Road",
-      "zipcode": 560068,
+      "zipcode": "560068",
       "city": "Bengaluru",
       "state": "Karnataka",
       "country": "in"
@@ -24,7 +24,7 @@ client.order.create({
     "shipping_address": {
       "line1": "Ground & 1st Floor, SJR Cyber Laskar",
       "line2": "Hosur Road",
-      "zipcode": 560068,
+      "zipcode": "560068",
       "city": "Bengaluru",
       "state": "Karnataka",
       "country": "in"
@@ -35,7 +35,7 @@ client.order.create({
       "name": "Master Cloud Computing in 30 Days",
       "description": "Book by Ravena Ravenclaw",
       "amount": 399,
-     "currency": "USD",
+      "currency": "USD",
       "quantity": 1
     }
   ],
@@ -45,6 +45,22 @@ client.order.create({
   "expire_by": 1589765167
 })
 ```
+
+**Parameters:**
+
+| Name            | Type    | Description                                                                  |
+|-----------------|---------|------------------------------------------------------------------------------|
+|type*          | string | entity type (here its invoice)                                               |
+|description        | string  | A brief description of the invoice.                      |
+|customer_id           | string  | customer id for which invoice need be raised   |
+|draft           | string  |  Invoice is created in draft state when value is set to `1`   |
+| customer*     | array | All parameters listed [here](https://razorpay.com/docs/api/payments/invoices/#create-an-invoice) are supported           |
+| line_items    | array | All parameters listed [here](https://razorpay.com/docs/api/payments/invoices/#create-an-invoice) are supported |
+|expire_by           | array  | Details of the line item that is billed in the invoice.  |
+|sms_notify           | array  | Details of the line item that is billed in the invoice.  |
+|email_notify           | array  | Details of the line item that is billed in the invoice.  |
+|partial_payment | boolean  | Indicates whether customers can make partial payments on the invoice . Possible values: true - Customer can make partial payments. false (default) - Customer cannot make partial payments. |
+| currency*   | string  | The currency of the payment (defaults to INR)  |
 
 Request #2
 In this example, an invoice is created using existing `customer_id` and `item_id`
@@ -235,10 +251,98 @@ client.invoice.edit(invoiceId,{
 | Name            | Type    | Description                                                                  |
 |-----------------|---------|------------------------------------------------------------------------------|
 | invoiceId*          | string | The id of the invoice to be fetched                         |
+| line_items    | array | All parameters listed [here](https://razorpay.com/docs/api/payments/invoices/#update-an-invoice) are supported |
+| notes    | array | key value pair |
 
 **Response:**
-For update invoice response please click [here](https://razorpay.com/docs/api/invoices/#update-an-invoice)
-
+```json
+{
+  "id": "inv_DAweOiQ7amIUVd",
+  "entity": "invoice",
+  "receipt": "#0961",
+  "invoice_number": "#0961",
+  "customer_id": "cust_DAtUWmvpktokrT",
+  "customer_details": {
+    "id": "cust_DAtUWmvpktokrT",
+    "name": "Gaurav Kumar",
+    "email": "gaurav.kumar@example.com",
+    "contact": "9977886633",
+    "gstin": null,
+    "billing_address": {
+      "id": "addr_DAtUWoxgu91obl",
+      "type": "billing_address",
+      "primary": true,
+      "line1": "318 C-Wing, Suyog Co. Housing Society Ltd.",
+      "line2": "T.P.S Road, Vazira, Borivali",
+      "zipcode": "400092",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "country": "in"
+    },
+    "shipping_address": null,
+    "customer_name": "Gaurav Kumar",
+    "customer_email": "gaurav.kumar@example.com",
+    "customer_contact": "9977886633"
+  },
+  "order_id": null,
+  "line_items": [
+    {
+      "id": "li_DAweOizsysoJU6",
+      "item_id": null,
+      "name": "Book / English August - Updated name and quantity",
+      "description": "150 points in Quidditch",
+      "amount": 400,
+      "unit_amount": 400,
+      "gross_amount": 400,
+      "tax_amount": 0,
+      "taxable_amount": 400,
+      "net_amount": 400,
+      "currency": "INR",
+      "type": "invoice",
+      "tax_inclusive": false,
+      "hsn_code": null,
+      "sac_code": null,
+      "tax_rate": null,
+      "unit": null,
+      "quantity": 1,
+      "taxes": []
+    }
+  ],
+  "payment_id": null,
+  "status": "draft",
+  "expire_by": 1567103399,
+  "issued_at": null,
+  "paid_at": null,
+  "cancelled_at": null,
+  "expired_at": null,
+  "sms_status": null,
+  "email_status": null,
+  "date": 1566891149,
+  "terms": null,
+  "partial_payment": false,
+  "gross_amount": 600,
+  "tax_amount": 0,
+  "taxable_amount": 600,
+  "amount": 600,
+  "amount_paid": null,
+  "amount_due": null,
+  "currency": "INR",
+  "currency_symbol": "₹",
+  "description": "This is a test invoice.",
+  "notes": {
+    "updated-key": "An updated note."
+  },
+  "comment": null,
+  "short_url": null,
+  "view_less": true,
+  "billing_start": null,
+  "billing_end": null,
+  "type": "invoice",
+  "group_taxes_discounts": false,
+  "created_at": 1566906474,
+  "idempotency_key": null
+}
+```
 -------------------------------------------------------------------------------------------------------
 
 ### Issue an invoice

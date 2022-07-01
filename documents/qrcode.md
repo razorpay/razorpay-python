@@ -7,7 +7,7 @@ client.qrcode.create({
   "type": "upi_qr",
   "name": "Store_1",
   "usage": "single_use",
-  "fixed_amount": true,
+  "fixed_amount": True,
   "payment_amount": 300,
   "description": "For Store 1",
   "customer_id": "cust_HKsR5se84c5LTO",
@@ -240,24 +240,27 @@ client.qrcode.fetch(qrCodeId)
   "count": 1,
   "items": [
     {
-      "id": "qr_HMsgvioW64f0vh",
+      "id": "qr_HO2r1MDprYtWRT",
       "entity": "qr_code",
-      "created_at": 1623660959,
+      "created_at": 1623915088,
       "name": "Store_1",
       "usage": "single_use",
       "type": "upi_qr",
-      "image_url": "https://rzp.io/i/DTa2eQR",
+      "image_url": "https://rzp.io/i/oCswTOcCo",
       "payment_amount": 300,
-      "status": "active",
+      "status": "closed",
       "description": "For Store 1",
       "fixed_amount": true,
-      "payments_amount_received": 0,
-      "payments_count_received": 0,
+      "payments_amount_received": 300,
+      "payments_count_received": 1,
       "notes": {
         "purpose": "Test UPI QR code notes"
       },
       "customer_id": "cust_HKsR5se84c5LTO",
-      "close_by": 1681615838
+      "close_by": 1681615838,
+      "closed_at": 1625558914,
+      "close_reason": "paid",
+      "tax_invoice": null
     }
   ]
 }
@@ -299,7 +302,8 @@ client.qrcode.fetch(qrCodeId)
       "notes": [],
       "customer_id": "cust_HKsR5se84c5LTO",
       "close_by": 1624472999,
-      "close_reason": null
+      "close_reason": "paid",
+      "tax_invoice": null
     }
   ]
 }
@@ -370,7 +374,7 @@ client.qrcode.fetch_all_payments(qrCodeId, options)
 ### Close a QR Code
 
 ```py
-client.qrcode.close(qrCodeId);
+client.qrcode.close(qrCodeId)
 ```
 
 **Parameters:**
@@ -406,6 +410,48 @@ client.qrcode.close(qrCodeId);
 ```
 -------------------------------------------------------------------------------------------------------
 
+### Refund a Payment
+
+```py
+client.payment.refund("pay_JRP3Y66cNcf2qF",{
+   "amount": "100",
+   "notes": {
+    "notes_key_1": "Beam me up Scotty.",
+    "notes_key_2": "Engage"
+  }
+})
+```
+
+**Parameters:**
+
+| Name            | Type    | Description                                                                  |
+|-----------------|---------|------------------------------------------------------------------------------|
+| paymentId*  | string | The id of the payment to be refunded |
+| amount  | string | Amount to be refunded |
+| notes       | array | Key-value pair that can be used to store additional information about the QR code. Maximum 15 key-value pairs, 256 characters (maximum) each. |
+
+**Response:**
+```json
+{
+  "id": "rfnd_FP8QHiV938haTz",
+  "entity": "refund",
+  "amount": 500100,
+  "receipt": "Receipt No. 31",
+  "currency": "INR",
+  "payment_id": "pay_29QQoUBi66xm2f",
+  "notes": [],
+  "receipt": null,
+  "acquirer_data": {
+    "arn": null
+  },
+  "created_at": 1597078866,
+  "batch_id": null,
+  "status": "processed",
+  "speed_processed": "normal",
+  "speed_requested": "normal"
+}
+```
+-------------------------------------------------------------------------------------------------------
 
 **PN: * indicates mandatory fields**
 <br>

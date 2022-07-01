@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## [1.3.1][1.3.1] - 2022-07-01
+
+- Added Third party validation & Otp API for Payment (createUpi, validateVpa, otpGenerate, otpSubmit, otpResend)
+- Update Documention
+
 ## [1.3.0][1.3.0] - 2022-02-01
 
 ### Added
