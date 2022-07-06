@@ -47,28 +47,33 @@ client.customer.create({
 
 ```py
 client.order.create({
-  "amount": 0,
-  "currency": "INR",
-  "method": "emandate",
+  "amount":0,
+  "currency":"INR",
+  "method":"nach",
   "customer_id": "cust_1Aa00000000001",
-  "receipt": "Receipt No. 1",
+  "receipt":"Receipt No. 1",
   "notes": {
     "notes_key_1": "Beam me up Scotty",
-   "notes_key_2": "Engage"
+    "notes_key_2": "Engage"
   },
-  "token": {
-    "auth_type": "netbanking",
-    "max_amount": 9999900,
-    "expire_at": 4102444799,
+  "token":{
+    "auth_type":"physical",
+    "max_amount":10000000,
+    "expire_at":2709971120,
     "notes": {
       "notes_key_1": "Tea, Earl Grey, Hot",
       "notes_key_2": "Tea, Earl Grey… decaf."
     },
-    "bank_account": {
-      "beneficiary_name": "Gaurav Kumar",
-      "account_number": 1121431121541121,
-      "account_type": "savings",
-      "ifsc_code": "HDFC0000001"
+    "bank_account":{
+      "account_number":"11214311215411",
+      "ifsc_code":"HDFC0000001",
+      "beneficiary_name":"Gaurav Kumar",
+      "account_type":"savings"
+    },
+    "nach":{
+      "form_reference1":"Recurring Payment for Gaurav Kumar",
+      "form_reference2":"Method Paper NACH",
+      "description":"Paper NACH Gaurav Kumar"
     }
   }
 })
