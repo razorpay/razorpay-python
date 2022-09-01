@@ -15,7 +15,7 @@ setup(
     install_requires=["requests"],
     include_package_data=True,
     package_dir={'razorpay': 'razorpay', 'razorpay.resources': 'razorpay/resources', 'razorpay.constants': 'razorpay/constants', 'razorpay.utility': 'razorpay/utility'},
-    packages=['razorpay', 'razorpay.resources', 'razorpay/constants', 'razorpay/utility'],
+    packages=['razorpay', 'razorpay.resources', 'razorpay.constants', 'razorpay.utility'],
     keywords='razorpay payment gateway india',
     classifiers=[
         "Development Status :: 4 - Beta",
