@@ -7,6 +7,7 @@ from pkg_resources import DistributionNotFound
 
 from types import ModuleType
 
+from razorpay.resources.base import DecimalEncoder
 from .constants import HTTP_STATUS_CODE, ERROR_CODE, URL
 
 from . import resources, utility
@@ -180,7 +181,7 @@ class Client:
         """
         Updates The resource data and header options
         """
-        data = json.dumps(data)
+        data = json.dumps(data, cls=DecimalEncoder)
 
         if 'headers' not in options:
             options['headers'] = {}

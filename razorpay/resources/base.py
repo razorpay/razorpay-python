@@ -1,3 +1,6 @@
+from decimal import Decimal
+from json import JSONEncoder
+
 class Resource(object):
 
     def __init__(self, client=None):
@@ -28,3 +31,12 @@ class Resource(object):
     def delete(self, id, data, **kwargs):
         url = "{}/{}/delete".format(self.base_url, id)
         return self.delete_url(url, data, **kwargs)
+
+class DecimalEncoder(JSONEncoder):
+    def default(self, obj):
+        # if passed in object is instance of Decimal
+        # convert it to a string
+        if isinstance(obj, Decimal):
+            return str(obj)
+        # 👇️ otherwise use the default behavior
+        return JSONEncoder.default(self, obj)
