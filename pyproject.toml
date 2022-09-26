@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "razorpay-python"
+version = "1.3.1"
+description = "Razorpay Python Client"
+authors = ["Akash Kothawale <decached@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "razorpay"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "*"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.1.3"
+responses = "^0.21.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "-v"
+testpaths = [
+    "tests",
+]
