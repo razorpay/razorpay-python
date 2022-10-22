@@ -1,6 +1,5 @@
 import razorpay
 import requests
-from pprint import pprint
 import json
 
 client = razorpay.Client(auth=("rzp_test_k6uL897VPBz20q", "EnLs21M47BllR3X8PSFtjtbd"))
