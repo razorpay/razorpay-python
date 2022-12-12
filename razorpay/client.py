@@ -151,6 +151,7 @@ class Client:
         """
         Parses GET request options and dispatches a request
         """
+        self._update_request({}, options)
         return self.request('get', path, params=params, **options)
 
     def post(self, path, data, **options):
