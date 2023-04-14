@@ -27,7 +27,7 @@ jobs:
       - name: Run Tests
         run: |
           python -m coverage run -m unittest
-          python -m coverage report
+          python -m coverage xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
