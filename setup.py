@@ -5,7 +5,7 @@ with open('README.md') as readme:
 
 setup(
     name="razorpay",
-    version="1.3.1",
+    version="1.3.0",
     description="Razorpay Python Client",
     long_description=readme_content,
     long_description_content_type='text/markdown',
