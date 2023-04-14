@@ -29,6 +29,7 @@ jobs:
           python -m coverage run -m unittest
           python -m coverage report
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v2
         with:
            token: ${{ secrets.CODECOV_TOKEN }}
+           version: "v0.1.15"
