@@ -26,7 +26,7 @@ jobs:
           python ${{ github.workspace }}/setup.py install
       - name: Run Tests
         run: |
-          python -m unittest
+          python -m coverage run -m unittest
           python -m coverage report
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
