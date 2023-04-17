@@ -30,6 +30,3 @@ jobs:
           python -m coverage xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
-        with:
-           token: ${{ secrets.CODECOV_TOKEN }}
-           files: /home/runner/work/razorpay-python/razorpay-python/coverage.xml
