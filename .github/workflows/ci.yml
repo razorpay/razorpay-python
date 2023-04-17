@@ -33,3 +33,4 @@ jobs:
         with:
            token: ${{ secrets.CODECOV_TOKEN }}
            version: "v0.1.15"
+           files: ./coverage.xml
