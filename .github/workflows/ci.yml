@@ -9,6 +9,20 @@ on:
     branches:
       - master
 jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip virtualenv
+          python -m build
+
   test:
     name: Run tests and publish test coverage
     runs-on: ubuntu-latest
@@ -30,3 +44,26 @@ jobs:
           python -m coverage xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+        
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: Install tools
+        run: make venv
+      - name: Publish packages to PyPi
+        run: |
+          set -ex
+          source venv/bin/activate
+          export VERSION=$(python3 setup.py --version)          
+          python -m twine upload --verbose --repository testpypi dist/razorpay-$VERSION-py3-none-any.whl dist/razorpay-$VERSION.tar.gz
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+ 
