@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip virtualenv
-          python -m build
+          python setup.py clean --all sdist bdist_wheel --universal
 
   test:
     name: Run tests and publish test coverage
