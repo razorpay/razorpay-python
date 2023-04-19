@@ -38,6 +38,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install responses
           pip install coverage
+          python -m pip install --upgrade twine
           python ${{ github.workspace }}/setup.py install
       - name: Run Tests
         run: |
