@@ -58,12 +58,9 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: "3.10"
-      - name: Install tools
-        run: make venv
       - name: Publish packages to PyPi
         run: |
           set -ex
-          source venv/bin/activate
           export VERSION=$(python3 setup.py --version)          
           python -m twine upload --verbose --repository testpypi dist/razorpay-$VERSION-py3-none-any.whl dist/razorpay-$VERSION.tar.gz
         env:
