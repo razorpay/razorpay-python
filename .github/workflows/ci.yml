@@ -32,7 +32,7 @@ jobs:
           name: dist
           path: dist/          
   test:
-    name: Run tests and publish test coverage
+    name: Test Coverage
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -55,7 +55,7 @@ jobs:
         uses: codecov/codecov-action@v3
         
   publish:
-    #if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v')
     needs: test
     runs-on: ubuntu-latest
     steps:
