@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python 3
         uses: actions/setup-python@v3
         with:
-          python-version: "3.x"  
+          python-version: "3.10"  
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip 
@@ -40,7 +40,7 @@ jobs:
       - name: Set up Python 3
         uses: actions/setup-python@v3
         with:
-          python-version: "3.x"
+          python-version: "3.10"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -55,7 +55,7 @@ jobs:
         uses: codecov/codecov-action@v3
         
   publish:
-    if: startsWith(github.ref, 'refs/tags/v')
+    #if: startsWith(github.ref, 'refs/tags/v')
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -68,7 +68,7 @@ jobs:
       - name: Set up Python 3
         uses: actions/setup-python@v3
         with:
-          python-version: "3.x"
+          python-version: "3.10"
       - name: Publish packages to PyPi
         run: |
           python -m pip install --upgrade twine
