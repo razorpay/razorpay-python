@@ -80,7 +80,7 @@ class Subscription(Resource):
         url = "{}/{}/addons".format(self.base_url, subscription_id)
         return self.post_url(url, data, **kwargs) 
 
-    def edit(self, subscription_id, data={}, **kwargs):
+    def update(self, subscription_id, data={}, **kwargs):
         """"
          Update particular subscription
 
