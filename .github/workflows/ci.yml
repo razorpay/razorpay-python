@@ -74,7 +74,7 @@ jobs:
           python -m pip install --upgrade twine
           set -ex
           export VERSION=$(python3 setup.py --version)          
-          python -m twine upload --verbose --repository testpypi dist/razorpay-$VERSION-py3-none-any.whl dist/razorpay-$VERSION.tar.gz
+          python -m twine upload --verbose dist/razorpay-$VERSION-py3-none-any.whl dist/razorpay-$VERSION.tar.gz
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
