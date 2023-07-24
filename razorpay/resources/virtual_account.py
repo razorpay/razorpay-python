@@ -6,7 +6,7 @@ import json
 class VirtualAccount(Resource):
     def __init__(self, client=None):
         super(VirtualAccount, self).__init__(client)
-        self.base_url = URL.VIRTUAL_ACCOUNT_URL
+        self.base_url = URL.V1 + URL.VIRTUAL_ACCOUNT_URL
 
     def all(self, data={}, **kwargs):
         """"

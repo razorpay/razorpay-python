@@ -5,7 +5,7 @@ from ..constants.url import URL
 class Addon(Resource):
     def __init__(self, client=None):
         super(Addon, self).__init__(client)
-        self.base_url = URL.ADDON_URL
+        self.base_url = URL.V1 + URL.ADDON_URL
 
     def fetch(self, addon_id, data={}, **kwargs):
         """"

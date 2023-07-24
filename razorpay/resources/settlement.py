@@ -5,7 +5,7 @@ from ..constants.url import URL
 class Settlement(Resource):
     def __init__(self, client=None):
         super(Settlement, self).__init__(client)
-        self.base_url = URL.SETTLEMENT_URL
+        self.base_url = URL.V1 + URL.SETTLEMENT_URL
 
     def all(self, data={}, **kwargs):
         """"

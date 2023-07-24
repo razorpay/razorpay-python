@@ -5,7 +5,7 @@ from ..constants.url import URL
 class Qrcode(Resource):
     def __init__(self, client=None):
         super(Qrcode, self).__init__(client)
-        self.base_url = URL.QRCODE_URL
+        self.base_url = URL.V1 + URL.QRCODE_URL
 
     def fetch(self, qrcode_id, data={}, **kwargs):
         """"

@@ -1,0 +1,13 @@
+{
+    "url": "https://google.com",
+    "alert_email": "gaurav.kumar@example.com",
+    "secret": "12345",
+    "events": [
+        "payment.authorized",
+        "payment.failed",
+        "payment.captured",
+        "payment.dispute.created",
+        "refund.failed",
+        "refund.created"
+    ]
+}

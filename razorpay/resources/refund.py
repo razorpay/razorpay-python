@@ -6,7 +6,7 @@ import warnings
 class Refund(Resource):
     def __init__(self, client=None):
         super(Refund, self).__init__(client)
-        self.base_url = URL.REFUNDS_URL
+        self.base_url = URL.V1 + URL.REFUNDS_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",

@@ -6,7 +6,7 @@ import warnings
 class Transfer(Resource):
     def __init__(self, client=None):
         super(Transfer, self).__init__(client)
-        self.base_url = URL.TRANSFER_URL
+        self.base_url = URL.V1 + URL.TRANSFER_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",
@@ -21,7 +21,7 @@ class Transfer(Resource):
             Dictionary of Transfer data
         """
         if 'payment_id' in data:
-            url = "/payments/{}/transfers".format(data['payment_id'])
+            url = URL.V1 + "/payments/{}/transfers".format(data['payment_id'])
 
             del data['payment_id']
             return self.get_url(url, data, **kwargs)

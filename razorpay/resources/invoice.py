@@ -6,7 +6,7 @@ import warnings
 class Invoice(Resource):
     def __init__(self, client=None):
         super(Invoice, self).__init__(client)
-        self.base_url = URL.INVOICE_URL
+        self.base_url = URL.V1 + URL.INVOICE_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release", DeprecationWarning)

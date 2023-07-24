@@ -5,7 +5,18 @@ from ..constants.url import URL
 class Token(Resource):
     def __init__(self, client=None):
         super(Token, self).__init__(client)
-        self.base_url = URL.CUSTOMER_URL
+        self.base_url = URL.V1 + URL.CUSTOMER_URL
+
+    def create(self, data={}, **kwargs):
+        """"
+        Create token from given dict
+
+        Returns:
+            token Dict which was created
+        """
+        url = '{}{}'.format(URL.V1, URL.TOKEN)
+
+        return self.post_url(url, data, **kwargs)
 
     def fetch(self, customer_id, token_id, data={}, **kwargs):
         """"
@@ -46,3 +57,33 @@ class Token(Resource):
         """
         url = "{}/{}/tokens/{}".format(self.base_url, customer_id, token_id)
         return self.delete_url(url, data, **kwargs)
+
+    def fetchToken(self, data={}, **kwargs):
+        """"
+        fetch Given Token For a Customer
+
+        Returns:
+            Dict for fetch token
+        """
+        url = '{}{}/{}'.format(URL.V1, URL.TOKEN, "fetch")
+        return self.post_url(url, data, **kwargs) 
+
+    def deleteToken(self, data={}, **kwargs):
+        """"
+        Delete Given Token
+
+        Returns:
+            Dict for deleted token
+        """
+        url = '{}{}/{}'.format(URL.V1, URL.TOKEN, "delete")
+        return self.post_url(url, data, **kwargs) 
+
+    def processPaymentOnAlternatePAorPG(self, data={}, **kwargs):
+        """"
+        Process a Payment on another PA/PG with Token Created on Razorpay
+
+        Returns:
+            
+        """
+        url = '{}{}/{}'.format(URL.V1, URL.TOKEN, "service_provider_tokens/token_transactional_data")
+        return self.post_url(url, data, **kwargs)                

@@ -6,7 +6,7 @@ import warnings
 class Order(Resource):
     def __init__(self, client=None):
         super(Order, self).__init__(client)
-        self.base_url = URL.ORDER_URL
+        self.base_url = URL.V1 + URL.ORDER_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",

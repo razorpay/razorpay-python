@@ -5,7 +5,7 @@ from ..constants.url import URL
 class Subscription(Resource):
     def __init__(self, client=None):
         super(Subscription, self).__init__(client)
-        self.base_url = URL.SUBSCRIPTION_URL
+        self.base_url = URL.V1 + URL.SUBSCRIPTION_URL
 
     def all(self, data={}, **kwargs):
         """"

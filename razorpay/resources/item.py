@@ -5,7 +5,7 @@ from ..constants.url import URL
 class Item(Resource):
     def __init__(self, client=None):
         super(Item, self).__init__(client)
-        self.base_url = URL.ITEM_URL
+        self.base_url = URL.V1 + URL.ITEM_URL
     
     def create(self, data={}, **kwargs):
         """"
