@@ -34,7 +34,8 @@ class Payment(Resource):
         """
         return super(Payment, self).fetch(payment_id, data, **kwargs)
 
-    def capture(self, payment_id, amount, data={}, **kwargs): # nosemgrep : python.lang.correctness.common-mistakes.default-mutable-dict.default-mutable-dict
+    # nosemgrep : python.lang.correctness.common-mistakes.default-mutable-dict.default-mutable-dict
+    def capture(self, payment_id, amount, data={}, **kwargs):
         """"
         Capture Payment for given Id
 
@@ -45,7 +46,8 @@ class Payment(Resource):
         Returns:
             Payment dict after getting captured
         """
-        url = "{}/{}/capture".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/capture"
+
         data['amount'] = amount
         return self.post_url(url, data, **kwargs)
 
@@ -60,7 +62,8 @@ class Payment(Resource):
         Returns:
             Payment dict after getting refunded
         """
-        url = "{}/{}/refund".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/refund"
+
         data['amount'] = amount
         return self.post_url(url, data, **kwargs)
 
@@ -74,7 +77,8 @@ class Payment(Resource):
         Returns:
             Payment dict after getting transferred
         """
-        url = "{}/{}/transfers".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/transfers"
+
         return self.post_url(url, data, **kwargs)
 
     def transfers(self, payment_id, data={}, **kwargs):
@@ -88,7 +92,7 @@ class Payment(Resource):
             A collection (dict) of transfers
             items : The key containing a list of 'transfer' entities
         """
-        url = "{}/{}/transfers".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/transfers"
         return self.get_url(url, data, **kwargs)
 
     def bank_transfer(self, payment_id, data={}, **kwargs):
@@ -101,7 +105,7 @@ class Payment(Resource):
         Returns:
             Bank Transfer dict
         """
-        url = "{}/{}/bank_transfer".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/bank_transfer"
         return self.get_url(url, data, **kwargs)
 
     def upi_transfer(self, payment_id, data={}, **kwargs):
@@ -114,9 +118,9 @@ class Payment(Resource):
         Returns:
             UPI Transfer dict
         """
-        url = "{}/{}/upi_transfer".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/upi_transfer"
         return self.get_url(url, data, **kwargs)
-    
+
     def refund(self, payment_id, data={}, **kwargs):
         """"
         Create a normal refund
@@ -124,7 +128,7 @@ class Payment(Resource):
         Returns:
             Payment dict after getting refund
         """
-        url = "{}/{}/refund".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/refund"
         return self.post_url(url, data, **kwargs)
 
     def fetch_multiple_refund(self, payment_id, data={}, **kwargs):
@@ -134,8 +138,8 @@ class Payment(Resource):
         Returns:
             refunds dict
         """
-        url = "{}/{}/refunds".format(self.base_url, payment_id)
-        return self.get_url(url, data, **kwargs) 
+        url = f"{self.base_url}/{payment_id}/refund"
+        return self.get_url(url, data, **kwargs)
 
     def fetch_refund_id(self, payment_id, refund_id, **kwargs):
         """"
@@ -144,23 +148,22 @@ class Payment(Resource):
         Returns:
             Refund dict
         """
-        url = "{}/{}/refunds/{}".format(self.base_url, payment_id, refund_id)
-        return self.get_url(url, {}, **kwargs)  
-  
+        url = f"{self.base_url}/{payment_id}/refunds/{refund_id}"
+        return self.get_url(url, {}, **kwargs)
+
     def edit(self, payment_id, data={}, **kwargs):
         """"
          Update the Payment
         Args:
             data : Dictionary having keys using which order have to be edited
                 'notes' : key value pair as notes
-            
+
             Returns:
             Payment Dict which was edited
         """
-        url = '{}/{}'.format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}"
+        return self.patch_url(url, data, **kwargs)
 
-        return self.patch_url(url, data, **kwargs) 
-    
     def fetchCardDetails(self, payment_id, **kwargs):
         """"
         Fetch Card Details of a Payment
@@ -171,7 +174,7 @@ class Payment(Resource):
         Returns:
             Payment dict for given Order Id
         """
-        url = "{}/{}/card".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/card"
         return self.get_url(url, {}, **kwargs)
 
     def fetchDownTime(self, **kwargs):
@@ -184,9 +187,9 @@ class Payment(Resource):
         Returns:
             Payment dict for given Order Id
         """
-        url = "{}/{}".format(self.base_url,'downtimes')
-        return self.get_url(url, {}, **kwargs)        
-    
+        url = f"{self.base_url}/downtimes"
+        return self.get_url(url, {}, **kwargs)
+
     def fetchDownTimeById(self, downtime_id, **kwargs):
         """"
         Fetch Payment Downtime Details by ID
@@ -197,10 +200,10 @@ class Payment(Resource):
         Returns:
             Payment dict for given Order Id
         """
-        url = "{}/downtimes/{}".format(self.base_url, downtime_id)
+        url = f"{self.base_url}/downtimes/{downtime_id}"
         return self.get_url(url, {}, **kwargs)
-    
-    def createPaymentJson(self ,data={}, **kwargs):
+
+    def createPaymentJson(self, data={}, **kwargs):
         """"
         Create a Payment
 
@@ -211,9 +214,8 @@ class Payment(Resource):
         Returns:
             Payment Dict which was created
         """
-        url = "{}/create/{}".format(self.base_url, 'json')
-
-        return self.post_url(url, data, **kwargs)  
+        url = f"{self.base_url}/create/json"
+        return self.post_url(url, data, **kwargs)
 
     def createRecurring(self, data={}, **kwargs):
         """"
@@ -221,7 +223,7 @@ class Payment(Resource):
         Return:
             Recurring Payments dict
         """
-        url = "{}/{}/recurring".format(self.base_url,'create')
+        url = f"{self.base_url}/create/recurring"
         return self.post_url(url, data, **kwargs)
 
     def createUpi(self, data={}, **kwargs):
@@ -230,7 +232,7 @@ class Payment(Resource):
         Return:
           Payments dict
         """
-        url = "{}/create/{}".format(self.base_url,'upi')
+        url = f"{self.base_url}/create/upi"
         return self.post_url(url, data, **kwargs)
 
     def validateVpa(self, data={}, **kwargs):
@@ -239,8 +241,8 @@ class Payment(Resource):
         Return:
           Payments dict
         """
-        url = "{}/validate/{}".format(self.base_url,'vpa')
-        return self.post_url(url, data, **kwargs)            
+        url = f"{self.base_url}/validate/vpa"
+        return self.post_url(url, data, **kwargs)
 
     def fetchPaymentMethods(self, **kwargs):
         """"
@@ -248,9 +250,9 @@ class Payment(Resource):
         Return:
           Payments dict
         """
-        url = "/{}".format('methods')
+        url = f"/methods"
         return self.get_url(url, {}, **kwargs)
-    
+
     def otpGenerate(self, payment_id, data={}, **kwargs):
         """"
         Otp Generate
@@ -261,7 +263,7 @@ class Payment(Resource):
         Returns:
             Otp Dict which was created
         """
-        url = "{}/{}/otp_generate".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/otp_generate"
         return self.post_url(url, data, **kwargs)
 
     def otpSubmit(self, payment_id, data={}, **kwargs):
@@ -274,7 +276,7 @@ class Payment(Resource):
         Returns:
             Otp Dict which was created
         """
-        url = "{}/{}/otp/submit".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/otp/submit"
         return self.post_url(url, data, **kwargs)
 
     def otpResend(self, payment_id, data={}, **kwargs):
@@ -287,5 +289,5 @@ class Payment(Resource):
         Returns:
             Otp Dict which was created
         """
-        url = "{}/{}/otp/resend".format(self.base_url, payment_id)
+        url = f"{self.base_url}/{payment_id}/otp/resend"
         return self.post_url(url, data, **kwargs)

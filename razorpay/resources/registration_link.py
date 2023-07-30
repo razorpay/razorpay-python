@@ -18,9 +18,9 @@ class RegistrationLink(Resource):
             description : The count may not be greater than 100.
             subscription_registration : Details of the authorization payment.
             notes : A key-value pair
-        
+
         Returns:
             {"success": true}
         """
-        url = "{}/{}".format(self.base_url, 'auth_links')
+        url = f"{self.base_url}/auth_links"
         return self.post_url(url, data, **kwargs)

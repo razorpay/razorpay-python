@@ -8,7 +8,7 @@ class TestClientQrcode(ClientTestCase):
 
     def setUp(self):
         super(TestClientQrcode, self).setUp()
-        self.base_url = '{}/payments/qr_codes'.format(self.base_url)
+        self.base_url = f"{self.base_url}/payments/qr_codes"
         self.plan_id = 'qr_IAgePI1GuSMTFN'
 
     @responses.activate
@@ -22,7 +22,7 @@ class TestClientQrcode(ClientTestCase):
     @responses.activate
     def test_qrcode_fetch(self):
         result = mock_file('fake_qrcode')
-        url = '{}/{}'.format(self.base_url, 'fake_qrcode_id')
+        url = f"{self.base_url}/fake_qrcode_id"
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.qrcode.fetch('fake_qrcode_id'), result)
@@ -51,15 +51,16 @@ class TestClientQrcode(ClientTestCase):
     @responses.activate
     def test_qrcode_fetch_all_payment(self):
         result = mock_file('qrcode_payments_collection')
-        url = '{}/{}/payments'.format(self.base_url, 'fake_qrcode_id')
+        url = f"{self.base_url}/fake_qrcode_id/payments"
         responses.add(responses.GET, url, status=200,
                       body=json.dumps(result), match_querystring=True)
-        self.assertEqual(self.client.qrcode.fetch_all_payments('fake_qrcode_id'), result)
+        self.assertEqual(self.client.qrcode.fetch_all_payments(
+            'fake_qrcode_id'), result)
 
     @responses.activate
     def test_qrcode_close(self):
         result = mock_file('fake_qrcode')
-        url = '{}/{}/close'.format(self.base_url, 'fake_qrcode_id')
+        url = f"{self.base_url}/fake_qrcode_id/close"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.qrcode.close('fake_qrcode_id'), result)

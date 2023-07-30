@@ -66,13 +66,12 @@ class Client:
 
         if 'base_url' in options:
             base_url = options['base_url']
-            del(options['base_url'])
+            del (options['base_url'])
 
         return base_url
 
     def _update_user_agent_header(self, options):
-        user_agent = "{}{} {}".format('Razorpay-Python/', self._get_version(),
-                                      self._get_app_details_ua())
+        user_agent = f"Razorpay-Python/{self._get_version()} {self._get_app_details_ua()}"
 
         if 'headers' in options:
             options['headers']['User-Agent'] = user_agent
@@ -83,7 +82,7 @@ class Client:
 
     def _get_version(self):
         version = ""
-        try: # nosemgrep : gitlab.bandit.B110
+        try:  # nosemgrep : gitlab.bandit.B110
             version = pkg_resources.require("razorpay")[0].version
         except DistributionNotFound:  # pragma: no cover
             pass
@@ -98,8 +97,8 @@ class Client:
             if 'title' in app:
                 app_ua = app['title']
                 if 'version' in app:
-                    app_ua += "/{}".format(app['version'])
-                app_details_ua += "{} ".format(app_ua)
+                    app_ua += f"/{app['version']}"
+                app_details_ua += f"{app_ua} "
 
         return app_details_ua
 
@@ -115,14 +114,14 @@ class Client:
         """
         options = self._update_user_agent_header(options)
 
-        url = "{}{}".format(self.base_url, path)
+        url = f"{self.base_url}{path}"
 
         response = getattr(self.session, method)(url, auth=self.auth,
                                                  verify=self.cert_path,
                                                  **options)
         if ((response.status_code >= HTTP_STATUS_CODE.OK) and
                 (response.status_code < HTTP_STATUS_CODE.REDIRECT)):
-            return json.dumps({}) if(response.status_code==204) else response.json()
+            return json.dumps({}) if (response.status_code == 204) else response.json()
         else:
             msg = ""
             code = ""
@@ -137,7 +136,8 @@ class Client:
                 raise BadRequestError(msg)
             elif str.upper(code) == ERROR_CODE.GATEWAY_ERROR:
                 raise GatewayError(msg)
-            elif str.upper(code) == ERROR_CODE.SERVER_ERROR: # nosemgrep : python.lang.maintainability.useless-ifelse.useless-if-body
+            # nosemgrep : python.lang.maintainability.useless-ifelse.useless-if-body
+            elif str.upper(code) == ERROR_CODE.SERVER_ERROR:
                 raise ServerError(msg)
             else:
                 raise ServerError(msg)

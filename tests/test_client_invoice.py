@@ -8,7 +8,7 @@ class TestClientInvoice(ClientTestCase):
 
     def setUp(self):
         super(TestClientInvoice, self).setUp()
-        self.base_url = '{}/invoices'.format(self.base_url)
+        self.base_url = f"{self.base_url}/invoices"
 
     @responses.activate
     def test_invoice_fetch_all(self):
@@ -22,7 +22,7 @@ class TestClientInvoice(ClientTestCase):
     def test_invoice_fetch_all_with_options(self):
         count = 1
         result = mock_file('invoice_collection_with_one_invoice')
-        url = '{}?count={}'.format(self.base_url, count)
+        url = f"{self.base_url}?count={count}"
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.invoice.all({'count': count}), result)
@@ -30,7 +30,7 @@ class TestClientInvoice(ClientTestCase):
     @responses.activate
     def test_invoice_fetch(self):
         result = mock_file('fake_invoice')
-        url = '{}/{}'.format(self.base_url, 'fake_invoice_id')
+        url = f"{self.base_url}/fake_invoice_id"
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.invoice.fetch('fake_invoice_id'), result)
@@ -48,15 +48,16 @@ class TestClientInvoice(ClientTestCase):
     def test_invoice_notify_by(self):
         medium = "sms"
         result = mock_file('fake_invoice_notify_by')
-        url = '{}/{}/notify_by/{}'.format(self.base_url, 'fake_invoice_id', medium)
+        url = f"{self.base_url}/fake_invoice_id/notify_by/{medium}"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.invoice.notify_by('fake_invoice_id', medium=medium), result)
+        self.assertEqual(self.client.invoice.notify_by(
+            'fake_invoice_id', medium=medium), result)
 
     @responses.activate
     def test_invoice_cancel(self):
         result = mock_file('fake_invoice_cancel')
-        url = '{}/{}/cancel'.format(self.base_url, 'fake_invoice_id')
+        url = f"{self.base_url}/fake_invoice_id/cancel"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.invoice.cancel('fake_invoice_id'), result)
@@ -64,7 +65,7 @@ class TestClientInvoice(ClientTestCase):
     @responses.activate
     def test_invoice_delete(self):
         result = mock_file('fake_invoice_delete')
-        url = '{}/{}'.format(self.base_url, 'fake_invoice_id')
+        url = f"{self.base_url}/fake_invoice_id"
         responses.add(responses.DELETE, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.invoice.delete('fake_invoice_id'), result)
@@ -72,7 +73,7 @@ class TestClientInvoice(ClientTestCase):
     @responses.activate
     def test_invoice_issue(self):
         result = mock_file('fake_invoice')
-        url = '{}/{}/issue'.format(self.base_url, 'fake_invoice_id')
+        url = f"{self.base_url}/fake_invoice_id/issue"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.invoice.issue('fake_invoice_id'), result)
@@ -81,7 +82,8 @@ class TestClientInvoice(ClientTestCase):
     def test_invoice_edit(self):
         init = mock_file('init_invoice_edit')
         result = mock_file('fake_invoice_edit')
-        url = '{}/{}'.format(self.base_url, 'fake_invoice_id')
+        url = f"{self.base_url}/fake_invoice_id"
         responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.invoice.edit('fake_invoice_id', init), result)
+        self.assertEqual(self.client.invoice.edit(
+            'fake_invoice_id', init), result)

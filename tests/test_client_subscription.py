@@ -8,7 +8,7 @@ class TestClientSubscription(ClientTestCase):
 
     def setUp(self):
         super(TestClientSubscription, self).setUp()
-        self.base_url = '{}/subscriptions'.format(self.base_url)
+        self.base_url = f"{self.base_url}/subscriptions"
         self.subscription_id = 'sub_8RlLljfA4AnDVx'
 
     @responses.activate
@@ -22,7 +22,7 @@ class TestClientSubscription(ClientTestCase):
     @responses.activate
     def test_subscription_fetch(self):
         result = mock_file('fake_subscription')
-        url = '{}/{}'.format(self.base_url, 'fake_subscription_id')
+        url = f"{self.base_url}/fake_subscription_id"
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(
@@ -41,7 +41,7 @@ class TestClientSubscription(ClientTestCase):
     @responses.activate
     def test_subscription_cancel(self):
         result = mock_file('fake_subscription_cancelled')
-        url = '{}/{}/cancel'.format(self.base_url, self.subscription_id)
+        url = f"{self.base_url}/{self.subscription_id}/cancel"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         response = json.loads(
@@ -53,18 +53,18 @@ class TestClientSubscription(ClientTestCase):
     @responses.activate
     def test_subscription_cancel_scheduled_changes(self):
         result = mock_file('fake_subscription_resumed')
-        url = '{}/{}/cancel_scheduled_changes'.format(self.base_url, self.subscription_id)
+        url = f"{self.base_url}/{self.subscription_id}/cancel_scheduled_changes"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         response = json.loads(
             self.client.subscription.cancel_scheduled_changes(self.subscription_id))
         self.assertEqual(response['id'], self.subscription_id)
-        self.assertEqual(response['entity'], 'subscription')   
+        self.assertEqual(response['entity'], 'subscription')
 
     @responses.activate
     def test_subscription_create_addon(self):
         result = mock_file('fake_subscription_addon')
-        url = '{}/{}/addons'.format(self.base_url, self.subscription_id)
+        url = f"{self.base_url}/{self.subscription_id}/addons"
         responses.add(responses.POST,
                       url,
                       status=200,
@@ -83,20 +83,21 @@ class TestClientSubscription(ClientTestCase):
     @responses.activate
     def test_subscription_edit(self):
         param = {
-                 "quantity":2,
-                 "schedule_change_at":"cycle_end",
-               }
+            "quantity": 2,
+            "schedule_change_at": "cycle_end",
+        }
 
         result = mock_file('fake_subscription')
-        url = '{}/{}'.format(self.base_url, 'subscription_id')
+        url = f"{self.base_url}/subscription_id"
         responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.subscription.edit('subscription_id', param), result)     
+        self.assertEqual(self.client.subscription.edit(
+            'subscription_id', param), result)
 
     @responses.activate
     def test_subscription_pending_update(self):
         result = mock_file('fake_subscription')
-        url = '{}/{}/retrieve_scheduled_changes'.format(self.base_url, 'fake_subscription_id')
+        url = f"{self.base_url}/fake_subscription_id/retrieve_scheduled_changes"
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(
@@ -106,19 +107,19 @@ class TestClientSubscription(ClientTestCase):
     @responses.activate
     def test_subscription_pause(self):
         result = mock_file('fake_subscription_paused')
-        url = '{}/{}/pause'.format(self.base_url, self.subscription_id)
+        url = f"{self.base_url}/{self.subscription_id}/pause"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         response = json.loads(
             self.client.subscription.pause(self.subscription_id))
         self.assertEqual(response['id'], self.subscription_id)
         self.assertEqual(response['entity'], 'subscription')
-        self.assertEqual(response['status'], 'paused')  
+        self.assertEqual(response['status'], 'paused')
 
     @responses.activate
     def test_subscription_resume(self):
         result = mock_file('fake_subscription_resumed')
-        url = '{}/{}/resume'.format(self.base_url, self.subscription_id)
+        url = f"{self.base_url}/{self.subscription_id}/resume"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         response = json.loads(
@@ -130,10 +131,10 @@ class TestClientSubscription(ClientTestCase):
     @responses.activate
     def test_subscription_delete_offer(self):
         result = mock_file('fake_subscription')
-        url = '{}/{}/{}'.format(self.base_url, 'sub_8kip7ybbcOyc9J','offer_IjA06IHSz33cw2')
+        url = f"{self.base_url}/sub_8kip7ybbcOyc9J/offer_IjA06IHSz33cw2"
         responses.add(responses.DELETE, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         response = json.loads(
-            self.client.subscription.delete_offer('sub_8kip7ybbcOyc9J','offer_IjA06IHSz33cw2'))
+            self.client.subscription.delete_offer('sub_8kip7ybbcOyc9J', 'offer_IjA06IHSz33cw2'))
         self.assertEqual(response['id'], 'sub_8kip7ybbcOyc9J')
-        self.assertEqual(response['entity'], 'subscription')               
+        self.assertEqual(response['entity'], 'subscription')

@@ -8,7 +8,7 @@ class TestClientFundAccount(ClientTestCase):
 
     def setUp(self):
         super(TestClientFundAccount, self).setUp()
-        self.base_url = '{}/fund_accounts'.format(self.base_url)
+        self.base_url = f'{self.base_url}/fund_accounts'
 
     @responses.activate
     def test_all(self):
@@ -22,11 +22,11 @@ class TestClientFundAccount(ClientTestCase):
     def test_create(self):
         param = {
             "customer_id": "cust_IEfAt3ruD4OEzo",
-            "account_type":"bank_account",
-            "bank_account":{
-                "name":"Gaurav Kumar",
-                "account_number":"11214311215411",
-                "ifsc":"HDFC0000053"
+            "account_type": "bank_account",
+            "bank_account": {
+                "name": "Gaurav Kumar",
+                "account_number": "11214311215411",
+                "ifsc": "HDFC0000053"
             }
         }
         result = mock_file('fund_account_collection')
@@ -38,4 +38,3 @@ class TestClientFundAccount(ClientTestCase):
                       match_querystring=True)
 
         self.assertEqual(self.client.fund_account.create(param), result)
- 

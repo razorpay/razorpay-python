@@ -54,7 +54,7 @@ class VirtualAccount(Resource):
             virtual_account_id :
                 Id for which Virtual Account objects has to be Closed
         """
-        url = "{}/{}/close".format(self.base_url, virtual_account_id)
+        url = f"{self.base_url}/{virtual_account_id}/close"
         return self.post_url(url, data, **kwargs)
 
     def payments(self, virtual_account_id, data={}, **kwargs):
@@ -68,7 +68,7 @@ class VirtualAccount(Resource):
         Returns:
             Payment dict for given Virtual Account Id
         """
-        url = "{}/{}/payments".format(self.base_url, virtual_account_id)
+        url = f"{self.base_url}/{virtual_account_id}/payments"
         return self.get_url(url, data, **kwargs)
 
     def add_receiver(self, virtual_account_id, data={}, **kwargs):
@@ -79,7 +79,7 @@ class VirtualAccount(Resource):
             virtual_account_id :
                 Id for which Virtual Account objects has to be Closed
         """
-        url = "{}/{}/receivers".format(self.base_url, virtual_account_id)
+        url = f"{self.base_url}/{virtual_account_id}/receivers"
         return self.post_url(url, data, **kwargs)
 
     def add_allowed_player(self, virtual_account_id, data={}, **kwargs):
@@ -90,8 +90,8 @@ class VirtualAccount(Resource):
             virtual_account_id :
                 Id for which Virtual Account objects has to be Closed
         """
-        url = "{}/{}/allowed_payers".format(self.base_url, virtual_account_id)
-        return self.post_url(url, data, **kwargs) 
+        url = f"{self.base_url}/{virtual_account_id}/allowed_payers"
+        return self.post_url(url, data, **kwargs)
 
     def delete_allowed_player(self, virtual_account_id, allowed_player_id, data={}, **kwargs):
         """"
@@ -101,7 +101,7 @@ class VirtualAccount(Resource):
             virtual_account_id :
                 Id for which Virtual Account objects has to be Closed
         Returns:
-            204        
+            204
         """
-        url = "{}/{}/allowed_payers/{}".format(self.base_url, virtual_account_id, allowed_player_id)
+        url = f"{self.base_url}/{virtual_account_id}/allowed_payers/{allowed_player_id}"
         return self.delete_url(url, data, **kwargs)

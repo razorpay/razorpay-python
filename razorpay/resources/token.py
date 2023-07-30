@@ -18,7 +18,7 @@ class Token(Resource):
         Returns:
             Token dict for given token Id
         """
-        url = "{}/{}/tokens/{}".format(self.base_url, customer_id, token_id)
+        url = f"{self.base_url}/{customer_id}/tokens/{token_id}"
         return self.get_url(url, data, **kwargs)
 
     def all(self, customer_id, data={}, **kwargs):
@@ -31,7 +31,7 @@ class Token(Resource):
         Returns:
             Token dicts for given cutomer Id
         """
-        url = "{}/{}/tokens".format(self.base_url, customer_id)
+        url = f"{self.base_url}/{customer_id}/tokens"
         return self.get_url(url, data, **kwargs)
 
     def delete(self, customer_id, token_id, data={}, **kwargs):
@@ -44,5 +44,5 @@ class Token(Resource):
         Returns:
             Dict for deleted token
         """
-        url = "{}/{}/tokens/{}".format(self.base_url, customer_id, token_id)
+        url = f"{self.base_url}/{customer_id}/tokens/{token_id}"
         return self.delete_url(url, data, **kwargs)

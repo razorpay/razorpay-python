@@ -7,7 +7,8 @@ class Resource(object):
         return self.get_url(self.base_url, data, **kwargs)
 
     def fetch(self, id, data, **kwargs):
-        url = "{}/{}".format(self.base_url, id)
+        url = f"{self.base_url}/{id}"
+
         return self.get_url(url, data, **kwargs)
 
     def get_url(self, url, data, **kwargs):
@@ -26,5 +27,6 @@ class Resource(object):
         return self.client.delete(url, data, **kwargs)
 
     def delete(self, id, data, **kwargs):
-        url = "{}/{}/delete".format(self.base_url, id)
+        url = f"{self.base_url}/{id}/delete"
+
         return self.delete_url(url, data, **kwargs)

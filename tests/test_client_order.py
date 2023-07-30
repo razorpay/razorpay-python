@@ -8,7 +8,7 @@ class TestClientOrder(ClientTestCase):
 
     def setUp(self):
         super(TestClientOrder, self).setUp()
-        self.base_url = '{}/orders'.format(self.base_url)
+        self.base_url = f'{self.base_url}/orders'
 
     @responses.activate
     def test_order_all(self):
@@ -26,7 +26,7 @@ class TestClientOrder(ClientTestCase):
     def test_order_all_with_options(self):
         count = 1
         result = mock_file('order_collection_with_one_order')
-        url = '{}?count={}'.format(self.base_url, count)
+        url = f'{self.base_url}?count={count}'
         responses.add(responses.GET,
                       url,
                       status=200,
@@ -38,7 +38,7 @@ class TestClientOrder(ClientTestCase):
     @responses.activate
     def test_order_fetch(self):
         result = mock_file('fake_order')
-        url = '{}/{}'.format(self.base_url, 'fake_order_id')
+        url = f'{self.base_url}/fake_order_id'
         responses.add(responses.GET,
                       url,
                       status=200,
@@ -50,7 +50,7 @@ class TestClientOrder(ClientTestCase):
     @responses.activate
     def test_order_payments(self):
         result = mock_file('fake_order')
-        url = '{}/{}/payments'.format(self.base_url, 'fake_order_id')
+        url = f'{self.base_url}/fake_order_id/payments'
         responses.add(responses.GET,
                       url,
                       status=200,
@@ -71,14 +71,14 @@ class TestClientOrder(ClientTestCase):
     @responses.activate
     def test_order_edit(self):
         param = {
-                  "notes": {
-                    "key1": "value3",
-                    "key2": "value2"
-                   }
-                }
-        
+            "notes": {
+                "key1": "value3",
+                "key2": "value2"
+            }
+        }
+
         result = mock_file('edit_order')
-        url = '{}/{}'.format(self.base_url, 'dummy_id')
+        url = f'{self.base_url}/dummy_id'
         responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.order.edit('dummy_id', param), result)

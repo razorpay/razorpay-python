@@ -8,7 +8,7 @@ class TestClientRegistrationLink(ClientTestCase):
 
     def setUp(self):
         super(TestClientRegistrationLink, self).setUp()
-        self.base_url = '{}/subscription_registration/{}'.format(self.base_url, 'auth_links')
+        self.base_url = f'{self.base_url}/subscription_registration/auth_links'
 
     @responses.activate
     def test_create(self):

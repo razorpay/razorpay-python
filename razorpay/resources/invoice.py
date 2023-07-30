@@ -57,7 +57,8 @@ class Invoice(Resource):
         Returns:
             {"success": true}
         """
-        url = "{}/{}/notify_by/{}".format(self.base_url, invoice_id, medium)
+        url = f"{self.base_url}/{invoice_id}/notify_by/{medium}"
+
         return self.post_url(url, {}, **kwargs)
 
     def cancel(self, invoice_id, **kwargs):
@@ -70,7 +71,8 @@ class Invoice(Resource):
         Returns:
             The response for the API will be the invoice entity, similar to create/update API response, with status attribute's value as cancelled
         """
-        url = "{}/{}/cancel".format(self.base_url, invoice_id)
+        url = f"{self.base_url}/{invoice_id}/cancel"
+
         return self.post_url(url, {}, **kwargs)
 
     def delete(self, invoice_id, **kwargs):
@@ -83,7 +85,8 @@ class Invoice(Resource):
         Returns:
             The response is always be an empty array like this - []
         """
-        url = "{}/{}".format(self.base_url, invoice_id)
+        url = f"{self.base_url}/{invoice_id}"
+
         return self.delete_url(url, {}, **kwargs)
 
     def issue(self, invoice_id, **kwargs):
@@ -95,7 +98,8 @@ class Invoice(Resource):
         Returns:
             Its response is the invoice entity, similar to create/update API response. Its status now would be issued.
         """
-        url = "{}/{}/issue".format(self.base_url, invoice_id)
+        url = f"{self.base_url}/{invoice_id}/issue"
+
         return self.post_url(url, {}, **kwargs)
 
     def edit(self, invoice_id, data={}, **kwargs):
@@ -110,5 +114,6 @@ class Invoice(Resource):
             Its response is the invoice entity, similar to create/update API response. Its status now would be issued.
             Refer https://razorpay.com/docs/invoices/api/#entity-structure
         """
-        url = "{}/{}".format(self.base_url, invoice_id)
+        url = f"{self.base_url}/{invoice_id}"
+
         return self.patch_url(url, data, **kwargs)

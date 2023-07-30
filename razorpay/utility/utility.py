@@ -14,45 +14,47 @@ class Utility(object):
         order_id = str(parameters['razorpay_order_id'])
         payment_id = str(parameters['razorpay_payment_id'])
         razorpay_signature = str(parameters['razorpay_signature'])
-       
-        msg = "{}|{}".format(order_id, payment_id)
-        
+
+        msg = f"{order_id}|{payment_id}"
         secret = str(self.client.auth[1])
 
         return self.verify_signature(msg, razorpay_signature, secret)
 
     def verify_payment_link_signature(self, parameters):
-        
+
         if 'razorpay_payment_id' in parameters.keys() and 'payment_link_reference_id' in parameters.keys() and 'payment_link_status' in parameters.keys():
             payment_id = str(parameters['razorpay_payment_id'])
             payment_link_id = str(parameters['payment_link_id'])
-            payment_link_reference_id = str(parameters['payment_link_reference_id'])
+            payment_link_reference_id = str(
+                parameters['payment_link_reference_id'])
             payment_link_status = str(parameters['payment_link_status'])
             razorpay_signature = str(parameters['razorpay_signature'])
         else:
             return False
-          
-        msg = "{}|{}|{}|{}".format(payment_link_id, payment_link_reference_id, payment_link_status, payment_id)
-        
-        secret = str(parameters['secret']) if 'secret' in parameters.keys() else str(self.client.auth[1])
 
-        return self.verify_signature(msg, razorpay_signature, secret)    
-    
+        msg = f"{payment_link_id}|{payment_link_reference_id}|{payment_link_status}|{payment_id}"
+
+        secret = str(parameters['secret']) if 'secret' in parameters.keys() else str(
+            self.client.auth[1])
+
+        return self.verify_signature(msg, razorpay_signature, secret)
+
     def verify_subscription_payment_signature(self, parameters):
         """
-        To consider the payment as successful and subscription as authorized 
+        To consider the payment as successful and subscription as authorized
         after the signature has been successfully verified
         """
         subscription_id = str(parameters['razorpay_subscription_id'])
         payment_id = str(parameters['razorpay_payment_id'])
         razorpay_signature = str(parameters['razorpay_signature'])
 
-        msg = "{}|{}".format(payment_id, subscription_id)
+        msg = f"{payment_id}|{subscription_id}"
 
-        secret = str(parameters['secret']) if 'secret' in parameters.keys() else str(self.client.auth[1])
+        secret = str(parameters['secret']) if 'secret' in parameters.keys() else str(
+            self.client.auth[1])
 
         return self.verify_signature(msg, razorpay_signature, secret)
-    
+
     def verify_webhook_signature(self, body, signature, secret):
         return self.verify_signature(body, signature, secret)
 

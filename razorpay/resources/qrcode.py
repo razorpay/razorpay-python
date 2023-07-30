@@ -28,7 +28,7 @@ class Qrcode(Resource):
         """
         url = self.base_url
         return self.post_url(url, data, **kwargs)
-    
+
     def all(self, data={}, **kwargs):
         """"
         Fetch All Qr Code
@@ -45,8 +45,8 @@ class Qrcode(Resource):
         Returns:
             Qrcode payment dict
         """
-        url = "{}/{}/payments".format(self.base_url, qrcode_id)
-        return self.get_url(url, data, **kwargs)   
+        url = f"{self.base_url}/{qrcode_id}/payments"
+        return self.get_url(url, data, **kwargs)
 
     def close(self, qrcode_id, **kwargs):
         """"
@@ -55,6 +55,6 @@ class Qrcode(Resource):
         Returns:
             Qrcode Dict which was closed
         """
-        url = '{}/{}/close'.format(self.base_url, qrcode_id)
+        url = f"{self.base_url}/{qrcode_id}/close"
 
         return self.post_url(url, {}, **kwargs)

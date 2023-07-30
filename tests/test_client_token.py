@@ -8,12 +8,12 @@ class TestClientCustomer(ClientTestCase):
 
     def setUp(self):
         super(TestClientCustomer, self).setUp()
-        self.base_url = '{}/customers'.format(self.base_url)
+        self.base_url = f'{self.base_url}/customers'
 
     @responses.activate
     def test_tokens_all(self):
         result = mock_file('token_collection')
-        url = '{}/{}/tokens'.format(self.base_url, self.customer_id)
+        url = f'{self.base_url}/{self.customer_id}/tokens'
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.token.all(self.customer_id),
@@ -22,9 +22,7 @@ class TestClientCustomer(ClientTestCase):
     @responses.activate
     def test_token_fetch(self):
         result = mock_file('token_collection')
-        url = '{}/{}/tokens/{}'.format(self.base_url,
-                                       self.customer_id,
-                                       self.token_id)
+        url = f'{self.base_url}/{self.customer_id}/tokens/{self.token_id}'
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(
@@ -33,9 +31,7 @@ class TestClientCustomer(ClientTestCase):
 
     @responses.activate
     def test_token_delete(self):
-        url = '{}/{}/tokens/{}'.format(self.base_url,
-                                       self.customer_id,
-                                       self.token_id)
+        url = f'{self.base_url}/{self.customer_id}/tokens/{self.token_id}'
         responses.add(responses.DELETE,
                       url,
                       status=200,

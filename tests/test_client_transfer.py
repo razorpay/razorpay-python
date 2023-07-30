@@ -8,8 +8,8 @@ class TestClientTransfer(ClientTestCase):
 
     def setUp(self):
         super(TestClientTransfer, self).setUp()
-        self.payment_url = '{}/payments'.format(self.base_url)
-        self.base_url = '{}/transfers'.format(self.base_url)
+        self.payment_url = f"{self.base_url}/payments"
+        self.base_url = f"{self.base_url}/transfers"
 
     @responses.activate
     def test_transfer_all(self):
@@ -26,7 +26,7 @@ class TestClientTransfer(ClientTestCase):
     @responses.activate
     def test_transfer_all_with_payment_id(self):
         result = mock_file('transfers_collection_with_payment_id')
-        url = "{}/dummy_payment/transfers".format(self.payment_url)
+        url = f"{self.payment_url}/dummy_payment/transfers"
         responses.add(responses.GET,
                       url,
                       status=200,
@@ -40,14 +40,15 @@ class TestClientTransfer(ClientTestCase):
     @responses.activate
     def test_transfer_fetch(self):
         result = mock_file('fake_transfer')
-        url = '{}/{}'.format(self.base_url, 'fake_transfer_id')
+        url = f"{self.base_url}/fake_transfer_id"
         responses.add(responses.GET,
                       url,
                       status=200,
                       body=json.dumps(result),
                       match_querystring=True)
 
-        self.assertEqual(self.client.transfer.fetch('fake_transfer_id'), result)
+        self.assertEqual(self.client.transfer.fetch(
+            'fake_transfer_id'), result)
 
     @responses.activate
     def test_transfer_create(self):
@@ -62,7 +63,7 @@ class TestClientTransfer(ClientTestCase):
     def test_transfer_edit(self):
         param = {'on_hold': False}
         result = mock_file('fake_transfer')
-        url = "{}/dummy_id".format(self.base_url)
+        url = f"{self.base_url}/dummy_id"
         responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.transfer.edit('dummy_id', param), result)
@@ -70,7 +71,7 @@ class TestClientTransfer(ClientTestCase):
     @responses.activate
     def test_transfer_reversal(self):
         result = mock_file('fake_reversal')
-        url = "{}/dummy_id/reversals".format(self.base_url)
+        url = f"{self.base_url}/dummy_id/reversals"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.transfer.reverse('dummy_id'), result)
@@ -78,7 +79,7 @@ class TestClientTransfer(ClientTestCase):
     @responses.activate
     def test_transfer_reversal_fetch(self):
         result = mock_file('reversal_collection')
-        url = "{}/dummy_id/reversals".format(self.base_url)
+        url = f"{self.base_url}/dummy_id/reversals"
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.transfer.reversals('dummy_id'), result)

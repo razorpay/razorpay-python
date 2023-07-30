@@ -48,5 +48,5 @@ class Refund(Resource):
         Returns:
             Refund Dict which was edited
         """
-        url = "{}/{}".format(self.base_url, refund_id)
-        return self.patch_url(url, data, **kwargs)     
+        url = f"{self.base_url}/{refund_id}"
+        return self.patch_url(url, data, **kwargs)

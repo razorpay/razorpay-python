@@ -51,7 +51,7 @@ class Subscription(Resource):
         Returns:
             Subscription Dict for given subscription id
         """
-        url = "{}/{}/cancel".format(self.base_url, subscription_id)
+        url = f"{self.base_url}/{subscription_id}/cancel"
         return self.post_url(url, data, **kwargs)
 
     def cancel_scheduled_changes(self, subscription_id, data={}, **kwargs):
@@ -64,8 +64,8 @@ class Subscription(Resource):
         Returns:
             Subscription Dict for given subscription id
         """
-        url = "{}/{}/cancel_scheduled_changes".format(self.base_url, subscription_id)
-        return self.post_url(url, data, **kwargs)    
+        url = f"{self.base_url}/{subscription_id}/cancel_scheduled_changes"
+        return self.post_url(url, data, **kwargs)
 
     def createAddon(self, subscription_id, data={}, **kwargs):
         """
@@ -77,20 +77,20 @@ class Subscription(Resource):
         Return:
             Subscription dict for given subscription id
         """
-        url = "{}/{}/addons".format(self.base_url, subscription_id)
-        return self.post_url(url, data, **kwargs) 
+        url = f"{self.base_url}/{subscription_id}/addons"
+        return self.post_url(url, data, **kwargs)
 
     def edit(self, subscription_id, data={}, **kwargs):
         """"
          Update particular subscription
 
         Args:
-            subscription_id : Id for which subscription has to be edited         
+            subscription_id : Id for which subscription has to be edited
         Returns:
             Subscription dict for given subscription id
         """
-        url = '{}/{}'.format(self.base_url, subscription_id)   
-        return self.patch_url(url, data, **kwargs) 
+        url = f"{self.base_url}/{subscription_id}"
+        return self.patch_url(url, data, **kwargs)
 
     def pending_update(self, subscription_id, **kwargs):
         """"
@@ -102,8 +102,8 @@ class Subscription(Resource):
         Returns:
             Subscription dict for given subscription Id
         """
-        url = '{}/{}/retrieve_scheduled_changes'.format(self.base_url, subscription_id)   
-        return self.get_url(url, {}, **kwargs)    
+        url = f"{self.base_url}/{subscription_id}/retrieve_scheduled_changes"
+        return self.get_url(url, {}, **kwargs)
 
     def pause(self, subscription_id, data={}, **kwargs):
         """
@@ -115,7 +115,7 @@ class Subscription(Resource):
         Returns:
             Subscription Dict for given subscription id
         """
-        url = "{}/{}/pause".format(self.base_url, subscription_id)
+        url = f"{self.base_url}/{subscription_id}/pause"
         return self.post_url(url, data, **kwargs)
 
     def resume(self, subscription_id, data={}, **kwargs):
@@ -128,7 +128,7 @@ class Subscription(Resource):
         Returns:
             Subscription Dict for given subscription id
         """
-        url = "{}/{}/resume".format(self.base_url, subscription_id)
+        url = f"{self.base_url}/{subscription_id}/resume"
         return self.post_url(url, data, **kwargs)
 
     def delete_offer(self, subscription_id, offer_id, data={}, **kwargs):
@@ -142,5 +142,5 @@ class Subscription(Resource):
         Returns:
             Subscription Dict for given subscription id
         """
-        url = "{}/{}/{}".format(self.base_url, subscription_id, offer_id)
-        return self.delete_url(url, data, **kwargs)                 
+        url = f"{self.base_url}/{subscription_id}/{offer_id}"
+        return self.delete_url(url, data, **kwargs)

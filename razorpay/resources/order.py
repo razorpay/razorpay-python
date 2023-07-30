@@ -49,7 +49,8 @@ class Order(Resource):
         Returns:
             Payment dict for given Order Id
         """
-        url = "{}/{}/payments".format(self.base_url, order_id)
+        url = f"{self.base_url}/{order_id}/payments"
+
         return self.get_url(url, data, **kwargs)
 
     def create(self, data={}, **kwargs):
@@ -69,7 +70,7 @@ class Order(Resource):
         """
         url = self.base_url
         return self.post_url(url, data, **kwargs)
-    
+
     def edit(self, order_id, data={}, **kwargs):
         """"
          Update order
@@ -77,11 +78,11 @@ class Order(Resource):
         Args:
             data : Dictionary having keys using which order have to be edited
                 'notes' : key value pair as notes
-            
+
             Returns:
             Order Dict which was edited
 
         """
-        url = '{}/{}'.format(self.base_url, order_id)
+        url = f"{self.base_url}/{order_id}"
 
         return self.patch_url(url, data, **kwargs)

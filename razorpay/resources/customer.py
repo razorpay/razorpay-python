@@ -36,10 +36,10 @@ class Customer(Resource):
         Returns:
             Customer Dict which was edited
         """
-        url = '{}/{}'.format(self.base_url, customer_id)
+        url = f"{self.base_url}/{customer_id}"
 
         return self.put_url(url, data, **kwargs)
-    
+
     def all(self, data={}, **kwargs):
         """"
         Fetch all customer

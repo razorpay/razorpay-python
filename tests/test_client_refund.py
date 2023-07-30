@@ -8,7 +8,7 @@ class TestClientRefund(ClientTestCase):
 
     def setUp(self):
         super(TestClientRefund, self).setUp()
-        self.base_url = '{}/refunds'.format(self.base_url)
+        self.base_url = f'{self.base_url}/refunds'
 
     @responses.activate
     def test_refund_all(self):
@@ -21,7 +21,7 @@ class TestClientRefund(ClientTestCase):
     @responses.activate
     def test_refund_fetch(self):
         result = mock_file('fake_refund')
-        url = '{}/{}'.format(self.base_url, self.refund_id)
+        url = f'{self.base_url}/{self.refund_id}'
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.refund.fetch(self.refund_id), result)
@@ -38,13 +38,14 @@ class TestClientRefund(ClientTestCase):
     @responses.activate
     def test_refund_edit(self):
         param = {
-                   "notes": {
-                   "notes_key_1":"Beam me up Scotty.",
-                   "notes_key_2":"Engage"
-                    }
-                }
+            "notes": {
+                "notes_key_1": "Beam me up Scotty.",
+                "notes_key_2": "Engage"
+            }
+        }
         result = mock_file('fake_refund')
-        url = "{}/{}".format(self.base_url,'rfnd_DfjjhJC6eDvUAi')
+        url = f"{self.base_url}/rfnd_DfjjhJC6eDvUAi"
         responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.refund.edit('rfnd_DfjjhJC6eDvUAi', param), result)
+        self.assertEqual(self.client.refund.edit(
+            'rfnd_DfjjhJC6eDvUAi', param), result)

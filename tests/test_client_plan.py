@@ -8,7 +8,7 @@ class TestClientPlan(ClientTestCase):
 
     def setUp(self):
         super(TestClientPlan, self).setUp()
-        self.base_url = '{}/plans'.format(self.base_url)
+        self.base_url = f'{self.base_url}/plans'
         self.plan_id = 'plan_8kihN0YqhnF8a7'
 
     @responses.activate
@@ -22,7 +22,7 @@ class TestClientPlan(ClientTestCase):
     @responses.activate
     def test_plan_fetch(self):
         result = mock_file('fake_plan')
-        url = '{}/{}'.format(self.base_url, self.plan_id)
+        url = f'{self.base_url}/{self.plan_id}'
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.plan.fetch(self.plan_id), result)
