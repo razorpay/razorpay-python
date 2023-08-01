@@ -176,10 +176,7 @@ class Client:
         data, options = self._update_request(data, options)
         return self.request('put', path, data=data, **options)
 
-    def file(self, path, data, **options):
-        """
-        Parses POST request options and dispatches a request
-        """      
+    def file(self, path, data, **options):     
         fileDict = {}
         fieldDict = {}
         
