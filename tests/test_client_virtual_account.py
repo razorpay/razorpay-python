@@ -151,7 +151,7 @@ class TestClientVirtualAccount(ClientTestCase):
    
     @responses.activate
     def test_virtual_delete_allowed_player(self):
-        result = mock_file('fake_delete_allowed_payer')
+        result = json.dumps({})
         url = "{}/{}/allowed_payers/{}".format(self.base_url, self.fake_virtual_account_id, 'fake_allowed_player_id')
         responses.add(responses.DELETE,
                       url,
@@ -161,5 +161,3 @@ class TestClientVirtualAccount(ClientTestCase):
         response = self.client.virtual_account.delete_allowed_player(
         self.fake_virtual_account_id, 'fake_allowed_player_id');   
         self.assertEqual(response, result)
-          
-   
