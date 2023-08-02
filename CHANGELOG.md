@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
-## [1.4.1][1.4.1] - 2023-08-01
+## [1.4.1][1.4.1] - 2023-08-02
 
 feat: Added new API endpoints
 
