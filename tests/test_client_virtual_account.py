@@ -150,7 +150,7 @@ class TestClientVirtualAccount(ClientTestCase):
 
     @responses.activate
     def test_virtual_delete_allowed_player(self):
-        result = mock_file('{}')
+        result = mock_file('[]')
         url = "{}/{}/allowed_payers/{}".format(self.base_url, self.fake_virtual_account_id, 'fake_allowed_player_id')
         responses.add(responses.DELETE,
                       url,
