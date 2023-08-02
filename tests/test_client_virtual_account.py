@@ -148,10 +148,9 @@ class TestClientVirtualAccount(ClientTestCase):
         self.assertEqual(response['id'], self.fake_virtual_account_id)
         self.assertEqual(response['entity'], 'virtual_account')
 
-
     @responses.activate
     def test_virtual_delete_allowed_player(self):
-        result = mock_file('fake_delete_allowed_payer')
+        result = mock_file('{}')
         url = "{}/{}/allowed_payers/{}".format(self.base_url, self.fake_virtual_account_id, 'fake_allowed_player_id')
         responses.add(responses.DELETE,
                       url,
@@ -161,4 +160,3 @@ class TestClientVirtualAccount(ClientTestCase):
         response = self.client.virtual_account.delete_allowed_player(
         self.fake_virtual_account_id, 'fake_allowed_player_id');   
         self.assertEqual(response, result)
-
