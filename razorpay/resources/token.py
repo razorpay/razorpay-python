@@ -8,7 +8,7 @@ class Token(Resource):
         self.base_url = URL.V1 + URL.CUSTOMER_URL
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create token from given dict
 
         Returns:
@@ -19,7 +19,7 @@ class Token(Resource):
         return self.post_url(url, data, **kwargs)
 
     def fetch(self, customer_id, token_id, data={}, **kwargs):
-        """"
+        """
         Fetch Token for given Id and given customer Id
 
         Args:
@@ -33,7 +33,7 @@ class Token(Resource):
         return self.get_url(url, data, **kwargs)
 
     def all(self, customer_id, data={}, **kwargs):
-        """"
+        """
         Get all tokens for given customer Id
 
         Args:
@@ -46,7 +46,7 @@ class Token(Resource):
         return self.get_url(url, data, **kwargs)
 
     def delete(self, customer_id, token_id, data={}, **kwargs):
-        """"
+        """
         Delete Given Token For a Customer
 
         Args:
@@ -59,7 +59,7 @@ class Token(Resource):
         return self.delete_url(url, data, **kwargs)
 
     def fetchToken(self, data={}, **kwargs):
-        """"
+        """
         fetch Given Token For a Customer
 
         Returns:
@@ -69,7 +69,7 @@ class Token(Resource):
         return self.post_url(url, data, **kwargs) 
 
     def deleteToken(self, data={}, **kwargs):
-        """"
+        """
         Delete Given Token
 
         Returns:
@@ -79,7 +79,7 @@ class Token(Resource):
         return self.post_url(url, data, **kwargs) 
 
     def processPaymentOnAlternatePAorPG(self, data={}, **kwargs):
-        """"
+        """
         Process a Payment on another PA/PG with Token Created on Razorpay
 
         Returns:

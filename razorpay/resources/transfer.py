@@ -14,7 +14,7 @@ class Transfer(Resource):
         return self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Transfer entities
 
         Returns:
@@ -29,7 +29,7 @@ class Transfer(Resource):
         return super(Transfer, self).all(data, **kwargs)
 
     def fetch(self, transfer_id, data={}, **kwargs):
-        """"
+        """
         Fetch Transfer for given Id
 
         Args:
@@ -41,7 +41,7 @@ class Transfer(Resource):
         return super(Transfer, self).fetch(transfer_id, data, **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create Transfer from given dict
 
         Args:
@@ -53,7 +53,7 @@ class Transfer(Resource):
         return self.post_url(url, data, **kwargs)
 
     def edit(self, transfer_id, data={}, **kwargs):
-        """"
+        """
         Edit Transfer from given id
 
         Args:
@@ -66,7 +66,7 @@ class Transfer(Resource):
         return self.patch_url(url, data, **kwargs)
 
     def reverse(self, transfer_id, data={}, **kwargs):
-        """"
+        """
         Reverse Transfer from given id
 
         Args:
@@ -79,7 +79,7 @@ class Transfer(Resource):
         return self.post_url(url, data, **kwargs)
 
     def reversals(self, transfer_id, data={}, **kwargs):
-        """"
+        """
         Get all Reversal Transfer from given id
 
         Args:

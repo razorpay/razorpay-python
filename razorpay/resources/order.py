@@ -14,7 +14,7 @@ class Order(Resource):
         return self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Order entities
 
         Returns:
@@ -23,7 +23,7 @@ class Order(Resource):
         return super(Order, self).all(data, **kwargs)
 
     def fetch(self, order_id, data={}, **kwargs):
-        """"
+        """
         Fetch Order for given Id
 
         Args:

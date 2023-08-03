@@ -8,7 +8,7 @@ class Product(Resource):
         self.base_url = URL.V2 + URL.ACCOUNT
 
     def requestProductConfiguration(self, account_id, data={}, **kwargs):
-        """"
+        """
         Request a Product Configuration from given dict
 
         Returns:
@@ -19,7 +19,7 @@ class Product(Resource):
         return self.post_url(url, data, **kwargs)
 
     def fetch(self, account_id, product_id,  data={}, **kwargs):
-        """"
+        """
         Fetch product for given accound and product id
 
         Returns:
@@ -29,7 +29,7 @@ class Product(Resource):
         return self.get_url(url, data, **kwargs)
 
     def edit(self, account_id, product_id, data={}, **kwargs):
-        """"
+        """
         Edit account information from given dict
 
         Returns:
@@ -39,7 +39,7 @@ class Product(Resource):
         return self.patch_url(url, data, **kwargs)
 
     def fetchTnc(self, product_name,  data={}, **kwargs):
-        """"
+        """
         Fetch Terms and Conditions for a Sub-Merchant
 
         Returns:

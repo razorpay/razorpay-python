@@ -8,7 +8,7 @@ class Plan(Resource):
         self.base_url = URL.V1 + URL.PLAN_URL
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create Plan from given dict
 
         Args:
@@ -21,7 +21,7 @@ class Plan(Resource):
         return self.post_url(url, data, **kwargs)
 
     def fetch(self, plan_id, data={}, **kwargs):
-        """"
+        """
         Fetch Plan for given Id
 
         Args:
@@ -33,7 +33,7 @@ class Plan(Resource):
         return super(Plan, self).fetch(plan_id, data, **kwargs)
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all plan entities
 
         Returns:
