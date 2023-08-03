@@ -163,4 +163,3 @@ class TestClientVirtualAccount(ClientTestCase):
         self.fake_virtual_account_id, 'fake_allowed_player_id');   
         self.assertEqual(response, result)
           
-   
