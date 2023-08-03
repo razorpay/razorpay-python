@@ -172,7 +172,7 @@ client.payment.fetch(paymentId)
 ### Fetch payments for an order
 
 ```py
-client.order.payment(orderId)
+client.order.payments(orderId)
 ```
 **Parameters**
 

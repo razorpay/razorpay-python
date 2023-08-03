@@ -8,7 +8,7 @@ class Account(Resource):
         self.base_url = URL.V2 + URL.ACCOUNT
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create account from given dict
 
         Returns:
@@ -18,7 +18,7 @@ class Account(Resource):
         return self.post_url(url, data, **kwargs)
 
     def fetch(self, account_id, data={}, **kwargs):
-        """"
+        """
         Fetch account for given Id
 
         Args:
@@ -30,7 +30,7 @@ class Account(Resource):
         return super(Account, self).fetch(account_id, data, **kwargs)
 
     def edit(self, account_id, data={}, **kwargs):
-        """"
+        """
         Edit account information from given dict
 
         Returns:

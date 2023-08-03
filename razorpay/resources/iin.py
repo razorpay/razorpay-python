@@ -8,7 +8,7 @@ class Iin(Resource):
         self.base_url = URL.V1 + URL.IIN
 
     def fetch(self, token_iin, data={}, **kwargs):
-        """"
+        """
         fetch card properties using token iin
 
         Returns:

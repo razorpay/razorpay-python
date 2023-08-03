@@ -40,7 +40,7 @@ class Order(Resource):
         return self.payments(order_id, data, **kwargs)
 
     def payments(self, order_id, data={}, **kwargs):
-        """"
+        """
         Fetch Payment for Order Id
 
         Args:
@@ -53,7 +53,7 @@ class Order(Resource):
         return self.get_url(url, data, **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create Order from given dict
 
         Args:
@@ -71,7 +71,7 @@ class Order(Resource):
         return self.post_url(url, data, **kwargs)
     
     def edit(self, order_id, data={}, **kwargs):
-        """"
+        """
          Update order
 
         Args:
