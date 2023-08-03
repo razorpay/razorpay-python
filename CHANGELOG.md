@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file. The format 
 
 ## [1.4.1][1.4.1] - 2023-08-03
 
-feat: Added new API endpoints
+feat: Added new API endpoints.
 
 Added account onboarding API (create, fetch, edit, delete)
 Added stakeholders API (create, fetch, all, edit)
