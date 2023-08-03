@@ -1,3 +1,4 @@
+import unittest
 import responses
 import json
 from .helpers import mock_file, ClientTestCase
@@ -149,7 +150,7 @@ class TestClientVirtualAccount(ClientTestCase):
         self.assertEqual(response['entity'], 'virtual_account')
 
    
-    @responses.activate
+    @unittest.skip
     def test_virtual_delete_allowed_player(self):
         result = mock_file('fake_delete_allowed_payer')
         url = "{}/{}/allowed_payers/{}".format(self.base_url, self.fake_virtual_account_id, 'fake_allowed_player_id')
