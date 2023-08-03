@@ -1,0 +1,32 @@
+{
+    "id": "token_IJmat4GwYATMtx",
+    "entity": "token",
+    "method": "card",
+    "card": {
+        "last4": "1111",
+        "network": "Visa",
+        "type": "credit",
+        "issuer": "IDFB",
+        "international": false,
+        "emi": false,
+        "sub_type": "consumer"
+    },
+    "customer": {
+        "id": "cust_1Aa00000000001",
+        "entity": "customer",
+        "name": "Bob",
+        "email": "bob@gmail.com",
+        "contact": "9000090000",
+        "gstin": null,
+        "notes": {
+            "notes_key_1": "Tea, Earl Grey, Hot",
+            "notes_key_2": "Tea, Earl Grey… decaf."
+        },
+        "created_at": 1658390470
+    },
+    "expired_at": 1701368999,
+    "customer_id": "cust_1Aa00000000001",
+    "compliant_with_tokenisation_guidelines": true,
+    "status": "active",
+    "notes": []
+}
