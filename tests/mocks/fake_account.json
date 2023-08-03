@@ -1,0 +1,78 @@
+{
+    "id": "acc_GRWKk7qQsLnDjX",
+    "type": "standard",
+    "status": "created",
+    "email": "gauriagain.kumar@example.org",
+    "profile": {
+        "category": "healthcare",
+        "subcategory": "clinic",
+        "addresses": {
+            "registered": {
+                "street1": "507, Koramangala 1st block",
+                "street2": "MG Road",
+                "city": "Bengaluru",
+                "state": "KARNATAKA",
+                "postal_code": 560034,
+                "country": "IN"
+            },
+            "operation": {
+                "street1": "507, Koramangala 6th block",
+                "street2": "Kormanagalo",
+                "city": "Bengaluru",
+                "state": "KARNATAKA",
+                "country": "IN",
+                "postal_code": 560047
+            }
+        },
+        "business_model": "Online Clothing ( men, women, ethnic, modern ) fashion and lifestyle, accessories, t-shirt, shirt, track pant, shoes."
+    },
+    "notes": {
+        "internal_ref_id": "123123"
+    },
+    "created_at": 1611136837,
+    "phone": "9000090000",
+    "business_type": "partnership",
+    "legal_business_name": "Acme Corp",
+    "customer_facing_business_name": "Example",
+    "legal_info": {
+        "pan": "AAACL1234C",
+        "gst": "18AABCU9603R1ZM"
+    },
+    "apps": {
+        "websites": [
+            "https://www.example.org"
+        ],
+        "android": [
+            {
+                "url": "playstore.example.org",
+                "name": "Example"
+            }
+        ],
+        "ios": [
+            {
+                "url": "appstore.example.org",
+                "name": "Example"
+            }
+        ]
+    },
+    "brand": {
+        "color": "#FFFFFF"
+    },
+    "contact_info": {
+        "chargeback": {
+            "email": "cb@example.org",
+            "phone": null,
+            "policy_url": null
+        },
+        "refund": {
+            "email": "cb@example.org",
+            "phone": null,
+            "policy_url": null
+        },
+        "support": {
+            "email": "support@example.org",
+            "phone": "9999999998",
+            "policy_url": "https://www.google.com"
+        }
+    }
+}
