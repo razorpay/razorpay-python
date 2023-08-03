@@ -5,7 +5,7 @@ with open('README.md') as readme:
 
 setup(
     name="razorpay",
-    version="1.3.1",
+    version="1.4.1",
     description="Razorpay Python Client",
     long_description=readme_content,
     long_description_content_type='text/markdown',
@@ -25,8 +25,6 @@ setup(
         # List of supported Python versions
         # Make sure that this is reflected in .github/workflows/python.yml as well
         "Programming Language :: Python",
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
