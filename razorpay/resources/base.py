@@ -30,3 +30,6 @@ class Resource(object):
         url = f"{self.base_url}/{id}/delete"
 
         return self.delete_url(url, data, **kwargs)
+
+    def file_url(self, url, data, **kwargs):
+        return self.client.file(url, data, **kwargs)    

@@ -6,7 +6,7 @@ import warnings
 class Refund(Resource):
     def __init__(self, client=None):
         super(Refund, self).__init__(client)
-        self.base_url = URL.REFUNDS_URL
+        self.base_url = URL.V1 + URL.REFUNDS_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",
@@ -21,7 +21,7 @@ class Refund(Resource):
         return self.post_url(url, data, **kwargs)
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch All Refund
 
         Returns:
@@ -30,7 +30,7 @@ class Refund(Resource):
         return super(Refund, self).all(data, **kwargs)
 
     def fetch(self, refund_id, data={}, **kwargs):
-        """"
+        """
         Refund object for given paymnet Id
 
         Args:
@@ -42,7 +42,7 @@ class Refund(Resource):
         return super(Refund, self).fetch(refund_id, data, **kwargs)
 
     def edit(self, refund_id, data={}, **kwargs):
-        """"
+        """
         Update Refund
 
         Returns:

@@ -8,7 +8,7 @@ class Item(Resource):
         self.base_url = URL.ITEM_URL
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create item
 
         Returns:
@@ -18,7 +18,7 @@ class Item(Resource):
         return self.post_url(url, data, **kwargs)
 
     def fetch(self, item_id, data={}, **kwargs):
-        """"
+        """
         Fetch an Item
 
         Args:
@@ -30,7 +30,7 @@ class Item(Resource):
         return super(Item, self).fetch(item_id, data, **kwargs)
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all items
 
         Returns:
@@ -39,7 +39,7 @@ class Item(Resource):
         return super(Item, self).all(data, **kwargs)
 
     def edit(self, item_id, data={}, **kwargs):
-        """"
+        """
         Update an Item
 
         Returns:
@@ -50,7 +50,7 @@ class Item(Resource):
         return self.patch_url(url, data, **kwargs)
 
     def delete(self, item_id, **kwargs):
-        """"
+        """
         Delete an Item
 
         Args:

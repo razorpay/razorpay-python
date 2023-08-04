@@ -6,7 +6,7 @@ import warnings
 class Transfer(Resource):
     def __init__(self, client=None):
         super(Transfer, self).__init__(client)
-        self.base_url = URL.TRANSFER_URL
+        self.base_url = URL.V1 + URL.TRANSFER_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",
@@ -14,14 +14,14 @@ class Transfer(Resource):
         return self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Transfer entities
 
         Returns:
             Dictionary of Transfer data
         """
         if 'payment_id' in data:
-            url = f"/payments/{data['payment_id']}/transfers"
+            url = URL.V1 + "/payments/{}/transfers".format(data['payment_id'])
 
             del data['payment_id']
             return self.get_url(url, data, **kwargs)
@@ -29,7 +29,7 @@ class Transfer(Resource):
         return super(Transfer, self).all(data, **kwargs)
 
     def fetch(self, transfer_id, data={}, **kwargs):
-        """"
+        """
         Fetch Transfer for given Id
 
         Args:
@@ -41,7 +41,7 @@ class Transfer(Resource):
         return super(Transfer, self).fetch(transfer_id, data, **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create Transfer from given dict
 
         Args:
@@ -53,7 +53,7 @@ class Transfer(Resource):
         return self.post_url(url, data, **kwargs)
 
     def edit(self, transfer_id, data={}, **kwargs):
-        """"
+        """
         Edit Transfer from given id
 
         Args:
@@ -66,7 +66,7 @@ class Transfer(Resource):
         return self.patch_url(url, data, **kwargs)
 
     def reverse(self, transfer_id, data={}, **kwargs):
-        """"
+        """
         Reverse Transfer from given id
 
         Args:
@@ -79,7 +79,7 @@ class Transfer(Resource):
         return self.post_url(url, data, **kwargs)
 
     def reversals(self, transfer_id, data={}, **kwargs):
-        """"
+        """
         Get all Reversal Transfer from given id
 
         Args:

@@ -6,14 +6,14 @@ import warnings
 class PaymentLink(Resource):
     def __init__(self, client=None):
         super(PaymentLink, self).__init__(client)
-        self.base_url = URL.PAYMENT_LINK_URL
+        self.base_url = URL.V1 + URL.PAYMENT_LINK_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release", DeprecationWarning)
         return self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Payment link entities
 
         Returns:
@@ -22,7 +22,7 @@ class PaymentLink(Resource):
         return super(PaymentLink, self).all(data, **kwargs)
 
     def fetch(self, payment_link_id, data={}, **kwargs):
-        """"
+        """
         Fetch Payment link for given Id
 
         Args:
@@ -34,7 +34,7 @@ class PaymentLink(Resource):
         return super(PaymentLink, self).fetch(payment_link_id, data, **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create Payment link from given dict
 
         Args:
@@ -47,7 +47,7 @@ class PaymentLink(Resource):
         return self.post_url(url, data, **kwargs)
 
     def cancel(self, payment_link_id, **kwargs):
-        """"
+        """
         Cancel an unpaid Payment link with given ID via API
         It can only be called on an Payment link that is not in the paid state.
 
@@ -61,7 +61,7 @@ class PaymentLink(Resource):
         return self.post_url(url, {}, **kwargs)
 
     def edit(self, payment_link_id, data={}, **kwargs):
-        """"
+        """
         Edit the Payment link
         Args:
             data : Dictionary having keys using which order have to be edited
@@ -78,7 +78,7 @@ class PaymentLink(Resource):
         return self.patch_url(url, data, **kwargs)
 
     def notifyBy(self, payment_link_id, medium, **kwargs):
-        """"
+        """
         Send notification
 
         Args:

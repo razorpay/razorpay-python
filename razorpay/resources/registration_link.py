@@ -5,10 +5,10 @@ from ..constants.url import URL
 class RegistrationLink(Resource):
     def __init__(self, client=None):
         super(RegistrationLink, self).__init__(client)
-        self.base_url = URL.REGISTRATION_LINK_URL
+        self.base_url = URL.V1 + URL.REGISTRATION_LINK_URL
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create a Registration Link
         Args:
             customer : Details of the customer to whom the registration link will be sent.

@@ -1,0 +1,139 @@
+{
+    "requested_configuration": {
+        "payment_methods": []
+    },
+    "active_configuration": {
+        "payment_capture": {
+            "mode": "automatic",
+            "refund_speed": "normal",
+            "automatic_expiry_period": 7200
+        },
+        "settlements": {
+            "account_number": null,
+            "ifsc_code": null,
+            "beneficiary_name": null
+        },
+        "checkout": {
+            "theme_color": "#FFFFFF",
+            "flash_checkout": true,
+            "logo": "https://example.com/your_logo"
+        },
+        "refund": {
+            "default_refund_speed": "normal"
+        },
+        "notifications": {
+            "whatsapp": true,
+            "sms": false,
+            "email": [
+                "b963e252-1201-45b0-9c39-c53eceb0cfd6_load@gmail.com"
+            ]
+        },
+        "payment_methods": {
+            "netbanking": {
+                "enabled": true,
+                "instrument": [
+                    {
+                        "type": "retail",
+                        "bank": [
+                            "hdfc",
+                            "sbin",
+                            "utib",
+                            "icic",
+                            "scbl",
+                            "yesb"
+                        ]
+                    }
+                ]
+            },
+            "wallet": {
+                "enabled": true,
+                "instrument": [
+                    "airtelmoney",
+                    "freecharge",
+                    "jiomoney",
+                    "olamoney",
+                    "payzapp",
+                    "mobikwik"
+                ]
+            },
+            "upi": {
+                "enabled": true,
+                "instrument": [
+                    "upi"
+                ]
+            }
+        }
+    },
+    "requirements": [
+        {
+            "field_reference": "individual_proof_of_address",
+            "resolution_url": "/accounts/acc_HQVlm3bnPmccC0/stakeholders/{stakeholderId}/documents",
+            "status": "required",
+            "reason_code": "document_missing"
+        },
+        {
+            "field_reference": "individual_proof_of_identification",
+            "resolution_url": "/accounts/acc_HQVlm3bnPmccC0/stakeholders/{stakeholderId}/documents",
+            "status": "required",
+            "reason_code": "document_missing"
+        },
+        {
+            "field_reference": "business_proof_of_identification",
+            "resolution_url": "/accounts/acc_HQVlm3bnPmccC0/documents",
+            "status": "required",
+            "reason_code": "document_missing"
+        },
+        {
+            "field_reference": "settlements.beneficiary_name",
+            "resolution_url": "/accounts/acc_HQVlm3bnPmccC0/products/acc_prd_HEgNpywUFctQ9e",
+            "status": "required",
+            "reason_code": "field_missing"
+        },
+        {
+            "field_reference": "settlements.account_number",
+            "resolution_url": "/accounts/acc_HQVlm3bnPmccC0/products/acc_prd_HEgNpywUFctQ9e",
+            "status": "required",
+            "reason_code": "field_missing"
+        },
+        {
+            "field_reference": "settlements.ifsc_code",
+            "resolution_url": "/accounts/acc_HQVlm3bnPmccC0/products/acc_prd_HEgNpywUFctQ9e",
+            "status": "required",
+            "reason_code": "field_missing"
+        },
+        {
+            "field_reference": "contact_name",
+            "resolution_url": "/accounts/acc_HQVlm3bnPmccC0",
+            "status": "required",
+            "reason_code": "field_missing"
+        },
+        {
+            "field_reference": "name",
+            "resolution_url": "/accounts/acc_HQVlm3bnPmccC0/stakeholders",
+            "status": "required",
+            "reason_code": "field_missing"
+        },
+        {
+            "field_reference": "customer_facing_business_name",
+            "resolution_url": "/accounts/acc_HQVlm3bnPmccC0",
+            "status": "required",
+            "reason_code": "field_missing"
+        },
+        {
+            "field_reference": "kyc.pan",
+            "resolution_url": "/accounts/acc_HQVlm3bnPmccC0/stakeholders",
+            "status": "required",
+            "reason_code": "field_missing"
+        }
+    ],
+    "tnc": {
+        "id": "tnc_IgohZaDBHRGjPv",
+        "accepted": true,
+        "accepted_at": 1641550798
+    },
+    "id": "acc_prd_HEgNpywUFctQ9e",
+    "account_id": "acc_HQVlm3bnPmccC0",
+    "product_name": "payment_gateway",
+    "activation_status": "needs_clarification",
+    "requested_at": 162547884
+}

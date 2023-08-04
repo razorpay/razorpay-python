@@ -6,14 +6,14 @@ import warnings
 class Invoice(Resource):
     def __init__(self, client=None):
         super(Invoice, self).__init__(client)
-        self.base_url = URL.INVOICE_URL
+        self.base_url = URL.V1 + URL.INVOICE_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release", DeprecationWarning)
         return self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Invoice entities
 
         Returns:
@@ -22,7 +22,7 @@ class Invoice(Resource):
         return super(Invoice, self).all(data, **kwargs)
 
     def fetch(self, invoice_id, data={}, **kwargs):
-        """"
+        """
         Fetch Invoice for given Id
 
         Args:
@@ -34,7 +34,7 @@ class Invoice(Resource):
         return super(Invoice, self).fetch(invoice_id, data, **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create Invoice from given dict
 
         Args:
@@ -47,7 +47,7 @@ class Invoice(Resource):
         return self.post_url(url, data, **kwargs)
 
     def notify_by(self, invoice_id, medium, **kwargs):
-        """"
+        """
         Send/Resend notifications to customer via email/sms
 
         Args:
@@ -62,7 +62,7 @@ class Invoice(Resource):
         return self.post_url(url, {}, **kwargs)
 
     def cancel(self, invoice_id, **kwargs):
-        """"
+        """
         Cancel an unpaid Invoice with given ID via API
         It can only be called on an invoice that is not in the paid state.
 
@@ -76,7 +76,7 @@ class Invoice(Resource):
         return self.post_url(url, {}, **kwargs)
 
     def delete(self, invoice_id, **kwargs):
-        """"
+        """
         Delete an invoice
         You can delete an invoice which is in the draft state.
 
@@ -90,7 +90,7 @@ class Invoice(Resource):
         return self.delete_url(url, {}, **kwargs)
 
     def issue(self, invoice_id, **kwargs):
-        """"
+        """
         Issues an invoice in draft state
 
         Args:
@@ -103,7 +103,7 @@ class Invoice(Resource):
         return self.post_url(url, {}, **kwargs)
 
     def edit(self, invoice_id, data={}, **kwargs):
-        """"
+        """
         Update an invoice
         In draft state all the attributes are allowed.
 
