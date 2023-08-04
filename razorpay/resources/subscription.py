@@ -5,10 +5,10 @@ from ..constants.url import URL
 class Subscription(Resource):
     def __init__(self, client=None):
         super(Subscription, self).__init__(client)
-        self.base_url = URL.SUBSCRIPTION_URL
+        self.base_url = URL.V1 + URL.SUBSCRIPTION_URL
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Subscription entities
 
         Returns:
@@ -17,7 +17,7 @@ class Subscription(Resource):
         return super(Subscription, self).all(data, **kwargs)
 
     def fetch(self, subscription_id, data={}, **kwargs):
-        """"
+        """
         Fetch Subscription for given Id
 
         Args:
@@ -29,7 +29,7 @@ class Subscription(Resource):
         return super(Subscription, self).fetch(subscription_id, data, **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create Subscription from given dict
 
         Args:
@@ -81,7 +81,7 @@ class Subscription(Resource):
         return self.post_url(url, data, **kwargs) 
 
     def edit(self, subscription_id, data={}, **kwargs):
-        """"
+        """
          Update particular subscription
 
         Args:
@@ -93,7 +93,7 @@ class Subscription(Resource):
         return self.patch_url(url, data, **kwargs) 
 
     def pending_update(self, subscription_id, **kwargs):
-        """"
+        """
         Fetch Subscription for given Id
 
         Args:
