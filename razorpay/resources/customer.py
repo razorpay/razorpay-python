@@ -5,10 +5,10 @@ from ..constants.url import URL
 class Customer(Resource):
     def __init__(self, client=None):
         super(Customer, self).__init__(client)
-        self.base_url = URL.CUSTOMER_URL
+        self.base_url = URL.V1 + URL.CUSTOMER_URL
 
     def fetch(self, customer_id, data={}, **kwargs):
-        """"
+        """
         Fetch Customer for given Id
 
         Args:
@@ -20,7 +20,7 @@ class Customer(Resource):
         return super(Customer, self).fetch(customer_id, data, **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create Customer from given dict
 
         Returns:
@@ -30,7 +30,7 @@ class Customer(Resource):
         return self.post_url(url, data, **kwargs)
 
     def edit(self, customer_id, data={}, **kwargs):
-        """"
+        """
         Edit Customer information from given dict
 
         Returns:
@@ -41,7 +41,7 @@ class Customer(Resource):
         return self.put_url(url, data, **kwargs)
     
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all customer
 
         Returns:

@@ -16,7 +16,10 @@ def mock_file(filename):
 class ClientTestCase(unittest.TestCase):
     def setUp(self):
         self.base_url = 'https://api.razorpay.com/v1'
-        self.secondary_url = 'https://test-api.razorpay.com/v1'
+        self.base_url_v2 = 'https://api.razorpay.com/v2'
+        self.secondary_url = 'https://test-api.razorpay.com'
+        self.v1 = 'v1'
+        self.v2 = 'v2'
         self.payment_id = 'fake_payment_id'
         self.refund_id = 'fake_refund_id'
         self.card_id = 'fake_card_id'
