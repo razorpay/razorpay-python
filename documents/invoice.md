@@ -511,7 +511,7 @@ client.invoice.cancel(invoiceId)
     "id": "cust_E7q0trFqXgExmT",
     "name": "Gaurav Kumar",
     "email": "gaurav.kumar@example.com",
-    "contact": "9972132594",
+    "contact": "+919999999999",
     "gstin": null,
     "billing_address": {
       "id": "addr_E7q0ttqh4SGhAC",
@@ -537,7 +537,7 @@ client.invoice.cancel(invoiceId)
     },
     "customer_name": "Gaurav Kumar",
     "customer_email": "gaurav.kumar@example.com",
-    "customer_contact": "9972132594"
+    "customer_contact": "+919999999999",
   },
   "order_id": "order_E7q0tvRpC0WJwg",
   "line_items": [
