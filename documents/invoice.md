@@ -537,7 +537,7 @@ client.invoice.cancel(invoiceId)
     },
     "customer_name": "Gaurav Kumar",
     "customer_email": "gaurav.kumar@example.com",
-    "customer_contact": "+919999999999",
+    "customer_contact": "+919999999999"
   },
   "order_id": "order_E7q0tvRpC0WJwg",
   "line_items": [

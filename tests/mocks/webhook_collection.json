@@ -1,0 +1,29 @@
+{
+    "entity": "collection",
+    "count": 1,
+    "items": [
+        {
+            "id": "HK890egfiItP3H",
+            "created_at": 1624060358,
+            "updated_at": 1624060358,
+            "service": "beta-api-test",
+            "owner_id": "H3kYHQ635sBwXG",
+            "owner_type": "merchant",
+            "context": [],
+            "disabled_at": 0,
+            "url": "https://en1mwkqo5ioct.x.pipedream.net",
+            "alert_email": "gaurav.kumar@example.com",
+            "secret_exists": true,
+            "entity": "webhook",
+            "active": true,
+            "events": [
+                "payment.authorized",
+                "payment.failed",
+                "payment.captured",
+                "payment.dispute.created",
+                "refund.failed",
+                "refund.created"
+            ]
+        }
+    ]
+}

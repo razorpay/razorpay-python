@@ -5,10 +5,10 @@ from ..constants.url import URL
 class Qrcode(Resource):
     def __init__(self, client=None):
         super(Qrcode, self).__init__(client)
-        self.base_url = URL.QRCODE_URL
+        self.base_url = URL.V1 + URL.QRCODE_URL
 
     def fetch(self, qrcode_id, data={}, **kwargs):
-        """"
+        """
         Fetch a Qr code
 
         Args:
@@ -20,7 +20,7 @@ class Qrcode(Resource):
         return super(Qrcode, self).fetch(qrcode_id, data, **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create a QR Code
 
         Returns:
@@ -30,7 +30,7 @@ class Qrcode(Resource):
         return self.post_url(url, data, **kwargs)
     
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch All Qr Code
 
         Returns:
@@ -39,7 +39,7 @@ class Qrcode(Resource):
         return super(Qrcode, self).all(data, **kwargs)
 
     def fetch_all_payments(self, qrcode_id,  data={}, **kwargs):
-        """"
+        """
         Fetch Payments for a QR Code
 
         Returns:
@@ -49,7 +49,7 @@ class Qrcode(Resource):
         return self.get_url(url, data, **kwargs)   
 
     def close(self, qrcode_id, **kwargs):
-        """"
+        """
         Close a QR Code
 
         Returns:

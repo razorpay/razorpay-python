@@ -5,10 +5,10 @@ from ..constants.url import URL
 class FundAccount(Resource):
     def __init__(self, client=None):
         super(FundAccount, self).__init__(client)
-        self.base_url = URL.FUND_ACCOUNT_URL
+        self.base_url = URL.V1 + URL.FUND_ACCOUNT_URL
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Fund Account entities
 
         Returns:
@@ -17,7 +17,7 @@ class FundAccount(Resource):
         return super(FundAccount, self).all(data, **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create a fund account
 
         Args:
