@@ -53,6 +53,8 @@ class Client:
 
         self.app_details = []
 
+        self.app_headers = {}
+
         # intializes each resource
         # injecting this client object into the constructor
         for name, Klass in RESOURCE_CLASSES.items():
@@ -106,13 +108,16 @@ class Client:
     def set_app_details(self, app_details):
         self.app_details.append(app_details)
 
+    def set_app_headers(self, app_headers):
+        self.app_headers = app_headers
+
     def get_app_details(self):
         return self.app_details
 
     def request(self, method, path, **options):
         """
         Dispatches a request to the Razorpay HTTP API
-        """
+        """        
         options = self._update_user_agent_header(options)
 
         url = "{}{}".format(self.base_url, path)
@@ -146,6 +151,7 @@ class Client:
         """
         Parses GET request options and dispatches a request
         """
+        self._update_request({}, options)
         return self.request('get', path, params=params, **options)
 
     def post(self, path, data, **options):
@@ -198,10 +204,13 @@ class Client:
         Updates The resource data and header options
         """
         data = json.dumps(data)
-
+        
         if 'headers' not in options:
             options['headers'] = {}
 
         options['headers'].update({'Content-type': 'application/json'})
+
+        if 'headers' in self.app_headers:
+         options['headers'].update(self.app_headers['headers'])
 
         return data, options
