@@ -586,6 +586,7 @@ client.payment.createUpi({
   "razorpay_payment_id": "pay_CMeM6XvOPGFiF",
   "link": "upi://pay?pa=success@razorpay&pn=xyz&tr=xxxxxxxxxxx&tn=gourav&am=1&cu=INR&mc=xyzw"
 }  
+```
 -------------------------------------------------------------------------------------------------------
 ### OTP Generate
 
