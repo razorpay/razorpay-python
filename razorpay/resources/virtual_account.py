@@ -6,10 +6,10 @@ import json
 class VirtualAccount(Resource):
     def __init__(self, client=None):
         super(VirtualAccount, self).__init__(client)
-        self.base_url = URL.VIRTUAL_ACCOUNT_URL
+        self.base_url = URL.V1 + URL.VIRTUAL_ACCOUNT_URL
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Virtual Account entities
 
         Returns:
@@ -18,7 +18,7 @@ class VirtualAccount(Resource):
         return super(VirtualAccount, self).all(data, **kwargs)
 
     def fetch(self, virtual_account_id, data={}, **kwargs):
-        """"
+        """
         Fetch Virtual Account for given Id
 
         Args:
@@ -34,7 +34,7 @@ class VirtualAccount(Resource):
             **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create Virtual Account from given dict
 
         Args:
@@ -47,7 +47,7 @@ class VirtualAccount(Resource):
         return self.post_url(url, data, **kwargs)
 
     def close(self, virtual_account_id, data={}, **kwargs):
-        """"
+        """
         Close Virtual Account from given Id
 
         Args:
@@ -58,7 +58,7 @@ class VirtualAccount(Resource):
         return self.post_url(url, data, **kwargs)
 
     def payments(self, virtual_account_id, data={}, **kwargs):
-        """"
+        """
         Fetch Payment for Virtual Account Id
 
         Args:
@@ -72,7 +72,7 @@ class VirtualAccount(Resource):
         return self.get_url(url, data, **kwargs)
 
     def add_receiver(self, virtual_account_id, data={}, **kwargs):
-        """"
+        """
         Add receiver to an existing virtual account
 
         Args:
@@ -83,7 +83,7 @@ class VirtualAccount(Resource):
         return self.post_url(url, data, **kwargs)
 
     def add_allowed_player(self, virtual_account_id, data={}, **kwargs):
-        """"
+        """
         Add an Allowed Payer Account
 
         Args:
@@ -94,7 +94,7 @@ class VirtualAccount(Resource):
         return self.post_url(url, data, **kwargs) 
 
     def delete_allowed_player(self, virtual_account_id, allowed_player_id, data={}, **kwargs):
-        """"
+        """
         Delete an Allowed Payer Account
 
         Args:
