@@ -1,0 +1,28 @@
+{
+  "percentage_ownership": 10,
+  "name": "Gaurav Kumar",
+  "email": "gaurav.kumar@example.com",
+  "relationship": {
+    "director": true,
+    "executive": false
+  },
+  "phone": {
+    "primary": "9000090000",
+    "secondary": "9000090000"
+  },
+  "addresses": {
+    "residential": {
+      "street": "506, Koramangala 1st block",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "postal_code": "560034",
+      "country": "IN"
+    }
+  },
+  "kyc": {
+    "pan": "AVOPB1111K"
+  },
+  "notes": {
+    "random_key_by_partner": "random_value"
+  }
+}

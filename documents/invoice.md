@@ -266,7 +266,7 @@ client.invoice.edit(invoiceId,{
     "id": "cust_DAtUWmvpktokrT",
     "name": "Gaurav Kumar",
     "email": "gaurav.kumar@example.com",
-    "contact": "9977886633",
+    "contact": "9999999999",
     "gstin": null,
     "billing_address": {
       "id": "addr_DAtUWoxgu91obl",
@@ -282,7 +282,7 @@ client.invoice.edit(invoiceId,{
     "shipping_address": null,
     "customer_name": "Gaurav Kumar",
     "customer_email": "gaurav.kumar@example.com",
-    "customer_contact": "9977886633"
+    "customer_contact": "9999999999"
   },
   "order_id": null,
   "line_items": [
@@ -369,7 +369,7 @@ client.invoice.issue(invoiceId)
     "id": "cust_DAtUWmvpktokrT",
     "name": "Gaurav Kumar",
     "email": "gaurav.kumar@example.com",
-    "contact": "9977886633",
+    "contact": "9999999999",
     "gstin": null,
     "billing_address": {
       "id": "addr_DAtUWoxgu91obl",
@@ -385,7 +385,7 @@ client.invoice.issue(invoiceId)
     "shipping_address": null,
     "customer_name": "Gaurav Kumar",
     "customer_email": "gaurav.kumar@example.com",
-    "customer_contact": "9977886633"
+    "customer_contact": "9999999999"
   },
   "order_id": "order_DBG3P8ZgDd1dsG",
   "line_items": [
@@ -537,7 +537,7 @@ client.invoice.cancel(invoiceId)
     },
     "customer_name": "Gaurav Kumar",
     "customer_email": "gaurav.kumar@example.com",
-    "customer_contact": "+919999999999",
+    "customer_contact": "+919999999999"
   },
   "order_id": "order_E7q0tvRpC0WJwg",
   "line_items": [

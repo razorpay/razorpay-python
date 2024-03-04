@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## [1.4.1][1.4.1] - 2023-08-03
+
+feat: Added new API endpoints.
+
+Added account onboarding API (create, fetch, edit, delete)
+Added stakeholders API (create, fetch, all, edit)
+Added product configuration API (requestProductConfiguration, fetch, edit, fetchTnc)
+Added webhooks API (create, fetch, all, edit, delete)
+Added token sharing API (create, fetchToken, deleteToken, processPaymentOnAlternatePAorPG)
+Added Documents API (uploadAccountDoc(, fetchAccountDoc, uploadStakeholderDoc, fetchStakeholderDoc)
+
 ## [1.3.1][1.3.1] - 2022-07-01
 
 - Added Third party validation & Otp API for Payment (createUpi, validateVpa, otpGenerate, otpSubmit, otpResend)

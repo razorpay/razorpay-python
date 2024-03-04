@@ -5,10 +5,10 @@ from ..constants.url import URL
 class Settlement(Resource):
     def __init__(self, client=None):
         super(Settlement, self).__init__(client)
-        self.base_url = URL.SETTLEMENT_URL
+        self.base_url = URL.V1 + URL.SETTLEMENT_URL
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Settlement entities
 
         Returns:
@@ -17,7 +17,7 @@ class Settlement(Resource):
         return super(Settlement, self).all(data, **kwargs)
 
     def fetch(self, settlement_id, data={}, **kwargs):
-        """"
+        """
         Fetch Settlement data for given Id
 
         Args:
@@ -29,7 +29,7 @@ class Settlement(Resource):
         return super(Settlement, self).fetch(settlement_id, data, **kwargs)
 
     def report(self, data={}, **kwargs):
-        """"
+        """
         Settlement report for a month
 
         Returns:

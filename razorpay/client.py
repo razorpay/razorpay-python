@@ -176,6 +176,23 @@ class Client:
         data, options = self._update_request(data, options)
         return self.request('put', path, data=data, **options)
 
+    def file(self, path, data, **options):     
+        fileDict = {}
+        fieldDict = {}
+        
+        if('file' not in data):
+            # if file is not exists in the dictionary
+            data['file'] = ""
+
+        fileDict['file'] = data['file'] 
+        
+        # Create a dict of form fields 
+        for fields in data:
+          if(fields != 'file'):
+            fieldDict[str(fields)] = data[fields] 
+
+        return self.request('post', path, files=fileDict, data=fieldDict, **options)
+
     def _update_request(self, data, options):
         """
         Updates The resource data and header options
