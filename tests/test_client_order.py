@@ -82,3 +82,27 @@ class TestClientOrder(ClientTestCase):
         responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
                       match_querystring=True)
         self.assertEqual(self.client.order.edit('dummy_id', param), result)
+
+    @responses.activate
+    def test_order_view_rto_review(self):
+        result = mock_file('rto')
+        url = '{}/{}/rto_review'.format(self.base_url, 'fake_order_id')
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(self.client.order.viewRtoReview('fake_order_id'), result)
+
+    @responses.activate
+    def test_order_edit_fulfillment(self):
+        request = {
+            "payment_method": "upi",
+            "shipping": {
+                "waybill": "123456789",
+                "status": "rto",
+                "provider": "Bluedart"
+            }
+        }
+        result = mock_file('fulfillment')
+        url = '{}/{}/fulfillment'.format(self.base_url, 'fake_order_id')
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)            
+        self.assertEqual(self.client.order.editFulfillment('fake_order_id', request), result)

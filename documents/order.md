@@ -272,7 +272,82 @@ client.order.edit(orderId,{
 }
 ```
 -------------------------------------------------------------------------------------------------------
+### View RTO/Risk Reasons
 
+```py
+orderId = "order_DaaS6LOUAASb7Y";
+
+client.order.viewRtoReview(orderId)
+```
+**Parameters**
+
+| Name     | Type   | Description                         |
+|----------|--------|-------------------------------------|
+| orderId* | string | The unique identifier of an order to access the fulfillment information. |
+
+**Response:**
+```json
+{
+  "risk_tier": "high",
+  "rto_reasons": [
+    {
+      "reason": "short_shipping_address",
+      "description": "Short shipping address",
+      "bucket": "address"
+    },
+    {
+      "reason": "address_pincode_state_mismatch",
+      "description": "Incorrect pincode state entered",
+      "bucket": "address"
+    }
+  ]
+}
+```
+-------------------------------------------------------------------------------------------------------
+
+### Update the Fulfillment Details
+
+```py
+orderId = "order_DaaS6LOUAASb7Y";
+
+request = {
+  "payment_method": "upi",
+  "shipping": {
+      "waybill": "123456789",
+      "status": "rto",
+      "provider": "Bluedart"
+  }
+}
+
+client.order.editFulfillment(orderId, request)
+```
+**Parameters**
+
+| Name     | Type   | Description                         |
+|----------|--------|-------------------------------------|
+| orderId* | string | The unique identifier of an order to access the fulfillment information. |
+| payment_method | string | The id of the order to be retrieve payment info |
+| shipping | array  | All keys listed [here](https://betasite.razorpay.com/docs/razorpay/IN/payments-magic-new-rto-intelligence/payments/magic-checkout/rto-intelligence/#13-update-the-fulfillment-details) are supported |
+
+**Response:**
+```json
+{
+  "entity": "order.fulfillment",
+  "order_id": "EKwxwAgItXXXX",
+  "payment_method": "upi",
+  "shipping": {
+    "waybill": "123456789",
+    "status": "rto",
+    "provider": "Bluedart"
+  }
+}
+```
+-------------------------------------------------------------------------------------------------------
+
+**PN: * indicates mandatory fields**
+<br>
+<br>
+**For reference click [here](https://razorpay.com/docs/api/orders/)**
 
 **PN: * indicates mandatory fields**
 <br>

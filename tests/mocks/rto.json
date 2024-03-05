@@ -1,0 +1,15 @@
+{
+    "risk_tier": "high",
+    "rto_reasons": [
+      {
+        "reason": "short_shipping_address",
+        "description": "Short shipping address",
+        "bucket": "address"
+      },
+      {
+        "reason": "address_pincode_state_mismatch",
+        "description": "Incorrect pincode state entered",
+        "bucket": "address"
+      }
+    ]
+  }
