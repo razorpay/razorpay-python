@@ -48,3 +48,43 @@ class Customer(Resource):
             Dictionary of Customers data
         """
         return super(Customer, self).all(data, **kwargs)
+
+    def addBankAccount(self, customer_id, data={}, **kwargs):
+        """
+        Add Bank Account of Customer
+
+        Returns:
+            Dictionary of Customers data
+        """
+        url = "{}/{}/bank_account".format(self.base_url, customer_id)
+        return self.post_url(url, data, **kwargs)
+
+    def deleteBankAccount(self, customer_id, bank_id, data={}, **kwargs):
+        """
+        Delete Bank Account of Customer
+
+        Returns:
+            Dictionary of Customers data
+        """
+        url = "{}/{}/bank_account/{}".format(self.base_url, customer_id, bank_id)
+        return self.delete_url(url, data, **kwargs)
+
+    def requestEligibilityCheck(self, data={}, **kwargs):
+        """
+        Eligibility Check
+
+        Returns:
+            Dictionary of eligibility data
+        """
+        url = "{}/eligibility".format(self.base_url)
+        return self.post_url(url, data, **kwargs)
+
+    def fetchEligibility(self, eligibility_id, data={}, **kwargs):
+        """
+        Fetch Eligibility by id
+
+        Returns:
+            Eligibility dict for given eligibility Id
+        """
+        url = "{}/eligibility/{}".format(self.base_url, eligibility_id)
+        return self.get_url(url, data, **kwargs)

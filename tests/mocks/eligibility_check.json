@@ -1,0 +1,18 @@
+{
+    "amount": "500000",
+    "customer": {
+      "id": "KkBhM9EC1Y0HTm",
+      "contact": "+918220722114"
+    },
+    "instruments": [
+      {
+        "method": "emi",
+        "issuer": "HDFC",
+        "type": "debit",
+        "eligibility_req_id": "elig_KkCNLzlNeMYQyZ",
+        "eligibility": {
+          "status": "eligible"
+        }
+      }
+    ]
+  }
