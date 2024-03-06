@@ -85,3 +85,23 @@ class Order(Resource):
         url = '{}/{}'.format(self.base_url, order_id)
 
         return self.patch_url(url, data, **kwargs)
+    
+    def viewRtoReview(self, order_id, data={}, **kwargs):
+        """
+        View rto risk reasons
+
+        Returns:
+            Dict for given Order Id
+        """
+        url = "{}/{}/rto_review".format(self.base_url, order_id)
+        return self.post_url(url, data, **kwargs)
+
+    def editFulfillment(self, order_id, data={}, **kwargs):
+        """
+        Update the Fulfillment Details
+
+        Returns:
+            Dict for given Order Id
+        """
+        url = "{}/{}/fulfillment".format(self.base_url, order_id)
+        return self.post_url(url, data, **kwargs)
