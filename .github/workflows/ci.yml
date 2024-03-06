@@ -20,6 +20,7 @@ jobs:
           python-version: "3.10"  
       - name: Install dependencies
         run: |
+          pip install setuptools
           python -m pip install --upgrade pip 
           pip install build
           python -m build
@@ -43,6 +44,7 @@ jobs:
           python-version: "3.10"
       - name: Install dependencies
         run: |
+          pip install setuptools
           python -m pip install --upgrade pip
           pip install responses
           pip install coverage          
@@ -71,6 +73,7 @@ jobs:
           python-version: "3.10"
       - name: Publish packages to PyPi
         run: |
+          pip install setuptools
           python -m pip install --upgrade twine
           set -ex
           export VERSION=$(python3 setup.py --version)          
