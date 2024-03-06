@@ -2,12 +2,12 @@ name: CI
 on:
   push:
     branches:
-      - cicd_setuptool_fix
+      - master
     tags:
       - v[0-9]+.[0-9]+.[0-9]+*
   pull_request:
     branches:
-      - cicd_setuptool_fix
+      - master
 jobs:
   build:
     name: Build
@@ -20,7 +20,6 @@ jobs:
           python-version: "3.10"  
       - name: Install dependencies
         run: |
-          pip install setuptools
           python -m pip install --upgrade pip 
           pip install build
           python -m build
@@ -44,7 +43,6 @@ jobs:
           python-version: "3.10"
       - name: Install dependencies
         run: |
-          pip install setuptools
           python -m pip install --upgrade pip
           pip install responses
           pip install coverage          
@@ -73,7 +71,6 @@ jobs:
           python-version: "3.10"
       - name: Publish packages to PyPi
         run: |
-          pip install setuptools
           python -m pip install --upgrade twine
           set -ex
           export VERSION=$(python3 setup.py --version)          
