@@ -16,4 +16,14 @@ class Iin(Resource):
         """
 
         return super(Iin, self).fetch(token_iin, data, **kwargs)
-  
+
+    def all(self, data={}, **kwargs):
+        """
+        Fetch all iins supporting native otp
+        Fetch all iins with business sub-type
+
+        Returns:
+            Dictionary of Iin data
+        """
+        url = '{}/{}'.format(self.base_url, "list")
+        return self.get_url(url, data, **kwargs)
