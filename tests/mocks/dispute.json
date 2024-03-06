@@ -1,0 +1,15 @@
+{
+    "id": "disp_9GTZ2XXXXXXXXX",
+    "entity": "dispute",
+    "payment_id": "pay_9GMNcXXXXXXXXX",
+    "amount": 5000,
+    "currency": "INR",
+    "amount_deducted": 0,
+    "gateway_dispute_id": "test",
+    "reason_code": "goods_or_services_not_received_or_partially_received",
+    "respond_by": 1514658600,
+    "status": "under_review",
+    "phase": "chargeback",
+    "comments": null,
+    "created_at": 1513965738
+}
