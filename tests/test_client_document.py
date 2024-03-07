@@ -13,10 +13,11 @@ class TestClientDocument(ClientTestCase):
     @responses.activate
     def test_document_fetch(self):
         result = mock_file('document')
-        url = '{}/{}'.format(self.base_url, 'fake_document_id')
+        id = 'fake_document_id'
+        url = f"{self.base_url}/{id}"
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.document.fetch('fake_document_id'), result)
+        self.assertEqual(self.client.document.fetch(id), result)
 
     @responses.activate
     def test_document_create(self):

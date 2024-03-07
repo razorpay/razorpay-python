@@ -14,8 +14,7 @@ class Document(Resource):
         Returns:
            Dictionary of document   
         """
-        url = '{}'.format(self.base_url)
-        print(url)
+        url = self.base_url
         return self.file_url(url, data, **kwargs)
 
     def fetch(self, dispute_id, data={}, **kwargs):
