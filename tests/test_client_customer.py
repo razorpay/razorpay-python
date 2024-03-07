@@ -40,7 +40,7 @@ class TestClientCustomer(ClientTestCase):
     def test_customer_edit(self):
         email = 'test@test.com'
         result = mock_file('fake_customer')
-        url = f"{self.base_url}/{self.customer_id}"
+        url = '{}/{}'.format(self.base_url, self.customer_id)
         responses.add(responses.PUT,
                       url,
                       status=200,
@@ -56,6 +56,7 @@ class TestClientCustomer(ClientTestCase):
         url = self.base_url
         responses.add(responses.GET, url, status=200,
                       body=json.dumps(result), match_querystring=True)
+                      
         self.assertEqual(self.client.customer.all(), result)
 
     @responses.activate
