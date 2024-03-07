@@ -21,18 +21,20 @@ class TestClientDispute(ClientTestCase):
     @responses.activate
     def test_fetch_dispute(self):
         result = mock_file('dispute')
-        url = '{}/{}'.format(self.base_url, 'fake_dispute_id')
+        dispute_id = 'fake_dispute_id'
+        url = f"{self.base_url}/{dispute_id}"
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.dispute.fetch('fake_dispute_id'), result)
+        self.assertEqual(self.client.dispute.fetch(dispute_id), result)
 
     @responses.activate
     def test_dispute_accept(self):
         result = mock_file('dispute_accept')
-        url = '{}/{}/accept'.format(self.base_url, 'fake_dispute_id')
+        dispute_id = 'fake_dispute_id'
+        url = f"{self.base_url}/{dispute_id}/accept"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.dispute.accept('fake_dispute_id'), result)
+        self.assertEqual(self.client.dispute.accept(dispute_id), result)
 
     @responses.activate
     def test_dispute_contest(self):
@@ -56,7 +58,8 @@ class TestClientDispute(ClientTestCase):
         }
 
         result = mock_file('dispute_contest')
-        url = '{}/{}/contest'.format(self.base_url, 'fake_dispute_id')
+        dispute_id = 'fake_dispute_id'
+        url = f"{self.base_url}/{dispute_id}/contest"
         responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.dispute.contest('fake_dispute_id',request), result)
+        self.assertEqual(self.client.dispute.contest(dispute_id, request), result)

@@ -23,8 +23,7 @@ class Dispute(Resource):
         Returns:
              Dictionary of disputes
         """
-        url = '{}/{}/accept'.format(self.base_url, dispute_id)
-
+        url = f"{self.base_url}/{dispute_id}/accept"
         return self.post_url(url, data, **kwargs)
 
     def contest(self, dispute_id, data={}, **kwargs):
@@ -34,8 +33,7 @@ class Dispute(Resource):
         Returns:
              Dictionary of disputes
         """
-        url = '{}/{}/contest'.format(self.base_url, dispute_id)
-
+        url = f"{self.base_url}/{dispute_id}/contest"
         return self.patch_url(url, data, **kwargs)
 
     def all(self, data={}, **kwargs):
