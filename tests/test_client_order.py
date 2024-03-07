@@ -86,10 +86,11 @@ class TestClientOrder(ClientTestCase):
     @responses.activate
     def test_order_view_rto_review(self):
         result = mock_file('rto')
-        url = '{}/{}/rto_review'.format(self.base_url, 'fake_order_id')
+        order_id = 'fake_order_id'
+        url = f"{self.base_url}/{order_id}/rto_review"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.order.viewRtoReview('fake_order_id'), result)
+        self.assertEqual(self.client.order.viewRtoReview(order_id), result)
 
     @responses.activate
     def test_order_edit_fulfillment(self):
@@ -101,8 +102,9 @@ class TestClientOrder(ClientTestCase):
                 "provider": "Bluedart"
             }
         }
+        order_id = 'fake_order_id'
         result = mock_file('fulfillment')
-        url = '{}/{}/fulfillment'.format(self.base_url, 'fake_order_id')
+        url = f"{self.base_url}/{order_id}/fulfillment"
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)            
-        self.assertEqual(self.client.order.editFulfillment('fake_order_id', request), result)
+        self.assertEqual(self.client.order.editFulfillment(order_id, request), result)

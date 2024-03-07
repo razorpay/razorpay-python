@@ -82,8 +82,7 @@ class Order(Resource):
             Order Dict which was edited
 
         """
-        url = '{}/{}'.format(self.base_url, order_id)
-
+        url = f"{self.base_url}/{order_id}"
         return self.patch_url(url, data, **kwargs)
     
     def viewRtoReview(self, order_id, data={}, **kwargs):
@@ -93,7 +92,7 @@ class Order(Resource):
         Returns:
             Dict for given Order Id
         """
-        url = "{}/{}/rto_review".format(self.base_url, order_id)
+        url = f"{self.base_url}/{order_id}/rto_review"
         return self.post_url(url, data, **kwargs)
 
     def editFulfillment(self, order_id, data={}, **kwargs):
@@ -103,5 +102,5 @@ class Order(Resource):
         Returns:
             Dict for given Order Id
         """
-        url = "{}/{}/fulfillment".format(self.base_url, order_id)
+        url = f"{self.base_url}/{order_id}/fulfillment"
         return self.post_url(url, data, **kwargs)
