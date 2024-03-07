@@ -25,5 +25,5 @@ class Iin(Resource):
         Returns:
             Dictionary of Iin data
         """
-        url = '{}/{}'.format(self.base_url, "list")
+        url = f"{self.base_url}/list"
         return self.get_url(url, data, **kwargs)
