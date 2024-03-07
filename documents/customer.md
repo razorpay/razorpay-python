@@ -171,9 +171,9 @@ client.customer.addBankAccount(customerId, {
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
 | customerId*  | string      | Unique identifier of the customer.  |
-| account_number | string      | The name of the beneficiary associated with the bank account.  |
-| beneficiary_name | string  | The virtual payment address.  |
-| beneficiary_address1 | string      | The id of the customer to be fetched  |
+| account_number | string      | Customer's bank account number.  |
+| beneficiary_name | string  | The name of the beneficiary associated with the bank account.  |
+| beneficiary_address1 | string      | The virtual payment address.  |
 | beneficiary_email  | string      | Email address of the beneficiary.  |
 | beneficiary_mobile | integer      | Mobile number of the beneficiary.  |
 | beneficiary_city  | string      | The name of the city of the beneficiary.  |
@@ -211,7 +211,7 @@ client.customer.deleteBankAccount(customerId, bankaccountId)
 
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
-| customerId*  | string      | Customer's bank account number  |
+| customerId*  | string      | Unique identifier of the customer.  |
 | bankAccountId  | string      | The bank_id that needs to be deleted.  |
 
 **Response:**
@@ -249,8 +249,12 @@ client.customer.requestEligibilityCheck({
 
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
-| customerId*  | string      | Customer's bank account number  |
-| bank_id  | string      | The bank_id that needs to be deleted.  |
+| inquiry  | string      | List of methods or instruments on which eligibility check is required.  |
+| amount*  | string      | The amount for which the order was created, in currency subunits.  |
+| currency*  | string      | A three-letter ISO code for the currency in which you want to accept the payment.  |
+| customer*  | object      | All keys listed [here](https://razorpay.com/docs/payments/payment-gateway/affordability/eligibility-check/#eligibility-check-api)  |
+| instruments  | object | All keys listed [here](https://razorpay.com/docs/payments/payment-gateway/affordability/eligibility-check/#eligibility-check-api)  |
+
 
 **Response:**
 ```json
@@ -348,7 +352,7 @@ client.customer.fetchEligibility(eligibility)
 
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
-| eligibility  | string      | The unique identifier of the eligibility request to be retrieved.  |
+| eligibilityId  | string      | The unique identifier of the eligibility request to be retrieved.  |
 
 **Response:**
 ```json
