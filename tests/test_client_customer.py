@@ -8,12 +8,12 @@ class TestClientCustomer(ClientTestCase):
 
     def setUp(self):
         super(TestClientCustomer, self).setUp()
-        self.base_url = f"{self.base_url}/customers"
+        self.base_url = '{}/customers'.format(self.base_url)
 
     @responses.activate
     def test_customer_fetch(self):
         result = mock_file('fake_customer')
-        url = f"{self.base_url}/{self.customer_id}"
+        url = '{}/{}'.format(self.base_url, self.customer_id)
 
         responses.add(responses.GET,
                       url,
