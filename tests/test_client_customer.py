@@ -47,8 +47,7 @@ class TestClientCustomer(ClientTestCase):
                       body=json.dumps(result),
                       match_querystring=True)
 
-        self.assertEqual(self.client.customer.edit(
-            self.customer_id, email), result)
+        self.assertEqual(self.client.customer.edit(self.customer_id, email), result)
 
     @responses.activate
     def test_item_all(self):
@@ -56,7 +55,6 @@ class TestClientCustomer(ClientTestCase):
         url = self.base_url
         responses.add(responses.GET, url, status=200,
                       body=json.dumps(result), match_querystring=True)
-                      
         self.assertEqual(self.client.customer.all(), result)
 
     @responses.activate
