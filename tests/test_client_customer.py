@@ -8,12 +8,12 @@ class TestClientCustomer(ClientTestCase):
 
     def setUp(self):
         super(TestClientCustomer, self).setUp()
-        self.base_url = '{}/customers'.format(self.base_url)
+        self.base_url = f"{self.base_url}/customers"
 
     @responses.activate
     def test_customer_fetch(self):
         result = mock_file('fake_customer')
-        url = '{}/{}'.format(self.base_url, self.customer_id)
+        url = f"{self.base_url}/{self.customer_id}"
 
         responses.add(responses.GET,
                       url,
@@ -40,7 +40,7 @@ class TestClientCustomer(ClientTestCase):
     def test_customer_edit(self):
         email = 'test@test.com'
         result = mock_file('fake_customer')
-        url = '{}/{}'.format(self.base_url, self.customer_id)
+        url = f"{self.base_url}/{self.customer_id}"
         responses.add(responses.PUT,
                       url,
                       status=200,
@@ -75,7 +75,7 @@ class TestClientCustomer(ClientTestCase):
             "beneficiary_state": "KA",
             "beneficiary_country": "IN"
         }
-        url = '{}/{}/bank_account'.format(self.base_url, self.customer_id)
+        url = f"{self.base_url}/{self.customer_id}/bank_account"
         responses.add(responses.POST, url, status=200,
                       body=json.dumps(result), match_querystring=True)
         self.assertEqual(self.client.customer.addBankAccount(
@@ -85,8 +85,7 @@ class TestClientCustomer(ClientTestCase):
     def test_deletebank_account(self):
         result = mock_file('bank_account')
         bankaccountId = "ba_LSZht1Cm7xFTwF"
-        url = '{}/{}/bank_account/{}'.format(self.base_url,
-                                             self.customer_id, bankaccountId)
+        url = f"{self.base_url}/{self.customer_id}/bank_account/{bankaccountId}"
         responses.add(responses.DELETE, url, status=200,
                       body=json.dumps(result), match_querystring=True)
         self.assertEqual(self.client.customer.deleteBankAccount(
@@ -107,7 +106,7 @@ class TestClientCustomer(ClientTestCase):
             }
         }
         result = mock_file('eligibility_check')
-        url = '{}/eligibility'.format(self.base_url)
+        url = f"{self.base_url}/eligibility"
         responses.add(responses.POST, url, status=200,
                       body=json.dumps(result), match_querystring=True)
         self.assertEqual(self.client.customer.requestEligibilityCheck(request), result)
@@ -115,7 +114,8 @@ class TestClientCustomer(ClientTestCase):
     @responses.activate
     def test_fetch_eligibility(self):
         result = mock_file('eligibility')
-        url = "{}/eligibility/{}".format(self.base_url, 'fake_eligibility_id')
+        id = 'fake_eligibility_id'
+        url = f"{self.base_url}/eligibility/{id}"
         responses.add(responses.GET, url, status=200,
                       body=json.dumps(result), match_querystring=True)
-        self.assertEqual(self.client.customer.fetchEligibility('fake_eligibility_id'), result)
+        self.assertEqual(self.client.customer.fetchEligibility(id), result)

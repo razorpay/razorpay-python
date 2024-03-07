@@ -170,8 +170,7 @@ client.customer.addBankAccount(customerId, {
 
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
-| customerId*  | string      | Customer's bank account number  |
-| account_number  | integer      | The id of the customer to be fetched  |
+| customerId*  | string      | Unique identifier of the customer.  |
 | account_number | string      | The name of the beneficiary associated with the bank account.  |
 | beneficiary_name | string  | The virtual payment address.  |
 | beneficiary_address1 | string      | The id of the customer to be fetched  |

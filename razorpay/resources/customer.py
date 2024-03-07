@@ -56,7 +56,7 @@ class Customer(Resource):
         Returns:
             Dictionary of Customers data
         """
-        url = "{}/{}/bank_account".format(self.base_url, customer_id)
+        url = f"{self.base_url}/{customer_id}/bank_account"
         return self.post_url(url, data, **kwargs)
 
     def deleteBankAccount(self, customer_id, bank_id, data={}, **kwargs):
@@ -66,7 +66,7 @@ class Customer(Resource):
         Returns:
             Dictionary of Customers data
         """
-        url = "{}/{}/bank_account/{}".format(self.base_url, customer_id, bank_id)
+        url = f"{self.base_url}/{customer_id}/bank_account/{bank_id}"
         return self.delete_url(url, data, **kwargs)
 
     def requestEligibilityCheck(self, data={}, **kwargs):
@@ -76,7 +76,7 @@ class Customer(Resource):
         Returns:
             Dictionary of eligibility data
         """
-        url = "{}/eligibility".format(self.base_url)
+        url = f"{self.base_url}/eligibility" 
         return self.post_url(url, data, **kwargs)
 
     def fetchEligibility(self, eligibility_id, data={}, **kwargs):
@@ -86,5 +86,5 @@ class Customer(Resource):
         Returns:
             Eligibility dict for given eligibility Id
         """
-        url = "{}/eligibility/{}".format(self.base_url, eligibility_id)
+        url = f"{self.base_url}/eligibility/{eligibility_id}" 
         return self.get_url(url, data, **kwargs)
