@@ -252,8 +252,8 @@ client.customer.requestEligibilityCheck({
 | inquiry  | string      | List of methods or instruments on which eligibility check is required.  |
 | amount*  | string      | The amount for which the order was created, in currency subunits.  |
 | currency*  | string      | A three-letter ISO code for the currency in which you want to accept the payment.  |
-| customer*  | object      | All keys listed [here](https://razorpay.com/docs/payments/payment-gateway/affordability/eligibility-check/#eligibility-check-api)  |
-| instruments  | object | All keys listed [here](https://razorpay.com/docs/payments/payment-gateway/affordability/eligibility-check/#eligibility-check-api)  |
+| customer*  | object      | Customer details. [here](https://razorpay.com/docs/payments/payment-gateway/affordability/eligibility-check/#eligibility-check-api)  |
+| instruments  | object | Payment instruments on which an eligibility check is required. [here](https://razorpay.com/docs/payments/payment-gateway/affordability/eligibility-check/#eligibility-check-api)  |
 
 
 **Response:**
