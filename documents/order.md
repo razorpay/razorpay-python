@@ -326,8 +326,8 @@ client.order.editFulfillment(orderId, request)
 | Name     | Type   | Description                         |
 |----------|--------|-------------------------------------|
 | orderId* | string | The unique identifier of an order to access the fulfillment information. |
-| payment_method | string | The id of the order to be retrieve payment info |
-| shipping | array  | All keys listed [here](https://betasite.razorpay.com/docs/razorpay/IN/payments-magic-new-rto-intelligence/payments/magic-checkout/rto-intelligence/#13-update-the-fulfillment-details) are supported |
+| payment_method | string | Payment Method opted by the customer to complete the payment. Possible values is `upi`, `card`, `wallet`, `netbanking`, `cod`, `emi`, `cardless_emi`, `paylater`, `recurring`, `other`. |
+| shipping | object  | Contains the shipping data. [here](https://razorpay.com/docs/payments/magic-checkout/rto-intelligence/#step-3-update-the-fulfillment-details) are supported |
 
 **Response:**
 ```json
