@@ -170,14 +170,15 @@ client.customer.addBankAccount(customerId, {
 
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
-| customerId*  | string      | Unique identifier of the customer.  |
-| account_number | string      | Customer's bank account number.  |
+| customerId*  | string      | Unique identifier of the customer. |
+| account_number | string      | Customer's bank account number. For example, `0002020000304030434`. |
 | beneficiary_name | string  | The name of the beneficiary associated with the bank account.  |
 | beneficiary_address1 | string      | The virtual payment address.  |
-| beneficiary_email  | string      | Email address of the beneficiary.  |
+| beneficiary_email  | string      | Email address of the beneficiary. For example, `gaurav.kumar@example.com`. |
 | beneficiary_mobile | integer      | Mobile number of the beneficiary.  |
 | beneficiary_city  | string      | The name of the city of the beneficiary.  |
 | beneficiary_state | string      | The state of the beneficiary.  |
+| beneficiary_country | string      | The country of the beneficiary.  |
 | beneficiary_pin   | interger    | The pin code of the beneficiary's address.  |
 | ifsc_code          | string      | The IFSC code of the bank branch associated with the account.  |
 
@@ -211,7 +212,7 @@ client.customer.deleteBankAccount(customerId, bankaccountId)
 
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
-| customerId*  | string      | Unique identifier of the customer.  |
+| customerId*  | string      |  Customer id of the customer whose bank account is to be deleted.  |
 | bankAccountId  | string      | The bank_id that needs to be deleted.  |
 
 **Response:**
@@ -249,9 +250,9 @@ client.customer.requestEligibilityCheck({
 
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
-| inquiry  | string      | List of methods or instruments on which eligibility check is required.  |
-| amount*  | string      | The amount for which the order was created, in currency subunits.  |
-| currency*  | string      | A three-letter ISO code for the currency in which you want to accept the payment.  |
+| inquiry  | string      | List of methods or instruments on which eligibility check is required. Possible value is `affordability`. |
+| amount*  | integer      | The amount for which the order was created, in currency subunits. For example, for an amount of ₹295, enter `29500`. The user makes a payment for this amount against the order; hence, eligibility is checked for the amount. |
+| currency*  | string      | A three-letter ISO code for the currency in which you want to accept the payment. Possible value is `INR`.  |
 | customer*  | object      | Customer details. [here](https://razorpay.com/docs/payments/payment-gateway/affordability/eligibility-check/#eligibility-check-api)  |
 | instruments  | object | Payment instruments on which an eligibility check is required. [here](https://razorpay.com/docs/payments/payment-gateway/affordability/eligibility-check/#eligibility-check-api)  |
 
