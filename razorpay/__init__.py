@@ -55,5 +55,5 @@ __all__ = [
         'Product',
         'Iin',
         'Webhook',
-        'Document'
+        'Document',
 ]
