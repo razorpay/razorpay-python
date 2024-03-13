@@ -8,7 +8,7 @@ class TestClientDocument(ClientTestCase):
 
     def setUp(self):
         super(TestClientDocument, self).setUp()
-        self.base_url = '{}/documents'.format(self.base_url)
+        self.base_url = f"{self.base_url}/documents"
 
     @responses.activate
     def test_document_fetch(self):
