@@ -9,7 +9,6 @@ All notable changes to this project will be documented in this file. The format 
 feat: Added new API endpoints
 
 - Added support for `addBankAccount`, `deleteBankAccount`, `requestEligibilityCheck` & `fetchEligibility` on customer
-- Added support for `uploadAccountDoc` & `fetchAccountDoc` on account
 - Added support for [Dispute](https://razorpay.com/docs/api/disputes/)
 - Added support for [Document](https://razorpay.com/docs/api/documents/)
 - Added support for fetch all IINs Supporting native otps & fetch all IINs with business sub-type using `all`
