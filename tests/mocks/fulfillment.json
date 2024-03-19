@@ -1,0 +1,10 @@
+{
+    "entity": "order.fulfillment",
+    "order_id": "EKwxwAgItXXXX",
+    "payment_method": "upi",
+    "shipping": {
+      "waybill": "123456789",
+      "status": "rto",
+      "provider": "Bluedart"
+    }
+}
