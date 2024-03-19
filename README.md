@@ -86,6 +86,12 @@ that both app title and version are strings.
 - [Stakeholder](documents/stakeholder.md)
 
 - [Webhook](documents/webhook.md)
+
+- [Document](documents/document.md)
+
+- [Dispute](documents/dispute.md)
+
+- [Iin](documents/iin.md)
 ---
 
 ## Bugs? Feature requests? Pull requests?
