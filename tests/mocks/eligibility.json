@@ -1,0 +1,27 @@
+{
+    "instruments": [
+      {
+        "method": "paylater",
+        "provider": "lazypay",
+        "eligibility_req_id": "elig_LBwGKVvS2X48Lq",
+        "eligibility": {
+          "status": "eligible"
+        }
+      },
+      {
+        "method": "paylater",
+        "provider": "getsimpl",
+        "eligibility_req_id": "elig_LBwGKVvS2X48Lq",
+        "eligibility": {
+          "status": "ineligible",
+          "error": {
+            "code": "GATEWAY_ERROR",
+            "description": "The customer has exhausted their credit limit",
+            "source": "gateway",
+            "step": "inquiry",
+            "reason": "credit_limit_exhausted"
+          }
+        }
+      }
+    ]
+  }
