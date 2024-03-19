@@ -26,4 +26,6 @@ class URL(object):
     TOKEN = "/tokens"
     IIN = "/iins"
     WEBHOOK = "/webhooks"
+    DOCUMENT= "/documents"
     DISPUTE= "/disputes"
+

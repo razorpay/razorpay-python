@@ -25,6 +25,7 @@ from .resources import Stakeholder
 from .resources import Product
 from .resources import Iin
 from .resources import Webhook
+from .resources import Document
 from .resources import Dispute
 
 __all__ = [
@@ -55,5 +56,6 @@ __all__ = [
         'Product',
         'Iin',
         'Webhook',
+        'Document',
         'Dispute',
 ]
