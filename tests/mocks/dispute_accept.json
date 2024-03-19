@@ -1,0 +1,29 @@
+{
+    "id": "disp_AHfqOvkldwsbqt",
+    "entity": "dispute",
+    "payment_id": "pay_EsyWjHrfzb59eR",
+    "amount": 10000,
+    "currency": "INR",
+    "amount_deducted": 10000,
+    "reason_code": "pre_arbitration",
+    "respond_by": 1590604200,
+    "status": "lost",
+    "phase": "pre_arbitration",
+    "created_at": 1590059211,
+    "evidence": {
+      "amount": 10000,
+      "summary": null,
+      "shipping_proof": null,
+      "billing_proof": null,
+      "cancellation_proof": null,
+      "customer_communication": null,
+      "proof_of_service": null,
+      "explanation_letter": null,
+      "refund_confirmation": null,
+      "access_activity_log": null,
+      "refund_cancellation_policy": null,
+      "term_and_conditions": null,
+      "others": null,
+      "submitted_at": null
+    }
+  }
