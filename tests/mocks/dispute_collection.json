@@ -1,0 +1,67 @@
+{
+    "entity": "collection",
+    "count": 2,
+    "items": [
+      {
+        "id": "disp_Esz7KAitoYM7PJ",
+        "entity": "dispute",
+        "payment_id": "pay_EsyWjHrfzb59eR",
+        "amount": 10000,
+        "currency": "INR",
+        "amount_deducted": 0,
+        "reason_code": "pre_arbitration",
+        "respond_by": 1590604200,
+        "status": "open",
+        "phase": "pre_arbitration",
+        "created_at": 1590059211,
+        "evidence": {
+          "amount": 10000,
+          "summary": null,
+          "shipping_proof": null,
+          "billing_proof": null,
+          "cancellation_proof": null,
+          "customer_communication": null,
+          "proof_of_service": null,
+          "explanation_letter": null,
+          "refund_confirmation": null,
+          "access_activity_log": null,
+          "refund_cancellation_policy": null,
+          "term_and_conditions": null,
+          "others": null,
+          "submitted_at": null
+        }
+      },
+      {
+        "id": "disp_Esyvk3kZj0isXk",
+        "entity": "dispute",
+        "payment_id": "pay_EsyWjHrfzb59eR",
+        "amount": 5000,
+        "currency": "INR",
+        "amount_deducted": 0,
+        "reason_code": "warning_bulletin_or_exception_file",
+        "respond_by": 1590604200,
+        "status": "won",
+        "phase": "chargeback",
+        "created_at": 1590058554,
+        "evidence": {
+          "amount": 5000,
+          "summary": null,
+          "shipping_proof": [
+            "doc_EFtmUsbwpXwBH9",
+            "doc_EFtmUsbwpXwBH8"
+          ],
+          "billing_proof": null,
+          "cancellation_proof": null,
+          "customer_communication": null,
+          "proof_of_service": null,
+          "explanation_letter": null,
+          "refund_confirmation": null,
+          "access_activity_log": null,
+          "refund_cancellation_policy": null,
+          "term_and_conditions": null,
+          "others": null,
+          "submitted_at": 1590604100
+        }
+      }
+    ]
+  }

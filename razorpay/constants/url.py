@@ -27,3 +27,5 @@ class URL(object):
     IIN = "/iins"
     WEBHOOK = "/webhooks"
     DOCUMENT= "/documents"
+    DISPUTE= "/disputes"
+

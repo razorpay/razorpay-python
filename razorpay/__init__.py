@@ -26,6 +26,7 @@ from .resources import Product
 from .resources import Iin
 from .resources import Webhook
 from .resources import Document
+from .resources import Dispute
 
 __all__ = [
         'Payment',
@@ -56,4 +57,5 @@ __all__ = [
         'Iin',
         'Webhook',
         'Document',
+        'Dispute',
 ]
