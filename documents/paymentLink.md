@@ -55,7 +55,7 @@ client.payment_link.create({
   "reminder_enable": True,
   "notes": {
     "policy_name": "Jeevan Bima"
-  }
+  },
   "callback_url": "https://example-callback-url.com/",
   "callback_method": "get"
 })
