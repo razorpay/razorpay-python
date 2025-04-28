@@ -81,7 +81,7 @@ class TestClientSubscription(ClientTestCase):
         self.assertEqual(response['item']['amount'], 30000)
 
     @responses.activate
-    def test_subscription_edit(self):
+    def test_subscription_update(self):
         param = {
                  "quantity":2,
                  "schedule_change_at":"cycle_end",
@@ -91,7 +91,7 @@ class TestClientSubscription(ClientTestCase):
         url = '{}/{}'.format(self.base_url, 'subscription_id')
         responses.add(responses.PATCH, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.subscription.edit('subscription_id', param), result)     
+        self.assertEqual(self.client.subscription.update('subscription_id', param), result)     
 
     @responses.activate
     def test_subscription_pending_update(self):
