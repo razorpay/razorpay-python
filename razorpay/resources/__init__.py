@@ -21,6 +21,8 @@ from .stakeholder import Stakeholder
 from .product import Product
 from .iin import Iin
 from .webhook import Webhook
+from .document import Document
+from .dispute import Dispute
 
 __all__ = [
     'Payment',
@@ -45,5 +47,7 @@ __all__ = [
     'Stakeholder',
     'Product',
     'Iin',
-    'Webhook'
+    'Webhook',
+    'Document',
+    'Dispute',
 ]
