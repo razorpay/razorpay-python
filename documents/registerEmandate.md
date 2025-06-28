@@ -57,6 +57,7 @@ client.order.create({
    "notes_key_2": "Engage"
   },
   "token": {
+    "first_payment_amount": 100,
     "auth_type": "netbanking",
     "max_amount": 9999900,
     "expire_at": 4102444799,
@@ -81,7 +82,8 @@ client.order.create({
 | amount*   | integer      | The amount to be captured (should be equal to the authorized amount, in paise) |
 | currency*   | string  | The currency of the payment (defaults to INR)  |
 | customerId*   | string      | The id of the customer to be fetched |
-| method*      | string  | Payment method used to make the registration transaction. Possible value is `emandate`.  |
+| payment_capture* |  boolean  | Indicates whether payment status should be changed to `captured` automatically or not. Possible values: true - Payments are captured automatically. false - Payments are not captured automatically.|
+| method*      | string  | Payment method used to make the registration transaction. Possible value is `emandate`. |
 | receipt      | string  | Your system order reference id.  |
 | token  | object  | All keys listed [here](https://razorpay.com/docs/api/recurring-payments/emandate/auto-debit/#112-create-an-order) are supported |
 | notes | object  | A key-value pair  |
@@ -111,6 +113,7 @@ client.registration_link.create({
   "currency": "INR",
   "description": "12 p.m. Meals",
   "subscription_registration": {
+    "first_payment_amount": 100,
     "method": "emandate",
     "auth_type": "netbanking",
     "expire_at": 1580480689,
@@ -137,13 +140,14 @@ client.registration_link.create({
 
 | Name            | Type    | Description                                                   |
 |-----------------|---------|---------------------------------------------------------------|
-| customer   | object      | Details of the customer to whom the registration link will be sent. |
+| customer   | object  | All keys listed [here](https://razorpay.com/docs/api/recurring-payments/emandate/auto-debit/#12-using-a-registration-link) are supported  |
 | type*  | object | the value is `link`. |
 | amount*   | integer      | The amount to be captured (should be equal to the authorized amount, in paise) |
 | currency*   | string  | The currency of the payment (defaults to INR)  |
 | description*  | string      | A brief description of the payment.   |
-| subscription_registration   | object  | All keys listed [here](https://razorpay.com/docs/api/recurring-payments/emandate/auto-debit/#121-create-a-registration-link) are supported  |
+| subscription_registration   | object  | All keys listed [here](https://razorpay.com/docs/api/recurring-payments/emandate/auto-debit/#12-using-a-registration-link) are supported  |
 | receipt      | string  | Your system order reference id.  |
+| payment_capture* |  boolean  | Indicates whether payment status should be changed to `captured` automatically or not. Possible values: true - Payments are captured automatically. false - Payments are not captured automatically.|
 | sms_notify  | boolean  | SMS notifications are to be sent by Razorpay (default : 1)  |
 | email_notify | boolean  | Email notifications are to be sent by Razorpay (default : 1)  |
 | expire_by    | integer | The timestamp, in Unix format, till when the customer can make the authorization payment. |
@@ -151,6 +155,7 @@ client.registration_link.create({
 
 **Response:**
 For create registration link response please click [here](https://razorpay.com/docs/api/recurring-payments/emandate/auto-debit/#12-using-a-registration-link)
+
 -------------------------------------------------------------------------------------------------------
 
 ## Create an order to charge the customer
@@ -159,6 +164,7 @@ For create registration link response please click [here](https://razorpay.com/d
 client.order.create({
   "amount":1000,
   "currency":"INR",
+  "payment_capture": True,
   "receipt":"Receipt No. 1",
   "notes": {
     "notes_key_1":"Tea, Earl Grey, Hot",
@@ -172,6 +178,7 @@ client.order.create({
 |-----------------|---------|------------------------------------------------------------------------------|
 | amount*   | integer      | The amount to be captured (should be equal to the authorized amount, in paise) |
 | currency*   | string  | The currency of the payment (defaults to INR)  |
+| payment_capture*  | boolean  | Indicates whether payment status should be changed to captured automatically or not. Possible values: true - Payments are captured automatically. false - Payments are not captured automatically. |
 | receipt      | string  | Your system order reference id.  |
 | notes | object  | A key-value pair  |
 
@@ -202,14 +209,17 @@ client.order.create({
 ```py
 client.payment.createRecurring({
   "email": "gaurav.kumar@example.com",
-  "contact": 9123456789,
+  "contact": "9123456789",
   "amount": 1000,
   "currency": "INR",
-  "recurring": 1,
+  "order_id": "order_1Aa00000000002",
+  "customer_id": "cust_1Aa00000000001",
+  "token": "token_1Aa00000000001",
+  "recurring": "1",
   "description": "Creating recurring payment for Gaurav Kumar",
   "notes": {
-    "key1": "value3",
-    "key2": "value2"
+    "note_key 1": "Beam me up Scotty",
+    "note_key 2": "Tea. Earl Gray. Hot."
   }
 })
 ```
@@ -231,9 +241,7 @@ client.payment.createRecurring({
 **Response:**
 ```json
 {
-  "razorpay_payment_id" : "pay_1Aa00000000001",
-  "razorpay_order_id" : "order_1Aa00000000001",
-  "razorpay_signature" : "9ef4dffbfd84f1318f6739a3ce19f9d85851857ae648f114332d8401e0949a3d"
+  "razorpay_payment_id" : "pay_1Aa00000000001"
 }
 ```
 -------------------------------------------------------------------------------------------------------

@@ -47,9 +47,10 @@ client.customer.create({
 
 ```py
 client.order.create({
-  "amount": 100,
+  "amount": 0,
   "currency": "INR",
   "method": "nach",
+  "customer_id": "cust_1Aa00000000001",
   "receipt": "Receipt No. 5",
   "notes": {
     "note_key 1"": "Beam me up Scotty",
@@ -87,9 +88,9 @@ client.order.create({
 | currency*   | string  | The currency of the payment (defaults to INR)  |
 | customerId*   | string      | The id of the customer to be fetched |
 | method*      | string  | Payment method used to make the registration transaction. Possible value is `nach`.  |
+| token  | array  |  All parameters listed [here](https://razorpay.com/docs/api/payments/recurring-payments/paper-nach/auto-debit/#112-create-an-order) are supported |
+| notes | array  | A key-value pair  |
 | receipt      | string  | Your system order reference id.  |
-| token  | object  | All keys listed [here](https://razorpay.com/docs/api/recurring-payments/paper-nach/auto-debit/#112-create-an-order) are supported |
-| notes | object  | A key-value pair  |
 
 **Response:**
 ```json
@@ -310,6 +311,7 @@ client.payment.createRecurring({
 client.order.create({
   "amount":1000,
   "currency":"INR",
+  "payment_capture": True,
   "receipt":"Receipt No. 1",
   "notes": {
     "notes_key_1":"Tea, Earl Grey, Hot",
@@ -323,6 +325,7 @@ client.order.create({
 |-----------------|---------|------------------------------------------------------------------------------|
 | amount*   | integer      | The amount to be captured (should be equal to the authorized amount, in paise) |
 | currency*   | string  | The currency of the payment (defaults to INR)  |
+| payment_capture*  | boolean  | Indicates whether payment status should be changed to captured automatically or not. Possible values: true - Payments are captured automatically. false - Payments are not captured automatically. |
 | receipt      | string  | Your system order reference id.  |
 | notes | object  | A key-value pair  |
 
@@ -356,11 +359,14 @@ client.payment.createRecurring({
   "contact": "9123456789",
   "amount": 1000,
   "currency": "INR",
+  "order_id": "order_1Aa00000000002",
+  "customer_id": "cust_1Aa00000000001",
+  "token": "token_1Aa00000000001",
   "recurring": "1",
   "description": "Creating recurring payment for Gaurav Kumar",
   "notes": {
-    "key1": "value3",
-    "key2": "value2"
+    "note_key 1": "Beam me up Scotty",
+    "note_key 2": "Tea. Earl Gray. Hot."
   }
 })
 ```
@@ -377,14 +383,12 @@ client.payment.createRecurring({
 | tokenId*   | string      | The id of the token to be fetched |
 | recurring*   | boolean      | Possible values is `0` or `1` |
 | description  | string      | A brief description of the payment.   |
-| notes | object  | A key-value pair  |
+| notes | array  | A key-value pair  |
 
 **Response:**
 ```json
 {
-  "razorpay_payment_id" : "pay_1Aa00000000001",
-  "razorpay_order_id" : "order_1Aa00000000001",
-  "razorpay_signature" : "9ef4dffbfd84f1318f6739a3ce19f9d85851857ae648f114332d8401e0949a3d"
+  "razorpay_payment_id" : "pay_1Aa00000000001"
 }
 ```
 -------------------------------------------------------------------------------------------------------

@@ -83,7 +83,7 @@ class Client:
 
     def _get_version(self):
         version = ""
-        try:
+        try: # nosemgrep : gitlab.bandit.B110
             version = pkg_resources.require("razorpay")[0].version
         except DistributionNotFound:  # pragma: no cover
             pass
@@ -137,7 +137,7 @@ class Client:
                 raise BadRequestError(msg)
             elif str.upper(code) == ERROR_CODE.GATEWAY_ERROR:
                 raise GatewayError(msg)
-            elif str.upper(code) == ERROR_CODE.SERVER_ERROR:
+            elif str.upper(code) == ERROR_CODE.SERVER_ERROR: # nosemgrep : python.lang.maintainability.useless-ifelse.useless-if-body
                 raise ServerError(msg)
             else:
                 raise ServerError(msg)
@@ -175,6 +175,23 @@ class Client:
         """
         data, options = self._update_request(data, options)
         return self.request('put', path, data=data, **options)
+
+    def file(self, path, data, **options):     
+        fileDict = {}
+        fieldDict = {}
+        
+        if('file' not in data):
+            # if file is not exists in the dictionary
+            data['file'] = ""
+
+        fileDict['file'] = data['file'] 
+        
+        # Create a dict of form fields 
+        for fields in data:
+          if(fields != 'file'):
+            fieldDict[str(fields)] = data[fields] 
+
+        return self.request('post', path, files=fileDict, data=fieldDict, **options)
 
     def _update_request(self, data, options):
         """

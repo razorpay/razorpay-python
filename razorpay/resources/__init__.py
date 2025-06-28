@@ -16,6 +16,13 @@ from .registration_link import RegistrationLink
 from .settlement import Settlement
 from .item import Item
 from .fund_account import FundAccount
+from .account import Account
+from .stakeholder import Stakeholder
+from .product import Product
+from .iin import Iin
+from .webhook import Webhook
+from .document import Document
+from .dispute import Dispute
 
 __all__ = [
     'Payment',
@@ -35,5 +42,12 @@ __all__ = [
     'Settlement',
     'Item',
     'QrCode',
-    'FundAccount'
+    'FundAccount',
+    'Account',
+    'Stakeholder',
+    'Product',
+    'Iin',
+    'Webhook',
+    'Document',
+    'Dispute',
 ]

@@ -20,6 +20,13 @@ from .resources import FundAccount
 from .utility import Utility
 from .constants import ERROR_CODE
 from .constants import HTTP_STATUS_CODE
+from .resources import Account
+from .resources import Stakeholder
+from .resources import Product
+from .resources import Iin
+from .resources import Webhook
+from .resources import Document
+from .resources import Dispute
 
 __all__ = [
         'Payment',
@@ -44,4 +51,11 @@ __all__ = [
         'Qrcode',
         'HTTP_STATUS_CODE',
         'ERROR_CODE',
+        'Account',
+        'Stakeholder',
+        'Product',
+        'Iin',
+        'Webhook',
+        'Document',
+        'Dispute',
 ]

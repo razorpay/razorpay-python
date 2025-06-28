@@ -6,7 +6,7 @@ import warnings
 class Order(Resource):
     def __init__(self, client=None):
         super(Order, self).__init__(client)
-        self.base_url = URL.ORDER_URL
+        self.base_url = URL.V1 + URL.ORDER_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",
@@ -14,7 +14,7 @@ class Order(Resource):
         return self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Order entities
 
         Returns:
@@ -23,7 +23,7 @@ class Order(Resource):
         return super(Order, self).all(data, **kwargs)
 
     def fetch(self, order_id, data={}, **kwargs):
-        """"
+        """
         Fetch Order for given Id
 
         Args:
@@ -40,7 +40,7 @@ class Order(Resource):
         return self.payments(order_id, data, **kwargs)
 
     def payments(self, order_id, data={}, **kwargs):
-        """"
+        """
         Fetch Payment for Order Id
 
         Args:
@@ -53,7 +53,7 @@ class Order(Resource):
         return self.get_url(url, data, **kwargs)
 
     def create(self, data={}, **kwargs):
-        """"
+        """
         Create Order from given dict
 
         Args:
@@ -71,7 +71,7 @@ class Order(Resource):
         return self.post_url(url, data, **kwargs)
     
     def edit(self, order_id, data={}, **kwargs):
-        """"
+        """
          Update order
 
         Args:
@@ -82,6 +82,25 @@ class Order(Resource):
             Order Dict which was edited
 
         """
-        url = '{}/{}'.format(self.base_url, order_id)
-
+        url = f"{self.base_url}/{order_id}"
         return self.patch_url(url, data, **kwargs)
+    
+    def viewRtoReview(self, order_id, data={}, **kwargs):
+        """
+        View rto risk reasons
+
+        Returns:
+            Dict for given Order Id
+        """
+        url = f"{self.base_url}/{order_id}/rto_review"
+        return self.post_url(url, data, **kwargs)
+
+    def editFulfillment(self, order_id, data={}, **kwargs):
+        """
+        Update the Fulfillment Details
+
+        Returns:
+            Dict for given Order Id
+        """
+        url = f"{self.base_url}/{order_id}/fulfillment"
+        return self.post_url(url, data, **kwargs)

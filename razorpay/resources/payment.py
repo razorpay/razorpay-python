@@ -6,7 +6,7 @@ import warnings
 class Payment(Resource):
     def __init__(self, client=None):
         super(Payment, self).__init__(client)
-        self.base_url = URL.PAYMENTS_URL
+        self.base_url = URL.V1 + URL.PAYMENTS_URL
 
     def fetch_all(self, data={}, **kwargs):  # pragma: no cover
         warnings.warn("Will be Deprecated in next release, use all",
@@ -14,7 +14,7 @@ class Payment(Resource):
         return self.all(data, **kwargs)
 
     def all(self, data={}, **kwargs):
-        """"
+        """
         Fetch all Payment entities
 
         Returns:
@@ -23,7 +23,7 @@ class Payment(Resource):
         return super(Payment, self).all(data, **kwargs)
 
     def fetch(self, payment_id, data={}, **kwargs):
-        """"
+        """
         Fetch Payment for given Id
 
         Args:
@@ -34,8 +34,8 @@ class Payment(Resource):
         """
         return super(Payment, self).fetch(payment_id, data, **kwargs)
 
-    def capture(self, payment_id, amount, data={}, **kwargs):
-        """"
+    def capture(self, payment_id, amount, data={}, **kwargs): # nosemgrep : python.lang.correctness.common-mistakes.default-mutable-dict.default-mutable-dict
+        """
         Capture Payment for given Id
 
         Args:
@@ -49,8 +49,8 @@ class Payment(Resource):
         data['amount'] = amount
         return self.post_url(url, data, **kwargs)
 
-    def refund(self, payment_id, amount, data={}, **kwargs):  # pragma: no cover
-        """"
+    def refund(self, payment_id, amount, data={}, **kwargs):  # pragma: no cover # nosemgrep : python.lang.correctness.common-mistakes.default-mutable-dict.default-mutable-dict
+        """
         Refund Payment for given Id
 
         Args:
@@ -65,7 +65,7 @@ class Payment(Resource):
         return self.post_url(url, data, **kwargs)
 
     def transfer(self, payment_id, data={}, **kwargs):
-        """"
+        """
         Create Transfer for given Payment Id
 
         Args:
@@ -78,7 +78,7 @@ class Payment(Resource):
         return self.post_url(url, data, **kwargs)
 
     def transfers(self, payment_id, data={}, **kwargs):
-        """"
+        """
         Fetches all transfer for given Payment Id
 
         Args:
@@ -92,7 +92,7 @@ class Payment(Resource):
         return self.get_url(url, data, **kwargs)
 
     def bank_transfer(self, payment_id, data={}, **kwargs):
-        """"
+        """
         Bank Transfer Entity for given Payment
 
         Args:
@@ -105,7 +105,7 @@ class Payment(Resource):
         return self.get_url(url, data, **kwargs)
 
     def upi_transfer(self, payment_id, data={}, **kwargs):
-        """"
+        """
         UPI Transfer Entity for given Payment
 
         Args:
@@ -118,7 +118,7 @@ class Payment(Resource):
         return self.get_url(url, data, **kwargs)
     
     def refund(self, payment_id, data={}, **kwargs):
-        """"
+        """
         Create a normal refund
 
         Returns:
@@ -128,7 +128,7 @@ class Payment(Resource):
         return self.post_url(url, data, **kwargs)
 
     def fetch_multiple_refund(self, payment_id, data={}, **kwargs):
-        """"
+        """
         Fetch multiple refunds for a payment
 
         Returns:
@@ -138,7 +138,7 @@ class Payment(Resource):
         return self.get_url(url, data, **kwargs) 
 
     def fetch_refund_id(self, payment_id, refund_id, **kwargs):
-        """"
+        """
         Fetch multiple refunds for a payment
 
         Returns:
@@ -148,7 +148,7 @@ class Payment(Resource):
         return self.get_url(url, {}, **kwargs)  
   
     def edit(self, payment_id, data={}, **kwargs):
-        """"
+        """
          Update the Payment
         Args:
             data : Dictionary having keys using which order have to be edited
@@ -162,7 +162,7 @@ class Payment(Resource):
         return self.patch_url(url, data, **kwargs) 
     
     def fetchCardDetails(self, payment_id, **kwargs):
-        """"
+        """
         Fetch Card Details of a Payment
 
         Args:
@@ -175,7 +175,7 @@ class Payment(Resource):
         return self.get_url(url, {}, **kwargs)
 
     def fetchDownTime(self, **kwargs):
-        """"
+        """
         Fetch Card Details of a Payment
 
         Args:
@@ -188,7 +188,7 @@ class Payment(Resource):
         return self.get_url(url, {}, **kwargs)        
     
     def fetchDownTimeById(self, downtime_id, **kwargs):
-        """"
+        """
         Fetch Payment Downtime Details by ID
 
         Args:
@@ -201,7 +201,7 @@ class Payment(Resource):
         return self.get_url(url, {}, **kwargs)
     
     def createPaymentJson(self ,data={}, **kwargs):
-        """"
+        """
         Create a Payment
 
         Args:
@@ -216,10 +216,76 @@ class Payment(Resource):
         return self.post_url(url, data, **kwargs)  
 
     def createRecurring(self, data={}, **kwargs):
-        """"
+        """
         Create Recurring Payments
         Return:
             Recurring Payments dict
         """
         url = "{}/{}/recurring".format(self.base_url,'create')
+        return self.post_url(url, data, **kwargs)
+
+    def createUpi(self, data={}, **kwargs):
+        """
+        Initiate a payment
+        Return:
+          Payments dict
+        """
+        url = "{}/create/{}".format(self.base_url,'upi')
+        return self.post_url(url, data, **kwargs)
+
+    def validateVpa(self, data={}, **kwargs):
+        """
+        Validate the VPA
+        Return:
+          Payments dict
+        """
+        url = "{}/validate/{}".format(self.base_url,'vpa')
+        return self.post_url(url, data, **kwargs)            
+
+    def fetchPaymentMethods(self, **kwargs):
+        """
+        Fetch payment methods
+        Return:
+          Payments dict
+        """
+        url = "/{}".format('methods')
+        return self.get_url(url, {}, **kwargs)
+    
+    def otpGenerate(self, payment_id, data={}, **kwargs):
+        """
+        Otp Generate
+
+        Args:
+            payment_id : Id for which upi transfer entity has to be fetched
+
+        Returns:
+            Otp Dict which was created
+        """
+        url = "{}/{}/otp_generate".format(self.base_url, payment_id)
+        return self.post_url(url, data, **kwargs)
+
+    def otpSubmit(self, payment_id, data={}, **kwargs):
+        """
+        Otp Submit
+
+        Args:
+            payment_id : Id for which upi transfer entity has to be fetched
+
+        Returns:
+            Otp Dict which was created
+        """
+        url = "{}/{}/otp/submit".format(self.base_url, payment_id)
+        return self.post_url(url, data, **kwargs)
+
+    def otpResend(self, payment_id, data={}, **kwargs):
+        """
+        Otp Resend
+
+        Args:
+            payment_id : Id for which upi transfer entity has to be fetched
+
+        Returns:
+            Otp Dict which was created
+        """
+        url = "{}/{}/otp/resend".format(self.base_url, payment_id)
         return self.post_url(url, data, **kwargs)

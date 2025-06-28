@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## [1.4.2][1.4.2] - 2024-03-19
+
+feat: Added new API endpoints
+
+- Added support for `addBankAccount`, `deleteBankAccount`, `requestEligibilityCheck` & `fetchEligibility` on customer
+- Added support for [Dispute](https://razorpay.com/docs/api/disputes/)
+- Added support for [Document](https://razorpay.com/docs/api/documents/)
+- Added support for fetch all IINs Supporting native otps & fetch all IINs with business sub-type using `all`
+- Added support for `viewRtoReview` & `editFulfillment` on order
+
+## [1.4.1][1.4.1] - 2023-08-03
+
+feat: Added new API endpoints.
+
+Added account onboarding API (create, fetch, edit, delete)
+Added stakeholders API (create, fetch, all, edit)
+Added product configuration API (requestProductConfiguration, fetch, edit, fetchTnc)
+Added webhooks API (create, fetch, all, edit, delete)
+Added token sharing API (create, fetchToken, deleteToken, processPaymentOnAlternatePAorPG)
+Added Documents API (uploadAccountDoc(, fetchAccountDoc, uploadStakeholderDoc, fetchStakeholderDoc)
+
+## [1.3.1][1.3.1] - 2022-07-01
+
+- Added Third party validation & Otp API for Payment (createUpi, validateVpa, otpGenerate, otpSubmit, otpResend)
+- Update Documention
+
 ## [1.3.0][1.3.0] - 2022-02-01
 
 ### Added

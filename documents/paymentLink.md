@@ -9,7 +9,7 @@ Standard Payment Link
 client.payment_link.create({
   "amount": 500,
   "currency": "INR",
-  "accept_partial": true,
+  "accept_partial": True,
   "first_min_partial_amount": 100,
   "description": "For XYZ purpose",
   "customer": {
@@ -18,10 +18,10 @@ client.payment_link.create({
     "contact": "+919999999999"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": true,
+  "reminder_enable": True,
   "notes": {
     "policy_name": "Jeevan Bima"
   },
@@ -35,25 +35,29 @@ UPI Payment Link
 
 ```py
 client.payment_link.create({
-  "upi_link": true,
+  "upi_link": True,
   "amount": 500,
   "currency": "INR",
-  "accept_partial": true,
+  "accept_partial": True,
   "first_min_partial_amount": 100,
-  "description": "For XYZ purpose",
+  "expire_by": 1691097057,
+  "reference_id": "TS1989",
+  "description": "Payment for policy no #23456",
   "customer": {
     "name": "Gaurav Kumar",
     "email": "gaurav.kumar@example.com",
     "contact": "+919999999999"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": true,
+  "reminder_enable": True,
   "notes": {
     "policy_name": "Jeevan Bima"
   }
+  "callback_url": "https://example-callback-url.com/",
+  "callback_method": "get"
 })
 ```
 
@@ -64,12 +68,17 @@ client.payment_link.create({
 |upi_link*          | boolean | boolean Must be set to true   //   to creating UPI Payment Link only                                     |
 |amount*        | integer  | Amount to be paid using the Payment Link.                     |
 |currency           | string  |  A three-letter ISO code for the currency in which you want to accept the payment. For example, INR.                     |
+|accept_partial        | boolean  | Indicates whether customers can make partial payments using the Payment Link. Possible values: true - Customer can make partial payments. false (default) - Customer cannot make partial payments. // UPI Payment Link is not supported partial payment  |
 |description           | string  | A brief description of the Payment Link                     |
-|reference_id           | string  | AReference number tagged to a Payment Link.                      |
-|customer           | object  | name, email, contact                 |
+|first_min_partial_amount           | integer  |Minimum amount, in currency subunits, that must be paid by the customer as the first partial payment. // UPI Payment Link is not supported partial payment  |
+|reference_id           | string  | Reference number tagged to a Payment Link.                      |
+|customer           | object  | All parameters listed [here](https://razorpay.com/docs/api/payments/payment-links/#sample-codes-for-upi-payment-links) are supported                 |
 |expire_by           | integer  | Timestamp, in Unix, at which the Payment Link will expire. By default, a Payment Link will be valid for six months from the date of creation.                     |
 |notify           | object  | sms or email (boolean)                     |
 |notes           | json object  | Key-value pair that can be used to store additional information about the entity. Maximum 15 key-value pairs, 256 characters (maximum) each. For example, "note_key": "Beam me up Scotty”                     |
+| callback_url | string | If specified, adds a redirect URL to the Payment Link. Once customers completes the payment, they are redirected to the specified URL. |
+| callback_method | string | If callback_url parameter is passed, callback_method must be passed with the value `get`. |
+| reminder_enable | boolean | Used to send reminders for the Payment Link. Possible values is `true` or `false` |
 
 **Response:**
 For create payment link response please click [here](https://razorpay.com/docs/api/payment-links/#create-payment-link)
@@ -114,10 +123,10 @@ For fetch specific payment link response please click [here](https://razorpay.co
 ### Update payment link
 
 ```py
-client.payment_link.edit({
+client.payment_link.edit(paymentLinkId, {
     "reference_id": "TS35",
     "expire_by": 1653347540,
-    "reminder_enable":false,
+    "reminder_enable":False,
     "notes":{
       "policy_name": "Jeevan Saral"
     }
@@ -180,35 +189,38 @@ client.payment_link.notifyBy(paymentLinkId, medium)
 
 ```py
 client.payment_link.create({
-  "amount": 20000,
+  "amount": 1500,
   "currency": "INR",
-  "accept_partial": false,
-  "description": "For XYZ purpose",
+  "accept_partial": False,
+  "reference_id": "#aasasw8",
+  "description": "Payment for policy no #23456",
   "customer": {
     "name": "Gaurav Kumar",
-    "email": "gaurav.kumar@example.com",
-    "contact": "+919999999999"
+    "contact": "+919999999999",
+    "email": "gaurav.kumar@example.com"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": true,
+  "reminder_enable": True,
   "options": {
-    "order": [
-      {
-        "account": "acc_CNo3jSI8OkFJJJ",
-        "amount": 500,
-        "currency": "INR",
-        "notes": {
-          "branch": "Acme Corp Bangalore North",
-          "name": "Saurav Kumar",
+    "order": {
+      "transfers": [
+        {
+          "account": "acc_I0QRP7PpvaHhpB",
+          "amount": 500,
+          "currency": "INR",
+          "notes": {
+            "branch": "Acme Corp Bangalore North",
+            "name": "Bhairav Kumar"
+          },
           "linked_account_notes": [
             "branch"
           ]
         }
-      }
-    ]
+      ]
+    }
   }
 })
 ```
@@ -267,7 +279,7 @@ client.payment_link.create({
 client.payment_link.create({
   "amount": 3400,
   "currency": "INR",
-  "accept_partial": false,
+  "accept_partial": False,
   "reference_id": "#425",
   "description": "Payment for policy no #23456",
   "customer": {
@@ -276,10 +288,10 @@ client.payment_link.create({
     "email": "gaurav.kumar@example.com"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": false,
+  "reminder_enable": False,
   "options": {
     "order": {
       "offers": [
@@ -345,7 +357,7 @@ client.payment_link.create({
 client.payment_link.create({
   "amount": 1000,
   "currency": "INR",
-  "accept_partial": true,
+  "accept_partial": True,
   "first_min_partial_amount": 100,
   "reference_id": "#425",
   "description": "Payment for policy no #23456",
@@ -355,10 +367,10 @@ client.payment_link.create({
     "email": "gaurav.kumar@example.com"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": false
+  "reminder_enable": False
 })
 ```
 
@@ -440,7 +452,7 @@ client.payment_link.create({
 client.payment_link.create({
   "amount": 500,
   "currency": "INR",
-  "accept_partial": true,
+  "accept_partial": True,
   "first_min_partial_amount": 100,
   "description": "For XYZ purpose",
   "customer": {
@@ -449,10 +461,10 @@ client.payment_link.create({
     "contact": "+919999999999"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": true,
+  "reminder_enable": True,
   "options": {
     "checkout": {
       "partial_payment": {
@@ -527,7 +539,7 @@ client.payment_link.create({
 client.payment_link.create({
   "amount": 1000,
   "currency": "INR",
-  "accept_partial": true,
+  "accept_partial": True,
   "first_min_partial_amount": 100,
   "reference_id": "#2234542",
   "description": "Payment for policy no #23456",
@@ -537,10 +549,10 @@ client.payment_link.create({
     "email": "gaurav.kumar@example.com"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": true,
+  "reminder_enable": True,
   "options": {
     "checkout": {
       "name": "Lacme Corp"
@@ -556,7 +568,7 @@ client.payment_link.create({
 |amount*        | integer  | Amount to be paid using the Payment Link.                     |
 |currency           | string  |  A three-letter ISO code for the currency in which you want to accept the payment. For example, INR.                     |
 |accept_partial        | boolean  |  Indicates whether customers can make partial payments using the Payment Link. Possible values:true - Customer can make partial payments.false (default) - Customer cannot make partial payments.                     |
-|first_min_partial_amount        | integer  |                      |
+|first_min_partial_amount           | integer  |Minimum amount, in currency subunits, that must be paid by the customer as the first partial payment. // UPI Payment Link is not supported partial payment  |
 |description           | string  | A brief description of the Payment Link                     |
 |customer           | object  | name, email, contact                 |
 |notify           | object  | sms or email (boolean)                     |
@@ -609,7 +621,7 @@ client.payment_link.create({
 client.payment_link.create({
   "amount": 1000,
   "currency": "INR",
-  "accept_partial": true,
+  "accept_partial": True,
   "first_min_partial_amount": 100,
   "reference_id": "#417",
   "description": "Payment for policy no #23456",
@@ -619,10 +631,10 @@ client.payment_link.create({
     "email": "gaurav.kumar@example.com"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": true,
+  "reminder_enable": True,
   "options": {
     "checkout": {
       "prefill": {
@@ -644,7 +656,7 @@ client.payment_link.create({
 |amount*        | integer  | Amount to be paid using the Payment Link.                     |
 |currency           | string  |  A three-letter ISO code for the currency in which you want to accept the payment. For example, INR.                     |
 |accept_partial        | boolean  |  Indicates whether customers can make partial payments using the Payment Link. Possible values:true - Customer can make partial payments.false (default) - Customer cannot make partial payments.                     |
-|first_min_partial_amount        | integer  |                      |
+|first_min_partial_amount           | integer  |Minimum amount, in currency subunits, that must be paid by the customer as the first partial payment. // UPI Payment Link is not supported partial payment  |
 |description           | string  | A brief description of the Payment Link                     |
 |customer           | object  | name, email, contact                 |
 |notify           | object  | sms or email (boolean)                     |
@@ -662,7 +674,7 @@ For prefill checkout fields response please click [here](https://razorpay.com/do
 client.payment_link.create({
   "amount": 500,
   "currency": "INR",
-  "accept_partial": true,
+  "accept_partial": True,
   "first_min_partial_amount": 100,
   "description": "For XYZ purpose",
   "customer": {
@@ -671,10 +683,10 @@ client.payment_link.create({
     "contact": "+919999999999"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": true,
+  "reminder_enable": True,
   "options": {
     "checkout": {
       "method": {
@@ -695,7 +707,7 @@ client.payment_link.create({
 |amount*        | integer  | Amount to be paid using the Payment Link.                     |
 |currency           | string  |  A three-letter ISO code for the currency in which you want to accept the payment. For example, INR.                     |
 |accept_partial        | boolean  |  Indicates whether customers can make partial payments using the Payment Link. Possible values:true - Customer can make partial payments.false (default) - Customer cannot make partial payments.                     |
-|first_min_partial_amount        | integer  |                      |
+|first_min_partial_amount           | integer  |Minimum amount, in currency subunits, that must be paid by the customer as the first partial payment. // UPI Payment Link is not supported partial payment  |
 |description           | string  | A brief description of the Payment Link                     |
 |customer           | object  | name, email, contact                 |
 |notify           | object  | sms or email (boolean)                     |
@@ -749,7 +761,7 @@ client.payment_link.create({
 client.payment_link.create({
   "amount": 1000,
   "currency": "INR",
-  "accept_partial": true,
+  "accept_partial": True,
   "first_min_partial_amount": 100,
   "reference_id": "#20",
   "description": "Payment for policy no #23456",
@@ -759,10 +771,10 @@ client.payment_link.create({
     "email": "gaurav.kumar@example.com"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": true,
+  "reminder_enable": True,
   "options": {
     "checkout": {
       "readonly": {
@@ -781,7 +793,7 @@ client.payment_link.create({
 |amount*        | integer  | Amount to be paid using the Payment Link.                     |
 |currency           | string  |  A three-letter ISO code for the currency in which you want to accept the payment. For example, INR.                     |
 |accept_partial        | boolean  |  Indicates whether customers can make partial payments using the Payment Link. Possible values:true - Customer can make partial payments.false (default) - Customer cannot make partial payments.                     |
-|first_min_partial_amount        | integer  |                      |
+|first_min_partial_amount           | integer  |Minimum amount, in currency subunits, that must be paid by the customer as the first partial payment. // UPI Payment Link is not supported partial payment  |
 |description           | string  | A brief description of the Payment Link                     |
 |customer           | object  | name, email, contact                 |
 |notify           | object  | sms or email (boolean)                     |
@@ -835,7 +847,7 @@ client.payment_link.create({
 client.payment_link.create({
   "amount": 1000,
   "currency": "INR",
-  "accept_partial": true,
+  "accept_partial": True,
   "first_min_partial_amount": 100,
   "reference_id": "#423212",
   "description": "Payment for policy no #23456",
@@ -845,14 +857,14 @@ client.payment_link.create({
     "email": "gaurav.kumar@example.com"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": true,
+  "reminder_enable": True,
   "options": {
     "checkout": {
       "theme": {
-        "hide_topbar": true
+        "hide_topbar": True
       }
     }
   }
@@ -866,7 +878,7 @@ client.payment_link.create({
 |amount*        | integer  | Amount to be paid using the Payment Link.                     |
 |currency           | string  |  A three-letter ISO code for the currency in which you want to accept the payment. For example, INR.                     |
 |accept_partial        | boolean  |  Indicates whether customers can make partial payments using the Payment Link. Possible values:true - Customer can make partial payments.false (default) - Customer cannot make partial payments.                     |
-|first_min_partial_amount        | integer  |                      |
+|first_min_partial_amount           | integer  |Minimum amount, in currency subunits, that must be paid by the customer as the first partial payment. // UPI Payment Link is not supported partial payment  |
 |description           | string  | A brief description of the Payment Link                     |
 |customer           | object  | name, email, contact                 |
 |notify           | object  | sms or email (boolean)                     |
@@ -919,7 +931,7 @@ client.payment_link.create({
 client.payment_link.create({
   "amount": 1000,
   "currency": "INR",
-  "accept_partial": true,
+  "accept_partial": True,
   "first_min_partial_amount": 100,
   "reference_id": "#421",
   "description": "Payment for policy no #23456",
@@ -929,10 +941,10 @@ client.payment_link.create({
     "email": "gaurav.kumar@example.com"
   },
   "notify": {
-    "sms": true,
-    "email": true
+    "sms": True,
+    "email": True
   },
-  "reminder_enable": true,
+  "reminder_enable": True,
   "options": {
     "checkout": {
       "partial_payment": {
@@ -953,7 +965,7 @@ client.payment_link.create({
 |amount*        | integer  | Amount to be paid using the Payment Link.                     |
 |currency           | string  |  A three-letter ISO code for the currency in which you want to accept the payment. For example, INR.                     |
 |accept_partial        | boolean  |  Indicates whether customers can make partial payments using the Payment Link. Possible values:true - Customer can make partial payments.false (default) - Customer cannot make partial payments.                     |
-|first_min_partial_amount        | integer  |                      |
+|first_min_partial_amount           | integer  |Minimum amount, in currency subunits, that must be paid by the customer as the first partial payment. // UPI Payment Link is not supported partial payment  |
 |description           | string  | A brief description of the Payment Link                     |
 |customer           | object  | name, email, contact                 |
 |notify           | object  | sms or email (boolean)                     |
