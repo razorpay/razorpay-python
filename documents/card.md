@@ -581,7 +581,7 @@ client.card.requestCardReference({"number":"4854980604708430"})
 | Name        | Type    | Description                                                                  |
 |-------------|---------|------------------------------------------------------------------------------|
 | number* | string | The card number whose PAR or network reference id should be retrieved. |
-| tokenised  | string | Determines if the card is saved as a token. Possible value is `true` or `false` |
+| tokenised  | string | Determines if the card is saved as a token. Possible value is `True` or `False` |
 
 **Response:**
 ```json

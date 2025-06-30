@@ -427,8 +427,8 @@ client.payment.createPaymentJson({
     	"authentication_channel": "browser"
     },
     "browser": {
-    	"java_enabled": false,
-    	"javascript_enabled": false,
+    	"java_enabled": False,
+    	"javascript_enabled": False,
     	"timezone_offset": 11,
     	"color_depth": 23,
     	"screen_width": 23,

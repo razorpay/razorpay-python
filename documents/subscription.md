@@ -323,7 +323,7 @@ options = {
   "remaining_count":5,
   "start_at":1496000432,
   "schedule_change_at":"now",
-  "customer_notify": true
+  "customer_notify": True
 }
 
 client.subscription.update(subscriptionId,options)

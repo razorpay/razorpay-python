@@ -21,7 +21,7 @@ client.customer.create({
 | name*          | string      | Name of the customer                        |
 | email        | string      | Email of the customer                       |
 | contact      | string      | Contact number of the customer              |
-| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `True` or `False`|x`
+| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `True` or `False`|
 | notes         | object      | A key-value pair                            |
 
 **Response:**

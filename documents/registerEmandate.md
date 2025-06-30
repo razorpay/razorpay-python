@@ -147,7 +147,7 @@ client.registration_link.create({
 | description*  | string      | A brief description of the payment.   |
 | subscription_registration   | object  | All keys listed [here](https://razorpay.com/docs/api/recurring-payments/emandate/auto-debit/#12-using-a-registration-link) are supported  |
 | receipt      | string  | Your system order reference id.  |
-| payment_capture* |  boolean  | Indicates whether payment status should be changed to `captured` automatically or not. Possible values: true - Payments are captured automatically. false - Payments are not captured automatically.|
+| payment_capture* |  boolean  | Indicates whether payment status should be changed to `captured` automatically or not. Possible values: `True` - Payments are captured automatically. `False` - Payments are not captured automatically.|
 | sms_notify  | boolean  | SMS notifications are to be sent by Razorpay (default : True)  |
 | email_notify | boolean  | Email notifications are to be sent by Razorpay (default : True)  |
 | expire_by    | integer | The timestamp, in Unix format, till when the customer can make the authorization payment. |
