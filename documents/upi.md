@@ -6,7 +6,7 @@ client.customer.create({
   "name": "Gaurav Kumar",
   "contact": 9123456780,
   "email": "gaurav.kumar@example.com",
-  "fail_existing": True,
+  "fail_existing": "1",
   "notes": {
     "notes_key_1": "Tea, Earl Grey, Hot",
     "notes_key_2": "Tea, Earl Grey… decaf."
@@ -21,7 +21,7 @@ client.customer.create({
 | name*          | string      | Name of the customer                        |
 | email        | string      | Email of the customer                       |
 | contact      | string      | Contact number of the customer              |
-| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `True` or `False`|
+| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `1` or `0`|
 | notes         | object      | A key-value pair                            |
 
 **Response:**
