@@ -5,7 +5,7 @@
 ```py
 client.subscription.create({
   "plan_id": "plan_7wAosPWtrkhqZw",
-  "customer_notify": 1,
+  "customer_notify": True,
   "quantity": 5,
   "total_count": 6,
   "start_at": 1495995837,
@@ -81,7 +81,7 @@ client.subscription.create({
   "total_count": 12,
   "quantity": 1,
   "expire_by": 1633237807,
-  "customer_notify": 1,
+  "customer_notify": True,
   "addons": [
     {
       "item": {
@@ -211,6 +211,8 @@ client.subscription.all(options)
 ### Fetch particular subscription
 
 ```py
+subscriptionId = "sub_00000000000001"
+
 client.subscription.fetch(subscriptionId)
 ```
 
@@ -259,6 +261,11 @@ client.subscription.fetch(subscriptionId)
 ### Cancel particular subscription
 
 ```py
+subscriptionId = "sub_00000000000001"
+options = {
+  "cancel_at_cycle_end": True
+}
+
 client.subscription.cancel(subscriptionId,options)
 ```
 
@@ -267,7 +274,7 @@ client.subscription.cancel(subscriptionId,options)
 | Name  | Type      | Description                                      |
 |-------|-----------|--------------------------------------------------|
 | subscriptionId*  | string | The id of the subscription to be cancelled  |
-| cancel_at_cycle_end  | boolean | Possible values:<br>0 (default): Cancel the subscription immediately. <br> 1: Cancel the subscription at the end of the current billing cycle.  |
+| cancel_at_cycle_end  | boolean | Possible values:<br>False (default): Cancel the subscription immediately. <br> True: Cancel the subscription at the end of the current billing cycle.  |
 
 **Response:**
 ```json
@@ -307,6 +314,18 @@ client.subscription.cancel(subscriptionId,options)
 ### Update particular subscription
 
 ```py
+subscriptionId = "sub_00000000000001"
+
+options = {
+  "plan_id":"plan_00000000000002",
+  "offer_id":"offer_JHD834hjbxzhd38d",
+  "quantity":5,
+  "remaining_count":5,
+  "start_at":1496000432,
+  "schedule_change_at":"now",
+  "customer_notify": True
+}
+
 client.subscription.update(subscriptionId,options)
 ```
 
@@ -356,6 +375,8 @@ client.subscription.update(subscriptionId,options)
 ### Fetch details of pending update
 
 ```py
+subscriptionId = "sub_00000000000001"
+
 client.subscription.pending_update(subscriptionId)
 ```
 
@@ -403,6 +424,8 @@ client.subscription.pending_update(subscriptionId)
 ### Cancel a update
 
 ```py
+var subscriptionId = "sub_00000000000001"
+
 client.subscription.cancel_scheduled_changes(subscriptionId)
 ```
 
@@ -450,6 +473,8 @@ client.subscription.cancel_scheduled_changes(subscriptionId)
 ### Pause a subscription
 
 ```py
+subscriptionId = "sub_00000000000001"
+
 client.subscription.pause(subscriptionId,{
   "pause_at" : "now"
 })
@@ -501,6 +526,8 @@ client.subscription.pause(subscriptionId,{
 ### Resume a subscription
 
 ```py
+subscriptionId = "sub_00000000000001"
+
 client.subscription.resume(subscriptionId,{
   "resume_at" : "now"
 })
@@ -552,6 +579,8 @@ client.subscription.resume(subscriptionId,{
 ### Fetch all invoices for a subscription
 
 ```py
+subscriptionId = "sub_00000000000001"
+
 client.invoice.all({
   'subscription_id':subscriptionId
 })
@@ -654,6 +683,9 @@ client.invoice.all({
 ### Delete offer linked to a subscription
 
 ```py
+subscriptionId = "sub_00000000000001"
+offerId = "offer__00000000000001"
+
 client.subscription.delete_offer(subscriptionId, offerId)
 ```
 

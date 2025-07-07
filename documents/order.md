@@ -275,7 +275,7 @@ client.order.edit(orderId,{
 ### View RTO/Risk Reasons
 
 ```py
-orderId = "order_DaaS6LOUAASb7Y";
+orderId = "order_DaaS6LOUAASb7Y"
 
 client.order.viewRtoReview(orderId)
 ```

@@ -16,7 +16,7 @@ client.payment.fetch(paymentId,{
       "linked_account_notes": [
         "branch"
       ],
-      "on_hold": 1,
+      "on_hold": True,
       "on_hold_until": 1671222870
     }
   ]
@@ -86,7 +86,7 @@ client.order.create({
       "linked_account_notes": [
         "branch"
       ],
-      "on_hold": 1,
+      "on_hold": True,
       "on_hold_until": 1671222870
     },
     {
@@ -100,7 +100,7 @@ client.order.create({
       "linked_account_notes": [
         "branch"
       ],
-      "on_hold": 0
+      "on_hold": True
     }
   ]
 })
@@ -504,7 +504,7 @@ client.transfer.all({
 ```py
 client.payment.refund(paymentId,{
     "amount" : 100,
-    "reverse_all" : 1
+    "reverse_all" : True
 })
 ```
 
@@ -514,7 +514,7 @@ client.payment.refund(paymentId,{
 |---------------|-------------|---------------------------------------------|
 | paymentId*   | string      | The id of the payment to be fetched  |
 | amount*   | integer      | The amount to be captured (should be equal to the authorized amount, in paise) |
-| reverse_all   | boolean    | Reverses transfer made to a linked account. Possible values:<br> * `1` - Reverses transfer made to a linked account.<br>* `0` - Does not reverse transfer made to a linked account.|
+| reverse_all   | boolean    | Reverses transfer made to a linked account. Possible values:<br> * `True` - Reverses transfer made to a linked account.<br>* `False` - Does not reverse transfer made to a linked account.|
 
 **Response:**
 ```json
@@ -635,13 +635,15 @@ client.transfer.reverse(transferId,{
 
 ### Hold settlements for transfers
 ```py
+paymentId = "pay_00000000000001"
+
 client.payment.transfer(paymentId,{
   "transfers": [
     {
       "amount": 100,
       "account": "acc_CMaomTz4o0FOFz",
       "currency": "INR",
-      "on_hold": 1
+      "on_hold": True
     }
   ]
 })
@@ -695,7 +697,7 @@ client.payment.transfer(paymentId,{
 ### Modify settlement hold for transfers
 ```py
 client.transfer.edit(transferId,{
-  "on_hold": "1",
+  "on_hold": True,
   "on_hold_until": "1679691505"
 })
 ```
@@ -705,7 +707,7 @@ client.transfer.edit(transferId,{
 | Name          | Type        | Description                                 |
 |---------------|-------------|---------------------------------------------|
 | transferId*   | string      | The id of the payment to be fetched  |
-| on_hold*   | boolean      | Possible values is `0` or `1`  |
+| on_hold*   | boolean      | Possible values is `True` or `False`  |
 | on_hold_until   | integer      | Timestamp, in Unix, that indicates until when the settlement of the transfer must be put on hold |
 
 **Response:**
