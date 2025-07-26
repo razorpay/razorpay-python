@@ -31,6 +31,8 @@ jobs:
         python3 setup.py install
     - name: Run Tests
       run: python3 -m unittest
+    - name: Print Python Version
+      run: python3 --version      
     - name: Run order Test
       env:
         RZP_API_KEY: ${{ secrets.RZP_API_KEY }}
