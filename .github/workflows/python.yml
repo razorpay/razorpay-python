@@ -17,7 +17,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3, 3.5, 3.6, 3.7, 3.8, 3.9, 3.10]
+        python-version: [3, 3.5, 3.6, 3.7, 3.8, 3.9, 3.10, 3.12]
 
     steps:
     - uses: actions/checkout@v2
@@ -31,3 +31,5 @@ jobs:
         python3 setup.py install
     - name: Run Tests
       run: python3 -m unittest
+    - name: Run order Test
+      run: python3 test.py     
