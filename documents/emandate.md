@@ -6,7 +6,7 @@ client.customer.create({
   "name": "Gaurav Kumar",
   "contact": 9123456780,
   "email": "gaurav.kumar@example.com",
-  "fail_existing": 0,
+  "fail_existing": "1",
   "gstin": "29XAbbA4369J1PA",
   "notes": {
     "notes_key_1": "Tea, Earl Grey, Hot",
@@ -22,7 +22,7 @@ client.customer.create({
 | name*          | string      | Name of the customer                        |
 | email        | string      | Email of the customer                       |
 | contact      | string      | Contact number of the customer              |
-| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `0` or `1`|
+| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `1` or `0`|
 | notes         | object      | A key-value pair                            |
 
 **Response:**
@@ -126,8 +126,8 @@ client.registration_link.create({
   },
   "receipt": "Receipt no. 1",
   "expire_by": 1880480689,
-  "sms_notify": 1,
-  "email_notify": 1,
+  "sms_notify": True,
+  "email_notify": True,
   "notes": {
     "note_key 1": "Beam me up Scotty",
     "note_key 2": "Tea. Earl Gray. Hot."
@@ -145,7 +145,8 @@ client.registration_link.create({
 | amount*         | integer  | The payment amount in the smallest currency sub-unit.                 |
 | description*    | string  | A description that appears on the hosted page. For example, `12:30 p.m. Thali meals (Gaurav Kumar`).                                                             |
 | subscription_registration  | array  | All parameters listed [here](https://razorpay.com/docs/api/payments/recurring-payments/emandate/create-authorization-transaction/#121-create-a-registration-link) are supported  |
-| email_notify | boolean  | Email notifications are to be sent by Razorpay (default : 1)  |
+| email_notify | boolean  | Email notifications are to be sent by Razorpay (default : True)  |
+| sms_notify  | boolean  | SMS notifications are to be sent by Razorpay (default : True)  |
 | expire_by    | integer | The timestamp, in Unix format, till when the customer can make the authorization payment. |
 | receipt      | string  | Your system order reference id.  |
 | notes           | array  | A key-value pair  |
@@ -430,7 +431,7 @@ client.payment.createRecurring({
   "order_id": "order_1Aa00000000002",
   "customer_id": "cust_1Aa00000000001",
   "token": "token_1Aa00000000001",
-  "recurring": "1",
+  "recurring": True,
   "description": "Creating recurring payment for Gaurav Kumar",
   "notes": {
     "note_key 1": "Beam me up Scotty",
@@ -450,7 +451,7 @@ client.payment.createRecurring({
 | order_id*        | string  | The unique identifier of the order created. |
 | customer_id*        | string  | The `customer_id` for the customer you want to charge.  |
 | token*        | string  | The `token_id` generated when the customer successfully completes the authorization payment. Different payment instruments for the same customer have different `token_id`.|
-| recurring*        | string  | Determines if recurring payment is enabled or not. Possible values:<br>* `1` - Recurring is enabled.* `0` - Recurring is not enabled.|
+| recurring*        | string  | Determines if recurring payment is enabled or not. Possible values:<br>* `True` - Recurring is enabled.* `False` - Recurring is not enabled.|
 | description        | string  | A user-entered description for the payment.|
 | notes        | object  | Key-value pair that can be used to store additional information about the entity. Maximum 15 key-value pairs, 256 characters (maximum) each. |
 

@@ -6,7 +6,7 @@ client.customer.create({
   "name": "Gaurav Kumar",
   "contact": 9123456780,
   "email": "gaurav.kumar@example.com",
-  "fail_existing": 0,
+  "fail_existing": "1",
   "gstin": "29XAbbA4369J1PA",
   "notes": {
     "notes_key_1": "Tea, Earl Grey, Hot",
@@ -23,7 +23,7 @@ client.customer.create({
 | email        | string      | Email of the customer                       |
 | contact      | string      | Contact number of the customer              |
 | notes         | object      | A key-value pair                            |
-| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `0` or `1`|
+| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `1` or `0`|
 
 **Response:**
 ```json
@@ -188,8 +188,8 @@ client.registration_link.create({
     "max_amount": 50000
   },
   "receipt": "Receipt No. 1",
-  "sms_notify": 1,
-  "email_notify": 1,
+  "sms_notify": True,
+  "email_notify": True,
   "expire_by": 1647483647,
   "notes": {
     "note_key 1": "Beam me up Scotty",
@@ -647,7 +647,7 @@ client.payment.createRecurring({
   "order_id": "order_1Aa00000000002",
   "customer_id": "cust_1Aa00000000001",
   "token": "token_1Aa00000000001",
-  "recurring": "1",
+  "recurring": True,
   "description": "Creating recurring payment for Gaurav Kumar",
   "notes": {
     "note_key 1": "Beam me up Scotty",
@@ -667,7 +667,7 @@ client.payment.createRecurring({
 | order_id*        | string  | The unique identifier of the order created. |
 | customer_id*        | string  | The `customer_id` for the customer you want to charge.  |
 | token*        | string  | The `token_id` generated when the customer successfully completes the authorization payment. Different payment instruments for the same customer have different `token_id`.|
-| recurring*        | string  | Determines if recurring payment is enabled or not. Possible values:<br>* `1` - Recurring is enabled.* `0` - Recurring is not enabled.|
+| recurring*        | string  | Determines if recurring payment is enabled or not. Possible values:<br>* `True` - Recurring is enabled.* `False` - Recurring is not enabled.|
 | description        | string  | A user-entered description for the payment.|
 | notes        | object  | Key-value pair that can be used to store additional information about the entity. Maximum 15 key-value pairs, 256 characters (maximum) each. |
 

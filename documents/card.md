@@ -6,7 +6,7 @@ client.customer.create({
   "name": "Gaurav Kumar",
   "email": "gaurav.kumar@example.com",
   "contact": "9123456780",
-  "fail_existing": "0",
+  "fail_existing": "1",
   "notes":{
     "note_key_1": "September",
     "note_key_2": "Make it so."
@@ -21,7 +21,7 @@ client.customer.create({
 | name*          | string      | Name of the customer                        |
 | email        | string      | Email of the customer                       |
 | contact      | string      | Contact number of the customer              |
-| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `0` or `1`|
+| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `1` or `0`|
 | notes         | object      | A key-value pair                            |
 
 **Response:**
@@ -121,8 +121,8 @@ client.registration_link.create({
     "expire_at":1644737663
   },
   "receipt":"Receipt No. #11",
-  "email_notify":1,
-  "sms_notify":1,
+  "email_notify": True,
+  "sms_notify": True,
   "expire_by":1644737663,
   "notes":{
     "note_key 1":"Beam me up Scotty",
@@ -141,8 +141,8 @@ client.registration_link.create({
 | description*  | string      | A brief description of the payment.   |
 | subscription_registration   | object  | All keys listed [here](https://razorpay.com/docs/api/recurring-payments/cards/authorization-transaction/#121-create-a-registration-link) are supported  |
 | receipt      | string  | Your system order reference id.  |
-| sms_notify  | boolean  | SMS notifications are to be sent by Razorpay (default : 1)  |
-| email_notify | boolean  | Email notifications are to be sent by Razorpay (default : 1)  |
+| sms_notify  | boolean  | SMS notifications are to be sent by Razorpay (default : True)  |
+| email_notify | boolean  | Email notifications are to be sent by Razorpay (default : True)  |
 | expire_by    | integer | The timestamp, in Unix format, till when the customer can make the authorization payment. |
 | notes | object  | A key-value pair  |
 
@@ -279,7 +279,7 @@ client.payment.createRecurring({
   "order_id": "order_IDts8IQBJT40aQ",
   "customer_id": "cust_Hwq7Ba6TDXl1ga",
   "token": "token_1Aa00000000001",
-  "recurring": 1,
+  "recurring": True,
   "description": "Creating recurring payment for Gaurav Kumar",
   "notes": {
     "note_key 1": "Beam me up Scotty",
@@ -298,7 +298,7 @@ client.payment.createRecurring({
 | orderId*   | string      | The id of the order to be fetched |
 | customerId*   | string      | The id of the customer to be fetched |
 | tokenId*   | string      | The id of the token to be fetched |
-| recurring*   | boolean      | Possible values is `0` or `1` |
+| recurring*   | boolean      | Possible values is `True` or `False` |
 | description  | string      | A brief description of the payment.   |
 | notes | object  | A key-value pair  |
 
@@ -581,7 +581,7 @@ client.card.requestCardReference({"number":"4854980604708430"})
 | Name        | Type    | Description                                                                  |
 |-------------|---------|------------------------------------------------------------------------------|
 | number* | string | The card number whose PAR or network reference id should be retrieved. |
-| tokenised  | string | Determines if the card is saved as a token. Possible value is `true` or `false` |
+| tokenised  | string | Determines if the card is saved as a token. Possible value is `True` or `False` |
 
 **Response:**
 ```json

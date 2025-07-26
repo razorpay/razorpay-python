@@ -39,8 +39,8 @@ client.invoice.create({
       "quantity": 1
     }
   ],
-  "sms_notify": 1,
-  "email_notify": 1,
+  "sms_notify": True,
+  "email_notify": True,
   "currency": "USD",
   "expire_by": 1589765167
 })

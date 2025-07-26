@@ -6,7 +6,7 @@ client.customer.create({
   "name": "Gaurav Kumar",
   "contact": 9123456780,
   "email": "gaurav.kumar@example.com",
-  "fail_existing": 0,
+  "fail_existing": "1",
   "gstin": "29XAbbA4369J1PA",
   "notes": {
     "notes_key_1": "Tea, Earl Grey, Hot",
@@ -22,7 +22,7 @@ client.customer.create({
 | name*          | string      | Name of the customer                        |
 | email        | string      | Email of the customer                       |
 | contact      | string      | Contact number of the customer              |
-| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `0` or `1`|
+| fail_existing | string | If a customer with the same details already exists, the request throws an exception by default. Possible value is `1` or `0`|
 | notes         | object      | A key-value pair                            |
 
 **Response:**
@@ -127,8 +127,8 @@ client.registration_link.create({
   },
   "receipt": "Receipt no. 1",
   "expire_by": 1880480689,
-  "sms_notify": 1,
-  "email_notify": 1,
+  "sms_notify": True,
+  "email_notify": True,
   "notes": {
     "note_key 1": "Beam me up Scotty",
     "note_key 2": "Tea. Earl Gray. Hot."
@@ -147,9 +147,9 @@ client.registration_link.create({
 | description*  | string      | A brief description of the payment.   |
 | subscription_registration   | object  | All keys listed [here](https://razorpay.com/docs/api/recurring-payments/emandate/auto-debit/#12-using-a-registration-link) are supported  |
 | receipt      | string  | Your system order reference id.  |
-| payment_capture* |  boolean  | Indicates whether payment status should be changed to `captured` automatically or not. Possible values: true - Payments are captured automatically. false - Payments are not captured automatically.|
-| sms_notify  | boolean  | SMS notifications are to be sent by Razorpay (default : 1)  |
-| email_notify | boolean  | Email notifications are to be sent by Razorpay (default : 1)  |
+| payment_capture* |  boolean  | Indicates whether payment status should be changed to `captured` automatically or not. Possible values: `True` - Payments are captured automatically. `False` - Payments are not captured automatically.|
+| sms_notify  | boolean  | SMS notifications are to be sent by Razorpay (default : True)  |
+| email_notify | boolean  | Email notifications are to be sent by Razorpay (default : True)  |
 | expire_by    | integer | The timestamp, in Unix format, till when the customer can make the authorization payment. |
 | notes | object  | A key-value pair  |
 
@@ -215,7 +215,7 @@ client.payment.createRecurring({
   "order_id": "order_1Aa00000000002",
   "customer_id": "cust_1Aa00000000001",
   "token": "token_1Aa00000000001",
-  "recurring": "1",
+  "recurring": True,
   "description": "Creating recurring payment for Gaurav Kumar",
   "notes": {
     "note_key 1": "Beam me up Scotty",
@@ -234,7 +234,7 @@ client.payment.createRecurring({
 | orderId*   | string      | The id of the order to be fetched |
 | customerId*   | string      | The id of the customer to be fetched |
 | tokenId*   | string      | The id of the token to be fetched |
-| recurring*   | boolean      | Possible values is `0` or `1` |
+| recurring*   | boolean      | Possible values is `True` or `False` |
 | description  | string      | A brief description of the payment.   |
 | notes | object  | A key-value pair  |
 
