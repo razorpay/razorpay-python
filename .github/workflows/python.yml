@@ -35,4 +35,4 @@ jobs:
       env:
         RZP_API_KEY: ${{ secrets.RZP_API_KEY }}
         RZP_API_SECRET: ${{ secrets.RZP_API_SECRET }}
-      run: python3 test.py     
+      run: python3 order_connect.py     
