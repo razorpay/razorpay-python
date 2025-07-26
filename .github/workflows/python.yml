@@ -14,17 +14,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest # nosemgrep : semgrep.dev/s/swati31196:github_provided_runner
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.5.10, 3.6.15, 3.7.17, 3.8.18, 3.9.23, 3.10.18, 3.12.11]
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: "3.12.11"
     - name: Install dependencies
       run: |
         pip install setuptools
