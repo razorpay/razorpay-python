@@ -1,9 +1,9 @@
 import os
 import json
 import requests
-import pkg_resources
+import importlib.metadata
 
-from pkg_resources import DistributionNotFound
+from importlib.metadata import PackageNotFoundError
 
 from types import ModuleType
 
@@ -84,7 +84,7 @@ class Client:
     def _get_version(self):
         version = ""
         try: # nosemgrep : gitlab.bandit.B110
-            version = pkg_resources.require("razorpay")[0].version
+            version = importlib.metadata.version("razorpay")
         except DistributionNotFound:  # pragma: no cover
             pass
         return version
