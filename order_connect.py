@@ -25,16 +25,7 @@ client = razorpay.Client(auth=(api_key, api_secret))
 
 for i in range(15):
     try:
-        x = client.order.create({
-          "amount": 50000,
-          "currency": "INR",
-          "receipt": f"receipt#{i+1}",
-          "partial_payment":False,
-          "notes": {
-            "key1": "value3",
-            "key2": "value2"
-          }
-        })
+        x = client.payment.fetch("pay_R2IbWHkb3nGCa9")
         
         print(f"Request {i+1}/15 at {time.strftime('%Y-%m-%d %H:%M:%S')}: {x}")
         
