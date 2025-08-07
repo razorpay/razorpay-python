@@ -10,6 +10,10 @@ echo "Starting 10 parallel instances of order_connect.py..."
 echo "Logs will be saved in the 'logs' folder"
 echo "================================================"
 
+# Record start time
+start_time=$(date +%s)
+start_time_readable=$(date)
+
 # Array to store process IDs
 pids=()
 
@@ -29,8 +33,24 @@ for pid in "${pids[@]}"; do
     echo "Process $pid completed"
 done
 
+# Record end time
+end_time=$(date +%s)
+end_time_readable=$(date)
+
+# Calculate execution time and RPS
+execution_time=$((end_time - start_time))
+total_requests=150  # 10 instances * 15 requests each
+rps=$(echo "scale=2; $total_requests / $execution_time" | bc -l)
+
 echo "================================================"
 echo "All instances completed!"
+echo "Execution Summary:"
+echo "- Start time: $start_time_readable"
+echo "- End time: $end_time_readable"
+echo "- Total execution time: ${execution_time} seconds"
+echo "- Total requests: $total_requests"
+echo "- Requests per second (RPS): $rps"
+echo "================================================"
 echo "Check the logs folder for individual instance outputs:"
 ls -la logs/
 
@@ -38,6 +58,13 @@ ls -la logs/
 echo "Creating summary log..."
 echo "Summary of all parallel order creation attempts" > logs/summary.log
 echo "Generated at: $(date)" >> logs/summary.log
+echo "================================================" >> logs/summary.log
+echo "EXECUTION STATISTICS:" >> logs/summary.log
+echo "- Start time: $start_time_readable" >> logs/summary.log
+echo "- End time: $end_time_readable" >> logs/summary.log
+echo "- Total execution time: ${execution_time} seconds" >> logs/summary.log
+echo "- Total requests: $total_requests (10 instances × 15 requests each)" >> logs/summary.log
+echo "- Requests per second (RPS): $rps" >> logs/summary.log
 echo "================================================" >> logs/summary.log
 
 for i in {1..10}; do
