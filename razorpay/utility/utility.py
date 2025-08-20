@@ -57,9 +57,12 @@ class Utility(object):
         return self.verify_signature(body, signature, secret)
 
     def verify_signature(self, body, signature, key):
-        if sys.version_info[0] == 3:  # pragma: no cover
-            key = bytes(key, 'utf-8')
-            body = bytes(body, 'utf-8')
+        if sys.version_info[0] == 3:
+            # ensure if not already bytes object
+            if not isinstance(key, (bytes, bytearray)):
+                key = bytes(key, 'utf-8')
+            if not isinstance(body, (bytes, bytearray)):
+                body = bytes(body, 'utf-8')
 
         dig = hmac.new(key=key,
                        msg=body,
