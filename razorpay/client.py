@@ -1,9 +1,7 @@
 import os
 import json
 import requests
-import importlib.metadata
-
-from importlib.metadata import PackageNotFoundError
+import warnings
 
 from types import ModuleType
 
@@ -98,7 +96,16 @@ class Client:
             # PackageNotFoundError: importlib.metadata couldn't find the package
             # DistributionNotFound: pkg_resources couldn't find the package  
             # NameError: in case the exception classes aren't defined due to import issues
-            pass
+            
+            # If all else fails, use the hardcoded version from the package
+            version = "1.4.3"
+
+            warnings.warn(
+              "Could not detect razorpay package version. Using fallback version."
+              "This may indicate an installation issue.",
+              UserWarning,
+              stacklevel=4
+            )
         return version
 
     def _get_app_details_ua(self):
