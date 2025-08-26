@@ -39,14 +39,13 @@ class Client:
         'base_url': URL.BASE_URL
     }
 
-    def __init__(self, session=None, auth=None, public_auth=None, **options):
+    def __init__(self, session=None, auth=None, **options):
         """
         Initialize a Client object with session,
         optional auth handler, and options
         """
         self.session = session or requests.Session()
         self.auth = auth
-        self.public_auth = public_auth
         file_dir = os.path.dirname(__file__)
         self.cert_path = file_dir + '/ca-bundle.crt'
 
@@ -116,10 +115,6 @@ class Client:
         """
         options = self._update_user_agent_header(options)
 
-        # Determine authentication type
-        use_public_auth = options.pop('use_public_auth', False)
-        auth_to_use = self.public_auth if use_public_auth and self.public_auth else self.auth
-
         # Inject device mode header if provided
         device_mode = options.pop('device_mode', None)
         if device_mode is not None:
@@ -129,7 +124,7 @@ class Client:
 
         url = "{}{}".format(self.base_url, path)
 
-        response = getattr(self.session, method)(url, auth=auth_to_use,
+        response = getattr(self.session, method)(url, auth=self.auth,
                                                  verify=self.cert_path,
                                                  **options)
         if ((response.status_code >= HTTP_STATUS_CODE.OK) and

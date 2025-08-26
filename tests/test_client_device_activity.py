@@ -12,7 +12,7 @@ class TestClientDeviceActivity(ClientTestCase):
     def setUp(self):
         super(TestClientDeviceActivity, self).setUp()
         self.device_activity_base_url = f"{self.base_url}/devices/activity"
-        self.public_client = razorpay.Client(auth=('key_id', 'key_secret'), public_auth=('public_key', ''))
+        self.public_client = razorpay.Client(auth=('key_id', 'key_secret'))
 
     @responses.activate
     def test_create_device_activity(self):
