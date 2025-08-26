@@ -115,6 +115,15 @@ class Client:
         """
         options = self._update_user_agent_header(options)
 
+        # Determine authentication type
+        use_public_auth = options.pop('use_public_auth', False)
+        auth_to_use = self.auth
+        
+        if use_public_auth:
+            # For public auth, use key_id only
+            if self.auth and isinstance(self.auth, tuple) and len(self.auth) >= 1:
+                auth_to_use = (self.auth[0], '')  # Use key_id only, empty key_secret
+
         # Inject device mode header if provided
         device_mode = options.pop('device_mode', None)
         if device_mode is not None:
@@ -124,7 +133,7 @@ class Client:
 
         url = "{}{}".format(self.base_url, path)
 
-        response = getattr(self.session, method)(url, auth=self.auth,
+        response = getattr(self.session, method)(url, auth=auth_to_use,
                                                  verify=self.cert_path,
                                                  **options)
         if ((response.status_code >= HTTP_STATUS_CODE.OK) and

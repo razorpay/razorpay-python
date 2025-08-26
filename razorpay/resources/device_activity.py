@@ -44,7 +44,7 @@ class DeviceActivity(Resource):
         device_mode = self._validate_device_mode(mode)
 
         url = self.base_url
-        return self.post_url(url, data, device_mode=device_mode, **kwargs)
+        return self.post_url(url, data, device_mode=device_mode, use_public_auth=True, **kwargs)
 
     def get_status(self, activity_id: str, mode: Optional[str] = None, **kwargs) -> Dict[str, Any]:
         """
@@ -63,4 +63,4 @@ class DeviceActivity(Resource):
         device_mode = self._validate_device_mode(mode)
 
         url = f"{self.base_url}/{activity_id}"
-        return self.get_url(url, {}, device_mode=device_mode, **kwargs) 
+        return self.get_url(url, {}, device_mode=device_mode, use_public_auth=True, **kwargs) 

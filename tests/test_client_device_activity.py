@@ -12,6 +12,8 @@ class TestClientDeviceActivity(ClientTestCase):
     def setUp(self):
         super(TestClientDeviceActivity, self).setUp()
         self.device_activity_base_url = f"{self.base_url}/devices/activity"
+        # Device APIs automatically use public authentication (key_id only) 
+        # by passing use_public_auth=True internally in device_activity.py
         self.public_client = razorpay.Client(auth=('key_id', 'key_secret'))
 
     @responses.activate
