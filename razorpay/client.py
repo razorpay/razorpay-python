@@ -1,9 +1,6 @@
 import os
 import json
 import requests
-import pkg_resources
-
-from pkg_resources import DistributionNotFound
 
 from types import ModuleType
 
@@ -82,12 +79,21 @@ class Client:
         return options
 
     def _get_version(self):
-        version = ""
+        # use pkg_resources or improtlib.metdata based on availability
+        try:
+            from pkg_resources import require, DistributionNotFound
+            get_version = lambda v: require(v)[0].version
+            NotFoundError = DistributionNotFound
+        except ModuleNotFoundError:
+            from importlib.metadata import version, PackageNotFoundError
+            get_version, NotFoundError = version, PackageNotFoundError
+
+        # return version
         try: # nosemgrep : gitlab.bandit.B110
-            version = pkg_resources.require("razorpay")[0].version
-        except DistributionNotFound:  # pragma: no cover
+            return get_version("razorpay")
+        except NotFoundError:  # pragma: no cover
             pass
-        return version
+        return ""
 
     def _get_app_details_ua(self):
         app_details_ua = ""
@@ -192,20 +198,20 @@ class Client:
         data, options = self._update_request(data, options)
         return self.request('put', path, data=data, **options)
 
-    def file(self, path, data, **options):     
+    def file(self, path, data, **options):
         fileDict = {}
         fieldDict = {}
-        
+
         if('file' not in data):
             # if file is not exists in the dictionary
             data['file'] = ""
 
-        fileDict['file'] = data['file'] 
-        
-        # Create a dict of form fields 
+        fileDict['file'] = data['file']
+
+        # Create a dict of form fields
         for fields in data:
           if(fields != 'file'):
-            fieldDict[str(fields)] = data[fields] 
+            fieldDict[str(fields)] = data[fields]
 
         return self.request('post', path, files=fileDict, data=fieldDict, **options)
 
