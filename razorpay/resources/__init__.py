@@ -23,6 +23,7 @@ from .iin import Iin
 from .webhook import Webhook
 from .document import Document
 from .dispute import Dispute
+from .device_activity import DeviceActivity
 
 __all__ = [
     'Payment',
@@ -50,4 +51,5 @@ __all__ = [
     'Webhook',
     'Document',
     'Dispute',
+    'DeviceActivity',
 ]

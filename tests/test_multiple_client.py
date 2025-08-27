@@ -10,7 +10,7 @@ class TestClientPayment(ClientTestCase):
     def setUp(self):
         super(TestClientPayment, self).setUp()
         self.base_url = '{}/payments'.format(self.base_url)
-        self.secondary_base_url = '{}/payments'.format(self.secondary_url)
+        self.secondary_base_url = '{}/v1/payments'.format(self.secondary_url)
 
     @responses.activate
     def test_payment_primary_url(self):
@@ -20,7 +20,7 @@ class TestClientPayment(ClientTestCase):
                       body=json.dumps(result), match_querystring=True)
         self.assertEqual(self.client.payment.all(), result)
 
-    @unittest.skip
+    @responses.activate
     def test_payment_secondary_url(self):
         result = mock_file('payment_collection')
         url = self.secondary_base_url
