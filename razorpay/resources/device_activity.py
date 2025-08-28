@@ -11,48 +11,48 @@ class DeviceActivity(Resource):
         super(DeviceActivity, self).__init__(client)
         self.base_url = URL.V1 + URL.DEVICE_ACTIVITY_URL
     
-    def _validate_device_mode(self, mode: Optional[str]) -> Optional[str]:
+    def _validate_device_mode(self, device_mode: Optional[str]) -> Optional[str]:
         """
         Validate device communication mode
         
         Args:
-            mode: Device communication mode ("wired" or "wireless")
+            device_mode: Device communication mode ("wired" or "wireless")
         
         Returns:
-            Validated mode or None if mode is None
+            Validated device_mode or None if device_mode is None
             
         Raises:
-            BadRequestError: If mode is invalid
+            BadRequestError: If device_mode is invalid
         """
-        if mode is not None:
-            if mode not in (DeviceMode.WIRED, DeviceMode.WIRELESS):
+        if device_mode is not None:
+            if device_mode not in (DeviceMode.WIRED, DeviceMode.WIRELESS):
                 raise BadRequestError("Invalid device mode. Allowed values are 'wired' and 'wireless'.")
-            return mode
+            return device_mode
         return None
 
-    def create(self, data: Dict[str, Any], mode: Optional[str] = None, **kwargs) -> Dict[str, Any]:
+    def create(self, data: Dict[str, Any], device_mode: Optional[str] = None, **kwargs) -> Dict[str, Any]:
         """
         Create a new device activity for POS gateway
         
         Args:
             data: Dictionary containing device activity data in the format expected by rzp-pos-gateway
-            mode: Device communication mode ("wired" or "wireless")
+            device_mode: Device communication mode ("wired" or "wireless")
         
         Returns:
             DeviceActivity object
         """
-        device_mode = self._validate_device_mode(mode)
+        validated_mode = self._validate_device_mode(device_mode)
 
         url = self.base_url
-        return self.post_url(url, data, device_mode=device_mode, use_public_auth=True, **kwargs)
+        return self.post_url(url, data, device_mode=validated_mode, use_public_auth=True, **kwargs)
 
-    def get_status(self, activity_id: str, mode: Optional[str] = None, **kwargs) -> Dict[str, Any]:
+    def get_status(self, activity_id: str, device_mode: Optional[str] = None, **kwargs) -> Dict[str, Any]:
         """
         Get the status of a device activity
         
         Args:
             activity_id: Activity ID to fetch status for
-            mode: Device communication mode ("wired" or "wireless")
+            device_mode: Device communication mode ("wired" or "wireless")
         
         Returns:
             DeviceActivity object with current status
@@ -60,7 +60,7 @@ class DeviceActivity(Resource):
         if not activity_id:
             raise BadRequestError("Activity ID must be provided")
 
-        device_mode = self._validate_device_mode(mode)
+        validated_mode = self._validate_device_mode(device_mode)
 
         url = f"{self.base_url}/{activity_id}"
-        return self.get_url(url, {}, device_mode=device_mode, use_public_auth=True, **kwargs) 
+        return self.get_url(url, {}, device_mode=validated_mode, use_public_auth=True, **kwargs) 
