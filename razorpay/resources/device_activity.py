@@ -30,29 +30,29 @@ class DeviceActivity(Resource):
             return mode
         return None
 
-    def create(self, data: Dict[str, Any], mode: Optional[str] = None, **kwargs) -> Dict[str, Any]:
+    def create(self, data: Dict[str, Any], device_mode: Optional[str] = None, **kwargs) -> Dict[str, Any]:
         """
         Create a new device activity for POS gateway
         
         Args:
             data: Dictionary containing device activity data in the format expected by rzp-pos-gateway
-            mode: Device communication mode ("wired" or "wireless")
+            device_mode: Device communication mode ("wired" or "wireless")
         
         Returns:
             DeviceActivity object
         """
-        validated_mode = self._validate_device_mode(mode)
+        validated_mode = self._validate_device_mode(device_mode)
 
         url = self.base_url
-        return self.post_url(url, data, mode=validated_mode, use_public_auth=True, **kwargs)
+        return self.post_url(url, data, device_mode=validated_mode, use_public_auth=True, **kwargs)
 
-    def get_status(self, activity_id: str, mode: Optional[str] = None, **kwargs) -> Dict[str, Any]:
+    def get_status(self, activity_id: str, device_mode: Optional[str] = None, **kwargs) -> Dict[str, Any]:
         """
         Get the status of a device activity
         
         Args:
             activity_id: Activity ID to fetch status for
-            mode: Device communication mode ("wired" or "wireless")
+            device_mode: Device communication mode ("wired" or "wireless")
         
         Returns:
             DeviceActivity object with current status
@@ -60,7 +60,7 @@ class DeviceActivity(Resource):
         if not activity_id:
             raise BadRequestError("Activity ID must be provided")
 
-        validated_mode = self._validate_device_mode(mode)
+        validated_mode = self._validate_device_mode(device_mode)
 
         url = f"{self.base_url}/{activity_id}"
-        return self.get_url(url, {}, mode=validated_mode, use_public_auth=True, **kwargs) 
+        return self.get_url(url, {}, device_mode=validated_mode, use_public_auth=True, **kwargs) 
