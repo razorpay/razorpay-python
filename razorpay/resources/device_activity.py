@@ -11,23 +11,23 @@ class DeviceActivity(Resource):
         super(DeviceActivity, self).__init__(client)
         self.base_url = URL.V1 + URL.DEVICE_ACTIVITY_URL
     
-    def _validate_device_mode(self, mode: Optional[str]) -> Optional[str]:
+    def _validate_device_mode(self, device_mode: Optional[str]) -> Optional[str]:
         """
         Validate device communication mode
         
         Args:
-            mode: Device communication mode ("wired" or "wireless")
+            device_mode: Device communication mode ("wired" or "wireless")
         
         Returns:
-            Validated mode or None if mode is None
+            Validated device_mode or None if device_mode is None
             
         Raises:
-            BadRequestError: If mode is invalid
+            BadRequestError: If device_mode is invalid
         """
-        if mode is not None:
-            if mode not in (DeviceMode.WIRED, DeviceMode.WIRELESS):
+        if device_mode is not None:
+            if device_mode not in (DeviceMode.WIRED, DeviceMode.WIRELESS):
                 raise BadRequestError("Invalid device mode. Allowed values are 'wired' and 'wireless'.")
-            return mode
+            return device_mode
         return None
 
     def create(self, data: Dict[str, Any], device_mode: Optional[str] = None, **kwargs) -> Dict[str, Any]:
