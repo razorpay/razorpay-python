@@ -125,11 +125,11 @@ class Client:
                 auth_to_use = (self.auth[0], '')  # Use key_id only, empty key_secret
 
         # Inject device mode header if provided
-        device_mode = options.pop('device_mode', None)
-        if device_mode is not None:
+        mode = options.pop('mode', None)
+        if mode is not None:
             if 'headers' not in options:
                 options['headers'] = {}
-            options['headers']['X-Razorpay-Device-Mode'] = device_mode
+            options['headers']['X-Razorpay-Device-Mode'] = mode
 
         url = "{}{}".format(self.base_url, path)
 
