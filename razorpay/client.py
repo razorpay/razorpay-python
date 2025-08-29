@@ -135,6 +135,7 @@ class Client:
         Dispatches a request to the Razorpay HTTP API with retry mechanism
         """
         options = self._update_user_agent_header(options)
+
         url = "{}{}".format(self.base_url, path)
         
         delay_seconds = self.initial_delay

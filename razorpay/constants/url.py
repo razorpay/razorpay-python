@@ -29,3 +29,5 @@ class URL(object):
     DOCUMENT= "/documents"
     DISPUTE= "/disputes"
 
+    DEVICE_ACTIVITY_URL = "/devices/activity"
+
