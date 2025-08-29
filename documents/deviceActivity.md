@@ -261,7 +261,7 @@ except BadRequestError as e:
 import razorpay
 
 # Initialize client
-client = razorpay.Client(auth=('key_id', 'key_secret'), base_url='http://localhost:8080')
+client = razorpay.Client(auth=('key_id', 'key_secret'), base_url='http://localhost:PORT')
 
 try:
     # Step 1: Initiate checkout
@@ -295,8 +295,7 @@ try:
     # Step 3: Close checkout when done
     close_response = client.device_activity.create({
         "device_id": "2841158834", 
-        "action": "close_checkout",
-
+        "action": "close_checkout"
     }, device_mode="wired")
     
     print("Checkout closed successfully")

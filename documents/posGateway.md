@@ -12,14 +12,14 @@ client = razorpay.Client(auth=('your_key_id', 'your_key_secret')) # Defautl base
 
 # For local development/testing
 client = razorpay.Client(
-auth=('your_key_id', 'your_key_secret'),
-base_url='http://localhost:8080'
+    auth=('your_key_id', 'your_key_secret'),
+    base_url='http://localhost:PORT'
 )
 ```
 
 **Host Configuration:**
 - **Production**: `https://api.razorpay.com` (default)
-- **Pos-Gateway**: `http://localhost:8080`
+- **Pos-Gateway**: `http://localhost:PORT`
 
 ---
 
@@ -60,8 +60,8 @@ response = client.device_activity.create({
 
 ```py
 response = client.device_activity.create({
-"device_id": "2841158834",           # Required for device_mode="wired", optional for device_mode="wireless"
-"action": "close_checkout"           # Required: Action type
+    "device_id": "2841158834",           # Required for device_mode="wired", optional for device_mode="wireless"
+    "action": "close_checkout"           # Required: Action type
 }, device_mode="wireless")  # Required: "wired" or "wireless"
 ```
 
@@ -69,8 +69,8 @@ response = client.device_activity.create({
 
 ```py
 response = client.device_activity.get_status(
-"act_12345678",         # Required: Activity ID from create response
-device_mode="wired"     # Required: "wired" or "wireless"
+    "act_12345678",         # Required: Activity ID from create response
+    device_mode="wired"     # Required: "wired" or "wireless"
 )
 ```
 
@@ -282,27 +282,27 @@ import razorpay
 import time
 
 class POSIntegration:
-def __init__(self, key_id, key_secret, base_url=None):
-    """Initialize POS integration client"""
-    self.client = razorpay.Client(
-        auth=(key_id, key_secret),
-        base_url=base_url
-    )
+    def __init__(self, key_id, key_secret, base_url=None):
+        """Initialize POS integration client"""
+        self.client = razorpay.Client(
+            auth=(key_id, key_secret),
+            base_url=base_url
+        )
 
-def complete_pos_checkout(self, device_id, amount, device_mode="wired"):
-    """Complete end-to-end POS checkout process"""
-    try:
-        # Step 1: Create Order
-        order = self.client.order.create({
-            "amount": amount,
-            "currency": "INR",
-            "receipt": f"pos_order_{int(time.time())}",
-            "notes": {"device_id": device_id}
-        }, device_mode=device_mode)
-        
-        print(f"Order created: {order['id']}")
-        
-                    # Step 2: Initiate Device Checkout
+    def complete_pos_checkout(self, device_id, amount, device_mode="wired"):
+        """Complete end-to-end POS checkout process"""
+        try:
+            # Step 1: Create Order
+            order = self.client.order.create({
+                "amount": amount,
+                "currency": "INR",
+                "receipt": f"pos_order_{int(time.time())}",
+                "notes": {"device_id": device_id}
+            }, device_mode=device_mode)
+            
+            print(f"Order created: {order['id']}")
+            
+            # Step 2: Initiate Device Checkout
             activity = self.client.device_activity.create({
                 "device_id": device_id,
                 "action": "initiate_checkout",
@@ -322,20 +322,20 @@ def complete_pos_checkout(self, device_id, amount, device_mode="wired"):
                     }
                 }
             }, device_mode=device_mode)
-        
-        activity_id = activity['id']
-        print(f"Checkout initiated: {activity_id}")
-        
-        # Step 3: Monitor Status (polling example)
-        max_attempts = 30  # 5 minutes max
-        for attempt in range(max_attempts):
-            try:
-                status = self.client.device_activity.get_status(activity_id, device_mode=device_mode)
-                current_status = status['status']
-                
-                print(f"Status check {attempt + 1}: {current_status}")
-                
-                                    if current_status == 'completed':
+            
+            activity_id = activity['id']
+            print(f"Checkout initiated: {activity_id}")
+            
+            # Step 3: Monitor Status (polling example)
+            max_attempts = 30  # 5 minutes max
+            for attempt in range(max_attempts):
+                try:
+                    status = self.client.device_activity.get_status(activity_id, device_mode=device_mode)
+                    current_status = status['status']
+                    
+                    print(f"Status check {attempt + 1}: {current_status}")
+                    
+                    if current_status == 'completed':
                         # Step 4: Get final order details with payments
                         order_with_payments = self.client.order.fetch(
                             order['id'], 
@@ -356,50 +356,50 @@ def complete_pos_checkout(self, device_id, amount, device_mode="wired"):
                             "error": f"Checkout failed: {error_details.get('code')} - {error_details.get('reason')}",
                             "activity": status
                         }
-                
-                time.sleep(10)  # Wait 10 seconds before next check
-                
-            except Exception as e:
-                print(f"Status check failed: {e}")
-                continue
-        
-        # Timeout - close checkout
-        self.close_checkout(device_mode=device_mode)
-        return {
-            "success": False,
-            "error": "Checkout timeout"
-        }
-        
-    except Exception as e:
-        return {
-            "success": False,
-            "error": str(e)
-        }
+                    
+                    time.sleep(10)  # Wait 10 seconds before next check
+                    
+                except Exception as e:
+                    print(f"Status check failed: {e}")
+                    continue
+            
+            # Timeout - close checkout
+            self.close_checkout(device_mode=device_mode)
+            return {
+                "success": False,
+                "error": "Checkout timeout"
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
 
-def close_checkout(self, device_mode):
-    """Close active checkout"""
-    try:
-        return self.client.device_activity.create({
-            "device_id": "2841158834",  # Use your device ID
-            "action": "close_checkout"
-        }, device_mode=device_mode)
-    except Exception as e:
-        print(f"Failed to close checkout: {e}")
-        return None
+    def close_checkout(self, device_mode):
+        """Close active checkout"""
+        try:
+            return self.client.device_activity.create({
+                "device_id": "2841158834",  # Use your device ID
+                "action": "close_checkout"
+            }, device_mode=device_mode)
+        except Exception as e:
+            print(f"Failed to close checkout: {e}")
+            return None
 
 # Usage Example
 pos = POSIntegration('your_key_id', 'your_key_secret')
 result = pos.complete_pos_checkout(
-device_id="2841158834",
-amount=19900,  # ₹199.00
-device_mode="wired"
+    device_id="2841158834",
+    amount=19900,  # ₹199.00
+    device_mode="wired"
 )
 
 if result['success']:
-print("✅ Checkout completed successfully!")
-print(f"Order ID: {result['order']['id']}")
+    print("✅ Checkout completed successfully!")
+    print(f"Order ID: {result['order']['id']}")
 else:
-print(f"❌ Checkout failed: {result['error']}")
+    print(f"❌ Checkout failed: {result['error']}")
 ```
 
 ---
@@ -424,16 +424,16 @@ print(f"❌ Checkout failed: {result['error']}")
 from razorpay.errors import BadRequestError
 
 try:
-response = client.device_activity.create(data, device_mode="wired")
+    response = client.device_activity.create(data, device_mode="wired")
 except BadRequestError as e:
-if "Invalid device mode" in str(e):
-    print("Use 'wired' or 'wireless' for device_mode")
-elif "Activity ID must be provided" in str(e):
-    print("Provide valid activity_id for get_status")
-else:
-    print(f"API Error: {e}")
+    if "Invalid device mode" in str(e):
+        print("Use 'wired' or 'wireless' for device_mode")
+    elif "Activity ID must be provided" in str(e):
+        print("Provide valid activity_id for get_status")
+    else:
+        print(f"API Error: {e}")
 except Exception as e:
-print(f"Unexpected error: {e}")
+    print(f"Unexpected error: {e}")
 ```
 
 **Common Error Solutions:**
@@ -518,4 +518,4 @@ order_with_payments = client.order.fetch("order_123", data={"expand[]": "payment
 ---
 
 For additional Device Activity API details, refer to:
-- [Device Activity API](deviceActivity.md) - Complete API reference with error handling examples 
+- [Device Activity API](deviceActivity.md) - Complete API reference with error handling examples
