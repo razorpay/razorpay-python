@@ -1,6 +1,6 @@
 # Razorpay Python Client
 
-[![PyPI Version](https://img.shields.io/pypi/v/razorpay.svg)](https://pypi.python.org/pypi/razorpay) [![Coverage Status](https://coveralls.io/repos/github/razorpay/razorpay-python/badge.svg?branch=master)](https://coveralls.io/github/razorpay/razorpay-python?branch=master) [![PyPI](https://img.shields.io/badge/python-3%20%7C%203.4%20%7C%203.5%20%7C%203.6-blue.svg)]() [![License](https://img.shields.io/:license-mit-blue.svg)](https://opensource.org/licenses/MIT)
+[![PyPI Version](https://img.shields.io/pypi/v/razorpay.svg)](https://pypi.python.org/pypi/razorpay) [![Coverage Status](https://coveralls.io/repos/github/razorpay/razorpay-python/badge.svg?branch=master)](https://coveralls.io/github/razorpay/razorpay-python?branch=master) [![PyPI](https://img.shields.io/badge/python-3.5%2B-blue.svg)]() [![License](https://img.shields.io/:license-mit-blue.svg)](https://opensource.org/licenses/MIT)
 
 Python bindings for interacting with the Razorpay API
 
@@ -42,6 +42,10 @@ that both app title and version are strings.
 - [Item](documents/items.md)
 
 - [Customer](documents/customer.md)
+
+- [Device Activity](documents/deviceActivity.md)
+
+- [POS Gateway Integration](documents/posGateway.md)
 
 - [Token](documents/token.md)
 
