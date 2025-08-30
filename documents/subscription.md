@@ -6,6 +6,7 @@
 client.subscription.create({
   "plan_id": "plan_7wAosPWtrkhqZw",
   "customer_notify": True,
+  "customer_id":"cust_D00000000000001",
   "quantity": 5,
   "total_count": 6,
   "start_at": 1495995837,
@@ -38,6 +39,7 @@ client.subscription.create({
 | addons    | array  | All parameters listed [here](https://razorpay.com/docs/api/payments/subscriptions/#create-a-subscription) are supported |
 | notes          | array | Notes you can enter for the contact for future reference.   |
 | offer_id   | string | The unique identifier of the offer that is linked to the subscription. |
+| customer id | string | The unique identifier of the customer that is linked to the subscription. |
 
 **Response:**
 ```json
@@ -61,6 +63,7 @@ client.subscription.create({
   "total_count": 6,
   "paid_count": 0,
   "customer_notify": true,
+  "customer_id":"cust_D00000000000001",
   "created_at": 1580280581,
   "expire_by": 1580626111,
   "short_url": "https://rzp.io/i/z3b1R61A9",
@@ -81,6 +84,7 @@ client.subscription.create({
   "total_count": 12,
   "quantity": 1,
   "expire_by": 1633237807,
+  "customer_id":"cust_D00000000000001",
   "customer_notify": True,
   "addons": [
     {
@@ -116,6 +120,7 @@ client.subscription.create({
 | notes          | array | Notes you can enter for the contact for future reference.   |
 | notify_info    | array  | All parameters listed [here](https://razorpay.com/docs/api/payments/subscriptions/#create-a-subscription-link) are supported |
 | offer_id   | string | The unique identifier of the offer that is linked to the subscription. |
+| customer_id   | string | The unique identifier of the customer that is linked to the subscription. |
 
 **Response:**
 ```json
@@ -139,6 +144,7 @@ client.subscription.create({
   "total_count":12,
   "paid_count":0,
   "customer_notify":true,
+  "customer_id":"cust_D00000000000001",
   "created_at":1580283117,
   "expire_by":1581013800,
   "short_url":"https://rzp.io/i/m0y0f",
