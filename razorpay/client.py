@@ -55,6 +55,7 @@ class Client:
         self.base_url = self._set_base_url(**options)
         self.max_retries = options.get('max_retries', self.DEFAULTS['max_retries'])
         self.initial_delay = options.get('initial_delay', self.DEFAULTS['initial_delay'])
+        self.retry_enabled = False
 
         self.app_details = []
 
@@ -130,19 +131,41 @@ class Client:
     def get_app_details(self):
         return self.app_details
 
+    def enable_retry(self, retry_enabled=False):
+        self.retry_enabled = retry_enabled
+        
     def request(self, method, path, **options):
         """
         Dispatches a request to the Razorpay HTTP API with retry mechanism
         """
         options = self._update_user_agent_header(options)
 
+        # Determine authentication type
+        use_public_auth = options.pop('use_public_auth', False)
+        auth_to_use = self.auth
+
+        if use_public_auth:
+            # For public auth, use key_id only
+            if self.auth and isinstance(self.auth, tuple) and len(self.auth) >= 1:
+                auth_to_use = (self.auth[0], '')  # Use key_id only, empty key_secret
+
+        # Inject device mode header if provided
+        device_mode = options.pop('device_mode', None)
+        if device_mode is not None:
+            if 'headers' not in options:
+                options['headers'] = {}
+            options['headers']['X-Razorpay-Device-Mode'] = device_mode
+
         url = "{}{}".format(self.base_url, path)
         
         delay_seconds = self.initial_delay
         
-        for attempt in range(self.max_retries):
+        # If retry is not enabled, set max attempts to 1
+        max_attempts = self.max_retries if self.retry_enabled else 1
+        
+        for attempt in range(max_attempts):
             try:
-                response = getattr(self.session, method)(url, auth=self.auth,
+                response = getattr(self.session, method)(url, auth=auth_to_use,
                                                          verify=self.cert_path,
                                                          **options)
                 
@@ -169,20 +192,20 @@ class Client:
                         raise ServerError(msg)
                         
             except requests.exceptions.ConnectionError as e:
-                if attempt < self.max_retries - 1:  # Don't sleep on the last attempt
-                    print(f"ConnectionError: {e}. Retrying in {delay_seconds} seconds... (Attempt {attempt + 1}/{self.max_retries})")
+                if self.retry_enabled and attempt < max_attempts - 1:  # Don't sleep on the last attempt
+                    print(f"ConnectionError: {e}. Retrying in {delay_seconds} seconds... (Attempt {attempt + 1}/{max_attempts})")
                     time.sleep(delay_seconds)
                     delay_seconds *= 2  # Exponential backoff
                 else:
-                    print(f"Max retries ({self.max_retries}) exceeded. Connection failed.")
+                    print(f"Connection failed." + (f" Max retries ({max_attempts}) exceeded." if self.retry_enabled else ""))
                     raise
             except requests.exceptions.Timeout as e:
-                if attempt < self.max_retries - 1:  # Don't sleep on the last attempt
-                    print(f"Timeout: {e}. Retrying in {delay_seconds} seconds... (Attempt {attempt + 1}/{self.max_retries})")
+                if self.retry_enabled and attempt < max_attempts - 1:  # Don't sleep on the last attempt
+                    print(f"Timeout: {e}. Retrying in {delay_seconds} seconds... (Attempt {attempt + 1}/{max_attempts})")
                     time.sleep(delay_seconds)
                     delay_seconds *= 2  # Exponential backoff
                 else:
-                    print(f"Max retries ({self.max_retries}) exceeded. Request timed out.")
+                    print(f"Request timed out." + (f" Max retries ({max_attempts}) exceeded." if self.retry_enabled else ""))
                     raise
             except requests.exceptions.RequestException as e:
                 # For other request exceptions, don't retry
