@@ -4,7 +4,7 @@
 
 ```py
 client.device_activity.create({
-  "device_id": "2841158834",            # Required for device_mode="wired", optional for device_mode="wireless"
+  "device_id": "2841158834",            # Required for device_mode="wireless", optional for device_mode="wired"
   "action": "initiate_checkout",        # Required: Action type
   "notes": {                            # Optional: Additional notes
     "key1": "value1",

@@ -33,7 +33,7 @@ For detailed API reference, see [Device Activity](deviceActivity.md).
 
 ```py
 response = client.device_activity.create({
-    "device_id": "2841158834",            # Required for device_mode="wired", optional for device_mode="wireless"
+    "device_id": "2841158834",            # Required for device_mode="wireless", optional for device_mode="wired"
     "action": "initiate_checkout",        # Required: Action type
     "notes": {                            # Optional: Additional notes
         "key1": "value1",
@@ -60,7 +60,7 @@ response = client.device_activity.create({
 
 ```py
 response = client.device_activity.create({
-    "device_id": "2841158834",           # Required for device_mode="wired", optional for device_mode="wireless"
+    "device_id": "2841158834",           # Required for device_mode="wireless", optional for device_mode="wired"
     "action": "close_checkout"           # Required: Action type
 }, device_mode="wireless")  # Required: "wired" or "wireless"
 ```
