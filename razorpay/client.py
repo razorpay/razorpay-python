@@ -3,6 +3,7 @@ import json
 import requests
 import importlib.metadata
 import time
+import random
 
 from importlib.metadata import PackageNotFoundError
 
@@ -39,7 +40,9 @@ class Client:
     DEFAULTS = {
         'base_url': URL.BASE_URL,
         'max_retries': 5,
-        'initial_delay': 1
+        'initial_delay': 1,
+        'max_delay': 60,
+        'jitter': 0.25
     }
 
     def __init__(self, session=None, auth=None, **options):
@@ -55,6 +58,8 @@ class Client:
         self.base_url = self._set_base_url(**options)
         self.max_retries = options.get('max_retries', self.DEFAULTS['max_retries'])
         self.initial_delay = options.get('initial_delay', self.DEFAULTS['initial_delay'])
+        self.max_delay = options.get('max_delay', self.DEFAULTS['max_delay'])
+        self.jitter = options.get('jitter', self.DEFAULTS['jitter'])
         self.retry_enabled = False
 
         self.app_details = []
@@ -77,6 +82,8 @@ class Client:
         # Remove retry options from options if they exist
         options.pop('max_retries', None)
         options.pop('initial_delay', None)
+        options.pop('max_delay', None)
+        options.pop('jitter', None)
 
         return base_url
 
@@ -193,17 +200,29 @@ class Client:
                         
             except requests.exceptions.ConnectionError as e:
                 if self.retry_enabled and attempt < max_attempts - 1:  # Don't sleep on the last attempt
-                    print(f"ConnectionError: {e}. Retrying in {delay_seconds} seconds... (Attempt {attempt + 1}/{max_attempts})")
-                    time.sleep(delay_seconds)
-                    delay_seconds *= 2  # Exponential backoff
+                    # Apply exponential backoff with jitter
+                    jitter_value = random.uniform(-self.jitter, self.jitter)
+                    jittered_delay = delay_seconds * (1 + jitter_value)
+                    # Cap the delay at max_delay
+                    actual_delay = min(jittered_delay, self.max_delay)
+                    
+                    print(f"ConnectionError: {e}. Retrying in {actual_delay:.2f} seconds... (Attempt {attempt + 1}/{max_attempts})")
+                    time.sleep(actual_delay)
+                    delay_seconds *= 2  # Exponential backoff for next attempt
                 else:
                     print(f"Connection failed." + (f" Max retries ({max_attempts}) exceeded." if self.retry_enabled else ""))
                     raise
             except requests.exceptions.Timeout as e:
                 if self.retry_enabled and attempt < max_attempts - 1:  # Don't sleep on the last attempt
-                    print(f"Timeout: {e}. Retrying in {delay_seconds} seconds... (Attempt {attempt + 1}/{max_attempts})")
-                    time.sleep(delay_seconds)
-                    delay_seconds *= 2  # Exponential backoff
+                    # Apply exponential backoff with jitter
+                    jitter_value = random.uniform(-self.jitter, self.jitter)
+                    jittered_delay = delay_seconds * (1 + jitter_value)
+                    # Cap the delay at max_delay
+                    actual_delay = min(jittered_delay, self.max_delay)
+                    
+                    print(f"Timeout: {e}. Retrying in {actual_delay:.2f} seconds... (Attempt {attempt + 1}/{max_attempts})")
+                    time.sleep(actual_delay)
+                    delay_seconds *= 2  # Exponential backoff for next attempt
                 else:
                     print(f"Request timed out." + (f" Max retries ({max_attempts}) exceeded." if self.retry_enabled else ""))
                     raise
