@@ -15,13 +15,13 @@ client.device_activity.create({
     "amount": 19900,                 # Required: Amount in paise (₹199.00)
     "currency": "INR",               # Required: Currency code
     "description": "POS Transaction", # Required: Transaction description
-    "type": "in_person",             # Required: Transaction type
+    "type": "in_person",             # Optional: Transaction type
     "order_id": "order_R7vqkfqG3Iw02m", # Required: Order reference
-    "method": "upi",                 # Required: "upi"|"card"|"netbanking"|"wallet"
     "prefill": {                     # Optional: Customer prefill data
       "name": "Gaurav Kumar",
       "email": "gaurav.kumar@example.com",
-      "contact": "9000090000"
+      "contact": "9000090000",
+      "method": "upi"                # Optional: "upi"|"card"|"netbanking"|"wallet"
     }
   }
 }, device_mode="wired")
@@ -31,7 +31,7 @@ client.device_activity.create({
 
 | Name          | Type   | Description                                                                    |
 |---------------|--------|--------------------------------------------------------------------------------|
-| device_id     | string | Device identifier. Required for wired mode, optional for wireless mode        |
+| device_id     | string | Device identifier. Required for wireless mode, optional for wired mode        |
 | action*       | string | Action type. Possible values: `initiate_checkout`, `close_checkout`           |
 | notes         | object | A key-value pair for additional information                                    |
 | initiate_checkout* | object | Required when action is `initiate_checkout`. Contains checkout details       |
@@ -45,10 +45,18 @@ client.device_activity.create({
 | amount*       | integer| Amount in paise (₹199.00 = 19900)                                            |
 | currency*     | string | Currency code (e.g., "INR")                                                   |
 | description*  | string | Transaction description                                                        |
-| type*         | string | Transaction type (e.g., "in_person")                                          |
+| type          | string | Optional transaction type (e.g., "in_person")                                 |
 | order_id*     | string | Order reference ID                                                             |
-| method*       | string | Payment method: "upi", "card", "netbanking", "wallet"                         |
-| prefill       | object | Optional customer prefill data (name, email, contact)                         |
+| prefill       | object | Optional customer prefill data (name, email, contact, method)                 |
+
+**prefill Object Parameters:**
+
+| Name          | Type   | Description                                                                    |
+|---------------|--------|--------------------------------------------------------------------------------|
+| name          | string | Optional customer name                                                         |
+| email         | string | Optional customer email                                                        |
+| contact       | string | Optional customer contact number                                               |
+| method        | string | Optional payment method: "upi", "card", "netbanking", "wallet"                |
 
 **Success Response:**
 
@@ -67,7 +75,8 @@ client.device_activity.create({
     "prefill": {
       "name": "Gaurav Kumar",
       "email": "gaurav.kumar@example.com",
-      "contact": "9000090000"
+      "contact": "9000090000",
+      "method": "upi"
     }
   },
   "status": "processing",
@@ -92,7 +101,8 @@ client.device_activity.create({
     "prefill": {
       "name": "Gaurav Kumar",
       "email": "gaurav.kumar@example.com",
-      "contact": "9000090000"
+      "contact": "9000090000",
+      "method": "upi"
     }
   },
   "status": "failed",
@@ -123,7 +133,7 @@ client.device_activity.create({
 
 | Name          | Type   | Description                                                                    |
 |---------------|--------|--------------------------------------------------------------------------------|
-| device_id     | string | Device identifier. Required for wired mode, optional for wireless mode        |
+| device_id     | string | Device identifier. Required for wireless mode, optional for wired mode        |
 | action*       | string | Action type: `close_checkout`                                                  |
 | device_mode*  | string | Device communication mode. Possible values: `wired`, `wireless`               |
 
@@ -155,70 +165,18 @@ client.device_activity.create({
   }
 }
 ```
-
----
-
-### Get device activity status
-
-```py
-client.device_activity.get_status("pid_NVTKa9PL0yessI", device_mode="wired")
-```
-
-**Parameters:**
-
-| Name          | Type   | Description                                                                    |
-|---------------|--------|--------------------------------------------------------------------------------|
-| activity_id*  | string | ID of the device activity to fetch status for                                 |
-| device_mode*  | string | Device communication mode. Possible values: `wired`, `wireless`               |
-
-**Response:**
-
-```json
-{
-  "id": "pda_NVTKa9PL0yessI",
-  "entity": "device.activity",
-  "device_id": "2841158834", 
-  "action": "initiate_checkout",
-  "initiate_checkout": {
-    "name": "Acme Corp",
-    "amount": 19900,
-    "currency": "INR",
-    "description": "POS Transaction",
-    "order_id": "order_R7vqkfqG3Iw02m",
-    "prefill": {
-      "name": "Gaurav Kumar",
-      "email": "gaurav.kumar@example.com",
-      "contact": "9000090000"
-    }
-  },
-  "status": "processing",
-  "error": null
-}
-```
-
----
-
-## Authentication
-
-Device Activity APIs use **public authentication** (key_id only). The SDK automatically handles this by using `use_public_auth=True` internally.
-
-**Authentication Type:** Public Authentication
-- Uses only the `key_id` from your Razorpay credentials
-- More secure for device-specific operations
-- Automatically handled by the SDK
-
 ---
 
 ## Device Modes
 
 ### Wired Mode
 - **device_mode**: `"wired"`
-- **device_id**: Required
+- **device_id**: Optional
 - Direct device connection
 
 ### Wireless Mode  
 - **device_mode**: `"wireless"`
-- **device_id**: Optional
+- **device_id**: Required
 - Wireless device communication
 
 ---
@@ -244,7 +202,7 @@ except BadRequestError as e:
 |-------|-------------|----------|
 | `BadRequestError` | Invalid device_mode parameter | Use only `"wired"` or `"wireless"` |
 | `BadRequestError` | Missing activity_id | Provide valid activity ID for get_status |
-| `BadRequestError` | Missing device_id in wired mode | Include device_id when using wired mode |
+| `BadRequestError` | Missing device_id in wireless mode | Include device_id when using wireless mode |
 
 **API Error Responses:**
 
@@ -274,13 +232,13 @@ try:
             "amount": 19900,
             "currency": "INR",
             "description": "POS Transaction",
-            "type": "in_person",
+            "type": "in_person",             # Optional
             "order_id": "order_R7vqkfqG3Iw02m",
-            "method": "upi",
             "prefill": {
                 "name": "Gaurav Kumar",
                 "email": "gaurav.kumar@example.com",
-                "contact": "9000090000"
+                "contact": "9000090000",
+                "method": "upi"
             }
         }
     }, device_mode="wired")
@@ -330,7 +288,9 @@ checkout = client.device_activity.create({
         "description": "POS Transaction",
         "type": "in_person",
         "order_id": order['id'],
-        "method": "upi"
+        "prefill": {
+            "method": "upi"
+        }
     }
 }, device_mode="wired")
 

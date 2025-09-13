@@ -44,13 +44,13 @@ response = client.device_activity.create({
         "amount": 19900,                 # Required: Amount in paise (₹199.00)
         "currency": "INR",               # Required: Currency code
         "description": "POS Transaction", # Required: Transaction description
-        "type": "in_person",             # Required: Transaction type
+        "type": "in_person",             # Optional: Transaction type
         "order_id": "order_R7vqkfqG3Iw02m", # Required: Order reference
-        "method": "upi",                 # Required: "upi"|"card"|"netbanking"|"wallet"
         "prefill": {                     # Optional: Customer prefill data
             "name": "Gaurav Kumar",
             "email": "gaurav.kumar@example.com",
-            "contact": "9000090000"
+            "contact": "9000090000",
+            "method": "upi"              # Optional: "upi"|"card"|"netbanking"|"wallet"
         }
     }
 }, device_mode="wired")  # Required: "wired" or "wireless"
@@ -270,8 +270,8 @@ order_with_payments = client.order.fetch(
 
 | Mode | Description | device_id Required |
 |------|-------------|-------------------|
-| **wired** | Direct device connection | ✅ Yes |
-| **wireless** | Wireless communication | ❌ Optional |
+| **wireless** | Wireless communication | ✅ Yes |
+| **wired** | Direct device connection | ❌ Optional |
 
 ---
 
@@ -312,13 +312,13 @@ class POSIntegration:
                     "amount": amount,
                     "currency": "INR",
                     "description": "POS Transaction",
-                    "type": "in_person",
+                    "type": "in_person",             # Optional
                     "order_id": order['id'],
-                    "method": "upi",
                     "prefill": {
                         "name": "Customer Name",
                         "email": "customer@example.com",
-                        "contact": "9000090000"
+                        "contact": "9000090000",
+                        "method": "upi"
                     }
                 }
             }, device_mode=device_mode)
@@ -404,20 +404,6 @@ else:
 
 ---
 
-## Authentication
-
-### Device Activity APIs
-- **Type**: Public Authentication (key_id only)
-- **Usage**: Automatically handled by SDK
-- **Security**: More secure for device operations
-
-### Order APIs  
-- **Type**: Standard Authentication (key_id + key_secret)
-- **Usage**: Automatically handled by SDK
-- **Security**: Full authentication for payment operations
-
----
-
 ## Error Handling
 
 ```py
@@ -442,7 +428,7 @@ except Exception as e:
 |-------|-------|----------|
 | `Invalid device mode` | Wrong device_mode value | Use `"wired"` or `"wireless"` |
 | `Activity ID must be provided` | Missing activity_id | Provide valid activity ID |
-| `device_id required for wired mode` | Missing device_id | Include device_id for wired mode |
+| `device_id required for wireless mode` | Missing device_id | Include device_id for wireless mode |
 
 **API Response Status Handling:**
 
@@ -513,6 +499,327 @@ order = client.order.fetch("order_123", device_mode="wired")
 
 # Fetch order with payments
 order_with_payments = client.order.fetch("order_123", data={"expand[]": "payments"}, device_mode="wired")
+```
+
+---
+
+## API Error Codes and Messages
+
+This section provides comprehensive error information that clients may encounter when calling POS Gateway APIs.
+
+### Error Response Format
+
+All APIs return errors in the following standardized format:
+
+```json
+{
+  "error": {
+    "code": "ERROR_CODE",
+    "description": "Human-readable error message",
+    "source": "error_source",
+    "step": "operation_step",
+    "reason": "technical_reason",
+    "field": "field_name",
+    "metadata": {
+      "additional": "context"
+    }
+  }
+}
+```
+
+**Error Response Fields:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| code | string | Error code identifier |
+| description | string | Human-readable error message |
+| source | string | Component that generated the error |
+| step | string | Operation step where error occurred (optional) |
+| reason | string | Technical reason for the error (optional) |
+| field | string | Field that caused validation error (optional) |
+| metadata | object | Additional error context (optional) |
+
+---
+
+### Device Activity API Errors
+
+#### POST /v1/devices/activity
+
+**HTTP Status Codes:**
+- `200` - Success
+- `400` - Validation errors
+- `500` - Processing/Device errors
+
+**Common Error Scenarios:**
+
+```json
+// Missing required field
+{
+  "error": {
+    "code": "VALIDATION_FAILED",
+    "description": "Action field is required",
+    "source": "activity_processor",
+    "field": "action",
+    "reason": "required_field_missing"
+  }
+}
+
+// Invalid amount
+{
+  "error": {
+    "code": "VALIDATION_FAILED", 
+    "description": "Amount must be greater than 0",
+    "source": "activity_processor",
+    "field": "initiate_checkout.amount",
+    "reason": "invalid_value"
+  }
+}
+
+// Device not connected
+{
+  "error": {
+    "code": "DEVICE_DISCONNECTED",
+    "description": "Device is not connected",
+    "source": "device_controller"
+  }
+}
+
+// Device busy/invalid state
+{
+  "error": {
+    "code": "DEVICE_BUSY",
+    "description": "Device is in an invalid state or transitioning",
+    "source": "device_controller"
+  }
+}
+```
+
+**Validation Error Codes:**
+
+| Error Code | Field | Description | Solution |
+|------------|-------|-------------|----------|
+| `VALIDATION_FAILED` | `action` | Missing action field | Provide `"initiate_checkout"` or `"close_checkout"` |
+| `VALIDATION_FAILED` | `initiate_checkout.amount` | Invalid or missing amount | Provide amount > 0 in paise |
+| `VALIDATION_FAILED` | `initiate_checkout.currency` | Missing currency | Provide currency code (e.g., "INR") |
+| `VALIDATION_FAILED` | `initiate_checkout.order_id` | Missing order ID | Provide valid order ID |
+| `VALIDATION_FAILED` | `device_id` | Missing device ID | Required for wireless mode |
+| `VALIDATION_FAILED` | `device_mode` | Invalid communication mode | Use `"wired"` or `"wireless"` |
+
+**Device Error Codes:**
+
+| Error Code | Description | Solution |
+|------------|-------------|----------|
+| `DEVICE_DISCONNECTED` | Device is not connected | Check device connection and retry |
+| `DEVICE_NOT_FOUND` | Device not found during discovery | Verify device is connected and powered on |
+| `DEVICE_BUSY` | Device is in invalid state | Wait for current operation to complete |
+| `DEVICE_TIMEOUT` | Device operation timed out | Check device connection and retry |
+| `DEVICE_ERROR` | Generic device communication error | Check device status and connection |
+| `UNSUPPORTED_ACTION` | Invalid action for device state | Verify device supports the requested action |
+
+#### GET /v1/devices/activity/{activity_id}
+
+**HTTP Status Codes:**
+- `200` - Success
+- `400` - Invalid activity ID
+- `404` - Activity not found
+- `500` - Processing errors
+
+**Error Examples:**
+
+```json
+// Activity not found
+{
+  "error": {
+    "code": "ACTIVITY_NOT_FOUND",
+    "description": "Activity with given ID not found",
+    "source": "activity_processor"
+  }
+}
+
+// Invalid activity ID format
+{
+  "error": {
+    "code": "VALIDATION_FAILED",
+    "description": "Invalid activity ID format",
+    "source": "activity_processor",
+    "field": "activity_id"
+  }
+}
+```
+
+---
+
+### Order API Errors
+
+#### POST /v1/orders
+
+**HTTP Status Codes:**
+- `200` - Success
+- `400` - Validation errors
+- `500` - Processing errors
+
+**Common Error Scenarios:**
+
+```json
+// Missing required field
+{
+  "error": {
+    "code": "VALIDATION_FAILED",
+    "description": "Amount field is required",
+    "source": "order_processor",
+    "field": "amount",
+    "reason": "required_field_missing"
+  }
+}
+
+// Invalid amount
+{
+  "error": {
+    "code": "VALIDATION_FAILED",
+    "description": "Amount must be at least INR 1.00",
+    "source": "order_processor",
+    "field": "amount",
+    "reason": "amount_too_small"
+  }
+}
+
+// Device in proxy mode
+{
+  "error": {
+    "code": "BUSINESS_LOGIC_ERROR",
+    "description": "Device is in proxy mode, cannot process order",
+    "source": "order_processor"
+  }
+}
+```
+
+**Order Validation Errors:**
+
+| Error Code | Field | Description | Solution |
+|------------|-------|-------------|----------|
+| `VALIDATION_FAILED` | `amount` | Missing or invalid amount | Provide amount ≥ 100 paise (₹1.00) |
+| `VALIDATION_FAILED` | `currency` | Missing or invalid currency | Provide valid currency code (e.g., "INR") |
+| `VALIDATION_FAILED` | `device_mode` | Missing communication mode | Use `"wired"` or `"wireless"` |
+
+#### GET /v1/orders/{order_id}
+
+**HTTP Status Codes:**
+- `200` - Success
+- `400` - Invalid order ID
+- `404` - Order not found
+- `500` - Processing errors
+
+**Error Examples:**
+
+```json
+// Order not found
+{
+  "error": {
+    "code": "ORDER_NOT_FOUND",
+    "description": "Order with given ID not found",
+    "source": "order_processor"
+  }
+}
+```
+
+---
+
+### Device-Specific Error Codes
+
+These errors originate from the physical POS device:
+
+**Card Transaction Errors:**
+
+```json
+{
+  "error": {
+    "code": "CARD_DECLINED",
+    "description": "Transaction was declined by the card issuer",
+    "source": "DEVICE",
+    "step": "AUTHORIZATION",
+    "reason": "Insufficient funds"
+  }
+}
+```
+
+**Common Device Error Codes:**
+
+| Error Code | Description | User Action |
+|------------|-------------|-------------|
+| `CARD_DECLINED` | Card transaction declined | Try different card or payment method |
+| `CARD_READ_ERROR` | Failed to read card data | Clean card and retry insertion |
+| `INVALID_PIN` | Incorrect PIN entered | Re-enter correct PIN |
+| `TIMEOUT` | Transaction timed out | Retry transaction |
+| `TRANSACTION_CANCELLED` | User cancelled transaction | Restart checkout if needed |
+| `NETWORK_ERROR` | Device network connectivity issue | Check device network connection |
+| `DEVICE_MALFUNCTION` | Hardware malfunction | Contact support |
+
+---
+
+### HTTP Status Code Reference
+
+| Status Code | Meaning | When It Occurs |
+|-------------|---------|----------------|
+| `200` | Success | Request processed successfully |
+| `400` | Bad Request | Validation errors, malformed requests |
+| `401` | Unauthorized | Authentication failed (proxy mode) |
+| `404` | Not Found | Resource not found (order/activity ID) |
+| `500` | Internal Server Error | Device errors, system failures |
+
+---
+
+### Error Handling Best Practices
+
+**1. Retry Logic:**
+```python
+import time
+
+def retry_device_operation(operation_func, max_retries=3):
+    for attempt in range(max_retries):
+        try:
+            return operation_func()
+        except Exception as e:
+            error_code = getattr(e, 'code', None)
+            
+            # Retry for transient errors
+            if error_code in ['DEVICE_BUSY', 'DEVICE_TIMEOUT', 'DEVICE_DISCONNECTED']:
+                if attempt < max_retries - 1:
+                    time.sleep(2 ** attempt)  # Exponential backoff
+                    continue
+            raise e
+```
+
+**2. Error Classification:**
+```python
+def classify_error(error_response):
+    error_code = error_response.get('error', {}).get('code', '')
+    
+    # Validation errors - fix request
+    if error_code == 'VALIDATION_FAILED':
+        return 'CLIENT_ERROR'
+    
+    # Device errors - may be transient
+    if error_code.startswith('DEVICE_'):
+        return 'DEVICE_ERROR'
+    
+    # System errors - retry or escalate
+    if error_code in ['PROCESSING_FAILED', 'BUSINESS_LOGIC_ERROR']:
+        return 'SYSTEM_ERROR'
+    
+    return 'UNKNOWN_ERROR'
+```
+
+**3. User-Friendly Messages:**
+```python
+ERROR_MESSAGES = {
+    'DEVICE_DISCONNECTED': 'Please check if the POS device is connected and try again.',
+    'CARD_DECLINED': 'Your card was declined. Please try a different payment method.',
+    'DEVICE_TIMEOUT': 'The device is taking too long to respond. Please try again.',
+    'VALIDATION_FAILED': 'Please check your request and try again.',
+}
+
+def get_user_message(error_code):
+    return ERROR_MESSAGES.get(error_code, 'An unexpected error occurred. Please try again.')
 ```
 
 ---
