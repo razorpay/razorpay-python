@@ -25,56 +25,7 @@ client = razorpay.Client(
 
 ## Core APIs
 
-### 1. Device Activity Management
-
-For detailed API reference, see [Device Activity](deviceActivity.md).
-
-#### Initiate Checkout
-
-```py
-response = client.device_activity.create({
-    "device_id": "2841158834",            # Required for device_mode="wireless", optional for device_mode="wired"
-    "action": "initiate_checkout",        # Required: Action type
-    "notes": {                            # Optional: Additional notes
-        "key1": "value1",
-        "key2": "value2"
-    },
-    "initiate_checkout": {               # Required for initiate_checkout
-        "name": "Acme Corp",             # Required: Business name
-        "amount": 19900,                 # Required: Amount in paise (₹199.00)
-        "currency": "INR",               # Required: Currency code
-        "description": "POS Transaction", # Required: Transaction description
-        "type": "in_person",             # Optional: Transaction type
-        "order_id": "order_R7vqkfqG3Iw02m", # Required: Order reference
-        "prefill": {                     # Optional: Customer prefill data
-            "name": "Gaurav Kumar",
-            "email": "gaurav.kumar@example.com",
-            "contact": "9000090000",
-            "method": "upi"              # Optional: "upi"|"card"|"netbanking"|"wallet"
-        }
-    }
-}, device_mode="wired")  # Required: "wired" or "wireless"
-```
-
-#### Close Checkout
-
-```py
-response = client.device_activity.create({
-    "device_id": "2841158834",           # Required for device_mode="wireless", optional for device_mode="wired"
-    "action": "close_checkout"           # Required: Action type
-}, device_mode="wireless")  # Required: "wired" or "wireless"
-```
-
-#### Check Activity Status
-
-```py
-response = client.device_activity.get_status(
-    "act_12345678",         # Required: Activity ID from create response
-    device_mode="wired"     # Required: "wired" or "wireless"
-)
-```
-
-### 2. Order Management
+### 1. Order Management
 
 #### Create Order
 
@@ -262,6 +213,55 @@ order_with_payments = client.order.fetch(
     "reason": "input_validation_failed"
   }
 }
+```
+
+### 2. Device Activity Management
+
+For detailed API reference, see [Device Activity](deviceActivity.md).
+
+#### Initiate Checkout
+
+```py
+response = client.device_activity.create({
+    "device_id": "2841158834",            # Required for device_mode="wireless", optional for device_mode="wired"
+    "action": "initiate_checkout",        # Required: Action type
+    "notes": {                            # Optional: Additional notes
+        "key1": "value1",
+        "key2": "value2"
+    },
+    "initiate_checkout": {               # Required for initiate_checkout
+        "name": "Acme Corp",             # Required: Business name
+        "amount": 19900,                 # Required: Amount in paise (₹199.00)
+        "currency": "INR",               # Required: Currency code
+        "description": "POS Transaction", # Required: Transaction description
+        "type": "in_person",             # Optional: Transaction type
+        "order_id": "order_R7vqkfqG3Iw02m", # Required: Order reference
+        "prefill": {                     # Optional: Customer prefill data
+            "name": "Gaurav Kumar",
+            "email": "gaurav.kumar@example.com",
+            "contact": "9000090000",
+            "method": "upi"              # Optional: "upi"|"card"|"netbanking"|"wallet"
+        }
+    }
+}, device_mode="wired")  # Required: "wired" or "wireless"
+```
+
+#### Close Checkout
+
+```py
+response = client.device_activity.create({
+    "device_id": "2841158834",           # Required for device_mode="wireless", optional for device_mode="wired"
+    "action": "close_checkout"           # Required: Action type
+}, device_mode="wireless")  # Required: "wired" or "wireless"
+```
+
+#### Check Activity Status
+
+```py
+response = client.device_activity.get_status(
+    "act_12345678",         # Required: Activity ID from create response
+    device_mode="wired"     # Required: "wired" or "wireless"
+)
 ```
 
 ---
