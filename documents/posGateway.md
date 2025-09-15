@@ -240,7 +240,7 @@ response = client.device_activity.create({
             "name": "Gaurav Kumar",
             "email": "gaurav.kumar@example.com",
             "contact": "9000090000",
-            "method": "upi"              # Optional: "upi"|"card"|"netbanking"|"wallet"
+            "method": "upi"              # Optional: "upi"|"card"
         }
     }
 }, device_mode="wired")  # Required: "wired" or "wireless"
