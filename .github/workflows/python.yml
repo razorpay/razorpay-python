@@ -14,15 +14,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest # nosemgrep : semgrep.dev/s/swati31196:github_provided_runner
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3, 3.5, 3.6, 3.7, 3.8, 3.9, 3.10]
-
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12.0"
     - name: Install dependencies
       run: |
         pip install setuptools
@@ -31,3 +28,10 @@ jobs:
         python3 setup.py install
     - name: Run Tests
       run: python3 -m unittest
+    - name: Print Python Version
+      run: python3 --version      
+    - name: Run order Test
+      env:
+        RZP_API_KEY: ${{ secrets.RZP_API_KEY }}
+        RZP_API_SECRET: ${{ secrets.RZP_API_SECRET }}
+      run: bash run_parallel_orders.sh
