@@ -56,7 +56,7 @@ client.device_activity.create({
 | name          | string | Optional customer name                                                         |
 | email         | string | Optional customer email                                                        |
 | contact       | string | Optional customer contact number                                               |
-| method        | string | Optional payment method: "upi", "card", "netbanking", "wallet"                |
+| method        | string | Optional payment method: "upi", "card"
 
 **Success Response:**
 
