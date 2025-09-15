@@ -11,7 +11,7 @@ client.device_activity.create({
     "key2": "value2"
   },
   "initiate_checkout": {               # Required for initiate_checkout
-    "name": "Acme Corp",             # Required: Business name
+    "name": "Acme Corp",             # Optional: Business name
     "amount": 19900,                 # Required: Amount in paise (₹199.00)
     "currency": "INR",               # Required: Currency code
     "description": "POS Transaction", # Required: Transaction description
