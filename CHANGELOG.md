@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## [1.5.0][1.5.0] - 2024-12-19
+
+feat: Add DeviceActivity support for POS Gateway integration
+
+- Add DeviceActivity resource with create() and get_status() methods
+- Support PUBLIC authentication for DeviceActivity APIs
+- Add X-Razorpay-Device-Mode header injection for wired/wireless modes
+- Add DeviceMode constants (WIRED, WIRELESS)
+- Enhance Client to support public_auth parameter
+- Add comprehensive test coverage and mock responses
+- Fix test_multiple_client URL mismatch
+- Maintain backward compatibility with existing APIs
+
+Endpoints:
+- POST /v1/devices/activity (create device activity)
+- GET /v1/devices/activity/{id} (get activity status)
+
 ## [1.4.2][1.4.2] - 2024-03-19
 
 feat: Added new API endpoints
