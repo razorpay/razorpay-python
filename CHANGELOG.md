@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## [2.0.0][2.0.0] - 2025-08-17
+fix: pkg_resources deprecation warning on runtime
+feat: Added retry mechanism for failed API calls with `enable_retry(True)` method
+feat: Enhanced error handling for network connectivity issues
+
 ## [1.5.0][1.5.0] - 2024-12-19
 
 feat: Add DeviceActivity support for POS Gateway integration
@@ -149,7 +154,12 @@ Added Documents API (uploadAccountDoc(, fetchAccountDoc, uploadStakeholderDoc, f
 -   Payments: List, fetch and capture payments.
 -   Refunds: List, fetch and initiate refunds.
 
-[unreleased]: https://github.com/razorpay/razorpay-python/compare/1.2.0...HEAD
+[unreleased]: https://github.com/razorpay/razorpay-python/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/razorpay/razorpay-python/compare/1.5.0...2.0.0
+[1.5.0]: https://github.com/razorpay/razorpay-python/compare/1.4.2...1.5.0
+[1.4.2]: https://github.com/razorpay/razorpay-python/compare/1.4.1...1.4.2
+[1.4.1]: https://github.com/razorpay/razorpay-python/compare/1.3.1...1.4.1
+[1.3.1]: https://github.com/razorpay/razorpay-python/compare/1.3.0...1.3.1
 [1.2.0]: https://github.com/razorpay/razorpay-python/compare/1.1.1...1.2.0
 [1.1.1]: https://github.com/razorpay/razorpay-python/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/razorpay/razorpay-python/compare/1.0.2...1.1.0
