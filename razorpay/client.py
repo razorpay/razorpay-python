@@ -1,9 +1,7 @@
 import os
 import json
 import requests
-import pkg_resources
-
-from pkg_resources import DistributionNotFound
+import warnings
 
 from types import ModuleType
 
@@ -84,9 +82,30 @@ class Client:
     def _get_version(self):
         version = ""
         try: # nosemgrep : gitlab.bandit.B110
-            version = pkg_resources.require("razorpay")[0].version
-        except DistributionNotFound:  # pragma: no cover
-            pass
+            # Try importlib.metadata first (modern approach)
+            try:
+                import importlib.metadata
+                from importlib.metadata import PackageNotFoundError
+                version = importlib.metadata.version("razorpay")
+            except ImportError:
+                # Fall back to pkg_resources
+                import pkg_resources
+                from pkg_resources import DistributionNotFound
+                version = pkg_resources.require("razorpay")[0].version
+        except (PackageNotFoundError, DistributionNotFound, NameError):  # pragma: no cover
+            # PackageNotFoundError: importlib.metadata couldn't find the package
+            # DistributionNotFound: pkg_resources couldn't find the package  
+            # NameError: in case the exception classes aren't defined due to import issues
+            
+            # If all else fails, use the hardcoded version from the package
+            version = "1.4.3"
+
+            warnings.warn(
+              "Could not detect razorpay package version. Using fallback version."
+              "This may indicate an installation issue.",
+              UserWarning,
+              stacklevel=4
+            )
         return version
 
     def _get_app_details_ua(self):
