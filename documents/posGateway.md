@@ -319,6 +319,8 @@ class POSIntegration:
             print(f"Checkout initiated: {activity_id}")
             
             print("Checkout initiated successfully")
+
+            self.close_checkout(device_mode=device_mode)
             
             return {
                 "success": True,
