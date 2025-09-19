@@ -255,14 +255,6 @@ response = client.device_activity.create({
 }, device_mode="wireless")  # Required: "wired" or "wireless"
 ```
 
-#### Check Activity Status
-
-```py
-response = client.device_activity.get_status(
-    "act_12345678",         # Required: Activity ID from create response
-    device_mode="wired"     # Required: "wired" or "wireless"
-)
-```
 
 ---
 
@@ -326,48 +318,12 @@ class POSIntegration:
             activity_id = activity['id']
             print(f"Checkout initiated: {activity_id}")
             
-            # Step 3: Monitor Status (polling example)
-            max_attempts = 30  # 5 minutes max
-            for attempt in range(max_attempts):
-                try:
-                    status = self.client.device_activity.get_status(activity_id, device_mode=device_mode)
-                    current_status = status['status']
-                    
-                    print(f"Status check {attempt + 1}: {current_status}")
-                    
-                    if current_status == 'completed':
-                        # Step 4: Get final order details with payments
-                        order_with_payments = self.client.order.fetch(
-                            order['id'], 
-                            data={"expand[]": "payments"}, 
-                            device_mode=device_mode
-                        )
-                        
-                        return {
-                            "success": True,
-                            "order": order_with_payments,
-                            "activity": status
-                        }
-                    
-                    elif current_status == 'failed':
-                        error_details = status.get('error', {})
-                        return {
-                            "success": False,
-                            "error": f"Checkout failed: {error_details.get('code')} - {error_details.get('reason')}",
-                            "activity": status
-                        }
-                    
-                    time.sleep(10)  # Wait 10 seconds before next check
-                    
-                except Exception as e:
-                    print(f"Status check failed: {e}")
-                    continue
+            print("Checkout initiated successfully")
             
-            # Timeout - close checkout
-            self.close_checkout(device_mode=device_mode)
             return {
-                "success": False,
-                "error": "Checkout timeout"
+                "success": True,
+                "order": order,
+                "activity": activity
             }
             
         except Exception as e:
@@ -414,8 +370,8 @@ try:
 except BadRequestError as e:
     if "Invalid device mode" in str(e):
         print("Use 'wired' or 'wireless' for device_mode")
-    elif "Activity ID must be provided" in str(e):
-        print("Provide valid activity_id for get_status")
+    elif "Invalid activity data" in str(e):
+        print("Provide valid activity data")
     else:
         print(f"API Error: {e}")
 except Exception as e:
@@ -427,7 +383,6 @@ except Exception as e:
 | Error | Cause | Solution |
 |-------|-------|----------|
 | `Invalid device mode` | Wrong device_mode value | Use `"wired"` or `"wireless"` |
-| `Activity ID must be provided` | Missing activity_id | Provide valid activity ID |
 | `device_id required for wireless mode` | Missing device_id | Include device_id for wireless mode |
 
 **API Response Status Handling:**
@@ -467,15 +422,11 @@ elif response['status'] == 'failed':
 | Method | Parameters | Returns | Description |
 |--------|------------|---------|-------------|
 | `create()` | `data`, `device_mode` | Activity object with status | Create checkout activity |
-| `get_status()` | `activity_id`, `device_mode` | Activity status | Check activity status |
 
 **Usage Examples:**
 ```py
 # Initiate checkout
 activity = client.device_activity.create(data, device_mode="wired")
-
-# Check status  
-status = client.device_activity.get_status("pda_123", device_mode="wired")
 
 # Close checkout
 client.device_activity.create({"action": "close_checkout"}, device_mode="wired")
