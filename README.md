@@ -20,6 +20,8 @@ You can find your API keys at <https://dashboard.razorpay.com/#/app/keys>.
 ```py
 import razorpay
 client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
+
+client.enable_retry(True)  # Enable retry mechanism for failed API calls
 ```
 
 ## App Details
