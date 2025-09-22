@@ -201,7 +201,6 @@ except BadRequestError as e:
 | Error | Description | Solution |
 |-------|-------------|----------|
 | `BadRequestError` | Invalid device_mode parameter | Use only `"wired"` or `"wireless"` |
-| `BadRequestError` | Missing activity_id | Provide valid activity ID for get_status |
 | `BadRequestError` | Missing device_id in wireless mode | Include device_id when using wireless mode |
 
 **API Error Responses:**
@@ -246,11 +245,7 @@ try:
     activity_id = activity['id']
     print(f"Checkout initiated: {activity_id}")
     
-    # Step 2: Check status
-    status = client.device_activity.get_status(activity_id, device_mode="wired")
-    print(f"Current status: {status['status']}")
-    
-    # Step 3: Close checkout when done
+    # Step 2: Close checkout when done
     close_response = client.device_activity.create({
         "device_id": "2841158834", 
         "action": "close_checkout"
@@ -294,6 +289,4 @@ checkout = client.device_activity.create({
     }
 }, device_mode="wired")
 
-# Monitor checkout status  
-status = client.device_activity.get_status(checkout['id'], device_mode="wired")
 ``` 
