@@ -3,7 +3,7 @@
 ### Create transfers from payment
 
 ```py
-client.payment.fetch(paymentId,{
+client.payment.transfer(paymentId,{
    "transfers": [
     {
       "account": 'acc_HgzcrXeSLfNP9U',
