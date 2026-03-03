@@ -103,3 +103,17 @@ class TestClientCustomer(ClientTestCase):
         self.assertEqual(
             self.client.token.processPaymentOnAlternatePAorPG(init),
             result)
+
+    @responses.activate
+    def test_canel_token(self):
+        url = '{}/{}/tokens/{}/cancel'.format(self.base_url,
+                                       self.customer_id,
+                                       self.token_id)
+        responses.add(responses.PUT,
+                      url,
+                      status=200,
+                      body=json.dumps({'status': 'cancellation_initiated'}),
+                      match_querystring=True)
+        self.assertEqual(
+            self.client.token.cancel(self.customer_id, self.token_id),
+            {'status': 'cancellation_initiated'})
