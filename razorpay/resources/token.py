@@ -87,3 +87,16 @@ class Token(Resource):
         """
         url = '{}{}/{}'.format(URL.V1, URL.TOKEN, "service_provider_tokens/token_transactional_data")
         return self.post_url(url, data, **kwargs)                
+
+    def cancel(self, customer_id, token_id, data={}, **kwargs):
+        """
+        Cancel Given Token
+
+        Args:
+            customer_id : Customer Id for which token have to be cancelled
+            token_id    : Id for which Token object has to be cancelled
+        Returns:
+            Dict for cancel token
+        """
+        url = f"{self.base_url}/{customer_id}/tokens/{token_id}/cancel"
+        return self.put_url(url, data, **kwargs)

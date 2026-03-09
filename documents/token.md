@@ -398,6 +398,27 @@ client.token.processPaymentOnAlternatePAorPG({"id":"spt_4lsdksD31GaZ09"})
 }
 ```
 -------------------------------------------------------------------------------------------------------
+
+### Cancel Token
+
+```py
+client.token.cancel(customerId, tokenId)
+```
+
+**Parameters:**
+
+| Name          | Type        | Description                          |
+|---------------|-------------|--------------------------------------|
+| customerId*   | string      | The id of the customer to be fetched |
+| tokenId*      | string      | The id of the token to be fetched    |
+
+**Response:**
+```json
+{
+  "status": "cancellation_initiated"
+}
+```
+-------------------------------------------------------------------------------------------------------
 **PN: * indicates mandatory fields**
 <br>
 <br>
