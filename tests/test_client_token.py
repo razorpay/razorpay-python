@@ -106,9 +106,7 @@ class TestClientCustomer(ClientTestCase):
 
     @responses.activate
     def test_canel_token(self):
-        url = '{}/{}/tokens/{}/cancel'.format(self.base_url,
-                                       self.customer_id,
-                                       self.token_id)
+        url = f"{self.base_url}/{self.customer_id}/tokens/{self.token_id}/cancel"
         responses.add(responses.PUT,
                       url,
                       status=200,

@@ -98,5 +98,5 @@ class Token(Resource):
         Returns:
             Dict for cancel token
         """
-        url = "{}/{}/tokens/{}/cancel".format(self.base_url, customer_id, token_id)
+        url = f"{self.base_url}/{customer_id}/tokens/{token_id}/cancel"
         return self.put_url(url, data, **kwargs)
