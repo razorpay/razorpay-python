@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## [2.0.1][2.0.1] - 2026-03-09
+feat: Added Support for cancel token
+
 ## [2.0.0][2.0.0] - 2025-09-22
 fix: pkg_resources deprecation warning on runtime
 feat: Added retry mechanism for failed API calls with `enable_retry(True)` method
