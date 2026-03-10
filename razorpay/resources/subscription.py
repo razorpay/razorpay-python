@@ -85,7 +85,7 @@ class Subscription(Resource):
          Update particular subscription
 
         Args:
-            subscription_id : Id for which subscription has to be edited         
+            subscription_id : Id for which subscription has to be edited        
         Returns:
             Subscription dict for given subscription id
         """
@@ -143,4 +143,7 @@ class Subscription(Resource):
             Subscription Dict for given subscription id
         """
         url = "{}/{}/{}".format(self.base_url, subscription_id, offer_id)
-        return self.delete_url(url, data, **kwargs)                 
+        return self.delete_url(url, data, **kwargs)
+
+    # Alias update to edit to match documentation (Fixes Issue #282)
+    update = edit
