@@ -49,21 +49,6 @@ class Payment(Resource):
         data['amount'] = amount
         return self.post_url(url, data, **kwargs)
 
-    def refund(self, payment_id, amount, data={}, **kwargs):  # pragma: no cover # nosemgrep : python.lang.correctness.common-mistakes.default-mutable-dict.default-mutable-dict
-        """
-        Refund Payment for given Id
-
-        Args:
-            payment_id : Id for which payment object has to be refunded
-            amount : Amount for which the payment has to be refunded
-
-        Returns:
-            Payment dict after getting refunded
-        """
-        url = "{}/{}/refund".format(self.base_url, payment_id)
-        data['amount'] = amount
-        return self.post_url(url, data, **kwargs)
-
     def transfer(self, payment_id, data={}, **kwargs):
         """
         Create Transfer for given Payment Id
