@@ -11,7 +11,7 @@ class Utility(object):
         self.client = client
 
     def verify_payment_signature(self, parameters):
-        order_id = str(parameters['razorpay_order_id'])
+        order_id = str(parameters['razorpay_order_id']) if 'razorpay_order_id' in parameters else str(parameters['razorpay_subscription_id'])
         payment_id = str(parameters['razorpay_payment_id'])
         razorpay_signature = str(parameters['razorpay_signature'])
        
