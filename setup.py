@@ -12,24 +12,23 @@ setup(
     url="https://github.com/razorpay/razorpay-python",
     author="Team Razorpay",
     license="MIT",
-    install_requires=["requests"],
+    python_requires='>=3.8',
+    install_requires=["requests>=2.28.0"],
     include_package_data=True,
     package_dir={'razorpay': 'razorpay', 'razorpay.resources': 'razorpay/resources'},
     packages=['razorpay', 'razorpay.resources'],
     keywords='razorpay payment gateway india',
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
-
-        # List of supported Python versions
-        # Make sure that this is reflected in .github/workflows/python.yml as well
         "Programming Language :: Python",
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         "Topic :: Software Development :: Libraries :: Python Modules",
     ]
 )
