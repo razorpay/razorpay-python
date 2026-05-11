@@ -47,9 +47,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install responses
-          pip install coverage
-          python ${{ github.workspace }}/setup.py install
+          pip install responses coverage
+          pip install .
       - name: Run Tests
         run: |
           python -m coverage run -m unittest
@@ -77,7 +76,7 @@ jobs:
         run: |
           python -m pip install --upgrade twine
           set -ex
-          export VERSION=$(python3 setup.py --version)
+          export VERSION=$(grep -m1 'version=' setup.py | cut -d'"' -f2)
           python -m twine upload --verbose dist/razorpay-$VERSION-py3-none-any.whl dist/razorpay-$VERSION.tar.gz
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
