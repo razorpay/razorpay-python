@@ -12,7 +12,7 @@ setup(
     url="https://github.com/razorpay/razorpay-python",
     author="Team Razorpay",
     license="MIT",
-    python_requires='>=3.8',
+    python_requires='>=3.10',
     install_requires=["requests>=2.28.0"],
     include_package_data=True,
     package_dir={'razorpay': 'razorpay', 'razorpay.resources': 'razorpay/resources'},
@@ -24,11 +24,10 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
         "Topic :: Software Development :: Libraries :: Python Modules",
     ]
 )

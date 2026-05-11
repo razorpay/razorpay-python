@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -54,7 +54,7 @@ jobs:
           python -m coverage run -m unittest
           python -m coverage xml
       - name: Upload coverage to Codecov
-        if: matrix.python-version == '3.12'
+        if: matrix.python-version == '3.13'
         uses: codecov/codecov-action@v4
 
   publish:
@@ -76,7 +76,7 @@ jobs:
         run: |
           python -m pip install --upgrade twine
           set -ex
-          export VERSION=$(grep -m1 'version=' setup.py | cut -d'"' -f2)
+          export VERSION=$(python3 -c "import re; print(re.search(r'version=[\"\\x27](.*?)[\"\\x27]', open('setup.py').read()).group(1))")
           python -m twine upload --verbose dist/razorpay-$VERSION-py3-none-any.whl dist/razorpay-$VERSION.tar.gz
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
