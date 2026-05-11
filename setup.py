@@ -19,7 +19,7 @@ setup(
     packages=['razorpay', 'razorpay.resources'],
     keywords='razorpay payment gateway india',
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
