@@ -45,6 +45,36 @@ class TestClientPayment(ClientTestCase):
                                                      amount=5100), result)
 
     @responses.activate
+    def test_payment_capture_does_not_leak_state_into_default(self):
+        # Regression test for issue #134: capture() used a mutable default
+        # argument (data={}) and mutated it, so the amount from one call
+        # leaked into the shared default and corrupted later/concurrent calls.
+        result = mock_file('fake_captured_payment')
+        url = '{}/{}/capture'.format(self.base_url, self.payment_id)
+        responses.add(responses.POST, url, status=200,
+                      body=json.dumps(result), match_querystring=True)
+
+        self.client.payment.capture(self.payment_id, amount=5100)
+        self.client.payment.capture(self.payment_id, amount=9900)
+
+        # Without a data argument, no captured state may persist on the
+        # function's default between invocations.
+        default = self.client.payment.capture.__defaults__[0]
+        self.assertNotIn('amount', default or {})
+
+    @responses.activate
+    def test_payment_capture_does_not_mutate_caller_dict(self):
+        result = mock_file('fake_captured_payment')
+        url = '{}/{}/capture'.format(self.base_url, self.payment_id)
+        responses.add(responses.POST, url, status=200,
+                      body=json.dumps(result), match_querystring=True)
+
+        caller_data = {}
+        self.client.payment.capture(self.payment_id, amount=5100,
+                                    data=caller_data)
+        self.assertEqual(caller_data, {})
+
+    @responses.activate
     def test_refund_create(self):
         result = mock_file('fake_refund')
         url = '{}/{}/refund'.format(self.base_url, self.payment_id)
