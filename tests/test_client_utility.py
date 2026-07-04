@@ -84,3 +84,41 @@ class TestClientValidator(ClientTestCase):
             body,
             sig,
             secret)
+
+    @responses.activate
+    def test_verify_payment_link_signature_missing_keys(self):
+        # Without payment_link_reference_id / payment_link_status the method
+        # short-circuits to False instead of attempting verification.
+        parameters = {
+            'razorpay_payment_id': 'pay_IH3d0ara9bSsjQ',
+            'razorpay_signature': 'some_signature',
+        }
+
+        self.assertEqual(
+            self.client.utility.verify_payment_link_signature(parameters),
+            False)
+
+    @responses.activate
+    def test_verify_subscription_payment_signature_with_exception(self):
+        parameters = {}
+        parameters['razorpay_subscription_id'] = 'sub_ID6MOhgkcoHj9I'
+        parameters['razorpay_payment_id'] = 'pay_IDZNwZZFtnjyym'
+        parameters['razorpay_signature'] = 'invalid_signature'
+        parameters['secret'] = 'EnLs21M47BllR3X8PSFtjtbd'
+
+        self.assertRaises(
+            SignatureVerificationError,
+            self.client.utility.verify_subscription_payment_signature,
+            parameters)
+
+    def test_compare_string_equal(self):
+        self.assertTrue(
+            self.client.utility.compare_string('abc123def', 'abc123def'))
+
+    def test_compare_string_different_content(self):
+        self.assertFalse(
+            self.client.utility.compare_string('abc123def', 'abc123deX'))
+
+    def test_compare_string_different_length(self):
+        self.assertFalse(
+            self.client.utility.compare_string('abc', 'abcd'))
