@@ -23,7 +23,10 @@ class Utility(object):
 
     def verify_payment_link_signature(self, parameters):
         
-        if 'razorpay_payment_id' in parameters.keys() and 'payment_link_reference_id' in parameters.keys() and 'payment_link_status' in parameters.keys():
+        required_keys = ('razorpay_payment_id', 'payment_link_id',
+                         'payment_link_reference_id', 'payment_link_status',
+                         'razorpay_signature')
+        if all(key in parameters for key in required_keys):
             payment_id = str(parameters['razorpay_payment_id'])
             payment_link_id = str(parameters['payment_link_id'])
             payment_link_reference_id = str(parameters['payment_link_reference_id'])

@@ -51,6 +51,21 @@ class TestClientValidator(ClientTestCase):
              True)
 
     @responses.activate
+    def test_verify_payment_link_signature_missing_key(self):
+        # A payload missing a required key (here payment_link_id) must return
+        # False, not raise KeyError.
+        parameters = {}
+        parameters['razorpay_payment_id'] = 'pay_IH3d0ara9bSsjQ'
+        parameters['payment_link_reference_id'] = 'TSsd1989'
+        parameters['payment_link_status'] = 'paid'
+        parameters['razorpay_signature'] = 'deadbeef'
+        parameters['secret'] = 'EnLs21M47BllR3X8PSFtjtbd'
+
+        self.assertEqual(
+             self.client.utility.verify_payment_link_signature(parameters),
+             False)
+
+    @responses.activate
     def test_verify_payment_signature_with_exception(self):
         parameters = {}
         parameters['razorpay_order_id'] = 'fake_order_id'
