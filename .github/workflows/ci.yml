@@ -13,7 +13,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: Set up Python 3
         uses: actions/setup-python@v3
         with:
@@ -59,14 +59,14 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist      
       - name: Set up Python 3
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984 # v3.1.4
         with:
           python-version: "3.10"
       - name: Publish packages to PyPi
