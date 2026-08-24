@@ -21,6 +21,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Start PMG proxy
+      uses: safedep/pmg@v1
+      with:
+        server-mode: true
+        api-key: ${{ secrets.SAFEDEP_API_KEY }}
+        tenant-id: ${{ secrets.SAFEDEP_TENANT_ID }}
     - name: Set up Python
       uses: actions/setup-python@v2
     - name: Install dependencies
@@ -31,3 +37,6 @@ jobs:
         python3 setup.py install
     - name: Run Tests
       run: python3 -m unittest
+    - name: Stop PMG proxy
+      if: always()
+      run: pmg proxy stop --fail-on-violation

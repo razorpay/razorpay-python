@@ -14,6 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Start PMG proxy
+        uses: safedep/pmg@v1
+        with:
+          server-mode: true
+          api-key: ${{ secrets.SAFEDEP_API_KEY }}
+          tenant-id: ${{ secrets.SAFEDEP_TENANT_ID }}
       - name: Set up Python 3
         uses: actions/setup-python@v3
         with:
@@ -31,12 +37,21 @@ jobs:
         with:
           name: dist
           path: dist/          
+      - name: Stop PMG proxy
+        if: always()
+        run: pmg proxy stop --fail-on-violation
   test:
     name: Test Coverage
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Start PMG proxy
+        uses: safedep/pmg@v1
+        with:
+          server-mode: true
+          api-key: ${{ secrets.SAFEDEP_API_KEY }}
+          tenant-id: ${{ secrets.SAFEDEP_TENANT_ID }}
       - name: Set up Python 3
         uses: actions/setup-python@v3
         with:
@@ -53,13 +68,21 @@ jobs:
           python -m coverage xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
-        
+      - name: Stop PMG proxy
+        if: always()
+        run: pmg proxy stop --fail-on-violation
   publish:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Start PMG proxy
+        uses: safedep/pmg@v1
+        with:
+          server-mode: true
+          api-key: ${{ secrets.SAFEDEP_API_KEY }}
+          tenant-id: ${{ secrets.SAFEDEP_TENANT_ID }}
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v4
         with:
@@ -78,4 +101,7 @@ jobs:
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+      - name: Stop PMG proxy
+        if: always()
+        run: pmg proxy stop --fail-on-violation
  
