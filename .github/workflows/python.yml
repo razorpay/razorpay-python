@@ -21,7 +21,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Start PMG proxy
+    - name: Setup PMG proxy
+      id: pmg-setup
       uses: safedep/pmg@v1
       with:
         server-mode: true
@@ -37,6 +38,11 @@ jobs:
         python3 setup.py install
     - name: Run Tests
       run: python3 -m unittest
-    - name: Stop PMG proxy
+    - name: Enforce PMG policy
       if: always()
-      run: pmg proxy stop --fail-on-violation
+      run: |
+        if [ "${{ steps.pmg-setup.outcome }}" = "success" ]; then
+          pmg proxy stop --fail-on-violation
+        else
+          pmg proxy stop || true
+        fi
