@@ -145,6 +145,19 @@ class Client:
     def get_app_details(self):
         return self.app_details
 
+    def close(self):
+        """
+        Close the underlying HTTP session and release its pooled connections.
+        The client should not be used for further requests after this.
+        """
+        self.session.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
     def enable_retry(self, retry_enabled=False):
         self.retry_enabled = retry_enabled
         

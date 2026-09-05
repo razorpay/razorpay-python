@@ -24,6 +24,18 @@ client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 client.enable_retry(True)  # Enable retry mechanism for failed API calls
 ```
 
+The client keeps a pooled HTTP session open. Close it when you are done, or use the client as a context manager:
+
+```py
+with razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>")) as client:
+    client.payment.fetch("pay_XXXXXXXXXXXXXX")
+# the session is closed here
+
+client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
+...
+client.close()
+```
+
 ## App Details
 
 After setting up client, you can set your app details before making any request
