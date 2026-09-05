@@ -97,33 +97,32 @@ class Client:
         return options
 
     def _get_version(self):
-        version = ""
-        try: # nosemgrep : gitlab.bandit.B110
-            # Try importlib.metadata first (modern approach)
-            try:
-                import importlib.metadata
-                from importlib.metadata import PackageNotFoundError
-                version = importlib.metadata.version("razorpay")
-            except ImportError:
-                # Fall back to pkg_resources
-                import pkg_resources
-                from pkg_resources import DistributionNotFound
-                version = pkg_resources.require("razorpay")[0].version
-        except (PackageNotFoundError, DistributionNotFound, NameError):  # pragma: no cover
-            # PackageNotFoundError: importlib.metadata couldn't find the package
-            # DistributionNotFound: pkg_resources couldn't find the package  
-            # NameError: in case the exception classes aren't defined due to import issues
-            
-            # If all else fails, use the hardcoded version from the package
-            version = "1.4.3"
+        """
+        Version of the installed razorpay package, used in the User-Agent.
+        Falls back to a fixed value, with a warning, when the package
+        metadata cannot be found (for example when running from a source
+        checkout that was never installed).
+        """
+        try:
+            from importlib.metadata import PackageNotFoundError
+            from importlib.metadata import version as package_version
+        except ImportError:  # pragma: no cover - Python < 3.8
+            from pkg_resources import DistributionNotFound as PackageNotFoundError
 
+            def package_version(name):
+                import pkg_resources
+                return pkg_resources.require(name)[0].version
+
+        try:
+            return package_version("razorpay")
+        except PackageNotFoundError:
             warnings.warn(
-              "Could not detect razorpay package version. Using fallback version."
-              "This may indicate an installation issue.",
-              UserWarning,
-              stacklevel=4
+                "Could not detect razorpay package version. Using fallback version. "
+                "This may indicate an installation issue.",
+                UserWarning,
+                stacklevel=4
             )
-        return version
+            return "1.4.3"
 
     def _get_app_details_ua(self):
         app_details_ua = ""
