@@ -29,11 +29,18 @@ class TestClientPayment(ClientTestCase):
 
     @responses.activate
     def test_payment_fetch(self):
-        result = mock_file('fake_payment')
+        result = json.loads(mock_file('fake_payment'))
         url = '{}/{}'.format(self.base_url, self.payment_id)
         responses.add(responses.GET, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.payment.fetch('fake_payment_id'), result)
+
+        response = self.client.payment.fetch(self.payment_id)
+
+        self.assertEqual(response, result)
+        self.assertEqual(response['id'], self.payment_id)
+        self.assertEqual(response['entity'], 'payment')
+        self.assertEqual(len(responses.calls), 1)
+        self.assertEqual(responses.calls[0].request.url, url)
 
     @responses.activate
     def test_payment_capture(self):
