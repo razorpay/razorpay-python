@@ -43,6 +43,35 @@ class TestClientPayment(ClientTestCase):
         self.assertEqual(responses.calls[0].request.url, url)
 
     @responses.activate
+    def test_payment_fetch_returns_parsed_payment(self):
+        result = mock_file('fake_payment')
+        url = '{}/{}'.format(self.base_url, self.payment_id)
+        responses.add(responses.GET, url, status=200, body=result,
+                      match_querystring=True)
+
+        response = self.client.payment.fetch(self.payment_id)
+
+        self.assertEqual(json.loads(result), response)
+        self.assertEqual(response['id'], self.payment_id)
+        self.assertEqual(response['entity'], 'payment')
+
+    @responses.activate
+    def test_payment_fetch_sends_get_with_basic_auth(self):
+        result = mock_file('fake_payment')
+        url = '{}/{}'.format(self.base_url, self.payment_id)
+        responses.add(responses.GET, url, status=200, body=result,
+                      match_querystring=True)
+
+        self.client.payment.fetch(self.payment_id)
+
+        self.assertEqual(len(responses.calls), 1)
+        request = responses.calls[0].request
+        self.assertEqual(request.method, 'GET')
+        self.assertEqual(request.url, url)
+        self.assertTrue(request.headers['Authorization']
+                        .startswith('Basic '))
+
+    @responses.activate
     def test_payment_capture(self):
         result = mock_file('fake_captured_payment')
         url = '{}/{}/capture'.format(self.base_url, self.payment_id)
