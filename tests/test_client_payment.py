@@ -52,6 +52,8 @@ class TestClientPayment(ClientTestCase):
                       match_querystring=True)
         self.assertEqual(self.client.payment.refund(self.payment_id, 2000),
                          result)
+        request_body = json.loads(responses.calls[0].request.body)
+        self.assertEqual(request_body, {'amount': 2000})
 
     @responses.activate
     def test_transfer(self):
@@ -116,7 +118,64 @@ class TestClientPayment(ClientTestCase):
         url = '{}/{}/refund'.format(self.base_url, 'fake_refund_id')
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.payment.refund('fake_refund_id',init), result)            
+        self.assertEqual(self.client.payment.refund('fake_refund_id',init), result)
+        request_body = json.loads(responses.calls[0].request.body)
+        self.assertEqual(request_body, {"amount": "100"})
+
+    @responses.activate
+    def test_payment_refund_with_amount_and_options(self):
+        result = mock_file('fake_refund')
+        url = '{}/{}/refund'.format(self.base_url, self.payment_id)
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        options = {'speed': 'normal', 'receipt': '#rec_1'}
+        self.assertEqual(
+            self.client.payment.refund(self.payment_id, 2000, options),
+            result
+        )
+        request_body = json.loads(responses.calls[0].request.body)
+        self.assertEqual(request_body, {'amount': 2000, 'speed': 'normal', 'receipt': '#rec_1'})
+        # Ensure caller's dictionary was not mutated in-place
+        self.assertEqual(options, {'speed': 'normal', 'receipt': '#rec_1'})
+
+    @responses.activate
+    def test_payment_refund_with_keyword_amount(self):
+        result = mock_file('fake_refund')
+        url = '{}/{}/refund'.format(self.base_url, self.payment_id)
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(
+            self.client.payment.refund(self.payment_id, amount=3000),
+            result
+        )
+        request_body = json.loads(responses.calls[0].request.body)
+        self.assertEqual(request_body, {'amount': 3000})
+
+    @responses.activate
+    def test_payment_refund_with_keyword_amount_and_data(self):
+        result = mock_file('fake_refund')
+        url = '{}/{}/refund'.format(self.base_url, self.payment_id)
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(
+            self.client.payment.refund(self.payment_id, amount=3000, data={'speed': 'optimum'}),
+            result
+        )
+        request_body = json.loads(responses.calls[0].request.body)
+        self.assertEqual(request_body, {'amount': 3000, 'speed': 'optimum'})
+
+    @responses.activate
+    def test_payment_refund_without_arguments(self):
+        result = mock_file('fake_refund')
+        url = '{}/{}/refund'.format(self.base_url, self.payment_id)
+        responses.add(responses.POST, url, status=200, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertEqual(
+            self.client.payment.refund(self.payment_id),
+            result
+        )
+        request_body = json.loads(responses.calls[0].request.body)
+        self.assertEqual(request_body, {})
 
     @responses.activate
     def test_payment_fetch_multiple_refund(self):

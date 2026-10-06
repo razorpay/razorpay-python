@@ -49,20 +49,37 @@ class Payment(Resource):
         data['amount'] = amount
         return self.post_url(url, data, **kwargs)
 
-    def refund(self, payment_id, amount, data={}, **kwargs):  # pragma: no cover # nosemgrep : python.lang.correctness.common-mistakes.default-mutable-dict.default-mutable-dict
+    def refund(self, payment_id, data_or_amount=None, data=None, **kwargs):
         """
         Refund Payment for given Id
 
         Args:
             payment_id : Id for which payment object has to be refunded
-            amount : Amount for which the payment has to be refunded
+            data_or_amount : Either the refund amount (int, float, str) or a dictionary
+                             containing refund parameters (e.g. amount, notes, speed, receipt)
+            data : Optional dictionary of refund options when amount is passed as positional argument
+            **kwargs : Additional arguments including keyword 'amount' or request options
 
         Returns:
             Payment dict after getting refunded
         """
         url = "{}/{}/refund".format(self.base_url, payment_id)
-        data['amount'] = amount
-        return self.post_url(url, data, **kwargs)
+
+        payload = {}
+        if isinstance(data_or_amount, dict):
+            payload.update(data_or_amount)
+        elif data_or_amount is not None:
+            payload['amount'] = data_or_amount
+
+        if isinstance(data, dict):
+            payload.update(data)
+        elif data is not None and 'amount' not in payload:
+            payload['amount'] = data
+
+        if 'amount' in kwargs:
+            payload['amount'] = kwargs.pop('amount')
+
+        return self.post_url(url, payload, **kwargs)
 
     def transfer(self, payment_id, data={}, **kwargs):
         """
@@ -116,16 +133,6 @@ class Payment(Resource):
         """
         url = "{}/{}/upi_transfer".format(self.base_url, payment_id)
         return self.get_url(url, data, **kwargs)
-    
-    def refund(self, payment_id, data={}, **kwargs):
-        """
-        Create a normal refund
-
-        Returns:
-            Payment dict after getting refund
-        """
-        url = "{}/{}/refund".format(self.base_url, payment_id)
-        return self.post_url(url, data, **kwargs)
 
     def fetch_multiple_refund(self, payment_id, data={}, **kwargs):
         """
@@ -139,7 +146,7 @@ class Payment(Resource):
 
     def fetch_refund_id(self, payment_id, refund_id, **kwargs):
         """
-        Fetch multiple refunds for a payment
+        Fetch a specific refund by ID for a payment
 
         Returns:
             Refund dict
