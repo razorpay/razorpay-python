@@ -21,7 +21,10 @@ You can find your API keys at <https://dashboard.razorpay.com/#/app/keys>.
 import razorpay
 client = razorpay.Client(auth=("<YOUR_API_KEY>", "<YOUR_API_SECRET>"))
 
-client.enable_retry(True)  # Enable retry mechanism for failed API calls
+client.enable_retry(True)  # Enable retry mechanism for failed API calls (requires razorpay >= 2.0.0)
+> **Note:** `enable_retry` is available from version 2.0.0. If you see
+> `AttributeError: 'Client' object has no attribute 'enable_retry'`,
+> upgrade with `pip install --upgrade razorpay`.
 ```
 
 ## App Details
