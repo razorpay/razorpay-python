@@ -27,6 +27,8 @@ from .resources import Iin
 from .resources import Webhook
 from .resources import Document
 from .resources import Dispute
+from .errors import (RazorpayError, BadRequestError, GatewayError,
+                     ServerError, SignatureVerificationError)
 
 __all__ = [
         'Payment',
@@ -58,4 +60,9 @@ __all__ = [
         'Webhook',
         'Document',
         'Dispute',
+        'RazorpayError',
+        'BadRequestError',
+        'GatewayError',
+        'ServerError',
+        'SignatureVerificationError',
 ]
