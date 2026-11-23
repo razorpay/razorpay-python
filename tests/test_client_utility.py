@@ -63,6 +63,51 @@ class TestClientValidator(ClientTestCase):
             parameters)
 
     @responses.activate
+    def test_verify_invoice_payment_signature(self):
+        sig = '25618cd49232eecb71991ac33e580ce9484f59c7000e494b8253bfccba817881'
+        parameters = {
+            'razorpay_invoice_id': 'inv_TestInvoiceId',
+            'razorpay_invoice_receipt': 'receipt_123',
+            'razorpay_invoice_status': 'paid',
+            'razorpay_payment_id': 'pay_TestPaymentId',
+            'razorpay_signature': sig,
+            'secret': 'EnLs21M47BllR3X8PSFtjtbd'
+        }
+        self.assertEqual(
+            self.client.utility.verify_invoice_payment_signature(parameters),
+            True)
+
+    @responses.activate
+    def test_verify_invoice_payment_signature_null_receipt(self):
+        sig = 'd99457d5e9ba484cc6ebc981647946ba1b32c93975c33135ff00eb11256967cd'
+        parameters = {
+            'razorpay_invoice_id': 'inv_TestInvoiceId',
+            'razorpay_invoice_receipt': None,
+            'razorpay_invoice_status': 'paid',
+            'razorpay_payment_id': 'pay_TestPaymentId',
+            'razorpay_signature': sig,
+            'secret': 'EnLs21M47BllR3X8PSFtjtbd'
+        }
+        self.assertEqual(
+            self.client.utility.verify_invoice_payment_signature(parameters),
+            True)
+
+    @responses.activate
+    def test_verify_invoice_payment_signature_with_exception(self):
+        parameters = {
+            'razorpay_invoice_id': 'inv_TestInvoiceId',
+            'razorpay_invoice_receipt': 'receipt_123',
+            'razorpay_invoice_status': 'paid',
+            'razorpay_payment_id': 'pay_TestPaymentId',
+            'razorpay_signature': 'wrong_signature',
+            'secret': 'EnLs21M47BllR3X8PSFtjtbd'
+        }
+        self.assertRaises(
+            SignatureVerificationError,
+            self.client.utility.verify_invoice_payment_signature,
+            parameters)
+
+    @responses.activate
     def test_verify_webhook_signature(self):
         secret = self.client.auth[1]
         sig = 'd60e67fd884556c045e9be7dad57903e33efc7172c17c6e3ef77db42d2b366e9'

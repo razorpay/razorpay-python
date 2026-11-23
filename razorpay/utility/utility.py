@@ -38,6 +38,25 @@ class Utility(object):
 
         return self.verify_signature(msg, razorpay_signature, secret)    
     
+    def verify_invoice_payment_signature(self, parameters):
+        """
+        Verify signature for invoice-based payments.
+
+        Message format: invoice_id|invoice_receipt|invoice_status|payment_id
+        invoice_receipt is treated as empty string when None/null.
+        """
+        invoice_id = str(parameters['razorpay_invoice_id'])
+        invoice_receipt = str(parameters.get('razorpay_invoice_receipt') or '')
+        invoice_status = str(parameters['razorpay_invoice_status'])
+        payment_id = str(parameters['razorpay_payment_id'])
+        razorpay_signature = str(parameters['razorpay_signature'])
+
+        msg = "{}|{}|{}|{}".format(invoice_id, invoice_receipt, invoice_status, payment_id)
+
+        secret = str(parameters['secret']) if 'secret' in parameters else str(self.client.auth[1])
+
+        return self.verify_signature(msg, razorpay_signature, secret)
+
     def verify_subscription_payment_signature(self, parameters):
         """
         To consider the payment as successful and subscription as authorized 
