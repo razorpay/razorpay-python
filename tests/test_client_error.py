@@ -2,7 +2,8 @@ import responses
 import json
 
 from .helpers import ClientTestCase
-from razorpay.errors import BadRequestError, GatewayError, ServerError
+from razorpay.errors import (RazorpayError, BadRequestError,
+                              GatewayError, ServerError)
 
 
 class TestClientError(ClientTestCase):
@@ -85,5 +86,33 @@ class TestClientError(ClientTestCase):
                       match_querystring=True)
         self.assertRaises(
             ServerError,
+            self.client.payment.all,
+            {'count': count})
+
+    def test_bad_request_error_is_razorpay_error(self):
+        self.assertTrue(issubclass(BadRequestError, RazorpayError))
+
+    def test_gateway_error_is_razorpay_error(self):
+        self.assertTrue(issubclass(GatewayError, RazorpayError))
+
+    def test_server_error_is_razorpay_error(self):
+        self.assertTrue(issubclass(ServerError, RazorpayError))
+
+    @responses.activate
+    def test_catch_as_razorpay_error(self):
+        count = 10000
+        result = {
+            'error':
+            {
+                'field': 'count',
+                'code': 'BAD_REQUEST_ERROR',
+                'description': 'The count may not be greater than 100.'
+            }
+        }
+        url = '{}?count={}'.format(self.base_url, count)
+        responses.add(responses.GET, url, status=400, body=json.dumps(result),
+                      match_querystring=True)
+        self.assertRaises(
+            RazorpayError,
             self.client.payment.all,
             {'count': count})
