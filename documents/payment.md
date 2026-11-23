@@ -3,9 +3,8 @@
 ### Capture payment
 
 ```py
-client.payment.capture(paymentId,{
-  "amount" : 1000,
-  "currency" : "INR"
+client.payment.capture(paymentId, amount, {
+  "currency": "INR"
 })
 ```
 
@@ -343,7 +342,7 @@ For payment downtime response please click [here](https://razorpay.com/docs/api/
 ### Fetch Payment Downtime
 
 ```py
-client.payment.fetchPaymentDowntimeById(downtimeId)
+client.payment.fetchDownTimeById(downtimeId)
 ```
 
 **Parameters:**
